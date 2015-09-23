@@ -1,0 +1,15 @@
+<script type="text/x-paperclip" id="table-items-template">
+<tr repeat.each="[:items:]" repeat.as="item">
+	<td>[: key|plus :]</td>
+	{% for column in table._columns %}
+	<td>
+		<show when="[: item|len('${{column.propertyName}}') > 0 :]">
+			<a href="[: item|get('{{column.propertyName}}') :]">[:item|get('${{column.propertyName}}'):]</a>
+		</show>
+		<show when="[: item|len('${{column.propertyName}}') === 0 :]">
+			<span>[: item|get('{{column.propertyName}}') :]</span>
+		</show>
+	</td>
+    {% endfor %}
+</tr>
+</script>
