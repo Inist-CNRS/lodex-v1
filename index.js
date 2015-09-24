@@ -1,3 +1,3 @@
 module.exports = {
-  browserifyModules: ['qs', 'vue', 'oboe', 'faker']
+  browserifyModules: ['vue', 'oboe', 'faker']
 }
