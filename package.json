@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/touv/semtab#readme",
   "dependencies": {
-    "faker": "^3.0.1",
     "oboe": "^2.1.2",
+    "paperclip": "^3.0.18",
     "vue": "^0.12.15"
   }
 }

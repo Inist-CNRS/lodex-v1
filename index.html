@@ -23,10 +23,10 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a id="action-loaddata" href="" data-toggle="modal" data-target="#modal-loaddata"><span class="glyphicon glyphicon-cloud-upload"></span> {{ __('Load data') }}</a></li>
 				<li><a id="action-edittable" href="" data-toggle="modal" data-target="#modal-edittable"><span class="glyphicon glyphicon glyphicon-pencil"></span> {{ __('Edit Table') }}</a></li>
 				<li><a id="action-newtable" href=""><span class="glyphicon glyphicon-object-align-left"></span> {{ __('New table') }}</a></li>
 				<li><a id="action-newcolumn" href=""><span class="glyphicon glyphicon-sound-stereo"></span> {{ __('New column') }}</a></li>
+				<li><a id="action-loaddata" href="" data-toggle="modal" data-target="#modal-loaddata"><span class="glyphicon glyphicon-cloud-upload"></span> {{ __('Load data') }}</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cloud-download"></span> {{ __('Download') }}<span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -93,8 +93,9 @@
 <script src="/libs/store.js/store.min.js"></script>
 <script src="/libs/jquery-resizable-columns/dist/jquery.resizableColumns.min.js"></script>
 <script src="/libs/bootstrap3-wysiwyg/dist/bootstrap3-wysihtml5.all.min.js"></script>
-<script src="/libs/paperclip/dist/paperclip.min.js"></script>
-<script src="/libs/paperclip/dist/parser.min.js"></script>
-<script src="/assets/js/index.js"></script>
+<script>
+var nColumns = {{table._columns.length|d(0)}};
+</script>
+<script src="/assets/js/main.js"></script>
 {% endblock %}
 

@@ -55,13 +55,7 @@
 	  <div class="jumbotron alert alert-info alert-dismissible fade in" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 		<h1><span class="glyphicon glyphicon-info-sign blue"></span> <small>{{ __('Tips') }}</small></h1>
-		{% if name == "TableNotFound"%}
-			<p class="lead"> {{ __('Try to create a new table.') }}</p>
-			<a id="action-newtable" href="" class="btn btn-success">{{ __('Create it.') }}</a>
-        {% elif name == "IndexNotFound" or name == "CollectionNotFound" %}
-			<p class="lead"> {{ __('Try to create a first table.') }}</p>
-			<a id="action-newtable" href="" class="btn btn-success">{{ __('Create it.') }}</a>
-        {% elif name == "MongoError" %}
+		 {% if name == "MongoError" %}
 			<p class="lead"> {{ __('Try to start (or retstart) Mongo.') }}</p>
 			<a href="javascript:document.location.reload(true);" class="btn btn-success">{{ __('Try Again') }}</a>
 		{% else %}
@@ -84,23 +78,3 @@
      <!-- /container -->
 {% endblock %}
 
-
-{% block scripts %}
-<script>
-$(document).ready(function() {
-    var Faker = require('faker');
-	$('#action-newtable').click(function() {
-		var url = '/' + Faker.lorem.words(3).join('-') + '/';
-		$.ajax({
-			type: "POST",
-			url: url ,
-			data: {},
-			success: function(data) {
-				document.location.href = url;
-			}
-		});
-		return false;
-	});
-});
-</script>
-{% endblock %}

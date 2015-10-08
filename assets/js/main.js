@@ -1,10 +1,13 @@
-/* global $, Vue, document, JSONEditor, paperclip */
+/* global $, Vue, document, JSONEditor, nColumns */
 'use strict';
 
-paperclip.modifiers.get = function (input, key) {
+var pc = require("paperclip/lib/node.js");
+
+
+pc.modifiers.get = function (input, key) {
   return input[key];
 };
-paperclip.modifiers.len = function (input, key) {
+pc.modifiers.len = function (input, key) {
   if (key !== undefined) {
     input = input[key]
   }
@@ -15,7 +18,7 @@ paperclip.modifiers.len = function (input, key) {
     return input.length;
   }
 };
-paperclip.modifiers.plus = function (input, nb) {
+pc.modifiers.plus = function (input, nb) {
   if (nb === undefined) {
     nb = 1
   }
@@ -26,19 +29,22 @@ paperclip.modifiers.plus = function (input, nb) {
 $(document).ready(function() {
     Vue.config.debug = true;
     var oboe = require('oboe');
-    var Faker = require('faker');
+    var nTables = 0;
 
 
-    var html = document.getElementById("table-items-template").innerHTML.replace(/\[:/g, '{{').replace(/:\]/g, '}}');
-    var template = paperclip.template(html);
+    var html = document.getElementById("table-items-template").innerHTML.replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+    var template = pc.template(html, pc);
+    var view = template.view({ items: {} });
+    document.getElementById("items-tbody").appendChild(view.render());
 
     oboe(window.location.href.replace(/\/+$/,'') + '/*').done(function(items) {
-        var view = template.view({
-            items: items
-        });
-        document.getElementById("items-tbody").appendChild(view.render());
+        view.set('items', items);
         $("#table-items table").resizableColumns();
     })
+    oboe(window.location.protocol + '//' + window.location.host + '/index/$count').done(function(items) {
+        nTables = items[0].value;
+    })
+
     var EditColumnVue = new Vue( {
         el: '#modal-editcolumn',
         data: {
@@ -67,7 +73,6 @@ $(document).ready(function() {
         methods: {
           setField: function (column) {
             var self = this;
-            console.log('column', column);
             self.propertyLabel = column.propertyLabel || '';
             self.previousLabel = column.propertyLabel || '';
             self.propertyValue = column.propertyValue || {};
@@ -82,13 +87,11 @@ $(document).ready(function() {
             self.previousComment = column.propertyComment || '';
             self.propertyText = column.propertyText || {};
             self.previousText = column.propertyText || {};
-            console.log('v', self.propertyValue);
-            console.log('t', self.propertyText);
             self.JSONEditorHandleValue.set(self.propertyValue);
             self.JSONEditorHandleLink.set(self.propertyText);
           },
           drop: function() {
-            var url = document.location.pathname.replace(/\/+$/,'') + '/*/' + this.propertyName + '/';
+            var url = '/-/v3/setcol' + document.location.pathname.replace(/\/+$/,'') + '/' + this.propertyName + '/';
             var form = {};
             form[this.propertyName] = true;
             $.ajax({
@@ -104,7 +107,7 @@ $(document).ready(function() {
             this.propertyValue = this.JSONEditorHandleValue.get();
             this.propertyText = this.JSONEditorHandleLink.get();
             this.propertyType = $("#modal-editcolumn-tab-list li.active").data('type')
-            var url = document.location.pathname.replace(/\/+$/,'') + '/*/' + this.propertyName + '/';
+            var url = '/-/v3/setcol' + document.location.pathname.replace(/\/+$/,'') + '/' + this.propertyName + '/';
             $.ajax({
                 type: "POST",
                 url: url ,
@@ -169,7 +172,6 @@ $(document).ready(function() {
           uri    : $("#modal-load-input-uri").val(),
           type   : $("#modal-load-tab-list li.active").data('type')
         }
-        console.log(formData);
         if (formData[formData.type] === undefined || formData[formData.type] === '') {
           return false;
         }
@@ -201,13 +203,14 @@ $(document).ready(function() {
         return false;
     });
     $('#action-newtable').click(function() {
-        var url = '/' + Faker.lorem.words(3).join('-') + '/';
+        var rsc = 't' + (nTables + 1);
+        var url = '/-/v3/settab/' + rsc + '/';
         $.ajax({
             type: "POST",
             url: url ,
             data: {},
             success: function(data) {
-              document.location.href = url;
+              document.location.href = '/' + rsc;
             }
         });
         return false;
@@ -221,7 +224,7 @@ $(document).ready(function() {
         return false;
     });
     $('#action-edittable-drop').click(function() {
-        var url = document.location.pathname.replace(/\/+$/,'').concat('/');
+        var url = '/-/v3/settab' + document.location.pathname.replace(/\/+$/,'').concat('/');
         var form = {};
         form[document.location.pathname.replace(/^\/+/, '').replace(/\/$/, '')] = true;
         $.ajax({
@@ -235,7 +238,7 @@ $(document).ready(function() {
         return false;
     });
     $('#action-edittable-save').click(function() {
-        var url = document.location.pathname.replace(/\/+$/,'').concat('/');
+        var url = '/-/v3/settab' + document.location.pathname.replace(/\/+$/,'').concat('/');
         var form = {
           "name": $('#modal-edittable-input-name').val(),
           "title": $('#modal-edittable-input-title').val(),
@@ -253,7 +256,7 @@ $(document).ready(function() {
         return false;
     });
     $('#action-newcolumn').click(function() {
-        var url = document.location.pathname.replace(/\/+$/,'') + '/*/' + Faker.lorem.words(3).join('-') + '/';
+        var url = '/-/v3/setcol' + document.location.pathname.replace(/\/+$/,'') + '/c' + (nColumns + 1) + '/';
         $.ajax({
             type: "POST",
             url: url ,
