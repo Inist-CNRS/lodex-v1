@@ -56,10 +56,10 @@
 			<thead>
 				<tr>
 					<th style="width: 0.5em"></th>
-					{% for column in table._columns %}
-					<th data-resizable-column-id="column-{{column.propertyName}}">
-						<span>{{column.propertyLabel}}</span>
-						<a href="" class="action-editcolumn pull-right" data-column='{{column|json}}'><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+					{% for name, field in table._columns %}
+					<th data-resizable-column-id="column-{{name}}">
+						<span>{{field.label}}</span>
+						<a href="" class="action-editcolumn pull-right" data-column-name='{{name}}' data-column='{{field|json}}'><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
 					</th>
 					{% endfor %}
 				</tr>

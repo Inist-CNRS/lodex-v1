@@ -1,5 +1,5 @@
 module.exports = {
-  connexionURI: 'mongodb://localhost:27017/semtab/',
+  connectionURI: 'mongodb://localhost:27017/semtab/',
   browserifyModules: ['paperclip/lib/node.js', 'vue', 'oboe'],
   routes: [
     "echo.js",

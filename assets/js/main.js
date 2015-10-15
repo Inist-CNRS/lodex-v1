@@ -72,21 +72,28 @@ $(document).ready(function() {
         },
         methods: {
           setField: function (column) {
+            console.log('column', column);
+            var value = column;
+            delete value.scheme;
+            delete value.label;
+            delete value.name;
+            delete value.type;
+            delete value.comment;
             var self = this;
-            self.propertyLabel = column.propertyLabel || '';
-            self.previousLabel = column.propertyLabel || '';
-            self.propertyValue = column.propertyValue || {};
-            self.previousValue = column.propertyValue || {};
-            self.propertyName = column.propertyName || '';
-            self.previousName = column.propertyName || '';
-            self.propertyScheme = column.propertyScheme || '';
-            self.previousScheme = column.propertyScheme || '';
-            self.propertyType= column.propertyType || '';
-            self.previousType = column.propertyType || '';
-            self.propertyComment = column.propertyComment || '';
-            self.previousComment = column.propertyComment || '';
-            self.propertyText = column.propertyText || {};
-            self.previousText = column.propertyText || {};
+            self.propertyLabel = column.label || '';
+            self.previousLabel = column.label || '';
+            self.propertyValue = value || {};
+            self.previousValue = value || {};
+            self.propertyName = column.name || '';
+            self.previousName = column.name || '';
+            self.propertyScheme = column.scheme || '';
+            self.previousScheme = column.scheme || '';
+            self.propertyType= column.type || '';
+            self.previousType = column.type || '';
+            self.propertyComment = column.comment || '';
+            self.previousComment = column.comment || '';
+            self.propertyText = column.text || {};
+            self.previousText = column.text || {};
             self.JSONEditorHandleValue.set(self.propertyValue);
             self.JSONEditorHandleLink.set(self.propertyText);
           },
@@ -188,7 +195,9 @@ $(document).ready(function() {
 
 
     $('.action-editcolumn').click(function (e) {
-        EditColumnVue.setField($(this).data("column"));
+        var c = $(this).data("column")
+        c.name = $(this).data("column-name")
+        EditColumnVue.setField(c);
         $('#modal-editcolumn').modal('toggle');
         return false;
     });
