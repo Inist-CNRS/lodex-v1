@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/touv/semtab#readme",
   "dependencies": {
-    "oboe": "^2.1.2",
-    "paperclip": "^3.0.18",
-    "vue": "^0.12.15"
+	  "castor-core" : "3.0.0-alpha.1",
+	  "oboe": "^2.1.2",
+	  "paperclip": "^3.0.18",
+	  "vue": "^0.12.15"
   }
 }
