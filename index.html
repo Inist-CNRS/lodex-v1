@@ -23,7 +23,7 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a id="action-edittable" href="" data-toggle="modal" data-target="#modal-edittable"><span class="glyphicon glyphicon glyphicon-pencil"></span> {{ __('Edit Table') }}</a></li>
+				<li><a id="action-edittable" href="" data-toggle="modal" data-target="#modal-edittable" role="button"><span class="glyphicon glyphicon glyphicon-pencil"></span> {{ __('Edit Table') }}</a></li>
 				<li><a id="action-newtable" href=""><span class="glyphicon glyphicon-object-align-left"></span> {{ __('New table') }}</a></li>
 				<li><a id="action-newcolumn" href=""><span class="glyphicon glyphicon-sound-stereo"></span> {{ __('New column') }}</a></li>
 				<li><a id="action-loaddata" href="" data-toggle="modal" data-target="#modal-loaddata"><span class="glyphicon glyphicon-cloud-upload"></span> {{ __('Load data') }}</a></li>
@@ -65,14 +65,19 @@
 				</tr>
 			</thead>
 			<tbody id="items-tbody">
+				<script type="text/x-paperclip" id="table-items-list">
+				{% include "./templates/table-items.html" %}
+				</script>
 			</tbody>
 		</table>
 	</div>
 
 </div> <!-- /container -->
 
-{% include "./templates/table-items.html" %}
-{% include "./modals/edit-table.html" %}
+<script type="text/x-paperclip" id="modal-edit-table">
+{% include "./templates/modal-edit-table.html" %}
+</script>
+
 {% include "./modals/load-data.html" %}
 {% include "./modals/edit-column.html" %}
 

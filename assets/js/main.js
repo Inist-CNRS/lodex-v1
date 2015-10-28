@@ -25,24 +25,76 @@ pc.modifiers.plus = function (input, nb) {
   return parseInt(input) + parseInt(nb);
 };
 
+var view = function(id, mdl) {
+  var n = document.getElementById(id)
+  var t = n.innerHTML.replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+  var v = pc.template(t, pc).view(mdl);
+  n.parentNode.insertBefore(v.render(), n);
+  return v;
+}
+
 
 $(document).ready(function() {
     Vue.config.debug = true;
     var oboe = require('oboe');
     var nTables = 0;
 
+    var viewList = view('table-items-list', {
+        items: []
+    });
 
-    var html = document.getElementById("table-items-template").innerHTML.replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
-    var template = pc.template(html, pc);
-    var view = template.view({ items: {} });
-    document.getElementById("items-tbody").appendChild(view.render());
+    var viewTable = view('modal-edit-table', {
+        handleSave : function(event) {
+          var url = '/-/v3/settab' + document.location.pathname.replace(/\/+$/,'').concat('/');
+          var form = {
+            "name": viewTable.get('_wid'),
+            "title": viewTable.get('title'),
+            "description" :  $('#modal-edittable-input-description').val()
+          };
+          $.ajax({
+              type: "POST",
+              url: url,
+              data: form,
+              success: function(data) {
+                document.location.href = "/";
+              }
+          });
+          return false;
+        },
+        handleDrop: function(event) {
+          var url = '/-/v3/settab' + document.location.pathname.replace(/\/+$/,'').concat('/');
+          var form = {};
+          form[document.location.pathname.replace(/^\/+/, '').replace(/\/$/, '')] = true;
+          $.ajax({
+              type: "POST",
+              url: url ,
+              data: form,
+              success: function(data) {
+                document.location.href = "/";
+              }
+          });
+          return false;
+        }
 
-    oboe(window.location.href.replace(/\/+$/,'') + '/*').done(function(items) {
-        view.set('items', items);
+    });
+
+    oboe(window.location.href.replace(/\/+$/,'') + '/*')
+    .node('!.*', function(item) {
+        var items = viewList.get('items');
+        items.push(item);
+        viewList.set('items', items);
+    })
+    .done(function(items) {
         $("#table-items table").resizableColumns();
     })
     oboe(window.location.protocol + '//' + window.location.host + '/index/$count').done(function(items) {
         nTables = items[0].value;
+    })
+    oboe(window.location.protocol + '//' + window.location.host + '/index' + document.location.pathname.replace(/\/+$/,'') +'/*?alt=raw').done(function(items) {
+        viewTable.set('title', items[0].title);
+        viewTable.set('description', items[0].description);
+        viewTable.set('_wid', items[0]._wid);
+        $('#modal-edittable-input-description').wysihtml5();
     })
 
     var EditColumnVue = new Vue( {
@@ -228,42 +280,6 @@ $(document).ready(function() {
         alert('Not yet implemented');
         return false;
     });
-    $('#action-edittable').click(function() {
-        $('#modal-edittable').modal('toggle');
-        return false;
-    });
-    $('#action-edittable-drop').click(function() {
-        var url = '/-/v3/settab' + document.location.pathname.replace(/\/+$/,'').concat('/');
-        var form = {};
-        form[document.location.pathname.replace(/^\/+/, '').replace(/\/$/, '')] = true;
-        $.ajax({
-            type: "POST",
-            url: url ,
-            data: form,
-            success: function(data) {
-              document.location.href = "/";
-            }
-        });
-        return false;
-    });
-    $('#action-edittable-save').click(function() {
-        var url = '/-/v3/settab' + document.location.pathname.replace(/\/+$/,'').concat('/');
-        var form = {
-          "name": $('#modal-edittable-input-name').val(),
-          "title": $('#modal-edittable-input-title').val(),
-          "description" : $('#modal-edittable-input-description').val()
-        };
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: form,
-            success: function(data) {
-              document.location.href = "/";
-            }
-        });
-
-        return false;
-    });
     $('#action-newcolumn').click(function() {
         var url = '/-/v3/setcol' + document.location.pathname.replace(/\/+$/,'') + '/c' + (nColumns + 1) + '/';
         $.ajax({
@@ -297,7 +313,6 @@ $(document).ready(function() {
      });
      */
 
-    $('#modal-edittable-input-description').wysihtml5();
 
 });
 
