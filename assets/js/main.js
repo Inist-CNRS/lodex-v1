@@ -1,8 +1,8 @@
 /* global $, Vue, document, JSONEditor, nColumns */
 'use strict';
 
+var JSONEditorOptions = { mode: "code" };
 var pc = require("paperclip/lib/node.js");
-
 
 pc.modifiers.get = function (input, key) {
   return input[key];
@@ -38,6 +38,7 @@ $(document).ready(function() {
     Vue.config.debug = true;
     var oboe = require('oboe');
     var nTables = 0;
+
 
     var viewList = view('table-items-list', {
         items: []
@@ -114,7 +115,6 @@ $(document).ready(function() {
           "propertyComment" : ""
         },
         ready: function() {
-          var JSONEditorOptions = { mode: "code" };
           var JSONEditorContainerValue = document.getElementById("modal-editcolumn-jsoneditor-value");
           this.JSONEditorHandleValue = new JSONEditor(JSONEditorContainerValue, JSONEditorOptions);
           var JSONEditorContainerLink= document.getElementById("modal-editcolumn-jsoneditor-link");
@@ -194,6 +194,14 @@ $(document).ready(function() {
       }
     );
     var fileToLoad = '';
+    var je1 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-label"), JSONEditorOptions);
+    je1.set({ set : 'Undefined label'});
+    var je2 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-text"), JSONEditorOptions);
+    je2.set({ set : 'n/a'});
+    var je3 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-hash"), JSONEditorOptions);
+    je3.set({ set : null});
+
+
     $('#modal-load-input-filename').change(function() {
         var t = $(this).val();
         $('#modal-load-input-file').val(t);
@@ -226,10 +234,13 @@ $(document).ready(function() {
     $('#modal-load-submit').click(function() {
         var formData = {
           loader : $("#modal-load-er").val(),
-          text   : $('#modal-load-input-text').val(),
+          keyboard : $('#modal-load-input-keyboard').val(),
           file   : fileToLoad,
           uri    : $("#modal-load-input-uri").val(),
-          type   : $("#modal-load-tab-list li.active").data('type')
+          type   : $("#modal-load-tab-list li.active").data('type'),
+          text   : je2.get(),
+          hash   : je3.get(),
+          label  : je1.get()
         }
         if (formData[formData.type] === undefined || formData[formData.type] === '') {
           return false;
@@ -314,5 +325,10 @@ $(document).ready(function() {
      */
 
 
+
+    $(".modal").on("show.bs.modal", function() {
+        var height = $(window).height() / 2;
+        $(this).find(".modal-body").css("min-height", Math.round(height));
+    });
 });
 

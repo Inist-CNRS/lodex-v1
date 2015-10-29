@@ -1,3 +1,8 @@
+body {
+  margin-left: .5em;
+  margin-right: .5em;
+}
+
 /* custom inclusion of right, left and below tabs */
 
 .tabs-below > .nav-tabs,
@@ -105,3 +110,6 @@
   *border-left-color: #ffffff;
 }
 
+.modal .modal-body {
+  max-height: 500px;
+}

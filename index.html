@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 
 {% block head %}
-<title> {{ table.title| d('n/a') | e }}  </title>
-<meta name="description" content="{{ table.description | d('n/a') | e }}">
+<title> {{ table._label | d('n/a') | e }}  </title>
+<meta name="description" content="{{ table._text | d('n/a') | e }}">
 <meta name="author" content="">
 {% endblock %}
 
@@ -26,7 +26,7 @@
 				<li><a id="action-edittable" href="" data-toggle="modal" data-target="#modal-edittable" role="button"><span class="glyphicon glyphicon glyphicon-pencil"></span> {{ __('Edit Table') }}</a></li>
 				<li><a id="action-newtable" href=""><span class="glyphicon glyphicon-object-align-left"></span> {{ __('New table') }}</a></li>
 				<li><a id="action-newcolumn" href=""><span class="glyphicon glyphicon-sound-stereo"></span> {{ __('New column') }}</a></li>
-				<li><a id="action-loaddata" href="" data-toggle="modal" data-target="#modal-loaddata"><span class="glyphicon glyphicon-cloud-upload"></span> {{ __('Load data') }}</a></li>
+				<li><a id="action-loaddata" href="" data-toggle="modal" data-target="#modal-loaddata-1"><span class="glyphicon glyphicon-cloud-upload"></span> {{ __('Load data') }}</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cloud-download"></span> {{ __('Download') }}<span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -48,8 +48,8 @@
 
 <div class="container-fuild">
 
-	<h1>{{ table.title|d('n/a')|e }}</h1>
-	<div>{{ table.description|d('n/a') }}</div>
+	<h1>{{ table._label|d('n/a')|e }}</h1>
+	<div>{{ table._text|d('n/a') }}</div>
 
 	<div id="table-items">
 		<table class="table table-bordered" data-resizable-columns-id="table-html">
@@ -78,7 +78,8 @@
 {% include "./templates/modal-edit-table.html" %}
 </script>
 
-{% include "./modals/load-data.html" %}
+{% include "./modals/load-data-1.html" %}
+{% include "./modals/load-data-2.html" %}
 {% include "./modals/edit-column.html" %}
 
 {% endblock %}
