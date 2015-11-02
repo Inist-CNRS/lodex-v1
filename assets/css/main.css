@@ -1,6 +1,6 @@
-body {
-  margin-left: .5em;
-  margin-right: .5em;
+#content {
+  padding-left: .5em;
+  padding-right: .5em;
 }
 
 /* custom inclusion of right, left and below tabs */
