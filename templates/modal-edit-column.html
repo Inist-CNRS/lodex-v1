@@ -1,0 +1,44 @@
+<div class="modal fade" id="modal-editcolumn" tabindex="-1" role="dialog" aria-labelledby="modal-editcolumn-title">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="modal-editcolumn-title">{{ __('Edit Column') }}</h4>
+    </div>
+    <div class="modal-body">
+      <p>
+      Onec purus dui, vehicula in egestas in, lobortis et sem. Mauris neque quam, pharetra in lacinia vel, tempor vitae tellus. Sed eu augue eget neque euismod euismod. Praesent cursus tincidunt interdum.
+      </p>
+      <form class="form" onsubmit=[[handleSave]]>
+        <div class="form-group">
+          <label class="control-label" for="modal-editcolumn-input-label">{{ __('Label') }}</label>
+          <input class="form-control" id="modal-editcolumn-input-label" placeholder="" type="text" value="[[ <~>label ]]" />
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Scheme') }}</label>
+          <input class="form-control" id="modal-editcolumn-input-scheme" placeholder="" type="url"  value="[[ <~>scheme ]]" />
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Stylesheet') }}</label>
+          <div id="modal-editcolumn-jsoneditor-value" style="width:100%;height:12em;"> </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="modal-editcolumn-input-name">{{ __('URL Name') }}</label>
+          <input class="form-control" id="modal-editcolumn-input-name" placeholder="" type="text" pattern="\w+" value="[[ <~>name ]]" />
+        </div>
+        <!--
+        <div class="form-group">
+          <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Comment') }}</label>
+          <input class="form-control" id="modal-editcolumn-input-scheme" placeholder="" type="text"  value="[[ <~>comment ]]" />
+        </div>
+        -->
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('Cancel') }}</button>
+      <button id="action-editcolumn-drop" type="button" class="btn btn-warning" onclick=[[handleDrop]]>{{ __('Drop') }}</button>
+      <button id="action-editcolumn-save" type="button" class="btn btn-primary" onclick=[[handleSave]]>{{ __('Save') }}</button>
+    </div>
+  </div>
+</div>
+</div>

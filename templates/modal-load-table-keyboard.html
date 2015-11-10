@@ -1,0 +1,32 @@
+<div class="modal modal-loadtable" id="modal-loadtable-keyboard" tabindex="-1" role="dialog" aria-labelledby="modal-loadtable-keyboard-title">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-loadtable-keyboard-title">{{ __('Load Data') }} 1 / 2</h4>
+    </div>
+    <div id="modal-load-tab-keyboard" class="modal-body">
+      <p>
+      Onec purus dui, vehicula in egestas in, lobortis et sem. Mauris neque quam, pharetra in lacinia vel, tempor vitae tellus. Sed eu augue eget neque euismod euismod. Praesent cursus tincidunt interdum.
+      </p>
+      <div class="form-group">
+        <label class="control-label" for="modal-load-input-type-c">{{ __('Type') }}</label>
+        <select id="modal-load-input-type-c" class="form-control modal-load-shared-type">
+          <option value="xml">XML Loader</option>
+          <option value="xls">Excel Loader</option>
+          <option value="csv">CSV Loader</option>
+          <option value="nq">N-Quads Loader</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="modal-load-input-keyboard">{{ __('Text') }}</label>
+        <textarea class="form-control" id="modal-load-input-keyboard" rows="3"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#modal-loadtable-keyboard">{{ __('Cancel') }}</button>
+      <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#modal-loadtable">{{ __('Continue') }}</button>
+    </div>
+  </div>
+</div>
+</div>
+

@@ -111,5 +111,5 @@
 }
 
 .modal .modal-body {
-  max-height: 500px;
+  min-height: 500px;
 }

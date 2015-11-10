@@ -1,0 +1,43 @@
+<div class="modal modal-loadtable" id="modal-loadtable-file" tabindex="-1" role="dialog" aria-labelledby="modal-loadtable-file-title">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-loadtable-file-title">{{ __('Load Data') }} 1 / 2</h4>
+    </div>
+    <div id="modal-load-tab-file" class="modal-body">
+      <p>
+      Onec purus dui, vehicula in egestas in, lobortis et sem. Mauris neque quam, pharetra in lacinia vel, tempor vitae tellus. Sed eu augue eget neque euismod euismod. Praesent cursus tincidunt interdum.
+      </p>
+      <div class="form-group">
+        <label class="control-label" for="modal-load-input-type-a">{{ __('Type') }}</label>
+        <select id="modal-load-input-type-a" class="form-control modal-load-shared-type">
+          <option value="xml">XML Loader</option>
+          <option value="xls">Excel Loader</option>
+          <option value="csv">CSV Loader</option>
+          <option value="nq">N-Quads Loader</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input data-type="POST" data-url="/-/v3/upload" id="modal-load-input-filename" type="file" name="inputFile" style="display:none" />
+        <label class="control-label" for="modal-load-input-file">{{ __('Name') }}</label>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" onclick=[[ handleSelect ]]>
+              <span id="modal-load-input-file-label">Browse</span>
+              <span class="badge" id="modal-load-input-file-indicator" style="display:none"></span>
+            </button>
+          </span>
+          <input id="modal-load-input-file" class="form-control" type="text" placeholder="Local file" value="[[ <~>filename ]]" readonly="true" style="cursor:auto" aria-describedby="modal-load-input-file-status" />
+          <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" style="display:none"></span>
+          <span id="modal-load-input-file-status" class="sr-only form-control-feedback" style="display:none">(success)</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#modal-loadtable-file">{{ __('Cancel') }}</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-loadtable">{{ __('Continue') }}</button>
+    </div>
+  </div>
+</div>
+</div>
+

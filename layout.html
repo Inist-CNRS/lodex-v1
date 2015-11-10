@@ -43,28 +43,28 @@
   <body>
 
 
-	  {% block body %}{% endblock %}
+    {% block header %}{% endblock %}
 
+    <div id="content" class="container-fuild">
+      {% block body %}{% endblock %}
+    </div>
 
+    {% block footer %}{% endblock %}
 
-      <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
       ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
       <script type="text/javascript" charset="utf-8" src="/libs.js"></script>
-      <script type="text/javascript" charset="utf-8">
-      var Vue = require('vue');
-      Vue.config.delimiters = ['(', ')'];
-      </script>
-	  <script type="text/javascript" charset="utf-8" src="/libs/jquery/dist/jquery.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/libs/jquery/dist/jquery.min.js"></script>
       <script type="text/javascript" charset="utf-8" src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
       <!-- <script type="text/javascript" charset="utf-8" src="./libs/bootstrap-material-design/dist/js/ripples.min.js"></script> -->
       <!-- <script type="text/javascript" charset="utf-8" src="./libs/bootstrap-material-design/dist/js/material.min.js"></script> -->
       <!-- <script type="text/javascript" charset="utf-8"> -->
-      <!-- $(document).ready(function() { -->
-        <!-- // This command is used to initialize some elements and make them work properly -->
-        <!-- $.material.init(); -->
-      <!-- }); -->
-      <!-- </script> -->
+<!-- $(document).ready(function() { -->
+  <!-- // This command is used to initialize some elements and make them work properly -->
+    <!-- $.material.init(); -->
+    <!-- }); -->
+<!-- </script> -->
 
       {% block scripts %}{% endblock %}
       <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

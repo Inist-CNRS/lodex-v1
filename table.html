@@ -6,9 +6,7 @@
 <meta name="author" content="">
 {% endblock %}
 
-
-
-{% block body %}
+{% block header %}
 <!-- Fixed navbar -->
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
 	<div class="container-fluid">
@@ -23,10 +21,34 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a id="action-edittable" href="" data-toggle="modal" data-target="#modal-edittable" role="button"><span class="glyphicon glyphicon glyphicon-pencil"></span> {{ __('Edit Table') }}</a></li>
+				<li><a id="action-edittable" href="" data-toggle="modal" data-target="#modal-edittable" role="button"><span class="glyphicon glyphicon-pencil"></span> {{ __('Edit Table') }}</a></li>
 				<li><a id="action-newtable" href=""><span class="glyphicon glyphicon-object-align-left"></span> {{ __('New table') }}</a></li>
 				<li><a id="action-newcolumn" href=""><span class="glyphicon glyphicon-sound-stereo"></span> {{ __('New column') }}</a></li>
-				<li><a id="action-loaddata" href="" data-toggle="modal" data-target="#modal-loaddata-1"><span class="glyphicon glyphicon-cloud-upload"></span> {{ __('Load data') }}</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-random"></span> {{ __('Fork') }}<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="" data-toggle="modal" data-target="#modal-loadtable-fork">{{ __('Rows') }}</a>
+						</li>
+						<li>
+							<a id="action-clonetable" href="">{{ __('Table') }}</a>
+						</li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cloud-upload"></span> {{ __('Upload') }}<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="" data-toggle="modal" data-target="#modal-loadtable-file">{{ __('From Computer') }}</a>
+						</li>
+						<li>
+							<a href="" data-toggle="modal" data-target="#modal-loadtable-uri">{{ __('From Internet') }}</a>
+						</li>
+						<li>
+							<a href="" data-toggle="modal" data-target="#modal-loadtable-keyboard">{{ __('From Keyboard') }}</a>
+						</li>
+					</ul>
+				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cloud-download"></span> {{ __('Download') }}<span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -45,8 +67,9 @@
 		</div><!--/.nav-collapse -->
 	</div>
 </nav>
+{% endblock %}
 
-<div id="content" class="container-fuild">
+{% block body %}
 
 	<h1>{{ table._label|d('n/a')|e }}</h1>
 	<div>{{ table._text|d('n/a') }}</div>
@@ -59,7 +82,7 @@
 					{% for name, field in table._columns %}
 					<th data-resizable-column-id="column-{{name}}">
 						<span>{{field.label}}</span>
-						<a href="" class="action-editcolumn pull-right" data-column-name='{{name}}' data-column='{{field|json}}'><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+						<a href="" class="action-editcolumn pull-right" data-toggle="modal" data-target="#modal-editcolumn" role="button" data-column='{{name}}' ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
 					</th>
 					{% endfor %}
 				</tr>
@@ -72,15 +95,34 @@
 		</table>
 	</div>
 
-</div> <!-- /container -->
 
 <script type="text/x-paperclip" id="modal-edit-table">
 {% include "./templates/modal-edit-table.html" %}
 </script>
 
-{% include "./modals/load-data-1.html" %}
-{% include "./modals/load-data-2.html" %}
-{% include "./modals/edit-column.html" %}
+<script type="text/x-paperclip" id="modal-edit-column">
+{% include "./templates/modal-edit-column.html" %}
+</script>
+
+<script type="text/x-paperclip" id="modal-load-table-fork">
+{% include "./templates/modal-load-table-fork.html" %}
+</script>
+
+<script type="text/x-paperclip" id="modal-load-table-file">
+{% include "./templates/modal-load-table-file.html" %}
+</script>
+
+<script type="text/x-paperclip" id="modal-load-table-uri">
+{% include "./templates/modal-load-table-uri.html" %}
+</script>
+
+<script type="text/x-paperclip" id="modal-load-table-keyboard">
+{% include "./templates/modal-load-table-keyboard.html" %}
+</script>
+
+<script type="text/x-paperclip" id="modal-load-table">
+{% include "./templates/modal-load-table.html" %}
+</script>
 
 {% endblock %}
 
@@ -88,6 +130,7 @@
 <link href="/libs/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
 <link href="/libs/jquery-resizable-columns/dist/jquery.resizableColumns.css" rel="stylesheet" type="text/css">
 <link href="/libs/bootstrap3-wysiwyg/dist/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css">
+<style> .jsoneditor .menu {display: none;} </style>
 {% endblock %}
 
 {% block scripts %}
@@ -100,8 +143,8 @@
 <script src="/libs/jquery-resizable-columns/dist/jquery.resizableColumns.min.js"></script>
 <script src="/libs/bootstrap3-wysiwyg/dist/bootstrap3-wysihtml5.all.min.js"></script>
 <script>
-var nColumns = {{table._columns.length|d(0)}};
+var nColumns = {{table._columns|length()|d(0)}};
 </script>
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/table.js"></script>
 {% endblock %}
 
