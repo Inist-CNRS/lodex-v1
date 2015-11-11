@@ -1,6 +1,6 @@
 module.exports = {
   connectionURI: "mongodb://localhost:27017/semtab/",
-  browserifyModules: ["paperclip/lib/node.js", "vue", "oboe"],
+  browserifyModules: ["paperclip/lib/node.js", "oboe"],
   maxFileSize: 536870912,
   acceptFileTypes: ['csv','xml','txt','xls','xlsx','nq','n3','nt'],
   loaders: [
@@ -34,6 +34,7 @@ module.exports = {
     },
   ],
   routes: [
+    "setroot.js",
     "echo.js",
     "table.js",
     "v3.js"

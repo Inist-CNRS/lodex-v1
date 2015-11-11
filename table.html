@@ -21,9 +21,20 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a id="action-edittable" href="" data-toggle="modal" data-target="#modal-edittable" role="button"><span class="glyphicon glyphicon-pencil"></span> {{ __('Edit Table') }}</a></li>
-				<li><a id="action-newtable" href=""><span class="glyphicon glyphicon-object-align-left"></span> {{ __('New table') }}</a></li>
-				<li><a id="action-newcolumn" href=""><span class="glyphicon glyphicon-sound-stereo"></span> {{ __('New column') }}</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list-alt"></span> {{ __('Table') }}<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a id="action-edittable" href="" data-toggle="modal" data-target="#modal-edittable" role="button">{{ __('Properties') }}</a>
+						</li>
+						<li
+							><a id="action-newcolumn" href="">{{ __('Add new column') }}</a>
+						</li>
+						<li>
+							<a id="action-newtable" href="">{{ __('Create new one') }}</a>
+						</li>
+					</ul>
+				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-random"></span> {{ __('Fork') }}<span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -70,6 +81,11 @@
 {% endblock %}
 
 {% block body %}
+
+<script type="text/x-paperclip" id="div-set-root">
+{% include "./templates/div-set-root.html" %}
+</script>
+
 
 	<h1>{{ table._label|d('n/a')|e }}</h1>
 	<div>{{ table._text|d('n/a') }}</div>
@@ -127,9 +143,10 @@
 {% endblock %}
 
 {% block styles %}
-<link href="/libs/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
-<link href="/libs/jquery-resizable-columns/dist/jquery.resizableColumns.css" rel="stylesheet" type="text/css">
-<link href="/libs/bootstrap3-wysiwyg/dist/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/libs/jsoneditor/dist/jsoneditor.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/jquery-resizable-columns/dist/jquery.resizableColumns.css">
+<link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/summernote/dist/summernote.css">
 <style> .jsoneditor .menu {display: none;} </style>
 {% endblock %}
 
@@ -141,7 +158,7 @@
 <script src="/libs/ace-builds/src-min/ace.js"></script>
 <script src="/libs/store.js/store.min.js"></script>
 <script src="/libs/jquery-resizable-columns/dist/jquery.resizableColumns.min.js"></script>
-<script src="/libs/bootstrap3-wysiwyg/dist/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="/libs/summernote/dist/summernote.min.js"></script>
 <script>
 var nColumns = {{table._columns|length()|d(0)}};
 </script>

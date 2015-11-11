@@ -24,11 +24,17 @@ pc.modifiers.plus = function (input, nb) {
   return parseInt(input) + parseInt(nb);
 };
 
-var view = function(id, mdl) {
+var view = function(id, cb, mdl) {
+  if (typeof cb !== 'function') {
+    mdl = cb;
+  }
   var n = document.getElementById(id)
   var t = n.innerHTML.replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
   var v = pc.template(t, pc).view(mdl);
   n.parentNode.insertBefore(v.render(), n);
+  if (typeof cb === 'function') {
+    setTimeout(cb, 0);
+  }
   return v;
 }
 
@@ -39,17 +45,79 @@ $(document).ready(function() {
     var je1, je2, je3, je4, je5;
 
     // {{{ VIEWS
-    var viewList = view('table-items-list', {
+    var viewList = view('table-items-list', function() {
+        oboe(window.location.href.replace(/\/+$/,'') + '/*')
+        .node('!.*', function(item) {
+            var items = viewList.get('items');
+            items.push(item);
+            viewList.set('items', items);
+        })
+        .done(function(items) {
+            $("#table-items table").resizableColumns();
+        });
+      },
+      {
         items: []
     });
 
-    var viewTable = view('modal-edit-table', {
+    var viewRoot = view('div-set-root', function() {
+        oboe(window.location.protocol + '//' + window.location.host + '/index' + document.location.pathname.replace(/\/+$/,'') +'/*?alt=raw').done(function(items) {
+            viewRoot.set('isRoot', items[0]._root || false);
+        });
+      },
+      {
+        isRoot: false,
+        handleToggle: function(event) {
+          var idt = document.location.pathname.replace(/\/+$/,'').slice(1);
+          var url = '/-/setroot/';
+          var form = {
+            "origin": idt,
+            "isRoot": viewRoot.get('isRoot')
+          };
+          if (form.isRoot) {
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form,
+                error: console.error
+            });
+          }
+          else {
+            viewRoot.set('isRoot', true);
+          }
+          return false;
+        }
+    });
+
+
+
+    var viewTable = view('modal-edit-table', function() {
+        $('#modal-edittable-input-description').summernote({
+            height: 200,
+            toolbar: [
+              ['g2', ['bold', 'italic', 'underline', 'color']],
+              ['g3', ['clear']],
+            ]
+          });
+        $("#modal-edittable").on("show.bs.modal", function() {
+            oboe(window.location.protocol + '//' + window.location.host + '/index' + document.location.pathname.replace(/\/+$/,'') +'/*?alt=raw').done(function(items) {
+                viewTable.set('title', items[0]._label);
+                viewTable.set('_wid', items[0]._wid);
+                je1.set(items[0]._label);
+                je2.set(items[0]._text);
+                je3.set(items[0]._hash);
+                console.log('items', items[0]);
+                $("#modal-edittable-input-description").summernote('code', items[0]._text);
+                viewRoot.set('isRoot', items[0]._root || false);
+            });
+        });
+      }, {
         handleSave : function(event) {
           var url = '/-/v3/settab' + document.location.pathname.replace(/\/+$/,'').concat('/');
           var form = {
             "name": viewTable.get('_wid'),
             "title": viewTable.get('title'),
-            "description" :  $('#modal-edittable-input-description').val()
+            "description" :  $("#modal-edittable-input-description").summernote("code")
           };
           $.ajax({
               type: "POST",
@@ -134,7 +202,9 @@ $(document).ready(function() {
     });
 
 
-    var viewLoad = view('modal-load-table', {
+    var viewLoad = view('modal-load-table', function() {
+        viewLoad.set('fileToLoad', '');
+      }, {
         handlePrevious: function(event) {
           if (viewLoad.get('typeToLoad') === 'file') {
             $("#modal-loadtable-file").modal('show');
@@ -184,30 +254,17 @@ $(document).ready(function() {
           $('#modal-load-input-filename').click();
         }
     });
-    var viewLoadUri= view('modal-load-table-uri', { });
+    var viewLoadUri = view('modal-load-table-uri', { });
     var viewLoadKeyboard = view('modal-load-table-keyboard', { });
     var viewLoadFork = view('modal-load-table-fork', { });
-
-
-
-
     // }}}
 
 
-    oboe(window.location.href.replace(/\/+$/,'') + '/*')
-    .node('!.*', function(item) {
-        var items = viewList.get('items');
-        items.push(item);
-        viewList.set('items', items);
-    })
-    .done(function(items) {
-        $("#table-items table").resizableColumns();
-    })
+
     oboe(window.location.protocol + '//' + window.location.host + '/index/$count').done(function(items) {
         nTables = items[0].value;
     })
 
-    viewLoad.set('fileToLoad', '');
 
     je1 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-label"), JSONEditorOptions);
     je2 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-text"), JSONEditorOptions);
@@ -249,7 +306,7 @@ $(document).ready(function() {
     $('.action-editcolumn').click(function (e) {
         var column = $(this).data("column");
         oboe(window.location.protocol + '//' + window.location.host + '/index' + document.location.pathname.replace(/\/+$/,'') +'/*?alt=raw').done(function(items) {
-            console.log('items', items[0]._columns[column]);
+            console.log('items', items[0]);
             viewColumn.set('plabel', items[0]._columns[column].label);
             viewColumn.set('label', items[0]._columns[column].label);
 
@@ -307,8 +364,7 @@ $(document).ready(function() {
         });
     })
     .change();
-    $("#modal-load-previous").click(function() {
-   });
+    $("#modal-load-previous").click(function() { });
     // }}}
 
     // {{{ MENU
@@ -357,6 +413,10 @@ $(document).ready(function() {
         });
         return false;
     });
+    $('#action-setroot').click(function() {
+        return false;
+    });
+
     $('#action-download-csv').click(function() {
         document.location.href = document.location.pathname.replace(/\/+$/,'') + '/*/?alt=csv';
         return false;
@@ -369,19 +429,7 @@ $(document).ready(function() {
         document.location.href = document.location.pathname.replace(/\/+$/,'') + '/*/?alt=json';
         return false;
     });
-    $("#modal-edittable").on("show.bs.modal", function() {
-        oboe(window.location.protocol + '//' + window.location.host + '/index' + document.location.pathname.replace(/\/+$/,'') +'/*?alt=raw').done(function(items) {
-            viewTable.set('title', items[0]._label);
-            viewTable.set('description', items[0]._text);
-            viewTable.set('_wid', items[0]._wid);
-            je1.set(items[0]._label);
-            je2.set(items[0]._text);
-            je3.set(items[0]._hash);
-            console.log('items', items[0]);
-            $('#modal-edittable-input-description').wysihtml5();
-        });
-    });
-    // }}}
+   // }}}
 
 
 

@@ -2,14 +2,10 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <h4 class="modal-title" id="modal-edittable-title">{{ __('Edit Table') }}</h4>
     </div>
     <div class="modal-body">
       <form onsubmit=[[handleSave]]>
-        <p>
-        Onec purus dui, vehicula in egestas in, lobortis et sem. Mauris neque quam, pharetra in lacinia vel, tempor vitae tellus. Sed eu augue eget neque euismod euismod. Praesent cursus tincidunt interdum.
-        </p>
         <div class="form-group">
           <label class="control-label" for="modal-edittable-input-name">{{ __('URL Name') }}</label>
           <input class="form-control" id="modal-edittable-input-name" placeholder="" type="text" pattern="\w+" value="[[ <~>_wid ]]" />
@@ -20,7 +16,7 @@
           <input class="form-control" id="modal-edittable-input-title" placeholder="" type="text" value="[[ <~>title ]]" />
         <div class="form-group">
           <label class="control-label" for="modal-edittable-input-description">{{ __('Description') }}</label>
-          <textarea  id="modal-edittable-input-description" class="textarea" placeholder="Enter text ..." style="width: 100%; height: 200px; font-size: 14px; line-height: 18px;">[[ ~description ]]</textarea>
+          <textarea  id="modal-edittable-input-description" class="textarea" placeholder="Enter text ..." style="width: 100%; height: 200px; font-size: 14px; line-height: 18px;"></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('Cancel') }}</button>
