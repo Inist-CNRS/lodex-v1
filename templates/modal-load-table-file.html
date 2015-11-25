@@ -8,15 +8,7 @@
       <p>
       Onec purus dui, vehicula in egestas in, lobortis et sem. Mauris neque quam, pharetra in lacinia vel, tempor vitae tellus. Sed eu augue eget neque euismod euismod. Praesent cursus tincidunt interdum.
       </p>
-      <div class="form-group">
-        <label class="control-label" for="modal-load-input-type-a">{{ __('Type') }}</label>
-        <select id="modal-load-input-type-a" class="form-control modal-load-shared-type">
-          <option value="xml">XML Loader</option>
-          <option value="xls">Excel Loader</option>
-          <option value="csv">CSV Loader</option>
-          <option value="nq">N-Quads Loader</option>
-        </select>
-      </div>
+      {% include "./partial-load-input-type.html" %}
       <div class="form-group">
         <input data-type="POST" data-url="/-/v3/upload" id="modal-load-input-filename" type="file" name="inputFile" style="display:none" />
         <label class="control-label" for="modal-load-input-file">{{ __('Name') }}</label>
@@ -32,6 +24,7 @@
           <span id="modal-load-input-file-status" class="sr-only form-control-feedback" style="display:none">(success)</span>
         </div>
       </div>
+      {% include "./partial-load-input-options.html" %}
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#modal-loadtable-file">{{ __('Cancel') }}</button>

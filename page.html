@@ -7,54 +7,6 @@
 {% endblock %}
 
 
-{% block header %}
-<!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-bottom">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">{{ __('Toggle navigation') }}</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="/index"><span class="glyphicon glyphicon-home"></span> {{ __('Index') }}</a>
-		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav">
-				<li><a id="action-editpage" href="" data-toggle="modal" data-target="#modal-editpage" role="button"><span class="glyphicon glyphicon glyphicon-pencil"></span> {{ __('Edit Page') }}</a></li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cloud-download"></span> {{ __('Download') }}<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li>
-							<a id="action-download-nq" href="">{{ __('N-Quads file') }}</a>
-						</li>
-						<li>
-							<a id="action-download-json" href="">{{ __('JSON LD file') }}</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div><!--/.nav-collapse -->
-	</div>
-</nav>
-<script type="text/x-paperclip" id="modal-edit-page">
-{% include "./templates/modal-edit-page.html" %}
-</script>
-
-{% endblock %}
 
 
-
-{% block styles %}
-<link href="/libs/bootstrap3-wysiwyg/dist/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css">
-<link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="/libs/summernote/dist/summernote.css" rel="stylesheet" type="text/css">
-
-{% endblock %}
-
-{% block scripts %}
-<script src="/libs/summernote/dist/summernote.min.js"></script>
-<script src="/assets/js/page.js"></script>
-{% endblock %}
 

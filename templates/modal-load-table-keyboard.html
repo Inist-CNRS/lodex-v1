@@ -8,19 +8,12 @@
       <p>
       Onec purus dui, vehicula in egestas in, lobortis et sem. Mauris neque quam, pharetra in lacinia vel, tempor vitae tellus. Sed eu augue eget neque euismod euismod. Praesent cursus tincidunt interdum.
       </p>
-      <div class="form-group">
-        <label class="control-label" for="modal-load-input-type-c">{{ __('Type') }}</label>
-        <select id="modal-load-input-type-c" class="form-control modal-load-shared-type">
-          <option value="xml">XML Loader</option>
-          <option value="xls">Excel Loader</option>
-          <option value="csv">CSV Loader</option>
-          <option value="nq">N-Quads Loader</option>
-        </select>
-      </div>
+      {% include "./partial-load-input-type.html" %}
       <div class="form-group">
         <label class="control-label" for="modal-load-input-keyboard">{{ __('Text') }}</label>
-        <textarea class="form-control" id="modal-load-input-keyboard" rows="3"></textarea>
+        <textarea class="form-control" id="modal-load-input-keyboard" rows="3" value="[[ <~>source ]]"></textarea>
       </div>
+      {% include "./partial-load-input-options.html" %}
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#modal-loadtable-keyboard">{{ __('Cancel') }}</button>
