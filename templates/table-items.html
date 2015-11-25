@@ -1,14 +1,20 @@
 <tr repeat.each="[[items]]" repeat.as="item">
-	<td>[[ key|plus ]]</td>
-	{% for name, column in table._columns %}
-	<td>
-		<show when="[[ item|len('${{name}}') > 0 ]]">
-			<a href="[[ item|get('{{name}}') ]]">[[item|get('${{name}}')]]</a>
-		</show>
-		<show when="[[ item|len('${{name}}') === 0 ]]">
-			<span>[[ item|get('{{name}}') ]]</span>
-		</show>
-	</td>
-    {% endfor %}
+<td>[[ key|plus ]]</td>
+{% for name, column in table._columns %}
+<td>
+  <show when="[[ item|len('${{name}}') > 0 ]]">
+  <a href="[[ item|get('{{name}}') ]]">[[item|get('${{name}}')]]</a>
+  </show>
+  <show when="[[ item|len('${{name}}') === 0 ]]">
+  <span>[[ item|get('{{name}}') ]]</span>
+  </show>
+</td>
+{% endfor %}
+<td>
+  <a style="margin: 2px" title="{{ __('CSV file') }}" href="./[[ item|get('_wid') ]]/*?alt=csv"><span class="fa fa-table"></span></a>
+  <a style="margin: 2px" title="{{ __('N-Quads file') }}" href="./[[ item|get('_wid') ]]/*?alt=nq"><span class="fa fa-bars"></span></a>
+  <a style="margin: 2px" title="{{ __('JSON LD file') }}" href="./[[ item|get('_wid') ]]/*?alt=json"><span class="fa fa-file-o"></span></a>
+  <a style="margin: 2px" title="{{ __('RAW file') }}" href="./[[ item|get('_wid') ]]/*?alt=raw"><span class="fa fa-file-code-o"></span></a>
+</td>
 </tr>
 
