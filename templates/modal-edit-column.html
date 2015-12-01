@@ -27,8 +27,32 @@
         </div>
         <!--
         <div class="form-group">
-          <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Comment') }}</label>
-          <input class="form-control" id="modal-editcolumn-input-scheme" placeholder="" type="text"  value="[[ <~>comment ]]" />
+          <label class="control-label" for="modal-editcolumn-input-name">{{ __('Type') }}</label>
+          <select  value="{{ <~>type }}">
+            <option value="http://www.w3.org/TR/xmlschema-2/#string">string</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#boolean">boolean</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#decimal">decimal</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#float">float</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#double">double</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#duration">duration</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#dateTime">dateTime</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#time">time</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#date">date</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#gYearMonth">gYearMonth</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#gYear">gYear</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#gMonthDay">gMonthDay</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#gDay">gDay</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#gMonth">gMonth</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#hexBinary">hexBinary</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#base64Binary">base64Binary</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#anyURI">anyURI</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#QName">QName</option>
+            <option value="http://www.w3.org/TR/xmlschema-2/#NOTATION">NOTATION</option>
+            </select>
+        </div>
+        <div class="form-group">
+        <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Comment') }}</label>
+        <input class="form-control" id="modal-editcolumn-input-scheme" placeholder="" type="text"  value="[[ <~>comment ]]" />
         </div>
         -->
       </form>

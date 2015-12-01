@@ -1,5 +1,7 @@
 <tr repeat.each="[[items]]" repeat.as="item">
-<td>[[ key|plus ]]</td>
+<td>
+  <a href="{{ "/" if _index else "./" }}[[ item|get('_wid') ]]/">#[[ key|plus ]]</a>
+</td>
 {% for name, column in table._columns %}
 <td>
   <show when="[[ item|len('${{name}}') > 0 ]]">

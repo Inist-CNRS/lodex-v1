@@ -13,8 +13,11 @@ pc.modifiers.len = function (input, key) {
   if (input === null || input === undefined) {
     return  0;
   }
-  else {
+  else if (typeof input.length === 'number') {
     return input.length;
+  }
+  else {
+    return 0;
   }
 };
 pc.modifiers.plus = function (input, nb) {
@@ -213,7 +216,7 @@ $(document).ready(function() {
             else if (viewLoad.get('typeToLoad') === 'uri') {
               $("#modal-loadtable-uri").modal('show');
             }
-            else if (viewLoad.get('typeToLoad') === 'text') {
+            else if (viewLoad.get('typeToLoad') === 'keyboard') {
               $("#modal-loadtable-keyboard").modal('show');
             }
             else if (viewLoad.get('typeToLoad') === 'fork') {
@@ -222,7 +225,9 @@ $(document).ready(function() {
           },
           handleLoad: function(event) {
             var optData;
+            var origin = document.location.pathname.replace(/\/+$/,'').slice(1);
             var typeToLoad = viewLoad.get('typeToLoad');
+            console.log('Load', typeToLoad);
             if (formatToLoad === 'json') {
               optData = viewLoadType[typeToLoad].get('jsonPath');
             }
@@ -235,9 +240,34 @@ $(document).ready(function() {
               label  : je1.get(),
               text   : je2.get(),
               hash   : je3.get(),
-              xtend  : je4.get(),
-              origin : document.location.pathname.replace(/\/+$/,'').slice(1),
+              enrich : je4.get(),
+              origin : origin,
               options: optData
+            }
+            if (typeToLoad === "fork") {
+              var rsc = 't' + (nTables + 1);
+              var url = '/-/v3/settab/' + rsc + '/';
+              var idt = document.location.pathname.replace(/\/+$/,'').slice(1);
+              $.ajax({
+                  type: "POST",
+                  url: url ,
+                  data: {
+                    origin: idt
+                  },
+                  success: function(data) {
+                    console.log('Created', data);
+                    formData['uri'] = '/' + rsc;
+                    $.ajax({
+                        type: "POST",
+                        url: "/-/v3/load",
+                        data: formData,
+                        success: function(data) {
+                          document.location.href = formData['uri'];
+                        }
+                    });
+                  },
+                  error: console.error
+              });
             }
             if (formData[formData.type] === undefined || formData[formData.type] === '') {
               return false;
@@ -331,7 +361,7 @@ $(document).ready(function() {
       je1 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-label"), JSONEditorOptions);
       je2 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-text"), JSONEditorOptions);
       je3 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-hash"), JSONEditorOptions);
-      je4 = new JSONEditor(document.getElementById("modal-forktable-extend"), JSONEditorOptions);
+      je4 = new JSONEditor(document.getElementById("modal-forktable-enrich"), JSONEditorOptions);
       je5 = new JSONEditor(document.getElementById("modal-editcolumn-jsoneditor-value"), JSONEditorOptions);
 
       $('#modal-load-input-filename').change(function() {
@@ -407,7 +437,7 @@ $(document).ready(function() {
       });
       $("#modal-loadtable-keyboard").on("show.bs.modal", function() {
           $(".modal-load-options").hide();
-          viewLoad.set('typeToLoad', 'text');
+          viewLoad.set('typeToLoad', 'keyboard');
       });
       $("#modal-loadtable-fork").on("show.bs.modal", function() {
           $(".modal-load-options").hide();

@@ -17,18 +17,20 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/index"><span class="glyphicon glyphicon-home"></span> {{ __('Index') }}</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
+				<li>
+					<a href="/index/"><span class="glyphicon glyphicon-home"></span> {{ __('Index') }}</a>
+				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-calendar"></span> {{ __('Table') }}<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li>
-							<a id="action-editpage" href="" data-toggle="modal" data-target="#modal-editpage" role="button"><span class="fa fa-pencil-square-o"></span> {{ __('Edit Page') }}</a>
+							<a id="action-editpage" href="" data-toggle="modal" data-target="#modal-editpage" role="button"><span class="fa fa-pencil-square-o"></span> {{ __('Edit Template') }}</a>
 						</li>
 						<li>
-							<a id="action-edittable" href="" data-toggle="modal" data-target="#modal-edittable" role="button"><span class="fa fa-cog"></span> {{ __('Properties') }}</a>
+							<a id="action-edittable" href="" data-toggle="modal" data-target="#modal-edittable" role="button"><span class="fa fa-cog"></span> {{ __('Edit Properties') }}</a>
 						</li>
 						<li
 							><a id="action-newcolumn" href=""><span class="fa fa-plus-square"></span> {{ __('Add new column') }}</a>
@@ -42,10 +44,10 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-random"></span> {{ __('Fork') }}<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="" data-toggle="modal" data-target="#modal-loadtable-fork">{{ __('Rows') }}</a>
+							<a href="" data-toggle="modal" data-target="#modal-loadtable-fork">{{ __('With all documents') }}</a>
 						</li>
 						<li>
-							<a id="action-clonetable" href="">{{ __('Table') }}</a>
+							<a id="action-clonetable" href="">{{ __('Only table properties') }}</a>
 						</li>
 					</ul>
 				</li>
@@ -90,7 +92,12 @@
 </script>
 
 
-	<h1>{{ table._label|d('n/a')|e }}</h1>
+	<h1>
+		{{ table._label|d('n/a')|e }}
+		{% if table._from %}
+		<small>forked from <a href="/{{ table._from }}">{{ table._from }}</a></small>
+		{% endif %}
+	</h1>
 	<div>{{ table._text|d('n/a') }}</div>
 
 	<div id="table-items">
