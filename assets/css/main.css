@@ -1,4 +1,6 @@
-#content {
+/* http://stackoverflow.com/questions/18392477/how-to-make-bootstrap-3-fluid-layout-without-horizontal-scrollbar */
+body { overflow-x: hidden;}
+#content .row {
   padding-left: .5em;
   padding-right: .5em;
 }

@@ -44,10 +44,10 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-random"></span> {{ __('Fork') }}<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="" data-toggle="modal" data-target="#modal-loadtable-fork">{{ __('With all documents') }}</a>
+							<a href="" data-toggle="modal" data-target="#modal-loadtable-fork"><span class="fa fa-circle"></span> {{ __('With all documents') }}</a>
 						</li>
 						<li>
-							<a id="action-clonetable" href="">{{ __('Only table properties') }}</a>
+							<a id="action-clonetable" href=""><span class="fa fa-circle-o"></span> {{ __('Only table properties') }}</a>
 						</li>
 					</ul>
 				</li>
@@ -55,13 +55,13 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cloud-upload"></span> {{ __('Upload') }}<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="" data-toggle="modal" data-target="#modal-loadtable-file">{{ __('From Computer') }}</a>
+							<a href="" data-toggle="modal" data-target="#modal-loadtable-file"><span class="fa fa-laptop"> {{ __('From Computer') }}</a>
 						</li>
 						<li>
-							<a href="" data-toggle="modal" data-target="#modal-loadtable-uri">{{ __('From Internet') }}</a>
+							<a href="" data-toggle="modal" data-target="#modal-loadtable-uri"><span class="fa fa-cloud"> {{ __('From Internet') }}</a>
 						</li>
 						<li>
-							<a href="" data-toggle="modal" data-target="#modal-loadtable-keyboard">{{ __('From Keyboard') }}</a>
+							<a href="" data-toggle="modal" data-target="#modal-loadtable-keyboard"><span class="fa fa-keyboard-o"></span> {{ __('From Keyboard') }}</a>
 						</li>
 					</ul>
 				</li>
@@ -80,6 +80,13 @@
 					</ul>
 				</li>
 			</ul>
+			<form class="navbar-form navbar-right">
+				<div class="form-group">
+					<script type="text/x-paperclip" id="div-set-root">
+					{% include "./templates/div-set-root.html" %}
+					</script>
+				</div>
+			</form>
 		</div><!--/.nav-collapse -->
 	</div>
 </nav>
@@ -87,40 +94,44 @@
 
 {% block body %}
 
-<script type="text/x-paperclip" id="div-set-root">
-{% include "./templates/div-set-root.html" %}
-</script>
-
-
-	<h1>
-		{{ table._label|d('n/a')|e }}
-		{% if table._from %}
-		<small>forked from <a href="/{{ table._from }}">{{ table._from }}</a></small>
-		{% endif %}
-	</h1>
-	<div>{{ table._text|d('n/a') }}</div>
-
-	<div id="table-items">
-		<table class="table table-bordered" data-resizable-columns-id="table-html">
-			<thead>
-				<tr>
-					<th style="width: 0.5em"></th>
-					{% for name, field in table._columns %}
-					<th data-resizable-column-id="column-{{name}}">
-						<span>{{field.label}}</span>
-						<a href="" class="action-editcolumn pull-right" data-toggle="modal" data-target="#modal-editcolumn" role="button" data-column='{{name}}' ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-					</th>
-					{% endfor %}
-					<th style="width: 0.5em"></th>
-				</tr>
-			</thead>
-			<tbody id="items-tbody">
-				<script type="text/x-paperclip" id="table-items-list">
-				{% include "./templates/table-items.html" %}
-				</script>
-			</tbody>
-		</table>
+<div class="row">
+	<div class="col-md-8">
+		<h1>
+			{{ table._label|d('n/a')|e }}
+			{% if table._from %}
+			<small>forked from <a href="/{{ table._from }}">{{ table._from }}</a></small>
+			{% endif %}
+		</h1>
+		<div>{{ table._text|d('n/a') }}</div>
 	</div>
+	<div class="col-md-4">
+		Sort By <select><option>...</option></select>
+		Sort By <select><option>...</option></select>
+	</div>
+</div>
+<div class="row" id="table-items">
+	<div class="col-md-12">
+	<table class="table table-bordered" data-resizable-columns-id="table-html">
+		<thead>
+			<tr>
+				<th style="width: 0.5em"></th>
+				{% for name, field in table._columns %}
+				<th data-resizable-column-id="column-{{name}}">
+					<span>{{field.label}}</span>
+					<a href="" class="action-editcolumn pull-right" data-toggle="modal" data-target="#modal-editcolumn" role="button" data-column='{{name}}' ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+				</th>
+				{% endfor %}
+				<th style="width: 0.5em"></th>
+			</tr>
+		</thead>
+		<tbody id="items-tbody">
+			<script type="text/x-paperclip" id="table-items-list">
+{% include "./templates/table-items.html" %}
+			</script>
+		</tbody>
+	</table>
+	</div>
+</div>
 
 
 <script type="text/x-paperclip" id="modal-edit-table">
