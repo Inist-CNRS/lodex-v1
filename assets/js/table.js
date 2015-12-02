@@ -43,25 +43,36 @@ var view = function(id, cb, mdl) {
 
 $(document).ready(function() {
     var oboe = require('oboe');
+    var JURL = require('url');
     var nTables = 0;
 
     var je1, je2, je3, je4, je5;
 
     // {{{ VIEWS
     var viewList = view('table-items-list', function() {
-        oboe(window.location.href.replace(/\/+$/,'') + '/*')
-        .node('!.*', function(item) {
-            var items = viewList.get('items');
-            items.push(item);
-            viewList.set('items', items);
-        })
-        .done(function(items) {
-            $("#table-items table").resizableColumns();
-        });
+        viewList.reload = function() {
+          var url = JURL.parse(viewList.get('url'));
+          url.query = {
+            "orderby" : viewSort.get('field') + ' '+  viewSort.get('order')
+          }
+          viewList.set('items', []);
+          oboe(JURL.format(url))
+          .node('!.*', function(item) {
+              var items = viewList.get('items');
+              items.push(item);
+              viewList.set('items', items);
+          })
+          .done(function(items) {
+              $("#table-items table").resizableColumns();
+          });
+        }
+        viewList.reload();
       },
       {
+        url :  window.location.href.replace(/\/+$/,'') + '/*',
         items: []
-    });
+      }
+    );
 
     var viewRoot = view('div-set-root', function() {
         oboe(window.location.protocol + '//' + window.location.host + '/index' + document.location.pathname.replace(/\/+$/,'') +'/*?alt=raw').done(function(items) {
@@ -91,6 +102,18 @@ $(document).ready(function() {
           return false;
         }
     });
+
+    var viewSort = view('div-sort-by', function() { },
+      {
+        field: '_id',
+        order: 'asc',
+        handleChange: function(event) {
+          viewSort.set($(this).attr('name'), $(this).val())
+          viewList.reload();
+          return false;
+        }
+    });
+
 
 
 

@@ -1,0 +1,12 @@
+{{ __('Sort by') }}
+<select name="field" onchange=[[handleChange]]>
+  <option value="_id">{{ __('Creation time') }}</option>
+  <option value="_label">{{ __('Representative label') }}</option>
+  <option value="_text">{{ __('Representative text') }}</option>
+  <option value="_hash">{{ __('Representative hash') }}</option>
+</select>
+<select name="order" onchange=[[handleChange]]>
+  <option value="asc">{{ __('Ascending') }}</option>
+  <option value="desc">{{ __('Descending') }}</option>
+</select>
+

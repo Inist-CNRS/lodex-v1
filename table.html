@@ -105,8 +105,9 @@
 		<div>{{ table._text|d('n/a') }}</div>
 	</div>
 	<div class="col-md-4">
-		Sort By <select><option>...</option></select>
-		Sort By <select><option>...</option></select>
+		<script type="text/x-paperclip" id="div-sort-by">
+			{% include "./templates/div-sort-by.html" %}
+		</script>
 	</div>
 </div>
 <div class="row" id="table-items">
