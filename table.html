@@ -41,6 +41,17 @@
 					</ul>
 				</li>
 				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-random"></span> {{ __('Loom') }}<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="" data-toggle="modal" data-target="#modal-loom-internal"><span class="fa fa-circle"></span> {{ __('With an internal table') }}</a>
+						</li>
+						<li>
+							<a href=""><span class="fa fa-cloud"></span> {{ __('With an external table') }}</a>
+						</li>
+					</ul>
+				</li>
+				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-random"></span> {{ __('Fork') }}<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li>
@@ -105,9 +116,11 @@
 		<div>{{ table._text|d('n/a') }}</div>
 	</div>
 	<div class="col-md-4">
+		<div class="pull-right">
 		<script type="text/x-paperclip" id="div-sort-by">
 			{% include "./templates/div-sort-by.html" %}
 		</script>
+		</div>
 	</div>
 </div>
 <div class="row" id="table-items">
@@ -115,14 +128,14 @@
 	<table class="table table-bordered" data-resizable-columns-id="table-html">
 		<thead>
 			<tr>
-				<th style="width: 0.5em"></th>
+				<th data-resizable-column-id="column-index"></th>
 				{% for name, field in table._columns %}
 				<th data-resizable-column-id="column-{{name}}">
 					<span>{{field.label}}</span>
 					<a href="" class="action-editcolumn pull-right" data-toggle="modal" data-target="#modal-editcolumn" role="button" data-column='{{name}}' ><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
 				</th>
 				{% endfor %}
-				<th style="width: 0.5em"></th>
+				<th data-resizable-column-id="column-buttons"></th>
 			</tr>
 		</thead>
 		<tbody id="items-tbody">
@@ -167,6 +180,9 @@
 {% include "./templates/modal-edit-page.html" %}
 </script>
 
+<script type="text/x-paperclip" id="modal-loom-internal">
+{% include "./templates/modal-loom-internal.html" %}
+</script>
 
 
 {% endblock %}

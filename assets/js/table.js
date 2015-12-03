@@ -49,6 +49,9 @@ $(document).ready(function() {
     var je1, je2, je3, je4, je5;
 
     // {{{ VIEWS
+    var viewLoomInternal = view('modal-loom-internal', function() {
+    }, {});
+
     var viewList = view('table-items-list', function() {
         viewList.reload = function() {
           var url = JURL.parse(viewList.get('url'));
@@ -231,6 +234,15 @@ $(document).ready(function() {
 
       var viewLoad = view('modal-load-table', function() {
           viewLoad.set('fileToLoad', '');
+          $(".modal-loadtable").on("show.bs.modal", function() {
+              $("#modal-loadtable").modal('hide');
+          })
+          $("#modal-loadtable").on("show.bs.modal", function() {
+              $("#modal-loadtable-file").modal('hide');
+              $("#modal-loadtable-uri").modal('hide');
+              $("#modal-loadtable-keyboard").modal('hide');
+              $("#modal-loadtable-fork").modal('hide');
+          });
         }, {
           handlePrevious: function(event) {
             if (viewLoad.get('typeToLoad') === 'file') {
@@ -364,15 +376,66 @@ $(document).ready(function() {
 
 
       var viewLoadType = {};
-      viewLoadType['file'] = view('modal-load-table-file', {
+      viewLoadType['file'] = view('modal-load-table-file', function() {
+          $('#modal-load-input-filename').change(function() {
+              var t = $(this).val();
+              $('#modal-load-input-file').val(t);
+          });
+          $('#modal-load-input-filename').fileupload({
+              dataType: 'json',
+              send:  function (e, data) {
+                $('#modal-load-input-file-label').hide(4, function() {
+                    $('#modal-load-input-file-indicator').show().html('0%');
+                });
+              },
+              done: function (error, data) {
+                if (Array.isArray(data.result) && data.result[0]) {
+                  viewLoad.set('fileToLoad', data.result[0]);
+                }
+                $('#modal-load-input-file-indicator').html('100%');
+                $('#modal-load-tab-file > div').addClass("has-success has-feedback");
+                $('#modal-load-tab-file .form-control-feedback').show();
+                setTimeout(function() {
+                    $('#modal-load-input-file-indicator').hide(4, function() {
+                        $('#modal-load-input-file-label').show();
+                    });
+                }, 2500);
+              },
+              progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#modal-load-input-file-indicator').html(progress + '%');
+              }
+          });
+          $("#modal-loadtable-file").on("show.bs.modal", function() {
+              $(".modal-load-options").hide();
+              viewLoad.set('typeToLoad', 'file');
+          });
+        }, {
           handleSelect: function(event) {
             $('#modal-load-input-filename').click();
           }
       });
-      viewLoadType['uri'] = view('modal-load-table-uri', { });
-      viewLoadType['keyboard'] = view('modal-load-table-keyboard', { });
-      viewLoadType['fork'] = view('modal-load-table-fork', { });
+      viewLoadType['uri'] = view('modal-load-table-uri', function() {
+          $("#modal-loadtable-uri").on("show.bs.modal", function() {
+              $(".modal-load-options").hide();
+              viewLoad.set('typeToLoad', 'uri');
+          });
+      }, { });
+      viewLoadType['keyboard'] = view('modal-load-table-keyboard', function() {
+          $("#modal-loadtable-keyboard").on("show.bs.modal", function() {
+              $(".modal-load-options").hide();
+              viewLoad.set('typeToLoad', 'keyboard');
+          });
+      }, { });
+      viewLoadType['fork'] = view('modal-load-table-fork', function() {
+          $("#modal-loadtable-fork").on("show.bs.modal", function() {
+              $(".modal-load-options").hide();
+              viewLoad.set('typeToLoad', 'fork');
+          });
+      }, { });
       // }}}
+
+
 
 
 
@@ -386,36 +449,6 @@ $(document).ready(function() {
       je3 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-hash"), JSONEditorOptions);
       je4 = new JSONEditor(document.getElementById("modal-forktable-enrich"), JSONEditorOptions);
       je5 = new JSONEditor(document.getElementById("modal-editcolumn-jsoneditor-value"), JSONEditorOptions);
-
-      $('#modal-load-input-filename').change(function() {
-          var t = $(this).val();
-          $('#modal-load-input-file').val(t);
-      });
-      $('#modal-load-input-filename').fileupload({
-          dataType: 'json',
-          send:  function (e, data) {
-            $('#modal-load-input-file-label').hide(4, function() {
-                $('#modal-load-input-file-indicator').show().html('0%');
-            });
-          },
-          done: function (error, data) {
-            if (Array.isArray(data.result) && data.result[0]) {
-              viewLoad.set('fileToLoad', data.result[0]);
-            }
-            $('#modal-load-input-file-indicator').html('100%');
-            $('#modal-load-tab-file > div').addClass("has-success has-feedback");
-            $('#modal-load-tab-file .form-control-feedback').show();
-            setTimeout(function() {
-                $('#modal-load-input-file-indicator').hide(4, function() {
-                    $('#modal-load-input-file-label').show();
-                });
-            }, 2500);
-          },
-          progressall: function (e, data) {
-            var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#modal-load-input-file-indicator').html(progress + '%');
-          }
-      });
 
 
       $('.action-editcolumn').click(function (e) {
@@ -450,33 +483,7 @@ $(document).ready(function() {
 
 
       // {{{ LOAD
-      $("#modal-loadtable-file").on("show.bs.modal", function() {
-          $(".modal-load-options").hide();
-          viewLoad.set('typeToLoad', 'file');
-      });
-      $("#modal-loadtable-uri").on("show.bs.modal", function() {
-          $(".modal-load-options").hide();
-          viewLoad.set('typeToLoad', 'uri');
-      });
-      $("#modal-loadtable-keyboard").on("show.bs.modal", function() {
-          $(".modal-load-options").hide();
-          viewLoad.set('typeToLoad', 'keyboard');
-      });
-      $("#modal-loadtable-fork").on("show.bs.modal", function() {
-          $(".modal-load-options").hide();
-          viewLoad.set('typeToLoad', 'fork');
-      });
-
-      $(".modal-loadtable").on("show.bs.modal", function() {
-          $("#modal-loadtable").modal('hide');
-      })
-      $("#modal-loadtable").on("show.bs.modal", function() {
-          $("#modal-loadtable-file").modal('hide');
-          $("#modal-loadtable-uri").modal('hide');
-          $("#modal-loadtable-keyboard").modal('hide');
-          $("#modal-loadtable-fork").modal('hide');
-      });
-      var formatToLoad;
+     var formatToLoad;
       $("select.modal-load-shared-type" ).change(function () {
           $(".modal-load-options").hide();
           $("option:selected", this ).each(function() {
@@ -485,7 +492,6 @@ $(document).ready(function() {
           });
       })
       .change();
-      $("#modal-load-previous").click(function() { });
       // }}}
 
       // {{{ MENU
