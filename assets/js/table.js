@@ -1,58 +1,70 @@
-/* global $, document, JSONEditor, nColumns */
+/* global $, document, JSONEditor, nColumns, view */
 'use strict';
-var JSONEditorOptions = { mode: "code" };
-var pc = require("paperclip/lib/node.js");
-
-pc.modifiers.get = function (input, key) {
-  return input[key];
-};
-pc.modifiers.len = function (input, key) {
-  if (key !== undefined) {
-    input = input[key]
-  }
-  if (input === null || input === undefined) {
-    return  0;
-  }
-  else if (typeof input.length === 'number') {
-    return input.length;
-  }
-  else {
-    return 0;
-  }
-};
-pc.modifiers.plus = function (input, nb) {
-  if (nb === undefined) {
-    nb = 1
-  }
-  return parseInt(input) + parseInt(nb);
-};
-
-var view = function(id, cb, mdl) {
-  if (typeof cb !== 'function') {
-    mdl = cb;
-  }
-  var n = document.getElementById(id)
-  var t = n.innerHTML.replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
-  var v = pc.template(t, pc).view(mdl);
-  n.parentNode.insertBefore(v.render(), n);
-  if (typeof cb === 'function') {
-    setTimeout(cb, 0);
-  }
-  return v;
-}
 
 $(document).ready(function() {
+    var JSONEditorOptions = { mode: "code" };
     var oboe = require('oboe');
     var JURL = require('url');
     var nTables = 0;
 
     var je1, je2, je3, je4, je5;
 
-    // {{{ VIEWS
-    var viewLoomInternal = view('modal-loom-internal', function() {
-    }, {});
+    /**
+     * View
+     *
+     */
+    var viewLoomInternal = view('template-modal-loom-internal', function() {
+        var url = JURL.parse(window.location.href.replace(/\/+$/,''));
+        url.pathname = url.path = '/index/*';
+        viewLoomInternal.set('items', []);
+        viewLoomInternal.set('rightTable', document.location.pathname.replace(/\/+$/,'').split('/').slice(1).shift());
+        oboe(JURL.format(url))
+          .node('!.*', function(item) {
+              var items = viewLoomInternal.get('items');
+              items.push(item);
+              viewLoomInternal.set('items', items);
+        });
+        $("#modal-loom-internal-select" ).change(function () {
+            $("option:selected", this).each(function() {
+                viewLoomInternal.set('rightTable', $(this).data('value'));
+            });
+        })
+    });
 
-    var viewList = view('table-items-list', function() {
+
+
+    /**
+     * View
+     *
+     */
+    var viewLoom = view('template-modal-loom', function() {
+        viewLoom.set('leftItems', []);
+        viewLoom.set('rightItems', []);
+        $(".modal-loom").on("show.bs.modal", function() {
+            $("#modal-loom").modal('hide');
+        })
+        $("#modal-loom").on("show.bs.modal", function() {
+            var url = JURL.parse(window.location.href.replace(/\/+$/,''));
+            url.pathname = url.path = String('/').concat(viewLoomInternal.get('rightTable')).concat('/*');
+            console.log(viewLoomInternal.get('rightTable'), url);
+            oboe(JURL.format(url))
+            .node('!.*', function(item) {
+                var items = viewLoom.get('rightItems');
+                items.push(item);
+                viewLoom.set('rightItems', items);
+            });
+            viewLoom.set('leftItems', viewList.get('items'));
+            $("#modal-loom-internal").modal('hide');
+        });
+    });
+
+
+
+     /**
+     * View
+     *
+     */
+    var viewList = view('template-table-items-list', function() {
         viewList.reload = function() {
           var url = JURL.parse(viewList.get('url'));
           url.query = {
@@ -77,7 +89,7 @@ $(document).ready(function() {
       }
     );
 
-    var viewRoot = view('div-set-root', function() {
+    var viewRoot = view('template-div-set-root', function() {
         oboe(window.location.protocol + '//' + window.location.host + '/index' + document.location.pathname.replace(/\/+$/,'') +'/*?alt=raw').done(function(items) {
             viewRoot.set('isRoot', items[0]._root || false);
         });
@@ -106,7 +118,7 @@ $(document).ready(function() {
         }
     });
 
-    var viewSort = view('div-sort-by', function() { },
+    var viewSort = view('template-div-sort-by', function() { },
       {
         field: '_id',
         order: 'asc',
@@ -120,7 +132,7 @@ $(document).ready(function() {
 
 
 
-    var viewTable = view('modal-edit-table', function() {
+    var viewTable = view('template-modal-edit-table', function() {
         $('#modal-edittable-input-description').summernote({
             height: 200,
             dialogsInBody: true,
@@ -176,7 +188,11 @@ $(document).ready(function() {
       });
 
 
-      var viewColumn = view('modal-edit-column', {
+      /**
+     * View
+     *
+     */
+      var viewColumn = view('template-modal-edit-column', {
           handleSave : function(event) {
             var idColumn = viewColumn.get('name');
             //var type = $("#modal-editcolumn-tab-list li.active").data('type')
@@ -232,7 +248,11 @@ $(document).ready(function() {
       });
 
 
-      var viewLoad = view('modal-load-table', function() {
+       /**
+     * View
+     *
+     */
+      var viewLoad = view('template-modal-load-table', function() {
           viewLoad.set('fileToLoad', '');
           $(".modal-loadtable").on("show.bs.modal", function() {
               $("#modal-loadtable").modal('hide');
@@ -320,7 +340,13 @@ $(document).ready(function() {
           }
       });
 
-      var viewPage = view('modal-edit-page', function() {
+
+
+       /**
+     * View
+     *
+     */
+      var viewPage = view('template-modal-edit-page', function() {
           $('#modal-editpage').on('show.bs.modal', function (e) {
               var idPage = document.location.pathname.replace(/\/+$/,'').split('/').slice(1).shift();
               oboe(window.location.protocol + '//' + window.location.host + '/index/' + idPage +'/*?alt=raw').done(function(items) {
@@ -376,7 +402,11 @@ $(document).ready(function() {
 
 
       var viewLoadType = {};
-      viewLoadType['file'] = view('modal-load-table-file', function() {
+      /**
+       * View
+       *
+       */
+      viewLoadType['file'] = view('template-modal-load-table-file', function() {
           $('#modal-load-input-filename').change(function() {
               var t = $(this).val();
               $('#modal-load-input-file').val(t);
@@ -415,34 +445,55 @@ $(document).ready(function() {
             $('#modal-load-input-filename').click();
           }
       });
-      viewLoadType['uri'] = view('modal-load-table-uri', function() {
+
+
+
+      /**
+       * View
+       *
+       */
+      viewLoadType['uri'] = view('template-modal-load-table-uri', function() {
           $("#modal-loadtable-uri").on("show.bs.modal", function() {
               $(".modal-load-options").hide();
               viewLoad.set('typeToLoad', 'uri');
           });
-      }, { });
-      viewLoadType['keyboard'] = view('modal-load-table-keyboard', function() {
+      });
+
+
+      /**
+       * View
+       *
+       */
+      viewLoadType['keyboard'] = view('template-modal-load-table-keyboard', function() {
           $("#modal-loadtable-keyboard").on("show.bs.modal", function() {
               $(".modal-load-options").hide();
               viewLoad.set('typeToLoad', 'keyboard');
           });
-      }, { });
-      viewLoadType['fork'] = view('modal-load-table-fork', function() {
+      });
+
+
+      /**
+       * View
+       *
+       */
+      viewLoadType['fork'] = view('template-modal-load-table-fork', function() {
           $("#modal-loadtable-fork").on("show.bs.modal", function() {
               $(".modal-load-options").hide();
               viewLoad.set('typeToLoad', 'fork');
           });
-      }, { });
-      // }}}
+      });
 
 
 
 
 
+      /**
+       * Fill variables
+       *
+       */
       oboe(window.location.protocol + '//' + window.location.host + '/index/$count').done(function(items) {
           nTables = items[0].value;
       })
-
 
       je1 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-label"), JSONEditorOptions);
       je2 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-text"), JSONEditorOptions);
@@ -451,6 +502,10 @@ $(document).ready(function() {
       je5 = new JSONEditor(document.getElementById("modal-editcolumn-jsoneditor-value"), JSONEditorOptions);
 
 
+      /**
+       * Action
+       *
+       */
       $('.action-editcolumn').click(function (e) {
           var column = $(this).data("column");
           oboe(window.location.protocol + '//' + window.location.host + '/index' + document.location.pathname.replace(/\/+$/,'') +'/*?alt=raw').done(function(items) {
@@ -482,8 +537,7 @@ $(document).ready(function() {
 
 
 
-      // {{{ LOAD
-     var formatToLoad;
+      var formatToLoad;
       $("select.modal-load-shared-type" ).change(function () {
           $(".modal-load-options").hide();
           $("option:selected", this ).each(function() {
@@ -491,10 +545,11 @@ $(document).ready(function() {
               $(".modal-load-options-"+formatToLoad).show();
           });
       })
-      .change();
-      // }}}
 
-      // {{{ MENU
+      /**
+       * Action
+       *
+       */
       $('#action-newtable').click(function() {
           var rsc = 't' + (nTables + 1);
           var url = '/-/v3/settab/' + rsc + '/';
@@ -508,6 +563,12 @@ $(document).ready(function() {
           });
           return false;
       });
+
+
+      /**
+       * Action
+       *
+       */
       $('#action-clonetable').click(function() {
           var rsc = 't' + (nTables + 1);
           var url = '/-/v3/settab/' + rsc + '/';
@@ -524,10 +585,22 @@ $(document).ready(function() {
           });
           return false;
       });
+
+
+       /**
+       * Action
+       *
+       */
       $('#action-droptable').click(function() {
           alert('Not yet implemented');
           return false;
       });
+
+
+       /**
+       * Action
+       *
+       */
       $('#action-newcolumn').click(function() {
           var url = '/-/v3/setcol' + document.location.pathname.replace(/\/+$/,'') + '/c' + (nColumns + 1) + '/';
           $.ajax({
@@ -540,26 +613,51 @@ $(document).ready(function() {
           });
           return false;
       });
+
+       /**
+       * Action
+       *
+       */
       $('#action-setroot').click(function() {
           return false;
       });
 
+
+       /**
+       * Action
+       *
+       */
       $('#action-download-csv').click(function() {
           document.location.href = document.location.pathname.replace(/\/+$/,'') + '/*/?alt=csv';
           return false;
       });
+
+
+       /**
+       * Action
+       *
+       */
       $('#action-download-nq').click(function() {
           document.location.href = document.location.pathname.replace(/\/+$/,'') + '/*/?alt=nq';
           return false;
       });
+
+
+       /**
+       * Action
+       *
+       */
       $('#action-download-json').click(function() {
           document.location.href = document.location.pathname.replace(/\/+$/,'') + '/*/?alt=json';
           return false;
       });
-      // }}}
 
 
 
+      /**
+       * Tricks
+       *
+       */
       $(".modal").on("show.bs.modal", function() {
           var height = $(window).height() / 2;
           $(this).find(".modal-body").css("min-height", Math.round(height));

@@ -1,0 +1,31 @@
+<div class="modal modal-loom" id="modal-loom" tabindex="-1" role="dialog" aria-labelledby="modal-loom-title">
+<div class="modal-dialog modal-lg" role="dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-loom-title">{{ __('Loom Data') }} 1 / 2</h4>
+    </div>
+    <div class="modal-body">
+       <div class="row">
+         <div class="col-md-6">
+           <ul>
+             <li repeat.each="[[leftItems]]" repeat.as="item">
+               [[ item|get('_wid') ]]
+             </li>
+           </ul>
+         </div>
+         <div class="col-md-6">
+            <ul>
+             <li repeat.each="[[rightItems]]" repeat.as="item">
+               [[ item|get('_wid') ]]
+             </li>
+           </ul>
+         </div>
+       </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#modal-loom">{{ __('Cancel') }}</button>
+    </div>
+  </div>
+</div>
+</div>
+

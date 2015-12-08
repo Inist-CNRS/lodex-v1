@@ -44,7 +44,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-random"></span> {{ __('Loom') }}<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="" data-toggle="modal" data-target="#modal-loom-internal"><span class="fa fa-circle"></span> {{ __('With an internal table') }}</a>
+							<a href="" data-toggle="modal" data-target="#modal-loominternal"><span class="fa fa-circle"></span> {{ __('With an internal table') }}</a>
 						</li>
 						<li>
 							<a href=""><span class="fa fa-cloud"></span> {{ __('With an external table') }}</a>
@@ -93,7 +93,7 @@
 			</ul>
 			<form class="navbar-form navbar-right">
 				<div class="form-group">
-					<script type="text/x-paperclip" id="div-set-root">
+					<script type="text/x-paperclip" id="template-div-set-root">
 					{% include "./templates/div-set-root.html" %}
 					</script>
 				</div>
@@ -117,7 +117,7 @@
 	</div>
 	<div class="col-md-4">
 		<div class="pull-right">
-		<script type="text/x-paperclip" id="div-sort-by">
+		<script type="text/x-paperclip" id="template-div-sort-by">
 			{% include "./templates/div-sort-by.html" %}
 		</script>
 		</div>
@@ -139,7 +139,7 @@
 			</tr>
 		</thead>
 		<tbody id="items-tbody">
-			<script type="text/x-paperclip" id="table-items-list">
+			<script type="text/x-paperclip" id="template-table-items-list">
 {% include "./templates/table-items.html" %}
 			</script>
 		</tbody>
@@ -148,41 +148,47 @@
 </div>
 
 
-<script type="text/x-paperclip" id="modal-edit-table">
+<script type="text/x-paperclip" id="template-modal-edit-table">
 {% include "./templates/modal-edit-table.html" %}
 </script>
 
-<script type="text/x-paperclip" id="modal-edit-column">
+<script type="text/x-paperclip" id="template-modal-edit-column">
 {% include "./templates/modal-edit-column.html" %}
 </script>
 
-<script type="text/x-paperclip" id="modal-load-table-fork">
+<script type="text/x-paperclip" id="template-modal-load-table-fork">
 {% include "./templates/modal-load-table-fork.html" %}
 </script>
 
-<script type="text/x-paperclip" id="modal-load-table-file">
+<script type="text/x-paperclip" id="template-modal-load-table-file">
 {% include "./templates/modal-load-table-file.html" %}
 </script>
 
-<script type="text/x-paperclip" id="modal-load-table-uri">
+<script type="text/x-paperclip" id="template-modal-load-table-uri">
 {% include "./templates/modal-load-table-uri.html" %}
 </script>
 
-<script type="text/x-paperclip" id="modal-load-table-keyboard">
+<script type="text/x-paperclip" id="template-modal-load-table-keyboard">
 {% include "./templates/modal-load-table-keyboard.html" %}
 </script>
 
-<script type="text/x-paperclip" id="modal-load-table">
+<script type="text/x-paperclip" id="template-modal-load-table">
 {% include "./templates/modal-load-table.html" %}
 </script>
 
-<script type="text/x-paperclip" id="modal-edit-page">
+<script type="text/x-paperclip" id="template-modal-edit-page">
 {% include "./templates/modal-edit-page.html" %}
 </script>
 
-<script type="text/x-paperclip" id="modal-loom-internal">
+<script type="text/x-paperclip" id="template-modal-loom-internal">
 {% include "./templates/modal-loom-internal.html" %}
 </script>
+
+<script type="text/x-paperclip" id="template-modal-loom">
+{% include "./templates/modal-loom.html" %}
+</script>
+
+
 
 
 {% endblock %}
@@ -207,6 +213,7 @@
 <script>
 var nColumns = {{table._columns|length()|d(0)}};
 </script>
+<script src="/assets/js/view.js"></script>
 <script src="/assets/js/table.js"></script>
 {% endblock %}
 
