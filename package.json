@@ -1,27 +1,33 @@
 {
-  "name": "semtab",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/touv/semtab.git"
-  },
-  "author": "Nicolas Thouvenin",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/touv/semtab/issues"
-  },
-  "homepage": "https://github.com/touv/semtab#readme",
-  "dependencies": {
-    "castor-core": "3.0.0-alpha.1",
-    "castor-load-jsoncorpus": "^1.0.1",
-    "oboe": "^2.1.2",
-    "paperclip": "^3.0.18",
-    "vue": "^1.0.4"
-  }
+	"name": "semtab",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "echo \"Error: use \"semtab\" to launch the server\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/touv/semtab.git"
+	},
+	"author": "Nicolas Thouvenin",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/touv/semtab/issues"
+	},
+	"homepage": "https://github.com/touv/semtab#readme",
+	"dependencies": {
+		"castor-core": "^3.0.0-alpha.1",
+		"castor-load-jsoncorpus": "^1.0.1",
+		"oboe": "^2.1.2",
+		"paperclip": "^3.0.18",
+		"castor-load": "latest",
+		"castor-load-csv": "latest",
+		"castor-load-excel": "latest",
+		"castor-load-jsoncorpus": "latest",
+		"castor-load-nq": "latest",
+		"castor-load-xml": "latest",
+		"debug": "latest"
+	}
 }
