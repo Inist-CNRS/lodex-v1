@@ -18,4 +18,4 @@ RUN npm install --unsafe-perm
 EXPOSE 3000
 
 CMD []
-ENTRYPOINT ["/opt/app/semtab", "/data"]
+ENTRYPOINT ["/opt/app/lodel", "/data"]

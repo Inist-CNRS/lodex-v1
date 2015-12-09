@@ -1,4 +1,4 @@
-NAME=semtab
+NAME=lodex
 PORT=3000
 
 .PHONY: start stop
