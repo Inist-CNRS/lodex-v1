@@ -3,19 +3,22 @@ FROM node:0.12
 ENV HTTP_PROXY=$HTTP_PROXY
 ENV HTTPS_PROXY=$HTTPS_PROXY
 
+RUN env
+RUN cat /etc/resolv.conf
+
 RUN mkdir /opt/app
 RUN mkdir /data
 
 VOLUME /data/
-ADD . /opt/app/
 WORKDIR /opt/app/
 
-RUN env
-RUN cat /etc/resolv.conf
-
+ADD package.json /opt/app/
 RUN npm install --unsafe-perm
+ADD . /opt/app/
+
+
 
 EXPOSE 3000
 
 CMD []
-ENTRYPOINT ["/opt/app/lodel", "/data"]
+ENTRYPOINT ["/opt/app/lodex", "/data"]
