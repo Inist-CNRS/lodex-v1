@@ -13,4 +13,4 @@ start:
 	docker run -p ${PORT}:3000 -d -v `pwd`:/data ${NAME}
 
 stop:
-	docker stop `docker ps | grep ${NAME} | awk '{print $1}'`
+	DID=`docker ps | grep ${NAME} | awk '{print $$1}'` && docker stop $$DID

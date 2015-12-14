@@ -3,8 +3,8 @@ FROM node:0.12
 ENV HTTP_PROXY=$HTTP_PROXY
 ENV HTTPS_PROXY=$HTTPS_PROXY
 
-RUN env
-RUN cat /etc/resolv.conf
+RUN env && \
+    cat /etc/resolv.conf
 
 RUN mkdir /opt/app
 RUN mkdir /data
