@@ -18,6 +18,7 @@ $(document).ready(function() {
         url.pathname = url.path = '/index/*';
         viewLoomInternal.set('items', []);
         viewLoomInternal.set('rightTable', document.location.pathname.replace(/\/+$/,'').split('/').slice(1).shift());
+        viewLoomInternal.set('leftTable', document.location.pathname.replace(/\/+$/,'').replace(/^\/+/,''));
         oboe(JURL.format(url))
           .node('!.*', function(item) {
               var items = viewLoomInternal.get('items');
@@ -38,24 +39,78 @@ $(document).ready(function() {
      *
      */
     var viewLoom = view('template-modal-loom', function() {
-        viewLoom.set('leftItems', []);
-        viewLoom.set('rightItems', []);
         $(".modal-loom").on("show.bs.modal", function() {
             $("#modal-loom").modal('hide');
-        })
-        $("#modal-loom").on("show.bs.modal", function() {
-            var url = JURL.parse(window.location.href.replace(/\/+$/,''));
-            url.pathname = url.path = String('/').concat(viewLoomInternal.get('rightTable')).concat('/*');
-            console.log(viewLoomInternal.get('rightTable'), url);
-            oboe(JURL.format(url))
-            .node('!.*', function(item) {
-                var items = viewLoom.get('rightItems');
-                items.push(item);
-                viewLoom.set('rightItems', items);
-            });
-            viewLoom.set('leftItems', viewList.get('items'));
-            $("#modal-loom-internal").modal('hide');
         });
+        $("#modal-loom").on("show.bs.modal", function() {
+            var height = $(window).height() / 2;
+            $(".modal-column").css("max-height", Math.round(height));
+            $("#modal-loom-internal").modal('hide');
+
+
+            var url = JURL.parse(window.location.href);
+
+            viewLoom.set('leftColumns', []);
+            url.pathname = String('/index/').concat(viewLoomInternal.get('leftTable')).concat('/*');
+            url.query = { "alt" : "raw" };
+            oboe(JURL.format(url)).done(function(items) {
+                var cols = Object.keys(items[0]._columns).map(function(x) { return {value : x, label : items[0]._columns[x].label} });
+                console.log(cols, cols[0].value);
+                viewLoom.set('leftColumnName', cols[0].value);
+                viewLoom.set('leftColumns', cols)
+            });
+
+            viewLoom.set('rightColumns', []);
+            url.pathname = String('/index/').concat(viewLoomInternal.get('rightTable')).concat('/*');
+            url.query = { "alt" : "raw" };
+            oboe(JURL.format(url)).done(function(items) {
+                var cols = Object.keys(items[0]._columns).map(function(x) { return {value : x, label : items[0]._columns[x].label} });
+                viewLoom.set('rightColumnName', cols[0].value);
+                viewLoom.set('rightColumns', cols)
+            });
+
+            viewLoom.reloadRight = function() {
+              viewLoom.set('rightItems', []);
+              var url = JURL.parse(window.location.href);
+              url.pathname = String('/').concat(viewLoomInternal.get('rightTable')).concat('/*');
+              oboe(JURL.format(url))
+              .node('!.*', function(item) {
+                  var name = viewLoom.get('rightColumnName');
+                  var items = viewLoom.get('rightItems');
+                  items.push(item[name]);
+                  viewLoom.set('rightItems', items);
+              });
+            }
+            viewLoom.reloadRight();
+
+
+            viewLoom.reloadLeft = function() {
+              viewLoom.set('leftItems', []);
+              var url = JURL.parse(window.location.href);
+              url.pathname = String('/').concat(viewLoomInternal.get('leftTable')).concat('/*');
+              oboe(JURL.format(url))
+              .node('!.*', function(item) {
+                  var name = viewLoom.get('leftColumnName');
+                  var items = viewLoom.get('leftItems');
+                  items.push(item[name]);
+                  viewLoom.set('leftItems', items);
+              });
+            }
+            viewLoom.reloadLeft();
+
+        });
+      }, {
+        handleChangeLeft: function(event) {
+          viewLoom.set('leftColumnName', $(this).find(":selected").data('value'));
+          viewLoom.reloadLeft();
+          return false;
+        },
+        handleChangeRight: function(event) {
+          viewLoom.set('rightColumnName', $(this).find(":selected").data('value'));
+          viewLoom.reloadRight();
+          return false;
+        }
+
     });
 
 
@@ -148,7 +203,6 @@ $(document).ready(function() {
                   je1.set(items[0]._label);
                   je2.set(items[0]._text);
                   je3.set(items[0]._hash);
-                  console.log('items', items[0]);
                   $("#modal-edittable-input-description").summernote('code', items[0]._text);
                   viewRoot.set('isRoot', items[0]._root || false);
               });
