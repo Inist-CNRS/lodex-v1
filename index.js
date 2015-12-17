@@ -1,7 +1,7 @@
 module.exports = {
   browserifyModules: [
-    "paperclip/lib/node.js", 
-    "oboe", 
+    "paperclip/lib/node.js",
+    "oboe",
     "url"
   ],
   maxFileSize: 536870912,

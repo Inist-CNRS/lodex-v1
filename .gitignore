@@ -19,9 +19,5 @@ npm-debug.log
 .~lock
 *.swn
 
-dist
 cache
-data*/*
-data*.json
-assets/amcharts-*
-assets/ammap-*
+./data/*
