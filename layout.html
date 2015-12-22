@@ -22,9 +22,9 @@
 
     <!-- Material Design for Bootstrap -->
     <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
-    <!-- <link href="/libs/bootstrap-material-design/dist/css/roboto.min.css" rel="stylesheet"> -->
-    <!-- <link href="/libs/bootstrap-material-design/dist/css/material.min.css" rel="stylesheet"> -->
-    <!-- <link href="/libs/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet"> -->
+    <link href="/libs/bootstrap-material-design/dist/css/roboto.min.css" rel="stylesheet">
+    <link href="/libs/bootstrap-material-design/dist/css/material.min.css" rel="stylesheet">
+    <link href="/libs/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="./assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -49,7 +49,12 @@
       {% block body %}{% endblock %}
     </div>
 
-    {% block footer %}{% endblock %}
+    
+     <footer class="footer">
+      <div class="container-fluid">
+        {% block footer %}{% endblock %}
+      </div>
+    </footer>
 
     <!-- Bootstrap core JavaScript
       ================================================== -->

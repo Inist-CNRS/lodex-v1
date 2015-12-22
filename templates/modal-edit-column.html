@@ -14,15 +14,15 @@
           <input class="form-control" id="modal-editcolumn-input-label" placeholder="" type="text" value="[[ <~>label ]]" />
         </div>
         <div class="form-group">
-          <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Scheme') }}</label>
-          <input class="form-control" id="modal-editcolumn-input-scheme" placeholder="" type="url"  value="[[ <~>scheme ]]" />
+          <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Scheme') }} <a href="[[ <~>scheme ]]" target="scheme">[{{ __('View it') }}]</a></label>
+          <select id="modal-editcolumn-input-scheme" class="form-control select2"></select>
         </div>
         <div class="form-group">
-          <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Stylesheet') }}</label>
+          <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Stylesheet') }} <a href="http://inist-cnrs.github.io/jbj-playground/?input=[[ <~>sampleURL ]]" target="playground">[{{ __('Test it') }}]</a></label>
           <div id="modal-editcolumn-jsoneditor-value" style="width:100%;height:12em;"> </div>
         </div>
         <div class="form-group">
-          <label class="control-label" for="modal-editcolumn-input-name">{{ __('URL Name') }}</label>
+          <label class="control-label" for="modal-editcolumn-input-name">{{ __('Technical name') }}</label>
           <input class="form-control" id="modal-editcolumn-input-name" placeholder="" type="text" pattern="\w+" value="[[ <~>name ]]" />
         </div>
         <!--

@@ -2,7 +2,7 @@
 'use strict';
 
 $(document).ready(function() {
-    var JSONEditorOptions = { mode: "code" };
+    var JSONEditorOptions = { mode: "code", maxLines: Infinity };
     var oboe = require('oboe');
     var JURL = require('url');
     var nTables = 0;
@@ -55,7 +55,6 @@ $(document).ready(function() {
             url.query = { "alt" : "raw" };
             oboe(JURL.format(url)).done(function(items) {
                 var cols = Object.keys(items[0]._columns).map(function(x) { return {value : x, label : items[0]._columns[x].label} });
-                console.log(cols, cols[0].value);
                 viewLoom.set('leftColumnName', cols[0].value);
                 viewLoom.set('leftColumns', cols)
             });
@@ -121,29 +120,47 @@ $(document).ready(function() {
      */
     var viewList = view('template-table-items-list', function() {
         viewList.reload = function() {
+          var first = true;
           var url = JURL.parse(viewList.get('url'));
           url.query = {
             "orderby" : viewSort.get('field') + ' '+  viewSort.get('order')
           }
+          viewList.set('page', 1);
           viewList.set('items', []);
           oboe(JURL.format(url))
           .node('!.*', function(item) {
               var items = viewList.get('items');
               items.push(item);
               viewList.set('items', items);
+              if (first) {
+                viewColumn.set('sampleURL', window.location.href.replace(/\/+$/,'').concat('/').concat(item._wid).concat('/*?alt=raw'));
+                first = false;
+              }
           })
           .done(function(items) {
               $("#table-items table").resizableColumns();
           });
         }
         viewList.reload();
+        $(window).scroll(function(){
+            if ($(window).scrollTop() + $(window).height() >= $(document).height() - 300){
+              viewList.set('page', viewList.get('page') + 1);
+              alert("Page #" + viewList.get('page'));
+            }
+        });
       },
       {
+        page: 1,
         url :  window.location.href.replace(/\/+$/,'') + '/*',
         items: []
       }
     );
 
+
+    /**
+     * View
+     *
+     */
     var viewRoot = view('template-div-set-root', function() {
         oboe(window.location.protocol + '//' + window.location.host + '/index' + document.location.pathname.replace(/\/+$/,'') +'/*?alt=raw').done(function(items) {
             viewRoot.set('isRoot', items[0]._root || false);
@@ -173,6 +190,10 @@ $(document).ready(function() {
         }
     });
 
+    /**
+     * View
+     *
+     */
     var viewSort = view('template-div-sort-by', function() { },
       {
         field: '_id',
@@ -186,7 +207,10 @@ $(document).ready(function() {
 
 
 
-
+    /**
+     * View
+     *
+     */
     var viewTable = view('template-modal-edit-table', function() {
         $('#modal-edittable-input-description').summernote({
             height: 200,
@@ -220,7 +244,7 @@ $(document).ready(function() {
                 url: url,
                 data: form,
                 success: function(data) {
-                  document.location.href = "/";
+                  document.location.href = document.location.pathname;
                 }
             });
             return false;
@@ -246,178 +270,236 @@ $(document).ready(function() {
      * View
      *
      */
-      var viewColumn = view('template-modal-edit-column', {
-          handleSave : function(event) {
-            var idColumn = viewColumn.get('name');
-            //var type = $("#modal-editcolumn-tab-list li.active").data('type')
-            var url = '/-/v3/setcol' + document.location.pathname.replace(/\/+$/,'') + '/' + idColumn + '/';
-            console.log('form', {
+    var viewColumn = view('template-modal-edit-column', function() {
+
+        $.fn.modal.Constructor.prototype.enforceFocus = function() {}; // @see https://github.com/select2/select2/issues/1436
+        $("#modal-editcolumn-input-scheme").select2({
+            theme: "bootstrap",
+            width: null,
+            placeholder: {
+              id: "-1",
+              text: "Select an scheme..."
+            } ,
+            minimumInputLength: 2,
+            ajax: {
+              url: "http://lov.okfn.org/dataset/lov/api/v2/term/search",
+              dataType: 'json',
+              delay: 250,
+              data: function (params) {
+                return {
+                  q: params.term,
+                  page: params.page,
+                  type: 'property'
+                };
+              },
+              processResults: function (data, params) {
+                params.page = params.page || 1;
+                // @see http://stackoverflow.com/questions/29035717/select2-load-data-using-ajax-cannot-select-any-option/29082217#29082217
+                var select2Data = $.map(data.results, function (obj) {
+                    obj.id = Array.isArray(obj.uri) ? obj.uri.pop() : '?';
+                    obj.text = obj.prefixedName;
+                    return obj;
+                });
+                return {
+                  results: select2Data,
+                  pagination: {
+                    more: (params.page * 30) < data.total_results
+                  }
+                };
+              }
+            },
+            escapeMarkup: function (markup) { return markup; },
+            templateResult: function (row) {
+              if (row.loading) {
+                return row.text;
+              }
+              var markup = "<div>";
+              markup += "<div>" + row.text+ "</div>";
+              markup += "<small>" + row.id + "</small>";
+              markup += "</div>";
+              return markup;
+            },
+            templateSelection: function (row) {
+              return row.id;
+            }
+        }).change(function() {
+            viewColumn.set('scheme', $("#modal-editcolumn-input-scheme").val());
+        });
+      }, {
+        sampleURL : '',
+        handleSave : function(event) {
+          var idColumn = viewColumn.get('name');
+          //var type = $("#modal-editcolumn-tab-list li.active").data('type')
+          var url = '/-/v3/setcol' + document.location.pathname.replace(/\/+$/,'') + '/' + idColumn + '/';
+
+          console.log('before', {
+              "previousScheme": viewColumn.get('pscheme'),
+              "previousValue" : viewColumn.get('pvalue'),
+              "previousName" : viewColumn.get('pname'),
+              "previousLabel" : viewColumn.get('plabel'),
+              "previousComment" : viewColumn.get('pcomment')
+          });
+          console.log('after', {
+              "propertyScheme": $("#modal-editcolumn-input-scheme").val(),
+              "propertyValue" : je5.get(),
+              "propertyName" : idColumn,
+              "propertyLabel" : viewColumn.get('label'),
+              "propertyComment" : viewColumn.get('comment')
+          });
+
+          $.ajax({
+              type: "POST",
+              url: url ,
+              data: {
                 "previousScheme": viewColumn.get('pscheme'),
                 "previousValue" : viewColumn.get('pvalue'),
                 "previousName" : viewColumn.get('pname'),
                 "previousLabel" : viewColumn.get('plabel'),
                 "previousComment" : viewColumn.get('pcomment'),
-                "propertyScheme": viewColumn.get('scheme'),
+                "propertyScheme": $("#modal-editcolumn-input-scheme").val(),
                 "propertyValue" : je5.get(),
                 "propertyName" : idColumn,
                 "propertyLabel" : viewColumn.get('label'),
                 "propertyComment" : viewColumn.get('comment')
-            });
+              },
+              success: function(data) {
+                document.location.href = document.location.pathname;
+              }
+          });
+
+          return false;
+        },
+        handleDrop: function(event) {
+          var idColumn = viewColumn.get('name');
+          var url = '/-/v3/setcol' + document.location.pathname.replace(/\/+$/,'') + '/' + idColumn + '/';
+          var form = {};
+          form[idColumn] = true;
+          $.ajax({
+              type: "POST",
+              url: url ,
+              data: form,
+              success: function(data) {
+                document.location.href= document.location.pathname;
+              }
+          });
+          return false;
+        }
+    });
+
+
+    /**
+     * View
+     *
+     */
+    var viewLoad = view('template-modal-load-table', function() {
+        viewLoad.set('fileToLoad', '');
+        $(".modal-loadtable").on("show.bs.modal", function() {
+            $("#modal-loadtable").modal('hide');
+        })
+        $("#modal-loadtable").on("show.bs.modal", function() {
+            $("#modal-loadtable-file").modal('hide');
+            $("#modal-loadtable-uri").modal('hide');
+            $("#modal-loadtable-keyboard").modal('hide');
+            $("#modal-loadtable-fork").modal('hide');
+        });
+      }, {
+        handlePrevious: function(event) {
+          if (viewLoad.get('typeToLoad') === 'file') {
+            $("#modal-loadtable-file").modal('show');
+          }
+          else if (viewLoad.get('typeToLoad') === 'uri') {
+            $("#modal-loadtable-uri").modal('show');
+          }
+          else if (viewLoad.get('typeToLoad') === 'keyboard') {
+            $("#modal-loadtable-keyboard").modal('show');
+          }
+          else if (viewLoad.get('typeToLoad') === 'fork') {
+            $("#modal-loadtable-fork").modal('show');
+          }
+        },
+        handleLoad: function(event) {
+          var optData;
+          var origin = document.location.pathname.replace(/\/+$/,'').slice(1);
+          var typeToLoad = viewLoad.get('typeToLoad');
+          if (formatToLoad === 'json') {
+            optData = viewLoadType[typeToLoad].get('jsonPath');
+          }
+          var formData = {
+            loader : formatToLoad,
+            keyboard : $('#modal-load-input-keyboard').val(),
+            file   : viewLoad.get('fileToLoad'),
+            uri    : viewLoadType[typeToLoad].get('source'),
+            type   : typeToLoad,
+            label  : je1.get(),
+            text   : je2.get(),
+            hash   : je3.get(),
+            enrich : je4.get(),
+            origin : origin,
+            options: optData
+          }
+          if (typeToLoad === "fork") {
+            var rsc = 't' + (nTables + 1);
+            var url = '/-/v3/settab/' + rsc + '/';
+            var idt = document.location.pathname.replace(/\/+$/,'').slice(1);
             $.ajax({
                 type: "POST",
                 url: url ,
                 data: {
-                  "previousScheme": viewColumn.get('pscheme'),
-                  "previousValue" : viewColumn.get('pvalue'),
-                  "previousName" : viewColumn.get('pname'),
-                  "previousLabel" : viewColumn.get('plabel'),
-                  "previousComment" : viewColumn.get('pcomment'),
-                  "propertyScheme": viewColumn.get('scheme'),
-                  "propertyValue" : je5.get(),
-                  "propertyName" : idColumn,
-                  "propertyLabel" : viewColumn.get('label'),
-                  "propertyComment" : viewColumn.get('comment')
+                  origin: idt
                 },
                 success: function(data) {
-                  document.location.href = document.location.pathname;
-                }
+                  formData['uri'] = '/' + rsc;
+                  $.ajax({
+                      type: "POST",
+                      url: "/-/v3/load",
+                      data: formData,
+                      success: function(data) {
+                        document.location.href = formData['uri'];
+                      }
+                  });
+                },
+                error: console.error
             });
-            return false;
-          },
-          handleDrop: function(event) {
-            var idColumn = viewColumn.get('name');
-            var url = '/-/v3/setcol' + document.location.pathname.replace(/\/+$/,'') + '/' + idColumn + '/';
-            var form = {};
-            form[idColumn] = true;
-            $.ajax({
-                type: "POST",
-                url: url ,
-                data: form,
-                success: function(data) {
-                  document.location.href= document.location.pathname;
-                }
-            });
+          }
+          if (formData[formData.type] === undefined || formData[formData.type] === '') {
             return false;
           }
-      });
-
-
-       /**
-     * View
-     *
-     */
-      var viewLoad = view('template-modal-load-table', function() {
-          viewLoad.set('fileToLoad', '');
-          $(".modal-loadtable").on("show.bs.modal", function() {
-              $("#modal-loadtable").modal('hide');
-          })
-          $("#modal-loadtable").on("show.bs.modal", function() {
-              $("#modal-loadtable-file").modal('hide');
-              $("#modal-loadtable-uri").modal('hide');
-              $("#modal-loadtable-keyboard").modal('hide');
-              $("#modal-loadtable-fork").modal('hide');
+          $.ajax({
+              type: "POST",
+              url: "/-/v3/load",
+              data: formData,
+              success: function(data) {
+                document.location.href= document.location.pathname;
+              }
           });
-        }, {
-          handlePrevious: function(event) {
-            if (viewLoad.get('typeToLoad') === 'file') {
-              $("#modal-loadtable-file").modal('show');
-            }
-            else if (viewLoad.get('typeToLoad') === 'uri') {
-              $("#modal-loadtable-uri").modal('show');
-            }
-            else if (viewLoad.get('typeToLoad') === 'keyboard') {
-              $("#modal-loadtable-keyboard").modal('show');
-            }
-            else if (viewLoad.get('typeToLoad') === 'fork') {
-              $("#modal-loadtable-fork").modal('show');
-            }
-          },
-          handleLoad: function(event) {
-            var optData;
-            var origin = document.location.pathname.replace(/\/+$/,'').slice(1);
-            var typeToLoad = viewLoad.get('typeToLoad');
-            console.log('Load', typeToLoad);
-            if (formatToLoad === 'json') {
-              optData = viewLoadType[typeToLoad].get('jsonPath');
-            }
-            var formData = {
-              loader : formatToLoad,
-              keyboard : $('#modal-load-input-keyboard').val(),
-              file   : viewLoad.get('fileToLoad'),
-              uri    : viewLoadType[typeToLoad].get('source'),
-              type   : typeToLoad,
-              label  : je1.get(),
-              text   : je2.get(),
-              hash   : je3.get(),
-              enrich : je4.get(),
-              origin : origin,
-              options: optData
-            }
-            if (typeToLoad === "fork") {
-              var rsc = 't' + (nTables + 1);
-              var url = '/-/v3/settab/' + rsc + '/';
-              var idt = document.location.pathname.replace(/\/+$/,'').slice(1);
-              $.ajax({
-                  type: "POST",
-                  url: url ,
-                  data: {
-                    origin: idt
-                  },
-                  success: function(data) {
-                    console.log('Created', data);
-                    formData['uri'] = '/' + rsc;
-                    $.ajax({
-                        type: "POST",
-                        url: "/-/v3/load",
-                        data: formData,
-                        success: function(data) {
-                          document.location.href = formData['uri'];
-                        }
-                    });
-                  },
-                  error: console.error
-              });
-            }
-            if (formData[formData.type] === undefined || formData[formData.type] === '') {
-              return false;
-            }
-            $.ajax({
-                type: "POST",
-                url: "/-/v3/load",
-                data: formData,
-                success: function(data) {
-                  document.location.href= document.location.pathname;
-                }
-            });
-            viewLoad.get('fileToLoad');
-            return false;
-          }
-      });
+          viewLoad.get('fileToLoad');
+          return false;
+        }
+    });
 
 
 
-       /**
+    /**
      * View
      *
      */
-      var viewPage = view('template-modal-edit-page', function() {
-          $('#modal-editpage').on('show.bs.modal', function (e) {
-              var idPage = document.location.pathname.replace(/\/+$/,'').split('/').slice(1).shift();
-              oboe(window.location.protocol + '//' + window.location.host + '/index/' + idPage +'/*?alt=raw').done(function(items) {
-                  viewPage.set('_wid', items[0]._wid);
-                  console.log('items', items[0]);
-                  $('#modal-editpage-input-template').summernote({
-                      height: 200,
-                      dialogsInBody: true,
-                      toolbar: [
-                        ['g1', ['style', 'fontname', 'fontsize']],
-                        ['g2', ['bold', 'italic', 'underline', 'color']],
-                        ['g3', ['clear']],
-                        ['g4', ['paragraph', 'height', 'ol', 'ul', ]],
-                        ['g5', ['strikethrough', 'superscript', 'subscript']],
-                        ['g6', ['link', 'hr', 'picture', 'table']],
-                        ['g7', ['codeview', 'fullscreen']],
-                      ]
+    var viewPage = view('template-modal-edit-page', function() {
+        $('#modal-editpage').on('show.bs.modal', function (e) {
+            var idPage = document.location.pathname.replace(/\/+$/,'').split('/').slice(1).shift();
+            oboe(window.location.protocol + '//' + window.location.host + '/index/' + idPage +'/*?alt=raw').done(function(items) {
+                viewPage.set('_wid', items[0]._wid);
+                $('#modal-editpage-input-template').summernote({
+                    height: 200,
+                    dialogsInBody: true,
+                    toolbar: [
+                      ['g1', ['style', 'fontname', 'fontsize']],
+                      ['g2', ['bold', 'italic', 'underline', 'color']],
+                      ['g3', ['clear']],
+                      ['g4', ['paragraph', 'height', 'ol', 'ul', ]],
+                      ['g5', ['strikethrough', 'superscript', 'subscript']],
+                      ['g6', ['link', 'hr', 'picture', 'table']],
+                      ['g7', ['codeview', 'fullscreen']],
+                    ]
                   });
                   $('#modal-editpage-input-template').summernote('code', items[0]._template);
               });
@@ -440,7 +522,6 @@ $(document).ready(function() {
               "name": viewPage.get('_wid'),
               "template" :  $('#modal-editpage-input-template').summernote('code')
             };
-            console.log('form', form);
             $.ajax({
                 type: "POST",
                 url: url,
@@ -563,7 +644,6 @@ $(document).ready(function() {
       $('.action-editcolumn').click(function (e) {
           var column = $(this).data("column");
           oboe(window.location.protocol + '//' + window.location.host + '/index' + document.location.pathname.replace(/\/+$/,'') +'/*?alt=raw').done(function(items) {
-              console.log('items', items[0]);
               viewColumn.set('plabel', items[0]._columns[column].label);
               viewColumn.set('label', items[0]._columns[column].label);
 
@@ -571,7 +651,9 @@ $(document).ready(function() {
               viewColumn.set('name', column);
 
               viewColumn.set('pscheme', items[0]._columns[column].scheme);
-              viewColumn.set('scheme', items[0]._columns[column].scheme);
+              // @see https://stackoverflow.com/questions/30316586/select2-4-0-0-initial-value-with-ajax/30328989#30328989
+              var option = $("<option selected></option>").val(items[0]._columns[column].scheme).text(items[0]._columns[column].scheme);
+              $("#modal-editcolumn-input-scheme").append(option).trigger("change");
 
               viewColumn.set('ptype', items[0]._columns[column].type);
               viewColumn.set('type', items[0]._columns[column].type);
@@ -583,7 +665,6 @@ $(document).ready(function() {
               delete items[0]._columns[column].comment;
               delete items[0]._columns[column].type;
               delete items[0]._columns[column].scheme;
-              console.log('items', items[0]._columns[column]);
               viewColumn.set('pvalue', items[0]._columns[column]);
               je5.set(items[0]._columns[column]);
           });
@@ -641,7 +722,7 @@ $(document).ready(function() {
       });
 
 
-       /**
+      /**
        * Action
        *
        */
@@ -651,7 +732,7 @@ $(document).ready(function() {
       });
 
 
-       /**
+      /**
        * Action
        *
        */
@@ -668,7 +749,7 @@ $(document).ready(function() {
           return false;
       });
 
-       /**
+      /**
        * Action
        *
        */
@@ -677,7 +758,7 @@ $(document).ready(function() {
       });
 
 
-       /**
+      /**
        * Action
        *
        */
@@ -687,7 +768,7 @@ $(document).ready(function() {
       });
 
 
-       /**
+      /**
        * Action
        *
        */
@@ -697,7 +778,7 @@ $(document).ready(function() {
       });
 
 
-       /**
+      /**
        * Action
        *
        */
@@ -716,6 +797,13 @@ $(document).ready(function() {
           var height = $(window).height() / 2;
           $(this).find(".modal-body").css("min-height", Math.round(height));
       });
+
+      $(".jsoneditor", function() {
+          $(this).find(".outer").css("padding", 0);
+          $(this).find(".outer").css("margin", 0);
+      });
+
+
 
 
   });

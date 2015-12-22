@@ -7,16 +7,16 @@
     <div class="modal-body">
       <form onsubmit=[[handleSave]]>
         <div class="form-group">
-          <label class="control-label" for="modal-edittable-input-name">{{ __('URL Name') }}</label>
-          <input class="form-control" id="modal-edittable-input-name" placeholder="" type="text" pattern="\w+" value="[[ <~>_wid ]]" />
-        </div>
-        <div class="form-group">
           <label class="control-label" for="modal-edittable-input-title">{{ __('Title') }}</label>
-        </div>
           <input class="form-control" id="modal-edittable-input-title" placeholder="" type="text" value="[[ <~>title ]]" />
+        </div>
         <div class="form-group">
           <label class="control-label" for="modal-edittable-input-description">{{ __('Description') }}</label>
           <textarea  id="modal-edittable-input-description" class="textarea" placeholder="Enter text ..." style="width: 100%; height: 200px; font-size: 14px; line-height: 18px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="modal-edittable-input-name">{{ __('Technical name') }}</label>
+          <input class="form-control" id="modal-edittable-input-name" placeholder="" type="text" pattern="\w+" value="[[ <~>_wid ]]" />
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('Cancel') }}</button>
