@@ -1,0 +1,62 @@
+/* Styles go here */
+body {
+  padding-top: 51px;
+}
+
+/* this is only to style the sidebar - you can make the sidebar look any way you want */
+.sidebar {
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-right: 1px solid #eee;
+}
+
+/* custom search */
+#custom-search-input{
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+}
+
+/* status */
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,900|Oswald);
+body{
+    padding: 50px 0;
+}
+.status {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.status .panel-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 72px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 45px;
+    padding-top: 20px;
+    letter-spacing: -0.8px;
+}

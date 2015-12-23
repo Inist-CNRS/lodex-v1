@@ -11,20 +11,21 @@
 
     <link href="/favicon.ico" rel="icon">
 
-	<!-- Fonts -->
-	<!-- <link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'> -->
+    <!-- Fonts -->
+    <!-- <link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'> -->
 
     <!-- Bootstrap core CSS -->
     <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/assets/css/main.css" rel="stylesheet">
+    <link href="/assets/css/layout.css" rel="stylesheet">
 
     <!-- Material Design for Bootstrap -->
     <!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
     <link href="/libs/bootstrap-material-design/dist/css/roboto.min.css" rel="stylesheet">
     <link href="/libs/bootstrap-material-design/dist/css/material.min.css" rel="stylesheet">
     <link href="/libs/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
+    <link href="/libs/bootstrap-sidebar/dist/css/sidebar.css" rel="stylesheet"/>
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="./assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -34,42 +35,97 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+      <![endif]-->
 
-    {% block styles %}{% endblock %}
+      {% block styles %}{% endblock %}
 
   </head>
 
   <body>
 
-
-    {% block header %}{% endblock %}
-
-    <div id="content" class="container-fuild">
-      {% block body %}{% endblock %}
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-static navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle toggle-left hidden-md hidden-lg" data-toggle="sidebar" data-target=".sidebar-left">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">LODEX</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Les données</a></li>
+            <li><a href="#">L'API</a></li>
+            <li><a href="#">La licence</a></li>
+            <li><a href="#">La métodologie</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    
-     <footer class="footer">
-      <div class="container-fluid">
-        {% block footer %}{% endblock %}
-      </div>
-    </footer>
 
+    <!-- Begin page content -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate sidebar-md-show">
+          <div class="panel status panel-success">
+            <div class="panel-heading">
+              <h1 class="panel-title text-center">1623</h1>
+            </div>
+            <div class="panel-body text-center">                        
+              <strong>of data</strong>
+            </div>
+          </div>
+
+          <div id="custom-search-input">
+            <div class="input-group">
+              <input type="text" class="form-control input-lg" placeholder="Search..." />
+              <span class="input-group-btn">
+                <button class="btn btn-info btn-lg" type="button">
+                  <i class="glyphicon glyphicon-search"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+          <h4>Facettes #1</h4>
+          <ul class="nav navbar-stacked list-group">
+            <li class="list-group-item"> <span class="badge">32</span><a href="#">Data #1 </a></li>
+            <li class="list-group-item"> <span class="badge">10</span><a href="#about">Data #2</a></li>
+            <li class="list-group-item"> <span class="badge">4</span><a href="#contact">Data #3</a></li>
+          </ul>
+          <h4>Facettes #2</h4>
+          <ul class="nav navbar-stacked list-group">
+            <li class="list-group-item"> <span class="badge">22</span><a href="#">Data #1 </a></li>
+            <li class="list-group-item"> <span class="badge">20</span><a href="#about">Data #2</a></li>
+            <li class="list-group-item"> <span class="badge">4</span><a href="#contact">Data #3</a></li>
+          </ul>
+          <hr>
+          <a href="?alt=json">View scope</a>
+        </div>
+        <div class="main col-md-9 col-md-offset-3">
+          {% block header %}{% endblock %}
+          <div>
+            {% block body %}{% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  
     <!-- Bootstrap core JavaScript
       ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
       <script type="text/javascript" charset="utf-8" src="/libs.js"></script>
       <script type="text/javascript" charset="utf-8" src="/libs/jquery/dist/jquery.min.js"></script>
       <script type="text/javascript" charset="utf-8" src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-      <!-- <script type="text/javascript" charset="utf-8" src="./libs/bootstrap-material-design/dist/js/ripples.min.js"></script> -->
-      <!-- <script type="text/javascript" charset="utf-8" src="./libs/bootstrap-material-design/dist/js/material.min.js"></script> -->
-      <!-- <script type="text/javascript" charset="utf-8"> -->
-<!-- $(document).ready(function() { -->
-  <!-- // This command is used to initialize some elements and make them work properly -->
-    <!-- $.material.init(); -->
-    <!-- }); -->
-<!-- </script> -->
+      <script type="text/javascript" charset="utf-8" src="/libs/bootstrap-sidebar/dist/js/sidebar.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/libs/bootstrap-material-design/dist/js/ripples.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/libs/bootstrap-material-design/dist/js/material.min.js"></script>
+      <script type="text/javascript" charset="utf-8"> $(document).ready(function() { $.material.init(); }); </script>
 
       {% block scripts %}{% endblock %}
       <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

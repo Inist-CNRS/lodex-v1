@@ -17,34 +17,21 @@
 {% endblock %}
 
 {% block body %}
-<div class="row">
-  <div class="col-md-12">
-    {% for doc in _documents %}
-    <div class="media"  itemscope itemtype="http://schema.org/MediaObject">
-      <div class="media-left">
-        <a href="{{ doc._url }}> {{ doc.$_url }} </a>
-      </div>
-      <div class="media-body">
-        <h4 itemprop="name" class="media-heading">{{ doc._label }}</h4>
-        <p itemprop="description" >{{ doc._text }}</p>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
+{% for doc in _documents %}
+<div class="media"  itemscope itemtype="http://schema.org/MediaObject">
+	<div class="media-left">
+		<a href="{{ doc._url }}"> {{ doc.$_url }} </a>
+	</div>
+	<div class="media-body">
+		<h4 itemprop="name" class="media-heading">{{ doc._label }}</h4>
+		<p itemprop="description">{{ doc._text }}</p>
+	</div>
 </div>
+{% endfor %}
 {% endblock %}
 
 
 
 
 
-{% block footer %}
-<div class="row">
-  <div class="col-md-12">
-  <p class="pull-right">
-  <a href=\"?alt=raw\">View scope</a>
-  </p>
-  </div>
-</div>
-</div>
-{% endblock %}
+
