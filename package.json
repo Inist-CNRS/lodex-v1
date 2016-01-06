@@ -1,7 +1,7 @@
 {
 	"name": "lodex",
 	"version": "0.0.1",
-	"description": "",
+	"description": "Linked Open Data and ISTEX",
 	"main": "index.js",
 	"bin": {
 		"lodex": "lodex"
