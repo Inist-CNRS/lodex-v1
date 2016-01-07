@@ -44,8 +44,9 @@
     "**/extjs/welcome/**",
     "bower_components/**",
     "libs/**",
-    "**/ie10-viewport-bug-workarounds.js",
-    "**/ie-emulation-modes-warning.js"
+    "**/ie10-viewport-bug-workaround.js",
+    "**/ie-emulation-modes-warning.js",
+    "**/ie8-responsive-file-warning.js"
   ],
   "test": [
     "**/test/**",
