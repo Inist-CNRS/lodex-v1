@@ -32,6 +32,18 @@ Or you can pass it:
 - in variables prefixed with `lodex`,
 - via an option `--config file`, then from that file.
 
+## Use
+
+To be able to do anything with the LODEX, you have to first *create a table*.
+
+In order to create a table:
+- [start lodex](#start),
+- go to the URL given (usually http://localhost:3000/),
+- click on "Back office",
+- click on "Table", then "Create new one"
+
+There should be a table, visible by clicking on "Index".
+
 ## Contribute
 
 Here are few indicators of the quality of the code, they can be used as indications on what can be improved:
