@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<title> {{ table.$_wid | d('n/a') | e }}  </title>
+<meta name="description" content="{{ table._text | d('n/a') | e }}">
+<meta name="author" content="">
+{% endblock %}
+
+
+{% block header %}
+<h1>from {{_table._wid}} at {{_wid}}</h1>
+{% endblock %}
+
+{% block body %}
+<ul>
+	<li>_wid : {{_wid}}</li>
+	<li>_url : {{_url}}</li>
+	<li>_description : {{_description}}</li>
+</ul>
+{% endblock %}
+
+
+
+
+
+

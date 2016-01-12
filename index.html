@@ -20,11 +20,11 @@
 {% for doc in _documents %}
 <div class="media"  itemscope itemtype="http://schema.org/MediaObject">
 	<div class="media-left">
-		<a href="{{ doc._url }}"> {{ doc.$_url }} </a>
+		<a href="/{{ _globals.prefixKEY }}/{{ doc._wid}}/"> {{ doc._wid }} </a>
 	</div>
 	<div class="media-body">
-		<h4 itemprop="name" class="media-heading">{{ doc._label }}</h4>
-		<p itemprop="description">{{ doc._text }}</p>
+		<h4 itemprop="name" class="media-heading">{{ doc._label|d('n/a') }}</h4>
+		<p itemprop="description">{{ doc._text|d('n/a') }}</p>
 	</div>
 </div>
 {% endfor %}

@@ -7,7 +7,7 @@ $(document).ready(function() {
     var JURL = require('url');
     var nTables = 0;
 
-    var je1, je2, je3, je4, je5;
+    var je0, je1, je2, je3, je4, je5;
 
     /**
      * View
@@ -224,6 +224,7 @@ $(document).ready(function() {
               oboe(window.location.protocol + '//' + window.location.host + '/index' + document.location.pathname.replace(/\/+$/,'') +'/*?alt=raw').done(function(items) {
                   viewTable.set('title', items[0]._label);
                   viewTable.set('_wid', items[0]._wid);
+                  je0.set(items[0]._reskey);
                   je1.set(items[0]._label);
                   je2.set(items[0]._text);
                   je3.set(items[0]._hash);
@@ -430,6 +431,7 @@ $(document).ready(function() {
             file   : viewLoad.get('fileToLoad'),
             uri    : viewLoadType[typeToLoad].get('source'),
             type   : typeToLoad,
+            reskey : je0.get(),
             label  : je1.get(),
             text   : je2.get(),
             hash   : je3.get(),
@@ -630,6 +632,7 @@ $(document).ready(function() {
           nTables = items[0].value;
       })
 
+      je0 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-reskey"), JSONEditorOptions);
       je1 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-label"), JSONEditorOptions);
       je2 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-text"), JSONEditorOptions);
       je3 = new JSONEditor(document.getElementById("modal-load-tab2-jsoneditor-hash"), JSONEditorOptions);
