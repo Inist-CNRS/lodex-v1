@@ -16,6 +16,29 @@ module.exports = {
     'nt',
     'json'
   ],
+  strategies : [
+    {
+      require : 'local.js',
+      options : {
+        usernameField : 'username',
+        passwordField : 'password',
+        accessList : [
+          { id: 1, username: 'jack', password: 'secret', displayName: 'Jack', emails: [ { value: 'jack@example.com' } ] },
+          { id: 2, username: 'jill', password: 'birthday', displayName: 'Jill', emails: [ { value: 'jill@example.com' } ] }
+        ]
+      }
+    }
+  ],
+  access : [
+    {
+      pattern : "* /index/**",
+      require : "valid-user.js"
+    },
+    {
+      pattern : "post /*/*",
+      require : "valid-user.js"
+    }
+  ],
   loaders: [
     {
       pattern : "**/*.xml",
@@ -52,6 +75,7 @@ module.exports = {
   ],
   routes: [
     "echo.js",
+    "auth.js",
     "table.js",
     "v3.js"
   ]

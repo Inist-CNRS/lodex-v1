@@ -60,5 +60,20 @@
 	"Tips": "Astuces",
 	"Try Again": "Essayer à nouveau",
 	"Back home": "Retour à l'accueil",
-	"Homepage": "Page d'accueil"
+	"Homepage": "Page d'accueil",
+	"Try to start (or retstart) Mongo.": "Try to start (or retstart) Mongo.",
+	"Authenticate": "Authenticate",
+	"Choose your login provider.": "Choose your login provider.",
+	"Use your account": "Use your account",
+	"Email:": "Email:",
+	"Please enter your email address": "Please enter your email address",
+	"Password:": "Password:",
+	"Please enter your password": "Please enter your password",
+	"Sig in": "Sig in",
+	"Forgot your password ?": "Forgot your password ?",
+	"or New here ?": "or New here ?",
+	"Create an Account.": "Create an Account.",
+	"Login:": "Login:",
+	"Please enter your login": "Please enter your login",
+	"Resource key": "Resource key"
 }

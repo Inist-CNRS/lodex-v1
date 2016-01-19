@@ -56,5 +56,21 @@
 	"Load": "Load",
 	"Template": "Template",
 	"Loom Data": "Loom Data",
-	"Choose a table": "Choose a table"
+	"Choose a table": "Choose a table",
+	"The web server is returning an internal error.": "The web server is returning an internal error.",
+	"Tips": "Tips",
+	"Try Again": "Try Again",
+	"Back home": "Back home",
+	"Resource key": "Resource key",
+	"Authenticate": "Authenticate",
+	"Choose your login provider.": "Choose your login provider.",
+	"Use your account": "Use your account",
+	"Login:": "Login:",
+	"Please enter your login": "Please enter your login",
+	"Password:": "Password:",
+	"Please enter your password": "Please enter your password",
+	"Sig in": "Sig in",
+	"Forgot your password ?": "Forgot your password ?",
+	"or New here ?": "or New here ?",
+	"Create an Account.": "Create an Account."
 }
