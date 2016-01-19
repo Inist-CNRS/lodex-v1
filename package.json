@@ -1,32 +1,31 @@
 {
-	"name": "lodex",
-	"version": "0.0.1",
-	"description": "Linked Open Data and ISTEX",
-	"main": "index.js",
-	"bin": {
-		"lodex": "lodex"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/touv/lodex.git"
-	},
-	"author": "Nicolas Thouvenin",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/touv/lodex/issues"
-	},
-	"homepage": "https://github.com/touv/lodex#readme",
-	"dependencies": {
-		"castor-core": "^3.0.0-alpha.1",
-		"castor-load-jsoncorpus": "^1.0.1",
-		"oboe": "^2.1.2",
-		"paperclip": "^3.0.18",
-		"castor-load": "latest",
-		"castor-load-csv": "latest",
-		"castor-load-excel": "latest",
-		"castor-load-jsoncorpus": "latest",
-		"castor-load-nq": "latest",
-		"castor-load-xml": "latest",
-		"debug": "latest"
-	}
+  "name": "lodex",
+  "version": "0.1.0",
+  "description": "Linked Open Data and ISTEX",
+  "main": "index.js",
+  "bin": {
+    "lodex": "lodex"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/touv/lodex.git"
+  },
+  "author": "Nicolas Thouvenin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/touv/lodex/issues"
+  },
+  "homepage": "https://github.com/touv/lodex#readme",
+  "dependencies": {
+    "castor-core": "^3.0.0-alpha.1",
+    "castor-load-jsoncorpus": "latest",
+    "oboe": "^2.1.2",
+    "paperclip": "^3.0.18",
+    "castor-load": "latest",
+    "castor-load-csv": "latest",
+    "castor-load-excel": "latest",
+    "castor-load-nq": "latest",
+    "castor-load-xml": "latest",
+    "debug": "latest"
+  }
 }
