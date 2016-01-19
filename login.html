@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h2>{{ __('Authenticate') }} </h2>
+
+<h4>{{ __('Choose your login provider.') }}</h4>
+<div class="authProviders">
+	<div class="contentCenter">
+		<a href="/-/auth/twitter">O<i class="fa fa-twitter-square fa-4x"></i> </a>
+		<br>
+		Twitter
+	</div>
+	<div class="contentCenter">
+		<a href="/-/auth/google">O<i class="fa fa-google-plus-square fa-4x"></i> </a>
+		<br>
+		Google
+	</div>
+	<div class="contentCenter">
+		<a href="/-/auth/facebook">O<i class="fa fa-facebook-square fa-4x"></i></a>
+		<br>
+		Facebook
+	</div>
+</div>
+<div>
+	<h4>{{ __('Use your account') }}</h4>
+	<!-- Form -->
+	<form class="form" action="/-/login" method="post">
+		<div>
+			<label>
+				<span>{{ __('Login:') }}</span>
+				<input name="username" placeholder="{{ __('Please enter your login') }}" type="text" tabindex="2" required>
+			</label>
+		</div>
+		<div>
+			<label>
+				<span>{{ __('Password:') }}</span>
+				<input name="password" placeholder="{{ __('Please enter your password') }}" type="password" tabindex="2" required>
+			</label>
+		</div>
+		<div>
+			<button name="submit" type="submit" id="contact-submit">{{ __('Sig in') }}</button>
+		</div>
+	</form>
+	<!-- /Form -->
+</div>
+<div>
+	<!--
+	 <a href="">{{ __('Forgot your password ?') }}</a><br>
+	 <span>{{ __('or New here ?') }} </span><a href="/register">{{ __('Create an Account.') }}</a>
+	-->
+</div>
+{% endblock %}
