@@ -16,6 +16,8 @@ The repository pointed can be empty.
 
 ## Settings
 
+### files
+
 You can put your settings in any of these paths:
 
 - `./.lodexrc` (or any upper level repository: `../`, `../../`, *etc*.)
@@ -31,6 +33,22 @@ Or you can pass it:
 - in command line arguments,
 - in variables prefixed with `lodex`,
 - via an option `--config file`, then from that file.
+
+Or you can put your settings in a JSON file besides your data repository.
+
+For example, if you run `lodex /path/to/repository`, the file will be
+`/path/to/repository.json`.
+
+Wherever the settings file is, it is a JSON file.
+
+## parameters
+
+- `connectionURI`: URI to connect to mongoDB (by default: `mongodb://localhost:27017/lodex`)
+- `port`: the port the web application will listen (default: `3000`)
+- `title`: title of the application (default: `Change title`)
+- `description`: description for the application (default: `Change description`)
+- `strategies`: TODO
+- ...
 
 ## Use
 
