@@ -29,13 +29,9 @@ module.exports = {
       }
     }
   ],
-  access : [
+  authorizations: [
     {
-      pattern : "* /index/**",
-      require : "valid-user.js"
-    },
-    {
-      pattern : "post /*/*",
+      pattern : "* /fake.html",
       require : "valid-user.js"
     }
   ],
