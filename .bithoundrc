@@ -56,7 +56,8 @@
   ],
   "dependencies": {
     "unused-ignores": [
-      "castor-load*"
+      "castor-load*",
+      "debug"
     ]
   }
 }
