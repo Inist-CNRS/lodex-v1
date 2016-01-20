@@ -5,7 +5,7 @@
 {% for name, column in table._columns %}
 <td>
   <show when="[[ item|len('${{name}}') > 0 ]]">
-  <a href="[[ item|get('{{name}}') ]]">[[item|get('${{name}}')]]</a>
+  <a href="/[[ item|get('{{name}}') ]]">[[item|get('${{name}}')]]</a>
   </show>
   <show when="[[ item|len('${{name}}') === 0 ]]">
   <span>[[ item|get('{{name}}') ]]</span>
