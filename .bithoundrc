@@ -53,5 +53,10 @@
     "**/tests/**",
     "**/spec/**",
     "**/specs/**"
-  ]
+  ],
+  "dependencies": {
+    "unused-ignores": [
+      "castor-load*"
+    ]
+  }
 }
