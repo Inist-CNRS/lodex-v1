@@ -145,7 +145,7 @@ $(document).ready(function() {
         $(window).scroll(function(){
             if ($(window).scrollTop() + $(window).height() >= $(document).height() - 300){
               viewList.set('page', viewList.get('page') + 1);
-              alert("Page #" + viewList.get('page'));
+              console.log("Page #" + viewList.get('page'));
             }
         });
       },
