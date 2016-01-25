@@ -133,7 +133,7 @@ $(document).ready(function() {
               items.push(item);
               viewList.set('items', items);
               if (first) {
-                viewColumn.set('sampleURL', window.location.href.replace(/\/+$/,'').concat('/').concat(item._wid).concat('/*?alt=raw'));
+                viewColumn.set('sampleURL', window.location.href.replace(/\/+$/,'').concat('/').concat(item._wid).concat('/*?alt=raw&firstOnly=1'));
                 first = false;
               }
           })
