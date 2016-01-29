@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
 
+{% block sidebar %}
+{% endblock %}
+
 {% block head %}
     <title> {{ table.title }} | {{ site.title }} </title>
     <meta name="description" content="{{ site.description|e }}">
@@ -56,8 +59,11 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 		<h1><span class="glyphicon glyphicon-info-sign blue"></span> <small>{{ __('Tips') }}</small></h1>
 		 {% if name == "MongoError" %}
-			<p class="lead"> {{ __('Try to start (or retstart) Mongo.') }}</p>
+			<p class="text-info"> {{ __('Try to start (or retstart) Mongo.') }}</p>
 			<a href="javascript:document.location.reload(true);" class="btn btn-success">{{ __('Try Again') }}</a>
+		{% elif name == "Forbidden" %}
+			<p class="text-info"> {{ __('Try to log in.') }}</p>
+			<a href="/login.html" class="btn btn-success">{{ __('Log in') }}</a>
 		{% else %}
 			<a href="javascript:document.location.reload(true);" class="btn btn-success">{{ __('Try Again') }}</a>
         {% endif %}

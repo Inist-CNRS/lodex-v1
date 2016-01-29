@@ -88,6 +88,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-xs-7 col-sm-3 col-md-3 sidebar sidebar-left sidebar-animate sidebar-md-show">
+          {% block sidebar %}
           <div class="panel status panel-success">
             <div class="panel-heading">
               <h1 class="panel-title text-center">1623</h1>
@@ -96,7 +97,6 @@
               <strong>of data</strong>
             </div>
           </div>
-
           <div id="custom-search-input">
             <div class="input-group">
               <input type="text" class="form-control input-lg" placeholder="Search..." />
@@ -121,6 +121,7 @@
           </ul>
           <hr>
           <a href="/index/">Back office</a> | <a href="?alt=json">View scope</a>
+          {% endblock %}
         </div>
         <div class="main col-md-9 col-md-offset-3" style="margin-top: 20px;">
           {% block header %}{% endblock %}

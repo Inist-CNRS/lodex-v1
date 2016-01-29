@@ -75,5 +75,7 @@
 	"Create an Account.": "Créer un compte.",
 	"Login:": "Login:",
 	"Please enter your login": "Veuillez saisir votre login",
-	"Resource key": "Resource key"
+	"Resource key": "Resource key",
+	"Try to log in.": "Try to log in.",
+	"Log in": "Log in"
 }
