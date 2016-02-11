@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/touv/lodex#readme",
   "dependencies": {
-    "castor-core": "^3.0.0-alpha.1",
+    "castor-core": "^3.0.0-alpha.10",
     "castor-load-jsoncorpus": "latest",
     "oboe": "^2.1.2",
     "paperclip": "^3.0.18",
