@@ -1,5 +1,10 @@
 {% extends "layout.html" %}
 
+{% block styles %}
+<link href="/assets/css/index.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+
 {% block head %}
 <title>{{ _label | d($_wid) | d('n/a') | e }}</title>
 <meta name="description" content="{{ table._text | d($_wid) | d('n/a') | e }}">
@@ -8,26 +13,40 @@
 
 {% block header %}
 <div class="jumbotron">
-  <h1>{{_label}}</h1>
-  <p>{{_text}}</p>
-  <p>
-  <a  class="btn btn-primary btn-lg" href=\"{{_url|e}}\"  role="button">{{$_url|d('n/a')}}</a>
-  </p>
+	<h1>{{title}}</h1>
+	<p>{{description}}</p>
 </div>
 {% endblock %}
 
 {% block body %}
-{% for doc in _documents %}
-<div class="media"  itemscope itemtype="http://schema.org/MediaObject">
-	<div class="media-left">
-		<a href="/{{ _globals.prefixKEY }}/{{ doc._wid}}/"> {{ doc._wid }} </a>
-	</div>
-	<div class="media-body">
-		<h4 itemprop="name" class="media-heading">{{ doc._label|d('n/a') }}</h4>
-		<p itemprop="description">{{ doc._text|d('n/a') }}</p>
-	</div>
-</div>
-{% endfor %}
+ <div id="no-more-tables">
+	 <table class="col-md-12 table-bordered table-striped table-condensed cf">
+		 <thead class="cf">
+			 <tr>
+				 <td>#</td>
+				 {% for name, con in _documents[0].@context %}
+				 {% if con.@quality == 'primary' %}
+				 <th>{{ con.@label }}</th>
+				 {% endif %}
+				 {% endfor %}
+			 </tr>
+		 </thead>
+		 <tbody>
+			 {% for doc in _documents %}
+			 <tr>
+				 <td>
+					 <a href="/{{ _globals.prefixKEY }}/{{ doc._wid}}/"><i class="fa fa-sticky-note"></i></a>
+				 </td>
+				 {% for name, con in doc.@context %}
+				 {% if con.@quality == 'primary' %}
+				 <td data-title="{{ con.@label }}">{{doc[name]}}</td>
+				 {% endif %}
+				 {% endfor %}
+			 </tr>
+			 {% endfor %}
+		 </tbody>
+	 </table>
+ </div>
 {% endblock %}
 
 
