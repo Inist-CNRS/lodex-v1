@@ -77,5 +77,7 @@
 	"Please enter your login": "Veuillez saisir votre login",
 	"Resource key": "Resource key",
 	"Try to log in.": "Try to log in.",
-	"Log in": "Log in"
+	"Log in": "Log in",
+	"Language": "Language",
+	"Primary": "Primary"
 }

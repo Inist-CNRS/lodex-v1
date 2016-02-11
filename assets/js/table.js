@@ -350,6 +350,8 @@
                     "previousValue" : viewColumn.get('pvalue'),
                     "previousName" : viewColumn.get('pname'),
                     "previousLabel" : viewColumn.get('plabel'),
+                    "previousLanguage" : viewColumn.get('planguage'),
+                    "previousPrimary" : viewColumn.get('pprimary'),
                     "previousComment" : viewColumn.get('pcomment')
                 });
                 console.log('after', {
@@ -357,6 +359,8 @@
                     "propertyValue" : je5.get(),
                     "propertyName" : idColumn,
                     "propertyLabel" : viewColumn.get('label'),
+                    "propertyLanguage" : viewColumn.get('language'),
+                    "propertyPrimary" : viewColumn.get('primary'),
                     "propertyComment" : viewColumn.get('comment')
                 });
 
@@ -368,11 +372,15 @@
                       "previousValue" : viewColumn.get('pvalue'),
                       "previousName" : viewColumn.get('pname'),
                       "previousLabel" : viewColumn.get('plabel'),
+                      "previousLanguage" : viewColumn.get('planguage'),
+                      "previousPrimary" : viewColumn.get('pprimary'),
                       "previousComment" : viewColumn.get('pcomment'),
                       "propertyScheme": $("#modal-editcolumn-input-scheme").val(),
                       "propertyValue" : je5.get(),
                       "propertyName" : idColumn,
                       "propertyLabel" : viewColumn.get('label'),
+                      "propertyLanguage" : viewColumn.get('language'),
+                      "propertyPrimary" : viewColumn.get('primary'),
                       "propertyComment" : viewColumn.get('comment')
                     },
                     success: function(data) {
@@ -676,10 +684,19 @@
                     viewColumn.set('pcomment', items[0]._columns[column].comment);
                     viewColumn.set('comment', items[0]._columns[column].comment);
 
+                    viewColumn.set('planguage', items[0]._columns[column].language);
+                    viewColumn.set('language', items[0]._columns[column].language);
+
+                    viewColumn.set('pprimary', items[0]._columns[column].primary);
+                    viewColumn.set('primary', items[0]._columns[column].primary);
+
+
                     delete items[0]._columns[column].label;
                     delete items[0]._columns[column].comment;
                     delete items[0]._columns[column].type;
                     delete items[0]._columns[column].scheme;
+                    delete items[0]._columns[column].primary;
+                    delete items[0]._columns[column].language;
                     viewColumn.set('pvalue', items[0]._columns[column]);
                     je5.set(items[0]._columns[column]);
                 });
