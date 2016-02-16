@@ -4,6 +4,15 @@
 <link href="/assets/css/index.css" rel="stylesheet" type="text/css">
 {% endblock %}
 
+{% block scripts %}
+<script>
+$('.download').click(function(e) {
+	$('#modal-download-set').modal('hide')
+})
+</script>
+{% endblock %}
+
+
 
 {% block head %}
 <title>{{ _label | d($_wid) | d('n/a') | e }}</title>
@@ -14,39 +23,73 @@
 {% block header %}
 <div class="jumbotron">
 	<h1>{{title}}</h1>
+	<div class="pull-right">
+		<a href="" data-toggle="modal" data-target="#modal-download-set"><span class="fa fa-cloud-download fa-5x"></span></a>
+	</div>
 	<p>{{description}}</p>
+	<br>
 </div>
 {% endblock %}
 
 {% block body %}
- <div id="no-more-tables">
-	 <table class="col-md-12 table-bordered table-striped table-condensed cf">
-		 <thead class="cf">
-			 <tr>
-				 <td>#</td>
-				 {% for name, con in _documents[0].@context %}
-				 {% if con.@quality == 'primary' %}
-				 <th>{{ con.@label }}</th>
-				 {% endif %}
-				 {% endfor %}
-			 </tr>
-		 </thead>
-		 <tbody>
-			 {% for doc in _documents %}
-			 <tr>
-				 <td>
-					 <a href="/{{ _globals.prefixKEY }}/{{ doc._wid}}/"><i class="fa fa-sticky-note"></i></a>
-				 </td>
-				 {% for name, con in doc.@context %}
-				 {% if con.@quality == 'primary' %}
-				 <td data-title="{{ con.@label }}">{{doc[name]}}</td>
-				 {% endif %}
-				 {% endfor %}
-			 </tr>
-			 {% endfor %}
-		 </tbody>
-	 </table>
- </div>
+<div id="no-more-tables">
+	<table class="col-md-12 table-bordered table-striped table-condensed cf">
+		<thead class="cf">
+			<tr>
+				<td>#</td>
+				{% for name, con in _documents[0].@context %}
+				{% if con.@quality == 'primary' %}
+				<th>{{ con.@label }}</th>
+				{% endif %}
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for doc in _documents %}
+			<tr>
+				<td>
+					<a href="/{{ _globals.prefixKEY }}/{{ doc._wid}}/"><i class="fa fa-sticky-note"></i></a>
+				</td>
+				{% for name, con in doc.@context %}
+				{% if con.@quality == 'primary' %}
+				<td data-title="{{ con.@label }}">{{doc[name]}}</td>
+				{% endif %}
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div class="modal" id="modal-download-set" tabindex="-1" role="dialog" aria-labelledby="modal-download-set-title">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="modal-download-set-title">{{ __('Download set') }}</h4>
+			</div>
+			<div class="modal-body">
+				<p>
+				Onec purus dui, vehicula in egestas in, lobortis et sem. Mauris neque quam, pharetra in lacinia vel, tempor vitae tellus. Sed eu augue eget neque euismod euismod. Praesent cursus tincidunt interdum.
+				</p>
+				<ul class="list-inline text-center">
+					<li>
+						<a class="download" href="?alt=csv"><span class="fa fa-table fa-3x"></span><br> CSV</a>
+					</li>
+					<li>
+						<a class="download" href="?alt=nq"><span class="fa fa-bars fa-3x"></span><br> N-Quads</a>
+					</li>
+					<li>
+						<a class="download" href="?alt=json"><span class="fa fa-file-o fa-3x"></span><br> JSON LD</a>
+					</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" data-target="#modal-download-set">{{ __('Close') }}</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 {% endblock %}
 
 

@@ -79,5 +79,7 @@
 	"Try to log in.": "Try to log in.",
 	"Log in": "Log in",
 	"Language": "Language",
-	"Primary": "Primary"
+	"Primary": "Primary",
+	"Download set": "Download set",
+	"Close": "Close"
 }
