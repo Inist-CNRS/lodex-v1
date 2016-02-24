@@ -404,6 +404,10 @@
                     }
                 });
                 return false;
+              },
+              handleCrown : function(event) {
+                var idColumn = viewColumn.get('name');
+                alert('crown ' + idColumn);
               }
           });
 

@@ -81,5 +81,6 @@
 	"Language": "Language",
 	"Primary": "Primary",
 	"Download set": "Download set",
-	"Close": "Close"
+	"Close": "Close",
+	"Crown": "Crown"
 }
