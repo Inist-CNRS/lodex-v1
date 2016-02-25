@@ -76,11 +76,11 @@
 	"Login:": "Login:",
 	"Please enter your login": "Veuillez saisir votre login",
 	"Resource key": "Resource key",
-	"Try to log in.": "Try to log in.",
+	"Try to log in.": "Essayer de se loger.",
 	"Log in": "Log in",
-	"Language": "Language",
+	"Language": "Langue",
 	"Primary": "Primary",
-	"Download set": "Download set",
-	"Close": "Close",
+	"Download set": "Décharger le jeu de données",
+	"Close": "Fermer",
 	"Crown": "Crown"
 }

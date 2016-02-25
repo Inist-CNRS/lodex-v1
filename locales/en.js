@@ -72,5 +72,9 @@
 	"Sig in": "Sig in",
 	"Forgot your password ?": "Forgot your password ?",
 	"or New here ?": "or New here ?",
-	"Create an Account.": "Create an Account."
+	"Create an Account.": "Create an Account.",
+	"Download set": "Download set",
+	"Close": "Close",
+	"Try to log in.": "Try to log in.",
+	"Log in": "Log in"
 }
