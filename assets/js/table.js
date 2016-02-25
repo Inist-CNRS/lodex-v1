@@ -403,8 +403,10 @@
 				return false;
 			},
 			handleCrown: function(event) {
-				var idColumn = viewColumn.get('name');
-				alert('crown ' + idColumn);
+        je0.set(je5.get());
+				viewLoad.set('typeToLoad', 'fork');
+				$("#modal-editcolumn").modal('hide');
+        $("#modal-loadtable").modal('show');
 			}
 		});
 
