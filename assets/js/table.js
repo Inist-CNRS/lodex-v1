@@ -335,6 +335,13 @@
 			}).change(function() {
 				viewColumn.set('scheme', $("#modal-editcolumn-input-scheme").val());
 			});
+
+			$("#modal-editcolumn-input-language")
+			.select2()
+			.change(function() {
+				viewColumn.set('language', $("#modal-editcolumn-input-language").val());
+			});
+
 		}, {
 			sampleURL: '',
 			handleSave: function(event) {
@@ -688,6 +695,7 @@
 
 				viewColumn.set('planguage', items[0]._columns[column].language);
 				viewColumn.set('language', items[0]._columns[column].language);
+				$("#modal-editcolumn-input-language").val(viewColumn.get('language')).trigger('change');
 
 				viewColumn.set('pprimary', items[0]._columns[column].primary);
 				viewColumn.set('primary', items[0]._columns[column].primary);
