@@ -82,5 +82,5 @@
 	"Primary": "Primary",
 	"Download set": "Décharger le jeu de données",
 	"Close": "Fermer",
-	"Crown": "Crown"
+	"Crown": "Couronner"
 }
