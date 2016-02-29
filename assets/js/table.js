@@ -1566,6 +1566,25 @@
       return false;
     });
 
+    /**
+     * Action
+     *
+     */
+    $('#action-download-tsv').click(function() {
+      document.location.href = document.location.pathname.replace(/\/+$/, '') + '/*/?alt=tsv';
+      return false;
+    });
+
+    /**
+     * Action
+     *
+     */
+    $('#action-download-xls').click(function() {
+      document.location.href = document.location.pathname.replace(/\/+$/, '') + '/*/?alt=xls';
+      return false;
+    });
+
+
 
     /**
      * Action
