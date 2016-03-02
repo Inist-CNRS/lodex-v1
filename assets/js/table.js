@@ -341,7 +341,6 @@
       var userLang = navigator.language ? navigator.language.substr(0,2) : "en";
       oboe(window.location.protocol + '//' + window.location.host + '/assets/js/lang.json')
       .node("!.*", function(l) {
-        console.log('l',l);
         var o = {
           id:   l.code,
           text: l.prefLabels[userLang]
