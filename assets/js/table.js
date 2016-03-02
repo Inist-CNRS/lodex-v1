@@ -754,7 +754,6 @@
     }
   ];
 
-
   $(document).ready(function() {
     var JSONEditorOptions = { mode: "code", maxLines: Infinity };
     var oboe = require('oboe');
@@ -1089,15 +1088,36 @@
         viewColumn.set('scheme', $("#modal-editcolumn-input-scheme").val());
       });
 
-      $("#modal-editcolumn-input-language")
-      .select2({
-        data: isoLanguages,
-        theme: "bootstrap",
-        width: "100%"
+
+      var lang = [];
+      var userLang = navigator.language ? navigator.language.substr(0,2) : "en";
+      oboe(window.location.protocol + '//' + window.location.host + '/assets/js/lang.json')
+      .node("!.*", function(l) {
+        console.log('l',l);
+        var o = {
+          id:   l.code,
+          text: l.prefLabels[userLang]
+        }
+        lang.push(o);
       })
-      .change(function() {
-        viewColumn.set('language', $("#modal-editcolumn-input-language").val());
+      .done(function(iso6391) {
+
+        $("#modal-editcolumn-input-language")
+        .select2({
+          data: lang,
+          theme: "bootstrap",
+          width: "100%"
+        })
+        .change(function() {
+          viewColumn.set('language', $("#modal-editcolumn-input-language").val());
+        });
+
+      })
+      .fail(function(e) {
+        console.error(e);
       });
+
+
 
     }, {
       sampleURL: '',
