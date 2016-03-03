@@ -79,8 +79,10 @@
 	"Try to log in.": "Essayer de se loger.",
 	"Log in": "Log in",
 	"Language": "Langue",
-	"Primary": "Primary",
+	"Primary": "Primaire",
 	"Download set": "Décharger le jeu de données",
 	"Close": "Fermer",
-	"Crown": "Couronner"
+	"Crown": "Couronner",
+	"Excel file": "Fichier Excel",
+	"TSV file": "Fichier TSV"
 }
