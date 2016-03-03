@@ -43,7 +43,7 @@
     "**/extjs/src/**",
     "**/extjs/welcome/**",
     "bower_components/**",
-    "libs/**",
+    "views/libs/**",
     "**/ie10-viewport-bug-workaround.js",
     "**/ie-emulation-modes-warning.js",
     "**/ie8-responsive-file-warning.js"
