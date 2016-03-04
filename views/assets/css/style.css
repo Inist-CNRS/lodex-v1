@@ -8155,6 +8155,16 @@ div#linkcat-30.widget.widget_links h4.widgettitle {
   border-bottom: 0;
   padding-bottom: -20px;
 }
+.badgenbdoc {
+  font-size: 36px;
+  border-color: #7b3294;
+  color: #fff;
+  background: #00a241;
+  font-weight: bold;
+  line-height: 1;
+  border-radius: 10px;
+  text-align: center;
+}
 /*
 RETINA (2x RESOLUTION DEVICES)
 This applies to the retina iPhone (4s) and iPad (2,3) along with
