@@ -3,7 +3,11 @@
   <a href="{{ "/" if _index else "./" }}[[ item|get('_wid') ]]/">#[[ key|plus ]]</a>
 </td>
 {% for name, column in table._columns %}
+{% if name == '_wid' %}
+<td class="danger">
+{% else %}
 <td>
+{% endif %}
   <show when="[[ item|len('${{name}}') > 0 ]]">
   <a href="/[[ item|get('{{name}}') ]]">[[item|get('${{name}}')]]</a>
   </show>
