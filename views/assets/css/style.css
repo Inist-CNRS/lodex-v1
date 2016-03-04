@@ -276,7 +276,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Abel", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #222;
@@ -361,7 +361,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: inherit;
+  font-family: "Abel", Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -4380,11 +4380,11 @@ a.list-group-item.active > .badge,
 }
 .jumbotron h1,
 .jumbotron .h1 {
-  color: inherit;
+  color: #008837;
 }
 .jumbotron p {
   margin-bottom: 15px;
-  font-size: 21px;
+  font-size: 14px;
   font-weight: 200;
 }
 .container .jumbotron {
@@ -8139,6 +8139,21 @@ This is just for the sample BREW site.  Feel free to delete
 .about:hover i {
   color: #626c72;
   transition: all 0.35s ease;
+}
+/*
+theme LODEX par Cecilia
+
+*/
+.navbar-inverse .navbar-header a.navbar-brand {
+  font-family: "Anton", Helvetica, Arial, sans-serif;
+}
+div#linkcat-31.widget.widgetFooter.widget_links {
+  text-align: right;
+}
+div#linkcat-30.widget.widget_links h4.widgettitle {
+  color: transparent;
+  border-bottom: 0;
+  padding-bottom: -20px;
 }
 /*
 RETINA (2x RESOLUTION DEVICES)
