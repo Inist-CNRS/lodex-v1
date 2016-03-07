@@ -8148,13 +8148,10 @@ theme LODEX par Cecilia
 .navbar-inverse .navbar-header a.navbar-brand {
   font-family: "Anton", Helvetica, Arial, sans-serif;
 }
-div#linkcat-31.widget.widgetFooter.widget_links {
-  text-align: right;
-}
 div#linkcat-30.widget.widget_links h4.widgettitle {
-  color: transparent;
   border-bottom: 0;
   padding-bottom: -20px;
+  display: none;
 }
 .badgenbdoc {
   display: inline-block;
