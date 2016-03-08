@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal-editcolumn" tabindex="-1" role="dialog" aria-labelledby="modal-editcolumn-title">
-<div class="modal-dialog" role="document">
+<div class="modal-dialog modal-lg" role="document">
   <div class="modal-content">
     <div class="modal-header">
       <h4 class="modal-title" id="modal-editcolumn-title">{{ __('Edit Column') }}</h4>
@@ -9,60 +9,76 @@
       Onec purus dui, vehicula in egestas in, lobortis et sem. Mauris neque quam, pharetra in lacinia vel, tempor vitae tellus. Sed eu augue eget neque euismod euismod. Praesent cursus tincidunt interdum.
       </p>
       <form class="form" onsubmit=[[handleSave]]>
-        <div class="form-group">
-          <label class="control-label" for="modal-editcolumn-input-label">{{ __('Label') }}</label>
-          <input class="form-control" id="modal-editcolumn-input-label" placeholder="" type="text" value="[[ <~>label ]]" />
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label class="control-label" for="modal-editcolumn-input-label">{{ __('Label') }}</label>
+              <input class="form-control" id="modal-editcolumn-input-label" placeholder="" type="text" value="[[ <~>label ]]" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label" for="modal-editcolumn-input-name">{{ __('Technical name') }}</label>
+              <input class="form-control" id="modal-editcolumn-input-name" placeholder="" type="text" pattern="\w+" value="[[ <~>name ]]" />
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Scheme') }} <a href="[[ <~>scheme ]]" target="scheme">[{{ __('View it') }}]</a></label>
-          <select id="modal-editcolumn-input-scheme" class="form-control select2"></select>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Scheme') }} <a href="[[ <~>scheme ]]" target="scheme">[{{ __('View it') }}]</a></label>
+              <select id="modal-editcolumn-input-scheme" class="form-control select2"></select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="control-label" for="modal-editcolumn-input-language">{{ __('Language') }}</label>
+              <select id="modal-editcolumn-input-language" class="form-control select2">
+              </select>
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Stylesheet') }} <a href="http://inist-cnrs.github.io/jbj-playground/?input=[[ <~>sampleURL ]]&stylesheet=[[ <~>sampleStylesheet ]]" target="playground">[{{ __('Test it') }}]</a></label>
           <div id="modal-editcolumn-jsoneditor-value" style="width:100%;height:12em;"> </div>
         </div>
         <div class="form-group">
-          <label class="control-label" for="modal-editcolumn-input-language">{{ __('Language') }}</label>
-          <select id="modal-editcolumn-input-language" class="form-control select2">
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="modal-editcolumn-input-quality">{{ __('Primary') }}</label>
-          <input class="form-control" id="modal-editcolumn-input-quality" type="checkbox" checked="[[ <~> primary ]]"/>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="modal-editcolumn-input-name">{{ __('Technical name') }}</label>
-          <input class="form-control" id="modal-editcolumn-input-name" placeholder="" type="text" pattern="\w+" value="[[ <~>name ]]" />
+          <div class="funkyradio">
+            <div class="funkyradio-default">
+              <input id="modal-editcolumn-input-quality" type="checkbox" checked="[[ <~> primary ]]"/>
+              <label for="modal-editcolumn-input-quality">{{ __('Displayed on the home page') }}</label>
+            </div>
+          </div>
         </div>
         <!--
-        <div class="form-group">
+          <div class="form-group">
           <label class="control-label" for="modal-editcolumn-input-name">{{ __('Type') }}</label>
           <select  value="[[ <~>type ]]">
-            <option value="http://www.w3.org/TR/xmlschema-2/#string">string</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#boolean">boolean</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#decimal">decimal</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#float">float</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#double">double</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#duration">duration</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#dateTime">dateTime</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#time">time</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#date">date</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#gYearMonth">gYearMonth</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#gYear">gYear</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#gMonthDay">gMonthDay</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#gDay">gDay</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#gMonth">gMonth</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#hexBinary">hexBinary</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#base64Binary">base64Binary</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#anyURI">anyURI</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#QName">QName</option>
-            <option value="http://www.w3.org/TR/xmlschema-2/#NOTATION">NOTATION</option>
-            </select>
-        </div>
-        <div class="form-group">
-        <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Comment') }}</label>
-        <input class="form-control" id="modal-editcolumn-input-scheme" placeholder="" type="text"  value="[[ <~>comment ]]" />
-        </div>
+          <option value="http://www.w3.org/TR/xmlschema-2/#string">string</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#boolean">boolean</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#decimal">decimal</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#float">float</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#double">double</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#duration">duration</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#dateTime">dateTime</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#time">time</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#date">date</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#gYearMonth">gYearMonth</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#gYear">gYear</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#gMonthDay">gMonthDay</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#gDay">gDay</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#gMonth">gMonth</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#hexBinary">hexBinary</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#base64Binary">base64Binary</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#anyURI">anyURI</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#QName">QName</option>
+          <option value="http://www.w3.org/TR/xmlschema-2/#NOTATION">NOTATION</option>
+          </select>
+          </div>
+          <div class="form-group">
+          <label class="control-label" for="modal-editcolumn-input-scheme">{{ __('Comment') }}</label>
+          <input class="form-control" id="modal-editcolumn-input-scheme" placeholder="" type="text"  value="[[ <~>comment ]]" />
+          </div>
         -->
       </form>
     </div>

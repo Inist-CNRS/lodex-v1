@@ -18,14 +18,15 @@
   "homepage": "https://github.com/touv/lodex#readme",
   "dependencies": {
     "castor-core": "^3.0.0-alpha.10",
-    "castor-load-jsoncorpus": "latest",
-    "oboe": "^2.1.2",
-    "paperclip": "^3.0.18",
     "castor-load": "latest",
     "castor-load-csv": "latest",
     "castor-load-excel": "latest",
+    "castor-load-jsoncorpus": "latest",
     "castor-load-nq": "latest",
     "castor-load-xml": "latest",
-    "debug": "latest"
+    "debug": "latest",
+    "mongodb-querystring": "^1.0.1",
+    "oboe": "^2.1.2",
+    "paperclip": "^3.0.18"
   }
 }

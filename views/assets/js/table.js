@@ -6,6 +6,7 @@
     var JSONEditorOptions = { mode: "code", maxLines: Infinity };
     var oboe = require('oboe');
     var JURL = require('url');
+    var MQS = require('mongodb-querystring')
     var nTables = 0;
 
     var je0, je1, je2, je3, je4, je5;
@@ -134,11 +135,13 @@
         var page = Number(viewList.get('page'));
         page = Number.isNaN(page) ? 1 : page;
         var offset = limit * (page - 1)
-        url.query = {
-          "orderby": viewSort.get('field') + ' ' + viewSort.get('order'),
-          "limit": String(offset).concat(',').concat(String(limit))
-        }
-        oboe(JURL.format(url))
+        var query = {
+          "$orderby": {},
+          "$offset": Number(offset),
+          "$limit": Number(limit)
+        };
+        query.$orderby[viewSort.get('field')] = viewSort.get('order') === 'asc' ? 1 : -1;
+        oboe(JURL.format(url).concat('?').concat(MQS.stringify(query)))
         .node('!.*', function(item) {
           var items = viewList.get('items');
           items.push(item);
@@ -375,20 +378,20 @@
 
         console.log('before', {
           "previousScheme"  : viewColumn.get('pscheme'),
+          "previousPrimary" : viewColumn.get('pprimary'),
           "previousValue"   : viewColumn.get('pvalue'),
           "previousName"    : viewColumn.get('pname'),
           "previousLabel"   : viewColumn.get('plabel'),
           "previousLanguage": viewColumn.get('planguage'),
-          "previousPrimary" : viewColumn.get('pprimary'),
           "previousComment" : viewColumn.get('pcomment')
         });
         console.log('after', {
           "propertyScheme": $("#modal-editcolumn-input-scheme").val(),
+          "propertyPrimary" : viewColumn.get('primary'),
           "propertyValue"   : je5.get(),
           "propertyName"    : idColumn,
           "propertyLabel"   : viewColumn.get('label'),
           "propertyLanguage": viewColumn.get('language'),
-          "propertyPrimary" : viewColumn.get('primary'),
           "propertyComment" : viewColumn.get('comment')
         });
 
@@ -721,9 +724,14 @@
         viewColumn.set('language', items[0]._columns[column].language);
         $("#modal-editcolumn-input-language").val(viewColumn.get('language')).trigger('change');
 
-        viewColumn.set('pprimary', items[0]._columns[column].primary);
-        viewColumn.set('primary', items[0]._columns[column].primary);
-
+        if (items[0]._columns[column].primary === undefined || items[0]._columns[column].primary === "false" || items[0]._columns[column].primary === false) {
+          viewColumn.set('pprimary', false);
+          viewColumn.set('primary', false);
+        }
+        else {
+          viewColumn.set('pprimary', true);
+          viewColumn.set('primary', true);
+        }
 
         delete items[0]._columns[column].label;
         delete items[0]._columns[column].comment;

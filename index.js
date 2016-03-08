@@ -2,6 +2,7 @@ module.exports = {
   browserifyModules: [
     "paperclip/lib/node.js",
     "oboe",
+    "mongodb-querystring",
     "url"
   ],
   maxFileSize: 536870912,
@@ -76,7 +77,14 @@ module.exports = {
       require : "castor-load-jsoncorpus"
     }
   ],
+  /*
+  models : {
+    postColumn : 'post-column.js',
+    postTable : 'post-table.js'
+  },
+  */
   routes: [
+    // "set.js",
     "echo.js",
     "auth.js",
     "table.js",

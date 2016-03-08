@@ -84,5 +84,6 @@
 	"Close": "Fermer",
 	"Crown": "Couronner",
 	"Excel file": "Fichier Excel",
-	"TSV file": "Fichier TSV"
+	"TSV file": "Fichier TSV",
+	"Displayed on the home page": "Displayed on the home page"
 }
