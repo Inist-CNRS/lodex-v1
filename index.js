@@ -5,6 +5,7 @@ module.exports = {
     "mongodb-querystring",
     "url"
   ],
+  rootURL : '/',
   maxFileSize: 536870912,
   acceptFileTypes: [
     'csv',
