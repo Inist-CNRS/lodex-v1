@@ -15,4 +15,3 @@ chown:
 
 npm:
 	@docker run -it --rm -v `pwd`:/app -w /app --net=host -e NODE_ENV -e http_proxy -e https_proxy node:4-slim npm $(filter-out $@,$(MAKECMDGOALS))
-	@docker run -it --rm -v `pwd`:/app node:5-slim chown -R `id -u`:`id -g` /app/package.json /app/node_modules /app/npm-debug.log
