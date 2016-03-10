@@ -1,2 +1,7 @@
+Dockerfile
+docker-compose.*
+makefile
 .git
-node_modules
+data/*
+config.local.js
+npm-debug.log

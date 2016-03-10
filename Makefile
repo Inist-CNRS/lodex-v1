@@ -1,16 +1,18 @@
-NAME=lodex
-PORT=3000
+.PHONY: wrapped-install chown npm
 
-.PHONY: start stop
+all: wrapped-install
 
-build: Dockerfile
-	docker build -t ${NAME}  --build-arg HTTP_PROXY=${HTTP_PROXY} --build-arg HTTPS_PROXY=${HTTPS_PROXY} .
+wrapped-install:
+	@docker run -it --rm -v `pwd`:/app -w /app --net=host -e NODE_ENV -e http_proxy -e https_proxy node:4-slim npm install
 
-run:
-	docker run  -d --add-host=parenthost:`ip route show | grep docker0 | awk '{print $$9}'` -p ${PORT}:3000 -v `pwd`/data:/data ${NAME}
+install: chown
+	@npm install
 
-start:
-	docker run --add-host=parenthost:`ip route show | grep docker0 | awk '{print $$9}'` -p ${PORT}:3000 -d -v `pwd`/data:/data ${NAME}
+chown:
+	@test ! -d `pwd`/node_modules || docker run -it --rm -v `pwd`:/app node:5-slim chown -R `id -u`:`id -g` /app/node_modules
+	@test ! -f `pwd`/package.json || docker run -it --rm -v `pwd`:/app node:5-slim chown -R `id -u`:`id -g` /app/package.json
+	@test ! -f `pwd`/npm-debug.log || docker run -it --rm -v `pwd`:/app node:5-slim chown -R `id -u`:`id -g` /app/npm-debug.log
 
-stop:
-	DID=`docker ps | grep ${NAME} | awk '{print $$1}'` && docker stop $$DID
+npm:
+	@docker run -it --rm -v `pwd`:/app -w /app --net=host -e NODE_ENV -e http_proxy -e https_proxy node:4-slim npm $(filter-out $@,$(MAKECMDGOALS))
+	@docker run -it --rm -v `pwd`:/app node:5-slim chown -R `id -u`:`id -g` /app/package.json /app/node_modules /app/npm-debug.log

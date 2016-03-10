@@ -1,32 +1,58 @@
 {
-  "name": "lodex",
-  "version": "0.3.2",
-  "description": "Linked Open Data and ISTEX",
-  "main": "index.js",
-  "bin": {
-    "lodex": "lodex"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/touv/lodex.git"
-  },
-  "author": "Nicolas Thouvenin",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/touv/lodex/issues"
-  },
-  "homepage": "https://github.com/touv/lodex#readme",
-  "dependencies": {
-    "castor-core": "^3.4.0",
-    "castor-load": "latest",
-    "castor-load-csv": "latest",
-    "castor-load-excel": "latest",
-    "castor-load-jsoncorpus": "latest",
-    "castor-load-nq": "latest",
-    "castor-load-xml": "latest",
-    "debug": "latest",
-    "mongodb-querystring": "^1.0.3",
-    "oboe": "^2.1.2",
-    "paperclip": "^3.0.18"
-  }
+	"name": "lodex",
+	"version": "0.3.2",
+	"description": "Linked Open Data and ISTEX",
+	"main": "index.js",
+	"bin": {
+		"lodex": "lodex"
+	},
+	"scripts": {
+		"test": "mocha",
+		"coverage": "istanbul cover ./node_modules/.bin/_mocha -- -R spec",
+		"start": "./lodex",
+		"debug": "DEBUG=castor*,console* nodemon ./lodex",
+		"debug-docker": "docker-compose -f ./docker-compose.dev.yml up",
+		"build-docker": "docker build -t lodex --build-arg http_proxy --build-arg https_proxy .",
+		"lint": "jshint --exclude-path node_modes */**/*.js",
+		"lint2": "eslint --no-ignore *.js heartbeats/ helpers/ loaders/ test/ views/assets/"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Inist-CNRS/lodex.git"
+	},
+	"contributors": [
+		{
+			"name": "François ParmentierGully",
+			"url": "https://github.com/parmentf"
+		},
+		{
+			"name": "Nicolas Thouvenin",
+			"url": "https://github.com/touv"
+		}
+	],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Inist-CNRS/lodex/issues"
+	},
+	"homepage": "https://github.com/Inist-CNRS/lodex#readme",
+	"dependencies": {
+		"castor-core": "^3.4.0",
+		"castor-load": "latest",
+		"castor-load-csv": "latest",
+		"castor-load-excel": "latest",
+		"castor-load-jsoncorpus": "latest",
+		"castor-load-nq": "latest",
+		"castor-load-xml": "latest",
+		"debug": "latest",
+		"mongodb-querystring": "^1.0.3",
+		"oboe": "^2.1.2",
+		"paperclip": "^3.0.18"
+	},
+	"devDependencies": {
+		"eslint": "^2.3.0",
+		"istanbul": "^0.4.2",
+		"jshint": "^2.9.1",
+		"mocha": "^2.4.5",
+		"nodemon": "^1.9.1"
+	}
 }
