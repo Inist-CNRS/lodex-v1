@@ -85,5 +85,5 @@
 	"Crown": "Couronner",
 	"Excel file": "Fichier Excel",
 	"TSV file": "Fichier TSV",
-	"Displayed on the home page": "Displayed on the home page"
+	"Displayed on the home page": "Affiché sur la page d'accueil"
 }
