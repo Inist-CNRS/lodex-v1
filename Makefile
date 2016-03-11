@@ -1,4 +1,4 @@
-.PHONY: install chown npm
+.PHONY: install chown npm clean
 
 all: install chown
 
@@ -12,3 +12,7 @@ chown:
 
 npm:
 	@docker run -it --rm -v `pwd`:/app -w /app --net=host -e NODE_ENV -e http_proxy -e https_proxy node:4 npm $(filter-out $@,$(MAKECMDGOALS))
+
+clean:
+	@rm -Rf ./node_modules/ ./npm-debug.log
+
