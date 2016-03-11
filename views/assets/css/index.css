@@ -14,15 +14,15 @@
   }
 
   /* Hide table headers (but not display: none;, for accessibility) */
-  #no-more-tables thead tr {
+  #no-more-tables table thead tr {
     position: absolute;
     top: -9999px;
     left: -9999px;
   }
 
-  #no-more-tables tr { border: 1px solid #ccc; }
+  #no-more-tables table tr { border: 1px solid #ccc; }
 
-  #no-more-tables td {
+  #no-more-tables table td {
     /* Behave  like a "row" */
     border: none;
     border-bottom: 1px solid #eee;
@@ -33,7 +33,7 @@
     text-align:left;
   }
 
-  #no-more-tables td:before {
+  #no-more-tables table td:before {
     /* Now like a table header */
     position: absolute;
     /* Top/left values mimic padding */
@@ -49,5 +49,5 @@
   /*
   Label the data
    */
-#no-more-tables td:before { content: attr(data-title); }
+#no-more-tables table td:before { content: attr(data-title); }
 
