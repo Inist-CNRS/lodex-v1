@@ -8153,6 +8153,11 @@ div#linkcat-30.widget.widget_links h4.widgettitle {
   padding-bottom: -20px;
   display: none;
 }
+div#text-13.widget.widget_text h4.widgettitle {
+  border-bottom: 0;
+  padding-bottom: -20px;
+  display: none;
+}
 .badgenbdoc {
   display: inline-block;
   font-size: 36px;
