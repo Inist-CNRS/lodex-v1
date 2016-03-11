@@ -1,16 +1,18 @@
-NAME=lodex
-PORT=3000
+.PHONY: install chown npm clean
 
-.PHONY: start stop
+all: install chown
 
-build: Dockerfile
-	docker build -t ${NAME}  --build-arg HTTP_PROXY=${HTTP_PROXY} --build-arg HTTPS_PROXY=${HTTPS_PROXY} .
+install:
+	@docker run -it --rm -v `pwd`:/app -w /app --net=host -e NODE_ENV -e http_proxy -e https_proxy node:4 npm install
 
-run:
-	docker run  -d --add-host=parenthost:`ip route show | grep docker0 | awk '{print $$9}'` -p ${PORT}:3000 -v `pwd`/data:/data ${NAME}
+chown:
+	@test ! -d `pwd`/node_modules || docker run -it --rm -v `pwd`:/app node:4 chown -R `id -u`:`id -g` /app/node_modules
+	@test ! -f `pwd`/package.json || docker run -it --rm -v `pwd`:/app node:4 chown -R `id -u`:`id -g` /app/package.json
+	@test ! -f `pwd`/npm-debug.log || docker run -it --rm -v `pwd`:/app node:4 chown -R `id -u`:`id -g` /app/npm-debug.log
 
-start:
-	docker run --add-host=parenthost:`ip route show | grep docker0 | awk '{print $$9}'` -p ${PORT}:3000 -d -v `pwd`/data:/data ${NAME}
+npm:
+	@docker run -it --rm -v `pwd`:/app -w /app --net=host -e NODE_ENV -e http_proxy -e https_proxy node:4 npm $(filter-out $@,$(MAKECMDGOALS))
 
-stop:
-	DID=`docker ps | grep ${NAME} | awk '{print $$1}'` && docker stop $$DID
+clean:
+	@rm -Rf ./node_modules/ ./npm-debug.log
+

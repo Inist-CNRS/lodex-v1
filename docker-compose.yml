@@ -1,0 +1,17 @@
+lodex:
+  image: inistcnrs/lodex:latest
+  links:
+    - lodex_db:mongodb
+  volumes:
+    - ./data:/app/data
+    - ./config.local.js:/app/config.local.js
+  environment:
+    http_proxy:  ${http_proxy}
+    https_proxy: ${https_proxy}
+    NODE_ENV: "production"
+  ports:
+    - 3000:3000
+
+lodex_db:
+  image: mongo:3.0.7
+  command: --smallfiles
