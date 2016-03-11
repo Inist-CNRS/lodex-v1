@@ -90,5 +90,6 @@ module.exports = {
     "auth.js",
     "table.js",
     "v3.js"
-  ]
+  ],
+  filters: ["jbj-array","jbj-parse","jbj-template"]
 }

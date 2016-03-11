@@ -44,6 +44,9 @@
     "castor-load-nq": "latest",
     "castor-load-xml": "latest",
     "debug": "latest",
+    "jbj-array": "^1.0.0",
+    "jbj-parse": "^1.0.0",
+    "jbj-template": "^1.0.0",
     "mongodb-querystring": "^1.0.3",
     "oboe": "^2.1.2",
     "paperclip": "^3.0.18"
