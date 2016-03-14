@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/Inist-CNRS/lodex#readme",
   "dependencies": {
-    "castor-core": "^3.4.2",
+    "castor-core": "^3.5.0",
     "castor-load": "latest",
     "castor-load-csv": "latest",
     "castor-load-excel": "latest",
