@@ -4385,7 +4385,7 @@ a.list-group-item.active > .badge,
 }
 .jumbotron p {
   margin-bottom: 15px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 200;
 }
 .container .jumbotron {
@@ -8159,14 +8159,18 @@ div#text-13.widget.widget_text h4.widgettitle {
   display: none;
 }
 .badgenbdoc {
-  display: inline-block;
-  font-size: 36px;
+  font-size: 30px;
   border-color: #7b3294;
   color: #fff;
   background: #008837;
   font-weight: bold;
   border-radius: 10px;
   text-align: center;
+  padding: 4px;
+}
+.entry-content p {
+  max-width: 50em;
+  text-align: justify;
 }
 /*
 RETINA (2x RESOLUTION DEVICES)
