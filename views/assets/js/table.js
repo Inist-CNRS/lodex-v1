@@ -230,6 +230,10 @@
         toolbar: [
           ['g2', ['bold', 'italic', 'underline', 'color']],
           ['g3', ['clear']],
+          ['g4', ['paragraph', 'height', 'ol', 'ul', ]],
+          ['g5', ['strikethrough', 'superscript', 'subscript']],
+          ['g6', ['link', 'hr', 'picture', 'table']],
+          ['g7', ['codeview', 'fullscreen']]
         ]
       });
       $("#modal-edittable").on("show.bs.modal", function() {
@@ -557,7 +561,7 @@
               ['g4', ['paragraph', 'height', 'ol', 'ul', ]],
               ['g5', ['strikethrough', 'superscript', 'subscript']],
               ['g6', ['link', 'hr', 'picture', 'table']],
-              ['g7', ['codeview', 'fullscreen']],
+              ['g7', ['codeview', 'fullscreen']]
             ]
           });
           $('#modal-editpage-input-template').summernote('code', items[0]._template);
