@@ -13,6 +13,7 @@
     display: block;
   }
 
+
   /* Hide table headers (but not display: none;, for accessibility) */
   #no-more-tables table thead tr {
     position: absolute;
@@ -49,5 +50,10 @@
   /*
   Label the data
    */
-#no-more-tables table td:before { content: attr(data-title); }
-
+  #no-more-tables table td:before { 
+    content: attr(data-title); 
+  }
+}
+#no-more-tables {
+  background: #FFF;
+}
