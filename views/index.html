@@ -56,7 +56,6 @@ $('.download').click(function(e) {
 	<table class="table-bordered table-striped table-condensed cf">
 		<thead class="cf">
 			<tr>
-				<td>#</td>
 				{% for name, con in _documents[0].@context %}
 				{% if con.@quality == 'primary' %}
 				<th>{{ con.@label }}</th>
@@ -67,9 +66,6 @@ $('.download').click(function(e) {
 		<tbody>
 			{% for doc in _documents %}
 			<tr>
-				<td>
-					<a href="/{{ _globals.prefixKEY }}/{{ doc._wid}}/"><i class="fa fa-sticky-note"></i></a>
-				</td>
 				{% for name, con in doc.@context %}
 				{% if con.@quality == 'primary' %}
 				<td data-title="{{ con.@label }}">{{doc[name]}}</td>
