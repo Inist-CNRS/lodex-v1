@@ -136,6 +136,7 @@
         page = Number.isNaN(page) ? 1 : page;
         var offset = limit * (page - 1)
         var query = {
+          "alt" : "raw",
           "$orderby": {},
           "$offset": Number(offset),
           "$limit": Number(limit)

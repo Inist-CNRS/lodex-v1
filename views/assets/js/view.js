@@ -27,6 +27,10 @@ pc.modifiers.plus = function (input, nb) {
   return parseInt(input) + parseInt(nb);
 };
 
+pc.modifiers.uri = function (input, key) {
+  return String(input[key]).replace(window.location.origin, '');
+};
+
 var view = function(id, cb, mdl) {
   if (typeof cb !== 'function') {
     mdl = cb;
