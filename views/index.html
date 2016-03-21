@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+={% extends "layout.html" %}
 
 {% block styles %}
 <link href="/assets/css/index.css" rel="stylesheet" type="text/css">
@@ -30,35 +30,23 @@ $('.download').click(function(e) {
 	<br>
 </div>
 {% endblock %}
-{% block sidebar %}
-{{ super() }}
-
-
-<div id="recent-posts-2" class="widget widget_recent_entries">
-   
-     <h4 class="widgettitle">Nombre de documents</h4>	
-    <div class="badgenbdoc">{{_documents|length}}</div>
-
-
-
-{% endblock %}
-
 
 {% block body %}
 <!--
-<div id="recent-posts-2" class="widget widget_recent_entries">
-	            <h4 class="widgettitle">Nombre de documents</h4>	
+	<div id="recent-posts-2" class="widget widget_recent_entries">
+	<h4 class="widgettitle">Nombre de documents</h4>
 	<div class="badgenbdoc">{{_documents|length}} documents</div>
 
-</div>
+	</div>
 -->
 <div id="no-more-tables">
 	<table class="table-bordered table-striped table-condensed cf">
 		<thead class="cf">
 			<tr>
-				{% for name, con in _documents[0].@context %}
-				{% if con.@quality == 'primary' %}
-				<th>{{ con.@label }}</th>
+				<th>URI</th>
+				{% for name, con in _columns %}
+				{% if con.primary == 'true' %}
+				<th>{{ con.label }}</th>
 				{% endif %}
 				{% endfor %}
 			</tr>
@@ -66,9 +54,12 @@ $('.download').click(function(e) {
 		<tbody>
 			{% for doc in _documents %}
 			<tr>
-				{% for name, con in doc.@context %}
-				{% if con.@quality == 'primary' %}
-				<td data-title="{{ con.@label }}">{{doc[name]}}</td>
+				<td data-title="URI">
+					<a href="{{ doc._content.jsonld.@id }}/">{{ doc._content.jsonld.@id }}</a>
+				</td>
+				{% for name, con in _columns %}
+				{% if con.primary == 'true' %}
+				<td data-title="{{ con.label }}">{{doc[name]}}</td>
 				{% endif %}
 				{% endfor %}
 			</tr>
@@ -91,7 +82,7 @@ $('.download').click(function(e) {
 				La licence d'utilisation de ces données est disponible à cette adresse : <a href="http://lod.istex.fr/licence">http://lod.istex.fr/licence</a>.
 				</p>
 				<p>
-				Ils sont librement téléchargeable au travers de ces 5 fichiers d'export : 
+				Ils sont librement téléchargeable au travers de ces 5 fichiers d'export :
 				</p>
 				<ul class="list-inline text-center">
 					<li>
@@ -123,6 +114,22 @@ $('.download').click(function(e) {
 
 {% endblock %}
 
+
+
+{% block sidebar %}
+
+
+{{ super() }}
+
+
+<div id="recent-posts-2" class="widget widget_recent_entries">
+	<h4 class="widgettitle">Nombre de documents</h4>
+	<div class="badgenbdoc">{{_documents|length}}</div>
+</div>
+
+
+
+{% endblock %}
 
 
 
