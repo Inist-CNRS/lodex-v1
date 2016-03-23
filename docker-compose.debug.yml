@@ -1,16 +1,18 @@
 lodex:
-  image: inistcnrs/lodex:latest
+  image: node:4.4.0
   links:
     - lodex_db:mongodb
   volumes:
-    - ./data:/app/data
-    - ./config.local.js:/app/config.local.js
+    - .:/app
   environment:
     http_proxy:  ${http_proxy}
     https_proxy: ${https_proxy}
-    NODE_ENV: ${NODE_ENV}
+    NODE_ENV: "development"
+    DEBUG: "castor*,console*"
+  working_dir: /app
   ports:
     - 3000:3000
+  command: ./lodex
 
 lodex_db:
   image: mongo:3.0.7
