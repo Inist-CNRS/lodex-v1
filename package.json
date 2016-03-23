@@ -15,7 +15,7 @@
     "debug-docker": "docker-compose -f ./docker-compose.dev.yml up",
     "build-docker": "docker build -t lodex --build-arg http_proxy --build-arg https_proxy .",
     "lint": "jshint --exclude-path node_modes */**/*.js",
-    "lint2": "eslint --no-ignore *.js heartbeats/ helpers/ loaders/ test/ views/assets/"
+    "lint2": "eslint *.js heartbeats/ helpers/ loaders/ test/ views/assets/"
   },
   "repository": {
     "type": "git",

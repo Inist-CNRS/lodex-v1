@@ -1,5 +1,5 @@
 /*jshint node:true, laxcomma:true*/
-"use strict";
+'use strict';
 
 module.exports = function(config, start) {
   config.set('theme', __dirname);

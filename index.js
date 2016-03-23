@@ -1,3 +1,4 @@
+/*eslint strict: "off", quotes:"off", semi: "off" */
 module.exports = {
   browserifyModules: [
     "paperclip/lib/node.js",
@@ -19,11 +20,11 @@ module.exports = {
     'json'
   ],
   access: [
-		{
-			"login": "bob",
-			"plain" : "dylan",
-			"display" : "Bob Dylan"
-		}
+    {
+      "login": "bob",
+      "plain" : "dylan",
+      "display" : "Bob Dylan"
+    }
   ],
   strategies : [
     {
@@ -91,5 +92,5 @@ module.exports = {
     "table.js",
     "v3.js"
   ],
-  filters: ["jbj-array","jbj-parse","jbj-template"]
+  filters: ["jbj-array", "jbj-parse", "jbj-template"]
 }

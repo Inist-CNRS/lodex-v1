@@ -4,7 +4,7 @@
   "rules": {
     "indent": [2, 2],
     "max-len": [2, 100, 2],
-    "quotes": [2, "single"],
+    "quotes": [1, "single"],
     "linebreak-style": [2, "unix"],
     "semi": [2, "always" ],
     "comma-style": [2, "last"],
@@ -15,7 +15,7 @@
     "no-unused-vars": [2, {"vars": "all", "args": "none"}],
     "no-unneeded-ternary": [2, {"defaultAssignment": false}],
     "callback-return": [2, ["callback", "cb", "next"]],
-    "global-require": 2,
+    "global-require": 1,
     "no-path-concat": 2,
     "no-sync": 2,
     "no-var": 0,
