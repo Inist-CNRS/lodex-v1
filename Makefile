@@ -15,7 +15,7 @@ run-dev: ## run lodex in dev mode (with local mongo and nodejs/nodemon and witho
 	@DEBUG=castor*,console* NODE_ENV=development ./node_modules/.bin/nodemon ./lodex
 
 run-prod: ## run lodex in production mode (with local mongo and nodejs and without docker)
-	@NODE_ENV=development ./lodex
+	@NODE_ENV=production ./lodex
 
 docker-build: ## build the docker inistcnrs/lodex image localy
 	@docker build -t inistcnrs/lodex --build-arg http_proxy --build-arg https_proxy .
