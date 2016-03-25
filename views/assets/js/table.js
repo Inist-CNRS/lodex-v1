@@ -718,7 +718,8 @@
                          JSONEditorOptions);
     je3 = new JSONEditor(document.getElementById('modal-load-tab2-jsoneditor-hash'),
                          JSONEditorOptions);
-    je4 = new JSONEditor(document.getElementById('modal-forktable-enric'), JSONEditorOptions);
+    je4 = new JSONEditor(document.getElementById('modal-forktable-enrich'), 
+                         JSONEditorOptions);
     je5 = new JSONEditor(document.getElementById('modal-editcolumn-jsoneditor-value'),
                          JSONEditorOptions);
 
