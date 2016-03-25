@@ -59,7 +59,7 @@ $('.download').click(function(e) {
 				</td>
 				{% for name, con in _columns %}
 				{% if con.primary == 'true' %}
-				<td data-title="{{ con.label }}">{{doc[name]}}</td>
+				<td data-title="{{ con.label }}">{{doc._content.jsonld[name]}}</td>
 				{% endif %}
 				{% endfor %}
 			</tr>

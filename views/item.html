@@ -1,26 +1,31 @@
 {% extends "layout.html" %}
 
 {% block head %}
-<title> {{ table.$_wid | d('n/a') | e }}  </title>
-<meta name="description" content="{{ table._text | d('n/a') | e }}">
+<title> {{ _table._label | d(_table._wid) | d('n/a') | e }}  </title>
+<meta name="description" content="{{ _table._text | d('n/a') | e }}">
 <meta name="author" content="">
 {% endblock %}
 
 
 {% block header %}
-<h1>from {{_table._wid}} at {{_wid}}</h1>
+<h1>{{_table._label}} # {{_wid}}</h1>
 {% endblock %}
 
 {% block body %}
+<h2>English</h2>
 <ul>
-	<li>_wid : {{_wid}}</li>
-	<li>_url : {{_url}}</li>
-	<li>_description : {{_description}}</li>
+    <li>URI: {{_content.jsonld.@id}}</li>
+    <li>Identifier: {{_content.jsonld|getJsonLdField("http://purl.org/dc/elements/1.1/identifier")}}</li>
+    <li>Label: {{_content.jsonld|getJsonLdField(["http://www.w3.org/2004/02/skos/core#prefLabel","en"])}}</li>
+    <li>Definition: {{_content.jsonld|getJsonLdField(["http://www.w3.org/2004/02/skos/core#definition","en"])}}</li>
 </ul>
+
+<h2>Français</h2>
+<ul>
+    <li>URI: {{_content.jsonld.@id}}</li>
+    <li>Identifier: {{_content.jsonld|getJsonLdField("http://purl.org/dc/elements/1.1/identifier")}}</li>
+    <li>Label: {{_content.jsonld|getJsonLdField(["http://www.w3.org/2004/02/skos/core#prefLabel","fr"])}}</li>
+    <li>Definition: {{_content.jsonld|getJsonLdField(["http://www.w3.org/2004/02/skos/core#definition","fr"])}}</li>
+</ul>
+
 {% endblock %}
-
-
-
-
-
-

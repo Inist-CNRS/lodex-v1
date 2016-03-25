@@ -92,5 +92,5 @@ module.exports = {
     "table.js",
     "v3.js"
   ],
-  filters: ["jbj-array", "jbj-parse", "jbj-template"]
+  filters: ["jbj-array", "jbj-parse", "jbj-template", "jbj-rdfa"]
 }
