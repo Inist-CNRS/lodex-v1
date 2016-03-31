@@ -6,7 +6,7 @@
 var mongoHostPort = process.env.MONGODB_PORT ? process.env.MONGODB_PORT.replace('tcp://', '') : 'localhost:27017';
 
 module.exports = {
-  connectionURI: 'mongodb://' + mongoHostPort + '/ezark',
+  connectionURI: 'mongodb://' + mongoHostPort + '/lodex',
   browserifyModules: [
     "paperclip/lib/node.js",
     "oboe",
