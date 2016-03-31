@@ -100,5 +100,6 @@ module.exports = {
     "v3.js"
   ],
   filters: ["jbj-array", "jbj-parse", "jbj-template", "jbj-rdfa"],
-  themeName : "default"
+  /*themeName : "default"*/
+    themeName : "istex"
 }
