@@ -18,7 +18,7 @@
     <dd>{{_content.jsonld.@id}}</dd>
 {% for cName, column in _table._columns %}
     <dt>{{column.label}}</dt><!-- {{column.scheme}} {{column.language}} -->
-    <dd>{{_content.jsonld|getJsonLdField([column.scheme,column.language])}}</dd>
+    {{_content.jsonld | getJsonLdField([column.scheme,column.language]) | tag('dd')}}
 {% endfor %}
 </dl>
 
