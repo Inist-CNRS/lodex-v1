@@ -12,20 +12,14 @@
 {% endblock %}
 
 {% block body %}
-<h2>English</h2>
-<ul>
-    <li>URI: {{_content.jsonld.@id}}</li>
-    <li>Identifier: {{_content.jsonld|getJsonLdField("http://purl.org/dc/elements/1.1/identifier")}}</li>
-    <li>Label: {{_content.jsonld|getJsonLdField(["http://www.w3.org/2004/02/skos/core#prefLabel","en"])}}</li>
-    <li>Definition: {{_content.jsonld|getJsonLdField(["http://www.w3.org/2004/02/skos/core#definition","en"])}}</li>
-</ul>
 
-<h2>Français</h2>
-<ul>
-    <li>URI: {{_content.jsonld.@id}}</li>
-    <li>Identifier: {{_content.jsonld|getJsonLdField("http://purl.org/dc/elements/1.1/identifier")}}</li>
-    <li>Label: {{_content.jsonld|getJsonLdField(["http://www.w3.org/2004/02/skos/core#prefLabel","fr"])}}</li>
-    <li>Definition: {{_content.jsonld|getJsonLdField(["http://www.w3.org/2004/02/skos/core#definition","fr"])}}</li>
-</ul>
+<dl>
+    <dt>URI</dt>
+    <dd>{{_content.jsonld.@id}}</dd>
+{% for cName, column in _table._columns %}
+    <dt>{{column.label}}</dt><!-- {{column.scheme}} {{column.language}} -->
+    <dd>{{_content.jsonld|getJsonLdField([column.scheme,column.language])}}</dd>
+{% endfor %}
+</dl>
 
 {% endblock %}
