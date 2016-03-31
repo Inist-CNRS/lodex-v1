@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "./themes/" + themeName + ".html" %}
 
 {% block head %}
 <title> {{ _table._label | d(_table._wid) | d('n/a') | e }}  </title>
