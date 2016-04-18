@@ -42,7 +42,7 @@
 {% if themeName == 'istex' %}
 <script type="text/javascript">
 var istexConfig = {
-    query: '* AND genre:("{{_content.jsonld.englishLabel}}")',
+    query: '* AND genre.raw:("{{_content.jsonld.englishLabel}}")',
     hideButton: true
 };
 </script>
