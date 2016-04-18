@@ -76,5 +76,6 @@
 	"Download set": "Download set",
 	"Close": "Close",
 	"Try to log in.": "Try to log in.",
-	"Log in": "Log in"
+	"Log in": "Log in",
+	"Try to start (or retstart) Mongo.": "Try to start (or restart) Mongo."
 }

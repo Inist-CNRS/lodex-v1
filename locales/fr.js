@@ -78,6 +78,7 @@
 	"Resource key": "Resource key",
 	"Try to log in.": "Essayer de se loger.",
 	"Log in": "Log in",
+	"Try to start (or retstart) Mongo.": "Essayer de démarrer (ou redémarrer) Mongo.",
 	"Language": "Langue",
 	"Primary": "Primaire",
 	"Download set": "Décharger le jeu de données",
