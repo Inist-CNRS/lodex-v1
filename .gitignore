@@ -1,5 +1,4 @@
 .DS_Store
-config.local.js
 node_modules
 coverage/
 

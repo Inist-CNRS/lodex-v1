@@ -26,7 +26,7 @@ module.exports = {
     'nt',
     'json'
   ],
-  access: [
+  /*  access: [
     {
       "login": "bob",
       "plain" : "dylan",
@@ -52,6 +52,7 @@ module.exports = {
       require : "valid-user.js"
     }
   ],
+  */
   loaders: [
     {
       pattern : "**/*.xml",
@@ -100,6 +101,5 @@ module.exports = {
     "v3.js"
   ],
   filters: ["jbj-array", "jbj-parse", "jbj-template", "jbj-rdfa"],
-  /*themeName : "default"*/
-    themeName : "istex"
+  'allowedAltValues' : ['dry', 'csv', 'jsonld', 'jbj', 'xls', 'tsv', 'html', 'raw']
 }
