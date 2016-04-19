@@ -291,12 +291,14 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #008837;
+/*  color: #008837; istex dessous*/
+    color: #458ca5;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #7b3294;
+/*  color: #7b3294 couleur istex ci dessous;*/
+    color: #c4d735;
   text-decoration: underline;
 }
 a:focus {
@@ -364,7 +366,8 @@ h6,
   font-family: "Abel", Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
-  color: inherit;
+  color: #458ca5;
+    
 }
 h1 small,
 h2 small,
@@ -392,7 +395,8 @@ h6 .small,
 .h6 .small {
   font-weight: normal;
   line-height: 1;
-  color: #00a241;
+/*  color: #00a241; istex dessous*/
+   color: #c4d735;
 }
 h1,
 .h1,
@@ -402,6 +406,10 @@ h3,
 .h3 {
   margin-top: 20px;
   margin-bottom: 10px;
+/*    ISTEX ICI*/
+    margin: 20px 0;
+    border-left: 5px solid #c4d735;
+    padding-left: 10px;
 }
 h1 small,
 .h1 small,
@@ -1436,7 +1444,8 @@ th {
   border-top: 0;
 }
 .table > tbody + tbody {
-  border-top: 2px solid #7b3294;
+/*  border-top: 2px solid #7b3294; istex*/
+   border-top: 2px solid #458ca5;
 }
 .table .table {
   background-color: #f7f7f7;
@@ -1450,7 +1459,8 @@ th {
   padding: 5px;
 }
 .table-bordered {
-  border: 1px solid #7b3294;
+/*  border: 1px solid #7b3294; istex*/
+    border: 1px solid #458ca5;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
@@ -1458,7 +1468,8 @@ th {
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
-  border: 1px solid #7b3294;
+ /*  border: 1px solid #7b3294; istex*/
+    border: 1px solid #458ca5;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {
@@ -4030,10 +4041,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-inverse {
   background-color: #f7f7f7;
-  border-color: #008837;
+/*  border-color: #008837; istex ci dessous*/
+  border-color: #c4d735;
 }
 .navbar-inverse .navbar-brand {
-  color: #008837;
+/*  color: #008837; istex ci dessous*/
+    color: #c4d735;
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
@@ -4381,7 +4394,8 @@ a.list-group-item.active > .badge,
 }
 .jumbotron h1,
 .jumbotron .h1 {
-  color: #008837;
+/*  color: #008837; istex dessous*/
+   color:#458ca5;
 }
 .jumbotron p {
   margin-bottom: 15px;
@@ -4846,7 +4860,8 @@ a.list-group-item-danger.active:focus {
 }
 .panel > .panel-body + .table,
 .panel > .panel-body + .table-responsive {
-  border-top: 1px solid #7b3294;
+/*  border-top: 1px solid #7b3294; istex dessous*/
+   border-top: 1px solid #458ca5;
 }
 .panel > .table > tbody:first-child > tr:first-child th,
 .panel > .table > tbody:first-child > tr:first-child td {
@@ -7614,10 +7629,12 @@ Stylesheet: Sidebars
 .widgettitle {
   margin-bottom: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #c2a5cf;
+/*  border-bottom: 1px solid #c2a5cf; istex*/
+ border-bottom: 1px solid #c4d735;
   font-size: 18px;
   line-height: 24px;
-  color: #7b3294;
+/*  color: #7b3294; istex*/
+    color:  #458ca5;
 }
 .widget ul {
   padding: 0;
@@ -7636,15 +7653,18 @@ Stylesheet: Footer
 
 ******************************************************************/
 #footer {
-  border-top: 8px solid #008837;
+/*  border-top: 8px solid #008837; istex*/
+   border-top: 8px solid #c4d735;  
   background: #2a272e;
   padding-top: 30px;
   margin-top: 60px;
   clear: both;
-  color: #008837;
+/*  color: #008837; istex*/
+   color: #c4d735;
 }
 #footer h4 {
-  color: #008837;
+ /*  color: #008837; istex*/
+   color: #c4d735;
 }
 #footer a {
   color: #f7f7f7;
@@ -7662,7 +7682,8 @@ Stylesheet: Footer
   margin-bottom: 30px;
 }
 #sub-floor {
-  color: #008837;
+  /*  color: #008837; istex*/
+   color: #c4d735;
   background: #3b3b3b;
   padding: 10px 0;
 }
@@ -8160,10 +8181,12 @@ div#text-13.widget.widget_text h4.widgettitle {
 }
 .badgenbdoc {
   font-size: 30px;
-  border-color: #7b3294;
+/*  border-color: #7b3294; istex*/
+  border-color: #c4d735;
   color: #fff;
-  background: #008837;
-  font-weight: bold;
+/*  background: #008837;istex*/
+    background: #458ca5;
+ font-weight: bold;
   border-radius: 10px;
   text-align: center;
   padding: 4px;
