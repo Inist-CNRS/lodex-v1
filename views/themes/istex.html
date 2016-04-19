@@ -99,11 +99,11 @@
                                 </ul>                   
                             </li> 
                         </ul>	
-                        <br class="clear">
+<!--                        <br class="clear">-->
                     </div><!--/ surentete--> 
-                    <div id="barresrent"></div> <!--/barresrent-->
+                    <!-- <div id="barresrent"></div>/barresrent-->
                     <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
-                    <div class="navbar-header">
+                   <!-- <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -121,7 +121,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div>-->
             </div>
 
         </nav>
@@ -135,7 +135,8 @@
             <div id="main" class="col-md-10 clearfix" role="main">
                 {% block header %}{% endblock %}
                 <div>
-                    {% block body %}{% endblock %}
+                    {% block body %}
+                    {% endblock %}
                 </div>
             </div>
 
@@ -169,14 +170,17 @@
 
 
                 <div id="twitter_feed_widget-2" class="widget widget_twitter_feed_widget">
-                    <!--    <h4 class="widgettitle">Timeline Twitter</h4>-->
+                    <!--    <h4 class="widgettitle">Timeline Twitter</h4>
 
 
 
                     <a class="twitter-timeline" href="https://twitter.com/Projet_ISTEX" data-widget-id="715626428440657920"
                        data-chrome="nofooter noborders transparent"
                        data-tweet-limit="3">Tweets de @Projet_ISTEX</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>-->
+                    
+                    <a class="twitter-timeline" href="https://twitter.com/Projet_ISTEX" data-widget-id="722517530242392065"  data-chrome="nofooter noborders transparent"> Suivez @Projet_ISTEX sur twitter</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                 </div>
 
                 {% endblock %}
