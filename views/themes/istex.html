@@ -39,8 +39,9 @@
     <link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" >
 
     <link rel='stylesheet' id='bones-stylesheet-css' href='/assets/css/style.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='istex-stylesheet-css' href='/assets/css/surenteteistex.css' type='text/css' media='all' />
     <!--[if lt IE 9]>
-<link rel='stylesheet' id='bones-ie-only-css'  href='http://lodex.test.inist.fr/wp-content/themes/brew-master/library/css/ie.css' type='text/css' media='all' />
+<link rel='stylesheet' id='bones-ie-only-css'  href='http://lodex.inist.fr/wp-content/themes/brew-master/library/css/ie.css' type='text/css' media='all' />
 <![endif]-->
 
 
@@ -60,6 +61,73 @@
 
 <body class="home blog">
 
+    <header class="header">
+
+
+        <nav role="navigation">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container-fluid">
+                    <div id="surentete" class="bsbb"> 	
+                        <a class="logoistex" href="http://www.istex.fr/" ><img src="/assets/img/istex_img/LogoIstexANR.png" title="Financement : ANR-10-IDEX-0004-02" alt="Istex investissement d'avenir"></a>
+                        <!--<img  class="logoanr" src="imagesI/LogoANR.png" alt="investissement d'avenir"> -->
+                        <ul class="srent">
+                            <li>
+                                <a href="http://api.istex.fr/documentation/" ><img src="/assets/img/istex_img/LogoApi.png" alt="" >API</a>
+                            </li> 
+                            <li>
+                                <a href="http://demo.istex.fr" ><img src="/assets/img/istex_img/LogoDemo.png" alt="" >demo</a>
+                            </li>
+                            <li>
+                                <a href="http://widgets.istex.fr" ><img src="/assets/img/istex_img/LogoWidget.png" alt="" >widget</a>
+                            </li>
+                            <li>
+                                <a href="http://blog.istex.fr" ><img src="/assets/img/istex_img/LogoBlog.png" alt="" >blog</a>
+                            </li>
+                            <li>
+                                <a href="http://#" ><img src="/assets/img/istex_img/LogoVerrou.png"  alt="s'identifier" ></a>
+
+                                <ul class="srentss">
+                                    <li><a href="http://wiki.istex.fr" ><img src="/assets/img/istex_img/LogoWiki.png" alt="" >wiki</a></li> 
+                                    <li><a href="http://kanban.istex.fr" ><img src="/assets/img/istex_img/Logokanban.png" alt="" >kanban</a></li>
+                                </ul>    
+                            </li>
+                            <li>			
+                                <a href="http://#" ><img src="/assets/img/istex_img/LogoTwitter.png" alt="twitter" ></a>
+                                <ul class="srentss">
+                                    <li> <a href="https://twitter.com/istexdev" >istexdev</a></li> 
+                                    <li> <a href="https://twitter.com/Projet_ISTEX" >projet istex</a></li>
+                                </ul>                   
+                            </li> 
+                        </ul>	
+                        <br class="clear">
+                    </div><!--/ surentete--> 
+                    <div id="barresrent"></div> <!--/barresrent-->
+                    <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <a class="navbar-brand" href="/" title="LODEX theme ISTEX" rel="homepage">LODEX</a>
+
+                    </div>
+
+                    <div class="navbar-collapse collapse navbar-responsive-collapse">
+                        <ul id="menu-main-menu" class="nav navbar-nav navbar-right">
+                            <li id="menu-item-75" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-75">
+                                <a href="http://lodex.inist.fr/" title="Blog LODEX">Blog LODEX</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+
+    </header>
+
     <div class="container-fluid">
 
         <div id="content" class="row clearfix">
@@ -73,43 +141,43 @@
 
 
 
-          <div id="sidebar" class="pull-right col-md-2">
+            <div id="sidebar" class="pull-right col-md-2">
                 {% block sidebar %}
 
-               <!--   <div id="search-9" class="widget widget_search">
-                    <form action="http://lod.istex.fr/" method="get" class="form-inline">
-                        <fieldset>
-                            <div class="input-group">
-                                <input type="text" name="s" id="search" placeholder="Search" value="" class="form-control">
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-primary">Search</button>
-                                </span>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
+                <!--   <div id="search-9" class="widget widget_search">
+<form action="http://lod.istex.fr/" method="get" class="form-inline">
+<fieldset>
+<div class="input-group">
+<input type="text" name="s" id="search" placeholder="Search" value="" class="form-control">
+<span class="input-group-btn">
+<button type="submit" class="btn btn-primary">Search</button>
+</span>
+</div>
+</fieldset>
+</form>
+</div>
 -->
                 <div id="linkcat-30" class="widget widget_links"><h4 class="widgettitle">affichage</h4>
                     <ul class="xoxo blogroll">
 
-                     <li>
-                  <a href="http://www.cnrs.fr/" title="CNRS" target="_blank"><img src="/assets/img/cnrs130.png" alt="CNRS" title="Le site du CNRS"></a>
+                        <li>
+                            <a href="http://www.cnrs.fr/" title="CNRS" target="_blank"><img src="/assets/img/cnrs130.png" alt="CNRS" title="Le site du CNRS"></a>
                         </li>
 
                     </ul>
                 </div>
 
 
-<div id="twitter_feed_widget-2" class="widget widget_twitter_feed_widget">
-<!--    <h4 class="widgettitle">Timeline Twitter</h4>-->
+                <div id="twitter_feed_widget-2" class="widget widget_twitter_feed_widget">
+                    <!--    <h4 class="widgettitle">Timeline Twitter</h4>-->
 
 
 
-<a class="twitter-timeline" href="https://twitter.com/Projet_ISTEX" data-widget-id="715626428440657920"
-                data-chrome="nofooter noborders transparent"
-                data-tweet-limit="3">Tweets de @Projet_ISTEX</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-</div>
+                    <a class="twitter-timeline" href="https://twitter.com/Projet_ISTEX" data-widget-id="715626428440657920"
+                       data-chrome="nofooter noborders transparent"
+                       data-tweet-limit="3">Tweets de @Projet_ISTEX</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
 
                 {% endblock %}
             </div>
@@ -143,18 +211,18 @@
 
                         <div class="col-sm-6 col-md-3">
                             <div id="meta-4" class="widget widgetFooter widget_meta">
-<!--
-                                <h4 class="widgettitle">Autres démonstrateurs</h4>
-                                <ul>
-                                <li>
-                                    <a href="http://lod.istex.fr">Démo1</a>
-                                </li>
-                                <li>
-                                    <a href="http://lod.istex.fr">Démo2</a>
+                                <!--
+<h4 class="widgettitle">Autres démonstrateurs</h4>
+<ul>
+<li>
+<a href="http://lod.istex.fr">Démo1</a>
+</li>
+<li>
+<a href="http://lod.istex.fr">Démo2</a>
 
-                                </li>
+</li>
 
-                                </ul>
+</ul>
 -->
                             </div>
                         </div> <!-- end widget-->
@@ -162,12 +230,13 @@
                             <div id="meta-3" class="widget widgetFooter widget_meta">
                                 <h4 class="widgettitle">Liens</h4>			<ul>
                                 <li>
-                                  <a href="http://lodex.inist.fr/" title="Blog LODEX">Blog LODEX</a>
+                                    <a href="http://lodex.inist.fr" target="_blank">Le blog du projet</a>  </li>
+                                <li>
+                                    <a href="http://lodex.inist.fr/feed" target="_blank"> <abbr title="Really Simple Syndication">RSS du blog</abbr>
+                                    </a>
                                 </li>
 
-                                <li>
-                                  <a href="/index/">Back office</a>
-                                </li>
+                                <li>  <a href="/index/">Back office</a> </li>
 
 
 
@@ -181,7 +250,7 @@
 
                         <div class="col-sm-6 col-md-3">
                             <div id="search-3" class="widget widgetFooter widget_search">
-<!--                                                <h4 class="widgettitle">Footer4</h4>-->
+                                <!--                                                <h4 class="widgettitle">Footer4</h4>-->
                                 <a href="https://github.com/Inist-CNRS/lodex" title="Fork me on GitHub" target="_blank"><img src="/assets/img/GitHub-Mark-120px-plus.png" alt="LODEX Github" title="Fork me on GitHub"></a>
                             </div>
 
@@ -229,7 +298,7 @@
 
 <!-- Piwik -->
 <script type="text/javascript"> var _paq = _paq || []; _paq.push([function() { var self=this; function getOriginalVisitorCookieTimeout() { var now=new Date(), nowTs=Math.round(now.getTime()/1000), visitorInfo=self.getVisitorInfo(); var createTs = parseInt(visitorInfo[2]); var cookieTimeout=33696000; var originalTimeout=createTs+cookieTimeout-nowTs; return originalTimeout; } getOriginalVisitorCookieTimeout(); this.setVisitorCookieTimeout(getOriginalVisitorCookieTimeout()); }]); _paq.push(['trackPageView']); _paq.push(['enableLinkTracking']); (function() { var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik.inist.fr//"; _paq.push(['setTrackerUrl', u+'piwik.php']); _paq.push(['setSiteId', 130]); var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript'; g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s); })(); </script> <noscript><p><img src="http://piwik.inist.fr/piwik.php?idsite=130" style="border:0" alt="" /></p></noscript>
- <!-- End Piwik Code -->
+<!-- End Piwik Code -->
 
 </body>
 
