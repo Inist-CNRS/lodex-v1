@@ -433,6 +433,10 @@ h6,
 .h6 {
   margin-top: 10px;
   margin-bottom: 10px;
+    /*    ISTEX ICI*/
+    
+    border-bottom: 3px solid #C4D734;
+    font-style: italic;
 }
 h4 small,
 .h4 small,
@@ -7655,19 +7659,21 @@ Stylesheet: Footer
 #footer {
 /*  border-top: 8px solid #008837; istex*/
    border-top: 8px solid #c4d735;  
-  background: #2a272e;
+/*  background: #2a272e; istex dessous*/
+   background: #EAEADE;
   padding-top: 30px;
   margin-top: 60px;
   clear: both;
 /*  color: #008837; istex*/
-   color: #c4d735;
+   color: #458ca5;
 }
 #footer h4 {
  /*  color: #008837; istex*/
-   color: #c4d735;
+   color: #458ca5;
 }
 #footer a {
-  color: #f7f7f7;
+ /*  color: #008837; istex*/
+   color: #458ca5;
 }
 #footer li {
   padding: 7px 0;
@@ -7684,7 +7690,8 @@ Stylesheet: Footer
 #sub-floor {
   /*  color: #008837; istex*/
    color: #c4d735;
-  background: #3b3b3b;
+/*  background: #3b3b3b; istex*/
+   background: #f7f7f7;
   padding: 10px 0;
 }
 .copyright {
