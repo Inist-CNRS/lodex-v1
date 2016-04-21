@@ -8202,6 +8202,17 @@ div#text-13.widget.widget_text h4.widgettitle {
   max-width: 50em;
   text-align: justify;
 }
+
+
+/*Page ITEM */
+
+#notice dt {margin:20px 0;border-left:1px solid #c4d735;padding-left:10px}
+#notice dt {padding-bottom:0.2em}
+#notice dd {font-weight:normal;padding-bottom:0.1em;color: #458ca5}
+
+#notice table {width: 50%; border: 3px solid #458ca5; margin: 30px; background-color: #eaeade; border-radius: 35px}
+
+
 /*
 RETINA (2x RESOLUTION DEVICES)
 This applies to the retina iPhone (4s) and iPad (2,3) along with

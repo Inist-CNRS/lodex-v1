@@ -31,6 +31,9 @@
 
 {% block body %}
 
+
+<!--
+
 <dl>
     <dt>URI</dt>
     <dd>{{_content.jsonld.@id}}</dd>
@@ -39,6 +42,32 @@
     {{_content.jsonld | getJsonLdField([column.scheme,column.language]) | tag('dd')}}
 {% endfor %}
 </dl>
+-->
+
+<div id="notice">
+ <table >
+     <tbody>
+      <tr>
+        <td>URI : </td>
+        <td>{{_content.jsonld.@id}}</td>
+      </tr>
+      {% for cName, column in _table._columns %}
+       <tr>
+        <td>{{column.label}}: </td>
+         <td>{{_content.jsonld | getJsonLdField([column.scheme,column.language]) | tag('dd')}} 
+       </td>
+              {% endfor %}
+        </tr>
+        </tbody>
+
+   </table>
+   </div>
+   
+
+
+
+
+
 
 {% if themeName == 'istex' %}
 <script type="text/javascript">
