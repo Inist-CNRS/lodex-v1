@@ -19,6 +19,7 @@
     var viewLoomInternal = view('template-modal-loom-internal', function() {
       var url = JURL.parse(window.location.href.replace(/\/+$/, ''));
       url.pathname = url.path = '/index/*';
+      url.query = { 'alt': 'jsonld' };
       viewLoomInternal.set('items', []);
       viewLoomInternal.set('rightTable',
         document.location.pathname.replace(/\/+$/, '').split('/').slice(1).shift());
@@ -79,6 +80,7 @@
           viewLoom.set('rightItems', []);
           var url = JURL.parse(window.location.href);
           url.pathname = String('/').concat(viewLoomInternal.get('rightTable')).concat('/*');
+          url.query = { 'alt': 'jsonld' };
           oboe(JURL.format(url))
             .node('!.*', function(item) {
               var name = viewLoom.get('rightColumnName');
@@ -94,6 +96,7 @@
           viewLoom.set('leftItems', []);
           var url = JURL.parse(window.location.href);
           url.pathname = String('/').concat(viewLoomInternal.get('leftTable')).concat('/*');
+          url.query = { 'alt': 'jsonld' };
           oboe(JURL.format(url))
           .node('!.*', function(item) {
             var name = viewLoom.get('leftColumnName');
@@ -149,6 +152,7 @@
         .node('!.*', function(item) {
           var items = viewList.get('items');
           items.push(item);
+          console.log('item', item);
           viewList.set('items', items);
           if (first) {
             // viewColumn.set('sampleURL', encodeURIComponent(window.location.href.replace(/\/+$/,'').concat('/').concat(item._wid).concat('/*?alt=raw&firstOnly=1')));

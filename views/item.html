@@ -20,6 +20,7 @@
 
 
 {% block header %}
+<a href="/" title="Homepage" rel="homepage">LODEX-homepage</a> / Resource #{{_wid}}
 <h1>{{_table._label}} # {{_wid}}</h1>
 {% if themeName == 'istex' %}
 <div istex-results></div>
@@ -30,6 +31,9 @@
 
 {% block body %}
 
+
+<!--
+
 <dl>
     <dt>URI</dt>
     <dd>{{_content.jsonld.@id}}</dd>
@@ -38,6 +42,34 @@
     {{_content.jsonld | getJsonLdField([column.scheme,column.language]) | tag('dd')}}
 {% endfor %}
 </dl>
+-->
+
+<div id="notice">
+ <img src="/assets/img/istex_img/quoteleft.png" alt="quote" />
+ <table>
+     <tbody>
+      <tr>
+        <td>URI : </td>
+        <td>{{_content.jsonld.@id}}</td>
+      </tr>
+      {% for cName, column in _table._columns %}
+       <tr>
+        <td>{{column.label}}: </td>
+         <td>{{_content.jsonld | getJsonLdField([column.scheme,column.language]) | tag('dd')}} 
+       </td>
+              {% endfor %}
+        </tr>
+        </tbody>
+
+   </table>
+    <img src="/assets/img/istex_img/quoteright.png" alt="quote" />
+   </div>
+   
+
+
+
+
+
 
 {% if themeName == 'istex' %}
 <script type="text/javascript">
