@@ -8212,7 +8212,7 @@ div#text-13.widget.widget_text h4.widgettitle {
 #notice dt {padding-bottom:0.2em}
 #notice dd {font-weight:normal;padding-bottom:0.1em;color: #458ca5}
 
-#notice table {width: 50%; border: 3px solid #458ca5; margin: 30px; background-color: #f7f7f7; border-radius: 35px; box-shadow: 8px 8px 12px #aaa}
+#notice table {width: 80%; border: 3px solid #458ca5; margin: 30px; background-color: #f7f7f7; border-radius: 35px; box-shadow: 8px 8px 12px #aaa; padding: 15px;}
 #notice h3 {padding:1em;left:15em;background: url(../img/quoteleft.png) left top no-repeat,url(../img/quoteright.png) right top no-repeat;font-style:italic; border-left: 0;}
 
 
