@@ -14,6 +14,7 @@
 {% block styles %}
 {% if themeName == 'istex' %}
 <link rel="stylesheet" type="text/css" href="/assets/css/rzslider.css">
+<link rel="stylesheet" type="text/css" href="http://istex.github.io/styleAngular/style.min.css">
 {% endif %}
 {% endblock %}
 
@@ -55,7 +56,7 @@
       {% for cName, column in _table._columns %}
        <tr>
         <td>{{column.label}}: </td>
-         <td>{{_content.jsonld | getJsonLdField([column.scheme,column.language]) | tag('dd')}} 
+         <td>{{_content.jsonld | getJsonLdField([column.scheme,column.language]) | tag('dd')}}
        </td>
               {% endfor %}
         </tr>
@@ -64,7 +65,7 @@
    </table>
     <img src="/assets/img/istex_img/quoteright.png" alt="quote" />
    </div>
-   
+
 
 
 
