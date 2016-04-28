@@ -2,6 +2,7 @@
 node_modules
 coverage/
 
+*.local.*
 
 lib-cov
 *.seed

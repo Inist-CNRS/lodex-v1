@@ -34,7 +34,7 @@ module.exports = {
       "plain" : "dylan",
       "display" : "Bob Dylan"
     }
-  ],
+  ],*/
   strategies : [
     {
       require : 'local.js',
@@ -54,7 +54,6 @@ module.exports = {
       require : "valid-user.js"
     }
   ],
-  */
   loaders: [
     {
       pattern : "**/*.xml",

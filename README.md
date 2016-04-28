@@ -47,7 +47,7 @@ Wherever the settings file is, it is a JSON file.
 - `port`: the port the web application will listen (default: `3000`)
 - `title`: title of the application (default: `Change title`)
 - `description`: description for the application (default: `Change description`)
-- `themeName`: identifier of the template/CSS theme used (default: `default`)
+- `themeName`: identifier of the template/CSS theme used (default: `default, other possible: `istex`)
 - `baseURL`: base URL for the URIs (by default: `127.0.0.1`)
 - `access`: array of objects containing:
     + `login`
