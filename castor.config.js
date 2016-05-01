@@ -56,6 +56,10 @@ module.exports = {
   ],
   loaders: [
     {
+      pattern : "**/*.table",
+      require : "table"
+    },
+    {
       pattern : "**/*.xml",
       require : "castor-load-xml"
     },
