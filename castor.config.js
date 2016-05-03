@@ -4,8 +4,8 @@
 // to the MONGODB_PORT environment parameter
 // (docker uses it)
 var mongoHostPort = process.env.MONGODB_PORT ?
-  process.env.MONGODB_PORT.replace('tcp://', '') :
-  'localhost:27017';
+process.env.MONGODB_PORT.replace('tcp://', '') :
+'localhost:27017';
 
 module.exports = {
   connectionURI: 'mongodb://' + mongoHostPort + '/lodex',
@@ -13,7 +13,11 @@ module.exports = {
     "paperclip/lib/node.js",
     "oboe",
     "mongodb-querystring",
-    "url"
+    "url",
+    "components/backoffice"
+  ],
+  browserifyTransformers: [
+    'vueify'
   ],
   rootURL : '/',
   maxFileSize: 536870912,
