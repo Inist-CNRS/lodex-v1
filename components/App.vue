@@ -1,16 +1,21 @@
 <template>
-	<h1>{{ hello }} World !</h1>
-	<alert type="info" >
-	<strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-	</alert>
+  <menu></menu>
+  <div class="container-fluid">
+	<item></item>
+	<array></array>
+  </div>
 </template>
 
 <script>
-import alert from 'vue-strap/src/Alert.vue'
+import TablesList from './TablesList.vue'
+import TablesItem from './TablesItem.vue'
+import TablesTable from './TablesTable.vue'
 
 export default {
 	components: {
-					alert
+		'menu': TablesList,
+		'item': TablesItem,
+		'array': TablesTable
 	},
 	data () {
 		return {
