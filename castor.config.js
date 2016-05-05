@@ -56,6 +56,10 @@ module.exports = {
     {
       pattern : "* /index/*",
       require : "valid-user.js"
+    },
+    {
+      pattern : "* /backoffice.html",
+      require : "valid-user.js"
     }
   ],
   loaders: [
