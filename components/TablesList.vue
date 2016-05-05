@@ -30,6 +30,7 @@
 </template>
 <script>
 import sharedStore from './store.js'
+import MQS from 'mongodb-querystring'
 
 export default {
 	ready () {
@@ -61,7 +62,11 @@ export default {
 		},
 		doCreate (table) {
 			let self = this;
-			let url = 'http://localhost:3000/index/?typ=form';
+			let query = {
+				'typ' : 'form',
+				'filename' : String('t').concat(this.store.allTables.length + 1).concat('.table')
+			};
+			let url = 'http://localhost:3000/index/?' + MQS.stringify(query);
 			console.log('post', url)
 			let formData = {
 				title: 'Table X'
