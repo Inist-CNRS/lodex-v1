@@ -14,6 +14,9 @@ module.exports = function(options) {
     input._content = {
       json : loc.query
     }
+    console.log('loc', loc);
+    console.log('input', input);
+
     submit(null, input);
   }
 }
