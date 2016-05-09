@@ -16,12 +16,12 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 		<li v-for="table in store.allTables" class="nav-item" v-bind:class="{ 'active' : table.isSelected }">
-			<a href="#" class="nav-link" v-on:click="doChoose(table)">{{ table.value }}</a>
+			<a href="#" class="nav-link" v-on:click="choose(table)">{{ table.value }}</a>
 		</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-			<button class="btn btn btn-default navbar-btn" v-on:click="doCreate(table)">+</button>
+			<button class="btn btn btn-default navbar-btn" v-on:click="create(table)">+</button>
 		</li>
 	</ul>
     </div><!-- /.navbar-collapse -->
@@ -35,17 +35,7 @@ import MQS from 'mongodb-querystring'
 export default {
 	ready () {
 		let self = this;
-		let url = 'http://localhost:3000/index/*?alt=min';
-		self.$http.get(url).then(function (response) {
-			if (Array.isArray(response.data)) {
-				response.data.forEach(function(i, index) {
-					response.data[index].isSelected = false
-				})
-				response.data[0].isSelected = true
-				self.$set('store.allTables', response.data)
-				self.$set('store.currentTable', response.data[0])
-			}
-		}, console.error);
+		self.reload();
 	},
 	data () {
 		return {
@@ -53,26 +43,41 @@ export default {
 		}
 	},
 	methods: {
-		doChoose (table) {
+		reload() {
+			let self = this;
+			let url = '/index/*?alt=min';
+			self.$http.get(url).then(function (response) {
+					if (Array.isArray(response.data)) {
+					response.data.forEach(function(i, index) {
+							response.data[index].isSelected = false
+							})
+					response.data[0].isSelected = true
+					self.$set('store.allTables', response.data)
+					self.$set('store.currentTable', response.data[0])
+					}
+					}, console.error);
+		},
+		choose(table) {
 			let self = this;
 			self.store.allTables.forEach(function(i, index) {
 				self.store.allTables[index].isSelected = i.id === table.id ? true: false
 			})
 			self.$set('store.currentTable', table)
 		},
-		doCreate (table) {
+		create(table) {
 			let self = this;
 			let query = {
 				'typ' : 'form',
 				'filename' : String('t').concat(this.store.allTables.length + 1).concat('.table')
 			};
-			let url = 'http://localhost:3000/index/?' + MQS.stringify(query);
+			let url = '/index/?' + MQS.stringify(query);
 			console.log('post', url)
 			let formData = {
-				title: 'Table X'
+				title: 'Table #' + (self.store.allTables.length + 1),
+				since: Date.now()
 			}
 			self.$http.post(url, formData).then(function (response) {
-				console.log(response);
+				self.reload();
 			}, console.error)
 		}
     },
