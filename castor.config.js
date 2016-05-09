@@ -111,7 +111,7 @@ module.exports = {
     "echo.js",
     "auth.js",
     "table.js",
-    "v3.js" ,
+    "v3.js",
     "rest-crud.js"
   ],
   filters: ["jbj-array", "jbj-parse", "jbj-template", "jbj-rdfa"],
