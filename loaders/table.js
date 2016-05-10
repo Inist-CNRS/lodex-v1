@@ -13,7 +13,14 @@ module.exports = function(options) {
     input._wid = 't' + nid;
     input._content = {
       json : loc.query
+<<<<<<< a1bb051f4e79891a6e012192167f6bbd9021e2cc
     };
+=======
+    }
+    console.log('loc', loc);
+    console.log('input', input);
+
+>>>>>>> send _ref to setpage
     submit(null, input);
   };
 };

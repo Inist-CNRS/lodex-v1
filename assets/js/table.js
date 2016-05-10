@@ -573,6 +573,7 @@
              window.location.host + '/index/' + idPage + '/*?alt=raw')
         .done(function(items) {
           viewPage.set('_wid', items[0]._wid);
+          viewPage.set('_ref', items[0]._ref || '');
           $('#modal-editpage-input-template').summernote({
             height: 200,
             dialogsInBody: true,
@@ -603,6 +604,7 @@
         var url = String('/-/v3/settab/').concat(idPage).concat('/');
         var form = {
           'name': viewPage.get('_wid'),
+          'ref': viewPage.get('_ref'),
           'template': $('#modal-editpage-input-template').summernote('code')
         };
         $.ajax({
