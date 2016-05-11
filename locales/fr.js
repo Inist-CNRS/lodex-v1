@@ -61,7 +61,7 @@
 	"Try Again": "Essayer à nouveau",
 	"Back home": "Retour à l'accueil",
 	"Homepage": "Page d'accueil",
-	"Try to start (or retstart) Mongo.": "Essayer en lançant (ou relançant) Mongo.",
+	"Try to start (or retstart) Mongo.": "Essayer de démarrer (ou redémarrer) Mongo.",
 	"Authenticate": "S'authentifier",
 	"Choose your login provider.": "Choisir votre fournisseur d'identité.",
 	"Use your account": "Utiliser votre compte",
@@ -78,7 +78,6 @@
 	"Resource key": "Resource key",
 	"Try to log in.": "Essayer de se loger.",
 	"Log in": "Log in",
-	"Try to start (or retstart) Mongo.": "Essayer de démarrer (ou redémarrer) Mongo.",
 	"Language": "Langue",
 	"Primary": "Primaire",
 	"Download set": "Décharger le jeu de données",
@@ -86,5 +85,6 @@
 	"Crown": "Couronner",
 	"Excel file": "Fichier Excel",
 	"TSV file": "Fichier TSV",
-	"Displayed on the home page": "Affiché sur la page d'accueil"
+	"Displayed on the home page": "Affiché sur la page d'accueil",
+	"Réf.": "Réf."
 }
