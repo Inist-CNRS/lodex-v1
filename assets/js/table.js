@@ -604,9 +604,10 @@
         var url = String('/-/v3/settab/').concat(idPage).concat('/');
         var form = {
           'name': viewPage.get('_wid'),
-          'ref': viewPage.get('_ref'),
-          'template': $('#modal-editpage-input-template').summernote('code')
+          //          'template': $('#modal-editpage-input-template').summernote('code'),
+          'ref': viewPage.get('_ref')
         };
+        console.log('POST ' + url, form);
         $.ajax({
           type: 'POST',
           url: url,
@@ -724,7 +725,7 @@
                          JSONEditorOptions);
     je3 = new JSONEditor(document.getElementById('modal-load-tab2-jsoneditor-hash'),
                          JSONEditorOptions);
-    je4 = new JSONEditor(document.getElementById('modal-forktable-enrich'), 
+    je4 = new JSONEditor(document.getElementById('modal-forktable-enrich'),
                          JSONEditorOptions);
     je5 = new JSONEditor(document.getElementById('modal-editcolumn-jsoneditor-value'),
                          JSONEditorOptions);
