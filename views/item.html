@@ -20,59 +20,81 @@
 
 
 
-{% block header %}
-<a href="/" title="Homepage" rel="homepage">LODEX-homepage</a> / Resource #{{_wid}}
-<h1>{{_table._label}} # {{_wid}}</h1>
+{% block body %}
+<div>
+	<div class="postmeta updated color_gray">
+		<div class="pull-right">
+			<!--
+_refrenced
+| jsonld('compacted')
+| get(['http://purl.org/dc/elements/1.1/identifier', http://purl.org/dc/elements/identifier])
+| coalesce(true)
+| first(true)
+| tag('dd')
+ 
+	   -->
+		</div>
+	</div>
+	<h1>
+		{#
+		{% if _content | getJsonLdField(['http://purl.org/dc/terms/title']) %}
+			{{ _content | getJsonLdField(['http://purl.org/dc/terms/title']) | tag('span') }}
+		{% endif %}
+		#}
+	n/a
+	</h1>
+	<div class="pull-right">
+		<span class="fa fa-dollar"> XXXX {# _content | getJsonLdField(['http://purl.org/dc/terms/1.1/identifier']) | tag('span') #} </span> <br>
+		<span class="author  fa fa-user"> <em>xxxxxx</em></span>
+	</div>
+	<p class="byline vcard">
+	<a class="link fa fa-link" href="{{_content.@id}}"> {{_content.@id}}</a> <br>
+	<time class="date fa fa-clock-o" datetime="2015-01-05T17:12:07+00:00" pubdate=""> Updated on January 5, 2015</time>
+	</p>
+	<p>
+	n/a
+	</p>
+	{#
+	{% if _content | getJsonLdField(['http://purl.org/dc/terms/description']) %}
+	<p>
+			{{ _content | getJsonLdField(['http://purl.org/dc/terms/description']) | tag('span') }}
+	</p>
+	{% endif %}
+#}
+	<hr/>
+	<dl class="dl-horizontal lead">
+		<dt>GO UP</dt>
+		<dd>
+		<a href="/"> Root </a>
+		</dd>
+		<dt>Source</dt>
+		<dd>
+				<a href="/?alt=xls"   ><span class="fa fa-file-excel-o"></span> href="/?alt=xls"   </a>( Excel )<br/>
+				<a href="/?alt=tsv"   ><span class="fa fa-list"></span>         href="/?alt=tsv"   </a>( TSV )<br/>
+				<a href="/?alt=csv"   ><span class="fa fa-table"></span>        href="/?alt=csv"   </a>( CSV )<br/>
+				<a href="/?alt=nq"    ><span class="fa fa-bars"></span>         href="/?alt=nq"    </a>( N-Quads )<br/>
+				<a href="/?alt=jsonld"><span class="fa fa-code"></span>         href="/?alt=jsonld"    </a>( N-Quads )<br/>
+		</dd>
+	</dl>
+	<hr/>
+	<dl class="dl-horizontal lead">
+		{% for cName in _content | select(".@context .@id")  | dedupe(true) %}
+		<dt>
+			<a href="{{ cName}}">{{ cName
+				| replace(["http://www.w3.org/2004/02/skos/core#", "skos:"])
+				| replace(["http://www.w3.org/2008/05/skos-xl", "skos-xl:"])
+				| replace(["http://purl.org/dc/elements/1.1/", "dc:"])
+				}}</a>
+		</dt>
+		<dd>
+			{# _content | getJsonLdField([cName]) | tag('div') #}
+		</dd>
+		{% endfor %}
+	</dl>
+</div>
+
 {% if themeName == 'istex' %}
 <div istex-results></div>
-{% endif %}
-{% endblock %}
-
-
-
-{% block body %}
-
-
-<!--
-
-<dl>
-    <dt>URI</dt>
-    <dd>{{_content.jsonld.@id}}</dd>
-{% for cName, column in _table._columns %}
-    <dt>{{column.label}}</dt>
-    {{_content.jsonld | getJsonLdField([column.scheme,column.language]) | tag('dd')}}
-{% endfor %}
-</dl>
--->
-
-<div id="notice">
- <img src="/assets/img/istex_img/quoteleft.png" alt="quote" />
- <table>
-     <tbody>
-      <tr>
-        <td>URI : </td>
-        <td>{{_content.jsonld.@id}}</td>
-      </tr>
-      {% for cName, column in _table._columns %}
-       <tr>
-        <td>{{column.label}}: </td>
-         <td>{{_content.jsonld | getJsonLdField([column.scheme,column.language]) | tag('dd')}}
-       </td>
-              {% endfor %}
-        </tr>
-        </tbody>
-
-   </table>
-    <img src="/assets/img/istex_img/quoteright.png" alt="quote" />
-   </div>
-
-
-
-
-
-
-
-{% if themeName == 'istex' %}
 <script type="text/javascript">
 var istexConfig = {
     query: '* AND genre.raw:("{{_content.jsonld.englishLabel}}")',
