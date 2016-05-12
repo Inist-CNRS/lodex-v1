@@ -1,14 +1,7 @@
 /*eslint strict: "off", quotes:"off", semi: "off" */
 'use strict'
-// to allow mongodb host and port injection thanks
-// to the MONGODB_PORT environment parameter
-// (docker uses it)
-var mongoHostPort = process.env.MONGODB_PORT ?
-process.env.MONGODB_PORT.replace('tcp://', '') :
-'localhost:27017';
 
 module.exports = {
-  connectionURI: 'mongodb://' + mongoHostPort + '/lodex',
   browserifyModules: [
     "paperclip/lib/node.js",
     "oboe",
