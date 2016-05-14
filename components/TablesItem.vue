@@ -1,21 +1,16 @@
 <template>
 <div id="tables-item" class="row">
-	<form class="form-inline pull-right">
-	<div class="dropdown">
-		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			Download
-			<span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-			<li><a class="dropdown-item" href="#">CSV</a></li>
-			<li><a class="dropdown-item" href="#">TSV</a></li>
-			<li><a class="dropdown-item" href="#">N-Quads</a></li>
-			<li><a class="dropdown-item" href="#">JSON-LD</a></li>
-			<li><a class="dropdown-item" href="#">RAW</a></li>
-		</ul>
+	<div class="pull-right">
+		<div class="btn-group" role="group" aria-label="...">
+			<button type="button" class="btn btn-default"> <icon name="pencil-square-o" label="Edit"> </button>
+			<button type="button" class="btn btn-default"> <icon name="code-fork" label="Fork"> </button>
+			<button type="button" class="btn btn-default"> <icon name="upload" label="Upload"> </button>
+			<button type="button" class="btn btn-default"> <icon name="download" label="Download">  </button>
+		</div>
 	</div>
-	</form>
-	<span>Current: {{ store.currentTable.value }} </span>
+	<div>
+		<span>Current: {{ store.currentTable.value }} </span>
+	</div>
 </div>
 </template>
 <script>

@@ -29,6 +29,8 @@ $('.download').click(function(e) {
 			<!--
 _refrenced
 | jsonld('compacted')
+| prefix([{"http://www.w3.org/2004/02/skos/core#", "skos:"}, {"http://www.w3.org/2008/05/skos-xl", "skos-xl:"}])
+| mapping([{"http://www.w3.org/2004/02/skos/core#prefLabel", "Term"}])
 | get(['http://purl.org/dc/elements/1.1/identifier', http://purl.org/dc/elements/identifier])
 | coalesce(true)
 | first(true)

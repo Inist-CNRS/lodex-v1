@@ -15,13 +15,16 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-		<li v-for="table in store.allTables" class="nav-item" v-bind:class="{ 'active' : table.isSelected }">
-			<a href="#" class="nav-link" v-on:click="choose(table)">{{ table.value }}</a>
+		<li v-for="table in store.allTables" class="" v-bind:class="{ 'active' : table.isSelected }">
+			<div style="display:block;" class="nav-link">
+				<a  style="display:inline;" href="#" v-on:click="starer(table)"><icon name="star-o" ></icon></a>
+				<a  style="display:inline;" href="#" class="" v-on:click="choose(table)">{{ table.value }}</a>
+			</div>
 		</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-			<button class="btn btn btn-default navbar-btn" v-on:click="create(table)">+</button>
+			<button class="btn btn btn-default navbar-btn" v-on:click="create(table)"> <icon name="plus-square-o" scale="2" label="Add"></icon> </button>
 		</li>
 	</ul>
     </div><!-- /.navbar-collapse -->
@@ -63,6 +66,10 @@ export default {
 				self.store.allTables[index].isSelected = i.id === table.id ? true: false
 			})
 			self.$set('store.currentTable', table)
+		},
+		drop(table) {
+			let self = this;
+			alert('Drop table #'+table.id)
 		},
 		create(table) {
 			let self = this;
