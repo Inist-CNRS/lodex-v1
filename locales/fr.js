@@ -86,5 +86,6 @@
 	"Excel file": "Fichier Excel",
 	"TSV file": "Fichier TSV",
 	"Displayed on the home page": "Affiché sur la page d'accueil",
-	"Réf.": "Réf."
+	"Réf.": "Réf.",
+	"Edit Resource Reference": "Edit Resource Reference"
 }
