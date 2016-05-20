@@ -44,6 +44,7 @@
     "castor-load-xml": "latest",
     "debug": "latest",
     "jbj-array": "^1.0.0",
+    "jbj-nlp": "^1.0.0",
     "jbj-parse": "^1.0.0",
     "jbj-rdfa": "^1.1.0",
     "jbj-template": "^1.0.0",
