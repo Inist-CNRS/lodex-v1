@@ -19,7 +19,7 @@
   <div slot="modal-body" class="modal-body">
 
   <inputfile label="Browse" help="Try selecting one or more files and watch the feedback"><inputfile>
-  
+
   </div>
   <div slot="modal-footer" class="modal-footer">
     <button type="button" class="btn btn-default" @click='showModalUpload = false'>Close</button>
@@ -71,6 +71,7 @@ export default {
 		}
 	},
 	components: {
+		inputfile
 	}
 }
 </script>

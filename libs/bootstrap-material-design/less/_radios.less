@@ -1,11 +1,26 @@
-.form-horizontal .radio {
-  margin-bottom: 10px;
+.radio-color(@color, @opacity){
+  & ~ .check,
+  & ~ .circle {
+    opacity: @opacity;
+  }
+
+  & ~ .check {
+    background-color: @color;
+  }
+
+  & ~ .circle {
+    border-color: @color;
+  }
 }
+
 .radio {
   label {
     cursor: pointer;
     padding-left: 45px;
     position: relative;
+    color: @mdb-radio-label-color;
+    .mdb-label-color-toggle-focus();
+
     span {
       display: block;
       position: absolute;
@@ -14,7 +29,7 @@
       transition-duration: 0.2s;
     }
     .circle {
-      border: 2px solid @lightbg-text;
+      border: 2px solid @mdb-radio-color-off;
       height: 15px;
       width: 15px;
       border-radius: 100%;
@@ -23,14 +38,14 @@
       height: 15px;
       width: 15px;
       border-radius: 100%;
-      background-color: @radio-default;
+      background-color: @mdb-radio-color-on;
       transform: scale3d(0, 0, 0);
     }
     .check:after {
       display: block;
       position: absolute;
       content: "";
-      background-color: @lightbg-text;
+      background-color: @mdb-text-color-primary;
       left: -18px;
       top: -18px;
       height: 50px;
@@ -45,16 +60,8 @@
       animation: rippleOff 500ms;
     }
     input[type=radio]:checked ~ .check:after {
-      animation: rippleOn 500ms;
+      animation: rippleOn;
     }
-
-  }
-  .variations(~" input[type=radio]:checked ~ .check", background-color, @radio-default);
-  .variations(~" input[type=radio]:checked ~ .circle", border-color, @radio-default);
-
-  input[type=radio][disabled] ~ .check,
-  input[type=radio][disabled] ~ .circle {
-    opacity: 0.5;
   }
 
   input[type=radio] {
@@ -62,17 +69,34 @@
     height: 0;
     width: 0;
     overflow: hidden;
-  }
-  input[type=radio]:checked ~ .check {
-    transform: scale3d(0.55, 0.55, 1);
-  }
-  input[type=radio][disabled] ~ .circle {
-    border-color: @lightbg-text;
-  }
-  input[type=radio][disabled] ~ .check {
-    background-color: @lightbg-text;
+
+    &:checked {
+      .radio-color(@mdb-radio-color-on, 1);
+    }
+    &:checked ~ .check {
+      transform: scale3d(0.55, 0.55, 1);
+    }
   }
 
+  input[type=radio][disabled] {
+
+    // light theme spec: Disabled: #000000, Opacity  26%
+    .radio-color(@black, 0.26);
+
+    // dark theme spec: Disabled: #FFFFFF, Opacity  30%
+    .theme-dark & {
+      .radio-color(@white, 0.30);
+    }
+  }
+}
+
+// Prevent ripple effect on page load
+.is-focused {
+  .radio {
+    input[type=radio]:checked ~ .check:after {
+      animation: rippleOn 500ms;
+    }
+  }
 }
 
 @keyframes rippleOn {

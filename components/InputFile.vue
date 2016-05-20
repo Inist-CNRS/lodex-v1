@@ -1,17 +1,10 @@
 <template>
-  <div class="form-group">
-	<input data-type="POST" data-url="/-/v3/upload" id="modal-load-input-filename" type="file" name="inputFile" style="display:none" />
-	<label class="control-label" for="modal-load-input-file">{{ __('Name') }}</label>
+ <div class="form-group">
+	<label class="control-label" for="modal-load-input-file">File</label>
+	<input data-type="POST" data-url="/-/v3/upload" id="modal-load-input-filename" type="file" name="inputFile" />
 	<div class="input-group">
-	  <span class="input-group-btn">
-		<button class="btn btn-default" type="button" @click="handleSelect()">
-		  <span id="modal-load-input-file-label">Browse</span>
-		  <span class="badge" id="modal-load-input-file-indicator" style="display:none">{{ indicator }}</span>
-		</button>
-	  </span>
-	  <input id="modal-load-input-file" class="form-control" type="text" placeholder="Local file" value="{{ filename }}" readonly="true" style="cursor:auto" aria-describedby="modal-load-input-file-status" />
-	  <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" style="display:none"></span>
-	  <span id="modal-load-input-file-status" class="sr-only form-control-feedback" style="display:none">(success)</span>
+		<input type="text" readonly="" class="form-control" placeholder="Browse..." value="{{ filename }}">
+		<span class="input-group-addon">{{ indicator }}</span>
 	</div>
   </div>
 </template>
@@ -20,30 +13,17 @@
 export default {
 	ready () {
 	  let self = this;
-      $('#modal-load-input-filename').change(function() {
-		self.filename = $(this).val();
-      });
       $('#modal-load-input-filename').fileupload({
         dataType: 'json',
         send: function(e, data) {
-          $('#modal-load-input-file-label').hide(4, function() {
 			self.indicator = '0%';
-          });
         },
         done: function(error, data) {
+		  console.log('upload', data.result[0]);
           if (Array.isArray(data.result) && data.result[0]) {
-            viewLoad.set('fileToLoad', data.result[0]);
+            self.filename = data.result[0].name;
           }
-		  self.indicator = '100%';
-		  /*
-          $('#modal-load-tab-file > div').addClass('has-success has-feedback');
-          $('#modal-load-tab-file .form-control-feedback').show();
-          setTimeout(function() {
-            $('#modal-load-input-file-indicator').hide(4, function() {
-              $('#modal-load-input-file-label').show();
-            });
-          }, 2500);
-		  */
+		  self.indicator = '√';
         },
         progressall: function(e, data) {
 		  let self = this;
@@ -55,15 +35,12 @@ export default {
 	data () {
 		return {
 			filename : '',
-			indicator: '0%'
+			indicator: '?'
 		}
 	},
 	components: {
 	},
 	methods: {
-	  handleSelect () {
-        $('#modal-load-input-filename').click();
-      }
     }
 }
 </script>

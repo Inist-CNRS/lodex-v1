@@ -1,145 +1,86 @@
+// Placeholder text
+.material-placeholder(@rules) {
+  &::-moz-placeholder { @rules(); } // Firefox
+  &:-ms-input-placeholder { @rules(); } // Internet Explorer 10+
+  &::-webkit-input-placeholder  { @rules(); } // Safari and Chrome
+}
+
+
 // usage: .variations(~" .check", color, transparent);
-.variations(@extra, @property, @default) {
-  .generic-variations(@extra, @default, {
-      @{property}: @material-color;
-    });
+.variations(@component, @selector-suffix, @property, @color-default) {
+  .generic-variations(@component, @selector-suffix, @color-default, {
+    @{property}: @variation-color;
+  });
 }
 
-.background-variations(@extra, @default) {
-  .generic-variations(@extra, @default, {
-      background-color: @material-color;
-      color: @text-color;
-      & when (@material-color = @btn-default) {
-        color: @lightbg-text;
-      }
-    });
+
+
+.background-variations(@component, @selector-suffix, @color-default) {
+  .generic-variations(@component, @selector-suffix, @color-default, {
+    background-color: @variation-color;
+    & when (@variation-color = @mdb-btn-background-color) {
+      color: @mdb-text-color-primary;
+    }
+    & when not (@variation-color = @mdb-btn-background-color) {
+      color: @variation-color-text;
+    }
+  });
 }
 
-.text-variations(@extra, @default) {
-  .generic-variations(@extra, @default, {
-      color: @material-color;
-    });
+.text-variations(@component, @selector-suffix, @color-default) {
+  .generic-variations(@component, @selector-suffix, @color-default, {
+    color: @variation-color;
+  });
 }
+
+
 
 //
 // To use this mixin you should pass a function as final parameter to define
 // the style. In that definition you can use the following variables to define it.
 //
-// @material-color-name ---> "red", "green", "indigo" ...
-// @material-color-full-name ---> "red", "green-50", "indigo-400" ...
-// @material-color ---> #f44336, #e8f5e9, #5c6bc0 ...
-// @text-color ---> rgba(255,255,255,0.84), rgba(0,0,0,0.84), rgba(255,255,255,0.84) ...
+// @component: ~".btn" - one of the bs components that have -default, -danger, etc.
+// @variation-color
+// @variation-color-text
 //
-
-
-.generic-variations(@extra, @default, @func) {
-
+.generic-variations(@component, @selector-suffix, @color-default, @func) {
   @contrast-factor: 40%;
-
   // bootstrap styles
-  &@{extra}, &-default@{extra} {
-    @material-color-name: "default";
-    @material-color-full-name: @material-color-name;
-    @material-color: @default;
-    @text-color: @darkbg-text;
+  &@{selector-suffix},
+  &@{component}-default@{selector-suffix} {
+    @variation-color: @color-default;
+    @variation-color-text: @mdb-text-color-light;
     @func();
   }
-  &-black@{extra} {
-    @material-color-name: "black";
-    @material-color-full-name: @material-color-name;
-    @material-color: @black;
-    @text-color: @darkbg-text;
+  &@{component}-inverse@{selector-suffix} {
+    @variation-color: @mdb-brand-inverse;
+    //@variation-color-text: contrast(@mdb-brand-inverse, @mdb-text-color-primary, @mdb-text-color-light, @contrast-factor);
+    @variation-color-text: contrast(@mdb-brand-inverse, @mdb-text-color-primary-hex, @mdb-text-color-light-hex, @contrast-factor);
     @func();
   }
-  &-white@{extra} {
-    @material-color-name: "white";
-    @material-color-full-name: @material-color-name;
-    @material-color: @white;
-    @text-color: @lightbg-text;
+  &@{component}-primary@{selector-suffix} {
+    @variation-color: @brand-primary;
+    @variation-color-text: @mdb-text-color-light;
     @func();
   }
-  &-inverse@{extra} {
-    @material-color-name: "inverse";
-    @material-color-full-name: @material-color-name;
-    @material-color: @inverse;
-    @text-color: contrast(@inverse, @lightbg-text, @darkbg-text, @contrast-factor);
+  &@{component}-success@{selector-suffix} {
+    @variation-color: @brand-success;
+    @variation-color-text: @mdb-text-color-light;
     @func();
   }
-  &-primary@{extra} {
-    @material-color-name: "primary";
-    @material-color-full-name: @material-color-name;
-    @material-color: @primary;
-    @text-color: @darkbg-text;
+  &@{component}-info@{selector-suffix} {
+    @variation-color: @brand-info;
+    @variation-color-text: @mdb-text-color-light;
     @func();
   }
-  &-success@{extra} {
-    @material-color-name: "success";
-    @material-color-full-name: @material-color-name;
-    @material-color: @success;
-    @text-color: @darkbg-text;
+  &@{component}-warning@{selector-suffix} {
+    @variation-color: @brand-warning;
+    @variation-color-text: @mdb-text-color-light;
     @func();
   }
-  &-info@{extra} {
-    @material-color-name: "info";
-    @material-color-full-name: @material-color-name;
-    @material-color: @info;
-    @text-color: @darkbg-text;
+  &@{component}-danger@{selector-suffix} {
+    @variation-color: @brand-danger;
+    @variation-color-text: @mdb-text-color-light;
     @func();
   }
-  &-warning@{extra} {
-    @material-color-name: "warning";
-    @material-color-full-name: @material-color-name;
-    @material-color: @warning;
-    @text-color: @darkbg-text;
-    @func();
-  }
-  &-danger@{extra} {
-    @material-color-name: "danger";
-    @material-color-full-name: @material-color-name;
-    @material-color: @danger;
-    @text-color: @darkbg-text;
-    @func();
-  }
-
-  // given a color build multiples dephs
-  .generic-variations-factory(@material-color-name) {
-
-    // given a color and its deph build css
-    .generic-variations-factory-deep(@material-color-number) {
-
-      &-material-@{material-color-name}@{material-color-number}@{extra} {
-        @material-color-full-name: "@{material-color-name}@{material-color-number}";
-        @material-color: @@material-color-full-name;
-        @text-color: contrast(@material-color, @lightbg-text, @darkbg-text, @contrast-factor);
-        @func();
-      }
-
-    }
-
-    .generic-variations-factory-deep(~"");
-  }
-
-  .generic-variations-factory(~"red");
-  .generic-variations-factory(~"pink");
-  .generic-variations-factory(~"purple");
-  .generic-variations-factory(~"deep-purple");
-  .generic-variations-factory(~"indigo");
-  .generic-variations-factory(~"blue");
-  .generic-variations-factory(~"light-blue");
-  .generic-variations-factory(~"cyan");
-  .generic-variations-factory(~"teal");
-  .generic-variations-factory(~"green");
-  .generic-variations-factory(~"light-green");
-  .generic-variations-factory(~"lime");
-  .generic-variations-factory(~"yellow");
-  .generic-variations-factory(~"amber");
-  .generic-variations-factory(~"orange");
-  .generic-variations-factory(~"deep-orange");
-  .generic-variations-factory(~"brown");
-  .generic-variations-factory(~"grey");
-  .generic-variations-factory(~"blue-grey");
-
 }
-
-
-@all-variations: ~"-default, -primary, -info, -success, -warning, -danger";

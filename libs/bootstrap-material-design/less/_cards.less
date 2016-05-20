@@ -19,9 +19,9 @@
     /**************************************************************************/
 
 
-    border-radius: 2px;
-    color: @card-body-text;
-    background: @card-body-background;
+    border-radius: @border-radius-base;
+    color: @mdb-card-body-text;
+    background: @mdb-card-body-background;
 
     .shadow-z-2();
 
@@ -40,7 +40,7 @@
             position: absolute;
             bottom: 16px;
             left: 18px;
-            color: @card-image-headline;
+            color: @mdb-card-image-headline;
             font-size: 2em;
         }
     }
@@ -53,7 +53,7 @@
     .card-footer {
         height: 10%;
         padding: 18px;
-        button {
+        button, a {
             margin: 0 !important;
             position: relative;
             bottom: 25px;
