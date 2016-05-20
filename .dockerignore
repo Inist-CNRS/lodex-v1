@@ -1,7 +1,11 @@
+node_modules/
+.git/
+coverage/
+.dockerignore
 Dockerfile
+.gitignore
 docker-compose.*
 makefile
-.git
 data/*
 config.local.js
 npm-debug.log
