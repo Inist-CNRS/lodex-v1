@@ -17,9 +17,18 @@
 
 <modal :show.sync="showModalUpload" title="Upload to this table">
   <div slot="modal-body" class="modal-body">
-
-  <inputfile label="Browse" help="Try selecting one or more files and watch the feedback"><inputfile>
-
+	
+	<div class="form-group">
+		<label class="control-label" for="modal-load-input-type-a">Type</label>
+		<select id="modal-load-input-type-a" class="form-control modal-load-shared-type">
+			  <option value="xml">XML document</option>
+			  <option value="xls">Excel rows</option>
+			  <option value="csv">CSV rows</option>
+			  <option value="nq">N-Quads lines</option>
+			  <option value="json">JSON corpus</option>
+		</select>
+	</div>
+	<inputfile label="Browse" help="Try selecting one or more files and watch the feedback"><inputfile>
   </div>
   <div slot="modal-footer" class="modal-footer">
     <button type="button" class="btn btn-default" @click='showModalUpload = false'>Close</button>
