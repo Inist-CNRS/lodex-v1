@@ -1,6 +1,6 @@
 {
   "name": "lodex",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "description": "Linked Open Data and ISTEX",
   "main": "index.js",
   "bin": {
@@ -44,6 +44,7 @@
     "castor-load-xml": "latest",
     "debug": "latest",
     "jbj-array": "^1.0.0",
+    "jbj-nlp": "^1.0.0",
     "jbj-parse": "^1.0.0",
     "jbj-rdfa": "^1.1.0",
     "jbj-template": "^1.0.0",

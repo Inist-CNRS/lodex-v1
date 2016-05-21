@@ -107,6 +107,6 @@ module.exports = {
     "v3.js",
     "rest-crud.js"
   ],
-  filters: ["jbj-array", "jbj-parse", "jbj-template", "jbj-rdfa"],
+  filters: ["jbj-array", "jbj-parse", "jbj-template", "jbj-rdfa", "jbj-nlp"],
   allowedAltValues : ['dry', 'csv', 'jsonld', 'jbj', 'xls', 'tsv', 'html', 'raw']
 }
