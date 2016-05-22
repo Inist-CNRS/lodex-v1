@@ -16,10 +16,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 		<li v-for="table in store.allTables" class="" v-bind:class="{ 'active' : table.isSelected }">
-			<div style="display:block;" class="nav-link">
-				<a  style="display:inline;" href="#" v-on:click="starer(table)"><icon name="star-o" ></icon></a>
-				<a  style="display:inline;" href="#" class="" v-on:click="choose(table)">{{ table.value }}</a>
-			</div>
+			<a href="#">
+			<span v-on:click="starer(table)"><icon name="star-o" ></icon></span>
+			<span v-on:click="choose(table)">{{ table.value }}</span>
+			</a>
 		</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -51,21 +51,25 @@ export default {
 			let url = '/index/*?alt=min';
 			self.$http.get(url).then(function (response) {
 					if (Array.isArray(response.data)) {
-					response.data.forEach(function(i, index) {
-							response.data[index].isSelected = false
-							})
-					response.data[0].isSelected = true
-					self.$set('store.allTables', response.data)
-					self.$set('store.currentTable', response.data[0])
+						response.data.forEach(function(i, index) {
+								response.data[index].isSelected = false
+						})
+						response.data[0].isSelected = true
+						self.store.allTables = response.data
+						self.store.currentTable = response.data[0]
 					}
-					}, console.error);
+			}, console.error);
 		},
 		choose(table) {
 			let self = this;
 			self.store.allTables.forEach(function(i, index) {
-				self.store.allTables[index].isSelected = i.id === table.id ? true: false
+				self.store.allTables[index].isSelected = i._id === table._id ? true: false
 			})
-			self.$set('store.currentTable', table)
+			self.store.currentTable = table
+		},
+		starer(table) {
+			let self = this;
+		alert('star!');
 		},
 		drop(table) {
 			let self = this;

@@ -60,6 +60,7 @@ export default {
 	data () {
 		return {
 			store : sharedStore,
+			files: [],
 			showModalFork: false,
 			showModalUpload: false,
 			showModalDownload: false
@@ -72,11 +73,25 @@ export default {
 		},
 		doUpload() {
 			this.showModalUpload = false
-			alert('Uploaded');
+			let self = this;
+			let url = '/' + self.store.currentTable._id  + '/?typ=file';
+			let dta = {
+				file : self.files
+			};
+			console.log('POST ' + url, dta);
+			self.$http.post(url, dta).then(function (response) {
+					console.log('POST ' + url, response);
+				alert('Uploaded');
+			}, console.error);
 		},
 		doDownload() {
 			this.showModalDownload = false
 			alert('Download');
+		}
+	},
+	events: {
+		'files': function (fs) {
+			this.files = fs;
 		}
 	},
 	components: {
