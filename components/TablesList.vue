@@ -17,8 +17,8 @@
       <ul class="nav navbar-nav">
 		<li v-for="table in store.allTables" class="" v-bind:class="{ 'active' : table.isSelected }">
 			<a href="#">
-			<span v-on:click="starer(table)"><icon name="star-o" ></icon></span>
-			<span v-on:click="choose(table)">{{ table.value }}</span>
+				<startable v-bind:table="table"></startable>
+				<span v-on:click="choose(table)">{{ table.value }}</span>
 			</a>
 		</li>
       </ul>
@@ -34,6 +34,8 @@
 <script>
 import sharedStore from './store.js'
 import MQS from 'mongodb-querystring'
+import startable from './StarTable.vue'
+
 
 export default {
 	ready () {
@@ -67,10 +69,6 @@ export default {
 			})
 			self.store.currentTable = table
 		},
-		starer(table) {
-			let self = this;
-		alert('star!');
-		},
 		drop(table) {
 			let self = this;
 			alert('Drop table #'+table.id)
@@ -93,6 +91,7 @@ export default {
 		}
     },
 	components: {
-	 }
+		startable
+	}
 }
 </script>
