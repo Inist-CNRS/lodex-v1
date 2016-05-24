@@ -86,9 +86,7 @@ _refrenced
 				| replace(["http://purl.org/dc/elements/1.1/", "dc:"])
 				}}</a>
 		</dt>
-		<dd>
-			{# _content | getJsonLdField([cName]) | tag('div') #}
-		</dd>
+		{{ _content.jsonld | getJsonLdField([cName]) | tag('dd') }}
 		{% endfor %}
 	</dl>
 </div>
