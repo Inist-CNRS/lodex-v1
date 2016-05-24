@@ -13,7 +13,7 @@ module.exports = function(options) {
     input._wid = 't' + nid;
     input._content = {
       json : loc.query
-    }
+    };
     submit(null, input);
   };
 };
