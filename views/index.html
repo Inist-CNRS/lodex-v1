@@ -41,12 +41,11 @@ _refrenced
     </div>
     <span class="fa fa-dollar"> XXXX {# _referenced | getJsonLdField(['http://purl.org/dc/terms/1.1/identifier']) | tag('span') #} </span>
     <h1>
-        {#
         {% if _referenced | getJsonLdField(['http://purl.org/dc/terms/title']) %}
             {{ _referenced | getJsonLdField(['http://purl.org/dc/terms/title']) | tag('span') }}
+        {% else %}
+            n/a
         {% endif %}
-        #}
-    n/a
     </h1>
     <p class="byline vcard">
     <a class="link fa fa-link" href="{{_referenced.@id}}"> {{_referenced.@id}}</a> <br>
@@ -55,13 +54,9 @@ _refrenced
     <p>
     n/a
     </p>
-    {#
     {% if _referenced | getJsonLdField(['http://purl.org/dc/terms/description']) %}
-    <p>
-            {{ _referenced | getJsonLdField(['http://purl.org/dc/terms/description']) | tag('span') }}
-    </p>
+        {{ _referenced | getJsonLdField(['http://purl.org/dc/terms/description']) | tag('p') }}
     {% endif %}
-#}
     <hr/>
     <dl class="dl-horizontal lead">
         <dt>GO UP</dt>
