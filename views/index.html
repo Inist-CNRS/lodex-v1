@@ -39,24 +39,13 @@ _refrenced
        -->
         </div>
     </div>
-    <span class="fa fa-dollar"> XXXX {# _referenced | getJsonLdField(['http://purl.org/dc/terms/1.1/identifier']) | tag('span') #} </span>
-    <h1>
-        {% if _referenced | getJsonLdField(['http://purl.org/dc/terms/title']) %}
-            {{ _referenced | getJsonLdField(['http://purl.org/dc/terms/title']) | tag('span') }}
-        {% else %}
-            n/a
-        {% endif %}
-    </h1>
+    <span class="fa fa-dollar"> XXXX {# _referenced | getJsonLdField('http://purl.org/dc/terms/1.1/identifier') | tag('span') #} </span>
+    {{ _referenced | getJsonLdField(['http://purl.org/dc/terms/title']) | expect({"content": "n/a"}) | tag("h1") }}
     <p class="byline vcard">
     <a class="link fa fa-link" href="{{_referenced.@id}}"> {{_referenced.@id}}</a> <br>
     <time class="date fa fa-clock-o" datetime="2015-01-05T17:12:07+00:00" pubdate=""> Updated on January 5, 2015</time> by <span class="author  fa fa-user"> <em>xxxxxx</em></span>
     </p>
-    <p>
-    n/a
-    </p>
-    {% if _referenced | getJsonLdField(['http://purl.org/dc/terms/description']) %}
-        {{ _referenced | getJsonLdField(['http://purl.org/dc/terms/description']) | tag('p') }}
-    {% endif %}
+    {{ _referenced | getJsonLdField(['http://purl.org/dc/terms/description']) | expect({"content": "No description available"}) | tag('p') }}
     <hr/>
     <dl class="dl-horizontal lead">
         <dt>GO UP</dt>
