@@ -24,7 +24,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-			<button class="btn btn btn-default navbar-btn" v-on:click="create(table)"> <icon name="plus-square-o" scale="2" label="Add"></icon> </button>
+			<a style="padding:10px" href="#" v-on:click="create(table)"> <icon name="plus-square-o" scale="2" label="Add"></icon> </a>
 		</li>
 	</ul>
     </div><!-- /.navbar-collapse -->
