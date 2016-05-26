@@ -18,7 +18,7 @@
 		<li v-for="table in store.allTables" class="" v-bind:class="{ 'active' : table.isSelected }">
 			<a href="#">
 				<startable v-bind:table="table"></startable>
-				<span v-on:click="choose(table)">{{ table.value }}</span>
+				<span v-on:click="choose(table)">{{ table.title }}</span>
 			</a>
 		</li>
       </ul>
@@ -50,7 +50,7 @@ export default {
 	methods: {
 		reload() {
 			let self = this;
-			let url = '/index/*?alt=min';
+			let url = '/index/*?alt=jsonld';
 			self.$http.get(url).then(function (response) {
 					if (Array.isArray(response.data)) {
 						response.data.forEach(function(i, index) {
@@ -65,7 +65,7 @@ export default {
 		choose(table) {
 			let self = this;
 			self.store.allTables.forEach(function(i, index) {
-				self.store.allTables[index].isSelected = i._id === table._id ? true: false
+				self.store.allTables[index].isSelected = i.name === table.name ? true: false
 			})
 			self.store.currentTable = table
 		},
@@ -92,6 +92,12 @@ export default {
     },
 	components: {
 		startable
-	}
+	},
+	events: {
+		'stared': function (ta) {
+			this.reload();
+		}
+	},
+
 }
 </script>

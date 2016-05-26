@@ -22,7 +22,7 @@ export default {
 		  console.log('upload', data.result[0]);
           if (Array.isArray(data.result) && data.result[0]) {
             self.filename = data.result[0].name;
-			self.$dispatch('files', data.result)
+			self.$dispatch('uploaded', data.result[0])
           }
 		  self.indicator = '√';
         },

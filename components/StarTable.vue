@@ -1,6 +1,6 @@
 <template>
 <span v-on:click="starer(table)">
-	<icon v-if="table.isSelected" name="star"></icon>
+	<icon v-if="table.isRoot" name="star"></icon>
 	<icon v-else name="star-o"></icon>
 </span>
 </template>
@@ -10,17 +10,19 @@ export default {
     props: [
 		'table'
 	],
-	data () {
-		return {
-		}
-	},
-	components: {
-	},
 	methods: {
 		starer(table) {
-			let self = this;
-			console.log('table', table);
-			alert('star ! ' + self.table._id);
+			const self = this;
+			const idt = self.table.name;
+			const url = '/-/setroot/';
+			const dta = {
+				'origin': idt,
+				'isRoot': true
+			};
+			self.$http.post(url, dta).then(function (response) {
+					self.$dispatch('stared', self.table);
+
+			}, console.error);
 		}
     }
 }

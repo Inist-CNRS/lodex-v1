@@ -108,5 +108,47 @@ module.exports = {
     "rest-crud.js"
   ],
   filters: ["jbj-array", "jbj-parse", "jbj-template", "jbj-rdfa", "jbj-nlp"],
-  allowedAltValues : ['dry', 'csv', 'jsonld', 'jbj', 'xls', 'tsv', 'html', 'raw']
+  allowedAltValues : ['dry', 'csv', 'jsonld', 'jbj', 'xls', 'tsv', 'html', 'raw'],
+  "indexColumns" : {
+    "isRoot" : {
+      "label" : "Is on main page",
+      "scheme" : "https://schema.org/isAccessibleForFree",
+      "type": "https://www.w3.org/TR/xmlschema-2/#boolean",
+      "get" : "_root",
+      "cast": "boolean",
+      "default" : false
+    },
+    "title" : {
+      "label" : "Title",
+      "scheme" : "http://purl.org/dc/elements/1.1/title",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "get": ["_content.json.title", "title", "_label", "_wid"],
+      "coalesce": true,
+      "first" : true
+    },
+    "name" : {
+      "label" : "Name",
+      "scheme" : "http://purl.org/dc/terms/identifier",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "get" : "_wid"
+    }
+  },
+  "defaultColumns": {
+    "title": {
+      "label" : "Title",
+      "scheme" : "http://purl.org/dc/terms/title",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "get": ["_content.json.title", "title", "_label", "_wid"],
+      "coalesce": true,
+      "first" : true
+    },
+    "description": {
+      "label" : "Description",
+      "scheme" : "http://purl.org/dc/terms/description",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "get": ["_content.json.description", "description", "_text"],
+      "coalesce": true,
+      "first" : true
+    }
+  }
 }

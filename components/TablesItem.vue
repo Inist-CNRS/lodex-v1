@@ -9,7 +9,7 @@
 	</div>
 	<div>
 		<alert type="info" >
-			<span>Current: {{ store.currentTable.value }} </span>
+			<span>Current: {{ store.currentTable.title }} </span>
 		</alert>
 
 	</div>
@@ -17,7 +17,7 @@
 
 <modal :show.sync="showModalUpload" title="Upload to this table">
   <div slot="modal-body" class="modal-body">
-	
+
 	<div class="form-group">
 		<label class="control-label" for="modal-load-input-type-a">Type</label>
 		<select id="modal-load-input-type-a" class="form-control modal-load-shared-type">
@@ -60,7 +60,7 @@ export default {
 	data () {
 		return {
 			store : sharedStore,
-			files: [],
+			file: {},
 			showModalFork: false,
 			showModalUpload: false,
 			showModalDownload: false
@@ -74,14 +74,14 @@ export default {
 		doUpload() {
 			this.showModalUpload = false
 			let self = this;
-			let url = '/' + self.store.currentTable._id  + '/?typ=file';
+			let url = '/' + self.store.currentTable.name  + '/?typ=file';
 			let dta = {
-				file : self.files
+				file : self.file
 			};
 			console.log('POST ' + url, dta);
 			self.$http.post(url, dta).then(function (response) {
 					console.log('POST ' + url, response);
-				alert('Uploaded');
+					self.file = {}
 			}, console.error);
 		},
 		doDownload() {
@@ -90,8 +90,8 @@ export default {
 		}
 	},
 	events: {
-		'files': function (fs) {
-			this.files = fs;
+		'uploaded': function (fs) {
+			this.file = fs;
 		}
 	},
 	components: {
