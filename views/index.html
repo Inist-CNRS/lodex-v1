@@ -39,7 +39,7 @@ _referenced
        -->
         </div>
     </div>
-    <span class="fa fa-dollar"> XXXX {# _referenced | getJsonLdField('http://purl.org/dc/terms/1.1/identifier') | tag('span') #} </span>
+    {{ _referenced | getJsonLdField('http://purl.org/dc/terms/1.1/identifier') | expect({ content: "XXXX"}) | class("fa fa-dollar") | tag('span') }}
     {{ _referenced | getJsonLdField(['http://purl.org/dc/terms/title']) | expect({"content": "n/a"}) | tag("h1") }}
     <p class="byline vcard">
     <a class="link fa fa-link" href="{{_referenced.@id}}"> {{_referenced.@id}}</a> <br>
