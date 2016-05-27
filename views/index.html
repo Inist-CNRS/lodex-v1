@@ -27,7 +27,7 @@ $('.download').click(function(e) {
 
             <div class="badgenbdoc">{{_documents|length}} </div>Ressources
             <!--
-_refrenced
+_referenced
 | jsonld('compacted')
 | prefix([{"http://www.w3.org/2004/02/skos/core#", "skos:"}, {"http://www.w3.org/2008/05/skos-xl", "skos-xl:"}])
 | mapping([{"http://www.w3.org/2004/02/skos/core#prefLabel", "Term"}])
@@ -39,7 +39,7 @@ _refrenced
        -->
         </div>
     </div>
-    <span class="fa fa-dollar"> XXXX {# _referenced | getJsonLdField('http://purl.org/dc/terms/1.1/identifier') | tag('span') #} </span>
+    {{ _referenced | getJsonLdField('http://purl.org/dc/terms/1.1/identifier') | expect({ content: "XXXX"}) | class("fa fa-dollar") | tag('span') }}
     {{ _referenced | getJsonLdField(['http://purl.org/dc/terms/title']) | expect({"content": "n/a"}) | tag("h1") }}
     <p class="byline vcard">
     <a class="link fa fa-link" href="{{_referenced.@id}}"> {{_referenced.@id}}</a> <br>
@@ -50,15 +50,15 @@ _refrenced
     <dl class="dl-horizontal lead">
         <dt>GO UP</dt>
         <dd>
-        <a href="{{_referenced.@id}}"> {{_referenced.@id}}</a>
+            <a href="{{_referenced.@id}}"> {{_referenced.@id}}</a>
         </dd>
         <dt>Source</dt>
         <dd>
-                <a href="/?alt=xls"   ><span class="fa fa-file-excel-o"></span> href="/?alt=xls"   </a>( Excel )<br/>
-                <a href="/?alt=tsv"   ><span class="fa fa-list"></span>         href="/?alt=tsv"   </a>( TSV )<br/>
-                <a href="/?alt=csv"   ><span class="fa fa-table"></span>        href="/?alt=csv"   </a>( CSV )<br/>
-                <a href="/?alt=nq"    ><span class="fa fa-bars"></span>         href="/?alt=nq"    </a>( N-Quads )<br/>
-                <a href="/?alt=jsonld"><span class="fa fa-code"></span>         href="/?alt=jsonld"    </a>( N-Quads )<br/>
+                <a href="/?alt=xls"   ><span class="fa fa-file-excel-o"></span> ( Excel )</a><br/>
+                <a href="/?alt=tsv"   ><span class="fa fa-list"></span>         ( TSV )</a><br/>
+                <a href="/?alt=csv"   ><span class="fa fa-table"></span>        ( CSV )</a><br/>
+                <a href="/?alt=nq"    ><span class="fa fa-bars"></span>         ( N-Quads )</a><br/>
+                <a href="/?alt=jsonld"><span class="fa fa-code"></span>         ( JSON-LD )</a><br/>
         </dd>
     </dl>
     <hr/>
