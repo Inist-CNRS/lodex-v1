@@ -4,28 +4,12 @@
 <link href="/assets/css/index.css" rel="stylesheet" type="text/css">
 {% endblock %}
 
-{% block scripts %}
-<script>
-$('.download').click(function(e) {
-    $('#modal-download-set').modal('hide')
-})
-</script>
-{% endblock %}
-
-
-
 {% block head %}
 <title>{{ _label | d($_wid) | d('n/a') | e }}</title>
 <meta name="description" content="{{ table._text | d($_wid) | d('n/a') | e }}">
 <meta name="author" content="">
 {% endblock %}
 
-{% block header %}
-<div>
-    <div class="postmeta updated color_gray">
-        <div class="pull-right">
-
-            <div class="badgenbdoc">{{_documents|length}} </div>Ressources
             <!--
 _referenced
 | jsonld('compacted')
@@ -37,38 +21,64 @@ _referenced
 | tag('dd')
  
        -->
-        </div>
+
+
+{% block header %}
+<div>
+    <div class="postmeta updated color_gray">
+        <div class="pull-right">
+            <div class="badgenbdoc">{{ _documents|length }} </div>Ressources
+       </div>
     </div>
-    {{ _referenced | getJsonLdField('http://purl.org/dc/terms/1.1/identifier') | expect({ content: "XXXX"}) | class("fa fa-dollar") | tag('span') }}
+    {{ _content.jsonld | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | class("fa fa-dollar") | tag('span') }}
     {{ _referenced | getJsonLdField(['http://purl.org/dc/terms/title']) | expect({"content": "n/a"}) | tag("h1") }}
     <p class="byline vcard">
-    <a class="link fa fa-link" href="{{_referenced.@id}}"> {{_referenced.@id}}</a> <br>
-    <time class="date fa fa-clock-o" datetime="2015-01-05T17:12:07+00:00" pubdate=""> Updated on January 5, 2015</time> by <span class="author  fa fa-user"> <em>xxxxxx</em></span>
+		<a class="link fa fa-link" href="{{ _referenced.@id }}"> {{ _referenced.@id|d('n/a') }}</a> <br>
+		<div class="date fa fa-clock-o"> Updated on <time datetime="" pubdate="">{{ _content.jsonld | getJsonLdField('http://purl.org/dc/terms/modified') | expect({ content: "n/a"}) | tag('span') }} </time></div> <br>
+		<div class="user fa fa-user"> by {{ _content.jsonld | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | tag('span') }}</div> <br>
     </p>
-    {{ _referenced | getJsonLdField(['http://purl.org/dc/terms/description']) | expect({"content": "No description available"}) | tag('p') }}
+    {{ _content | getJsonLdField(['http://purl.org/dc/terms/creator']) | expect({"content": "No description available"}) | tag('p') }}
     <hr/>
     <dl class="dl-horizontal lead">
-        <dt>GO UP</dt>
-        <dd>
-            <a href="{{_referenced.@id}}"> {{_referenced.@id}}</a>
-        </dd>
-        <dt>Source</dt>
-        <dd>
-                <a href="/?alt=xls"   ><span class="fa fa-file-excel-o"></span> ( Excel )</a><br/>
-                <a href="/?alt=tsv"   ><span class="fa fa-list"></span>         ( TSV )</a><br/>
-                <a href="/?alt=csv"   ><span class="fa fa-table"></span>        ( CSV )</a><br/>
-                <a href="/?alt=nq"    ><span class="fa fa-bars"></span>         ( N-Quads )</a><br/>
-                <a href="/?alt=jsonld"><span class="fa fa-code"></span>         ( JSON-LD )</a><br/>
-        </dd>
+		<dt><a href="http://purl.org/dc/terms/isPartOf">dc:isPartOf</a></dt>
+		<dd>
+			<a href="{{_referenced.@id}}">{{_referenced.@id|d('n/a')}}</a>
+		</dd>
+		<dt><a href="http://purl.org/dc/terms/source">dc:source</a></dt>
+		{{ _referenced | getJsonLdField(['http://purl.org/dc/terms/source']) | expect({"content": "n/a"}) | tag("dd") }}
+	</dl>
+    <hr/>
+    <dl class="dl-horizontal lead">
+			<ul class="nav nav-pills nav-justified">
+			  <li role="presentation">
+				  <a href="?alt=xlsx"><span class="fa fa-file-excel-o fa-3x"></span><br/>Excel</a>
+			  </li>
+			  <li role="presentation">
+				  <a href="?alt=tsv"><span class="fa fa-list fa-3x"></span><br>TSV</a>
+			  </li>
+			  <li role="presentation">
+				  <a href="?alt=csv"><span class="fa fa-table fa-3x"></span><br>CSV</a>
+			  </li>
+			  <li role="presentation">
+				  <a href="?alt=nq"><span class="fa fa-bars fa-3x"></span><br>N-Quads</a>
+			  </li>
+			  <li role="presentation">
+				  <a href="?alt=nq.xlsx"><span class="fa fa-file-excel-o fa-3x"></span><br>N-Quads<br>(Excel)</a>
+			  </li>
+			  <li role="presentation">
+				  <a href="?alt=jsonld"><span class="fa fa-file-o fa-3x"></span><br> JSON LD</a>
+			  </li>
+			</ul>
     </dl>
     <hr/>
     <dl class="dl-horizontal lead">
         {% for cName in _referenced | select(".@context .@id")  | dedupe(true) %}
         <dt>
-            <a href="{{ cName}}">{{ cName
+            <a href="{{ cName }}">{{ cName
                 | replace(["http://www.w3.org/2004/02/skos/core#", "skos:"])
                 | replace(["http://www.w3.org/2008/05/skos-xl", "skos-xl:"])
                 | replace(["http://purl.org/dc/elements/1.1/", "dc:"])
+                | replace(["http://purl.org/dc/terms/", "dc:"])
                 }}</a>
         </dt>
         <dd>
@@ -81,13 +91,6 @@ _referenced
 
 {% block body %}
 
-<!--
-    <div id="recent-posts-2" class="widget widget_recent_entries">
-    <h4 class="widgettitle">Nombre de documents</h4>
-    <div class="badgenbdoc">{{_documents|length}} documents</div>
-
-    </div>
--->
 <ul class="nav nav-tabs">
   <li role="presentation" class="active"><a href="#">Resources contained</a></li>
 </ul>
@@ -120,50 +123,4 @@ _referenced
     </table>
 </div>
 
-<div class="modal" id="modal-download-set" tabindex="-1" role="dialog" aria-labelledby="modal-download-set-title">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modal-download-set-title">{{ __('Download set') }}</h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                Le jeu de données est disponible sur ce site selon une syntaxe "tableau", avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD et N-Quads.
-                </p>
-                <p>
-                La licence d'utilisation de ces données est disponible à cette adresse : <a href="http://lod.istex.fr/licence">http://lod.istex.fr/licence</a>.
-                </p>
-                <p>
-                Ils sont librement téléchargeable au travers de ces 5 fichiers d'export :
-                </p>
-                <ul class="list-inline text-center">
-                    <li>
-                        <a class="download" href="?alt=xlsx"><span class="fa fa-file-excel-o fa-3x"></span><br> Excel</a>
-                    </li>
-                    <li>
-                        <a class="download" href="?alt=tsv"><span class="fa fa-list fa-3x"></span><br> TSV</a>
-                    </li>
-                    <li>
-                        <a class="download" href="?alt=csv"><span class="fa fa-table fa-3x"></span><br> CSV</a>
-                    </li>
-                    <li>
-                        <a class="download" href="?alt=nq"><span class="fa fa-bars fa-3x"></span><br> N-Quads</a>
-                    </li>
-                    <li>
-                        <a class="download" href="?alt=nq.xlsx"><span class="fa fa-file-excel-o fa-3x"></span><br><em> Excel (RDF)</em></a>
-                    </li>
-                    <li>
-                        <a class="download" href="?alt=json"><span class="fa fa-file-o fa-3x"></span><br> JSON LD</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#modal-download-set">{{ __('Close') }}</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 {% endblock %}
-
-

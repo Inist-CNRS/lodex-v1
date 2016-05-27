@@ -131,6 +131,12 @@ module.exports = {
       "scheme" : "http://purl.org/dc/terms/identifier",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "get" : "_wid"
+    },
+    "updated" : {
+      "label" : "Updated",
+      "scheme" : "http://purl.org/dc/terms/modified",
+      "type": "https://www.w3.org/TR/xmlschema-2/#date",
+      "get" : "dateSynchronised"
     }
   },
   "defaultColumns": {
@@ -149,6 +155,12 @@ module.exports = {
       "get": ["_content.json.description", "description", "_text"],
       "coalesce": true,
       "first" : true
+    },
+    "updated" : {
+      "label" : "Updated",
+      "scheme" : "http://purl.org/dc/terms/modified",
+      "type": "https://www.w3.org/TR/xmlschema-2/#date",
+      "get" : "dateSynchronised"
     }
   }
 }

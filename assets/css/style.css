@@ -5,7 +5,7 @@ Author: Dan Brown
 Stylesheet: Main Stylesheet
 
 Here's where the magic happens. First we are calling the bootstrap
-LESS files.  Then we'll load Font Awesome.  Any customizations 
+LESS files.  Then we'll load Font Awesome.  Any customizations
 should be placed in either custom-variables.less, a new less file,
 or the proper file inside less/brew
 ******************************************************************/
@@ -368,7 +368,7 @@ h6,
   font-weight: 500;
   line-height: 1.1;
   color: #458ca5;
-    
+
 }
 h1 small,
 h2 small,
@@ -435,7 +435,7 @@ h6,
   margin-top: 10px;
   margin-bottom: 10px;
     /*    ISTEX ICI*/
-    
+
     border-bottom: 3px solid #C4D734;
     font-style: italic;
 }
@@ -3487,8 +3487,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
-  text-decoration: none;
-  background-color: #a6dba0;
+  /* text-decoration: none; */
+  /* background-color: #a6dba0; */
 }
 .nav > li.disabled > a {
   color: #00a241;
@@ -7659,7 +7659,7 @@ Stylesheet: Footer
 ******************************************************************/
 #footer {
 /*  border-top: 8px solid #008837; istex*/
-   border-top: 8px solid #c4d735;  
+   border-top: 8px solid #c4d735;
 /*  background: #2a272e; istex dessous*/
    background: #EAEADE;
   padding-top: 30px;
@@ -7731,7 +7731,7 @@ These are the styles for posts, pages, archive, & blog index
 
 ------------ MAP ------------
 
-01. #CONTENT & #MAIN WRAPPERS 
+01. #CONTENT & #MAIN WRAPPERS
 02. ARTICLE WRAPPER
 03. ENTRY/PAGE HEADER
 04. FEATURED IMAGE
@@ -8230,8 +8230,8 @@ query for retina AND a certain size if you want. Go Nuts.
 */
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
   /******************************************************************
-Site Name: 
-Author: 
+Site Name:
+Author:
 
 Stylesheet: Retina Screens & Devices Stylesheet
 
@@ -8240,9 +8240,9 @@ if you're not using font icons. Here you can add them in one neat
 place.
 
 ******************************************************************/
-  /* 
+  /*
 
-EXAMPLE 
+EXAMPLE
 Let's say you have an image and you need to make sure it looks ok
 on retina screens. Let's say we have an icon which dimension are
 24px x 24px. In your regular stylesheets, it would look something
@@ -8263,10 +8263,10 @@ dimensions, this is what we would put in our retina stylesheet:
 	background-size: 24px 24px;
 }
 
-So, you would create the same icon, but at double the resolution, meaning 
+So, you would create the same icon, but at double the resolution, meaning
 it would be 48px x 48px. You'd name it the same, but with a @2x at the end
 (this is pretty standard practice). Set the background image so it matches
-the original dimensions and you are good to go. 
+the original dimensions and you are good to go.
 
 */
 }
