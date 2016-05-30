@@ -108,7 +108,7 @@ module.exports = {
     "rest-crud.js"
   ],
   filters: ["jbj-array", "jbj-parse", "jbj-template", "jbj-rdfa", "jbj-nlp"],
-  allowedAltValues : ['dry', 'csv', 'jsonld', 'jbj', 'xls', 'tsv', 'html', 'raw'],
+  allowedAltValues : ['dry', 'csv', 'jsonld', 'nq', 'nq.xlsx', 'jbj', 'xls', 'tsv', 'html', 'raw'],
   "indexColumns" : {
     "isRoot" : {
       "label" : "Is on main page",
