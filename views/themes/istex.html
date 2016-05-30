@@ -1,3 +1,78 @@
+{% macro resource(_content, _referenced, _documents) %}
+<div>
+    <div class="postmeta updated color_gray">
+        <div class="pull-right">
+            <div class="badgenbdoc">{{ _documents|d([])|length }} </div>Ressources
+       </div>
+    </div>
+    {{ _content | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | class("fa fa-dollar") | tag('span') }}
+	{{ _referenced | d({}) | getJsonLdField(['http://purl.org/dc/terms/title']) | expect({"content": "n/a"}) | tag("h1") }}
+    <p class="byline vcard">
+		<a class="link fa fa-link" href="{{ _referenced.@id|d('#') }}"> {{ _referenced.@id|d('n/a') }}</a> <br>
+		<div class="date fa fa-clock-o"> Updated on <time datetime="" pubdate="">{{ _content | getJsonLdField('http://purl.org/dc/terms/modified') | expect({ content: "n/a"}) | tag('span') }} </time></div> <br>
+		<div class="user fa fa-user"> by {{ _content | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | tag('span') }}</div> <br>
+    </p>
+    {{ _content | getJsonLdField(['http://purl.org/dc/terms/creator']) | expect({"content": "No description available"}) | tag('p') }}
+    <hr/>
+    <dl class="dl-horizontal lead">
+		<dt><a href="http://purl.org/dc/terms/isPartOf">dc:isPartOf</a></dt>
+		<dd>
+			<a href="{{_referenced.@id|d('#')}}">{{_referenced.@id|d('n/a')}}</a>
+		</dd>
+		<dt><a href="http://purl.org/dc/terms/source">dc:source</a></dt>
+		<dd>
+		<!--
+	  bug : 	  
+	  <a href="{{ _referenced | d({}) | getJsonLdField(['http://purl.org/dc/terms/source']) | expect({'content': 'n/a'}) | tag('') }}"></a>
+		-->
+			<a href="#">
+				{{ _referenced | d({}) | getJsonLdField(['http://purl.org/dc/terms/source']) | expect({"content": "n/a"}) | tag("span") }}
+			</a>
+		</dd>
+	</dl>
+    <hr/>
+    <dl class="dl-horizontal lead">
+			<ul class="nav nav-pills nav-justified">
+			  <li role="presentation">
+				  <a href="?alt=xlsx"><span class="fa fa-file-excel-o fa-3x"></span><br/>Excel</a>
+			  </li>
+			  <li role="presentation">
+				  <a href="?alt=tsv"><span class="fa fa-list fa-3x"></span><br>TSV</a>
+			  </li>
+			  <li role="presentation">
+				  <a href="?alt=csv"><span class="fa fa-table fa-3x"></span><br>CSV</a>
+			  </li>
+			  <li role="presentation">
+				  <a href="?alt=nq"><span class="fa fa-bars fa-3x"></span><br>N-Quads</a>
+			  </li>
+			  <li role="presentation">
+				  <a href="?alt=nq.xlsx"><span class="fa fa-file-excel-o fa-3x"></span><br>N-Quads<br>(Excel)</a>
+			  </li>
+			  <li role="presentation">
+				  <a href="?alt=jsonld"><span class="fa fa-file-o fa-3x"></span><br> JSON LD</a>
+			  </li>
+			</ul>
+    </dl>
+    <hr/>
+    <dl class="dl-horizontal lead">
+        {% for cName in _referenced  | d({}) | select(".@context .@id")  | dedupe(true) %}
+        <dt>
+            <a href="{{ cName }}">{{ cName
+                | replace(["http://www.w3.org/2004/02/skos/core#", "skos:"])
+                | replace(["http://www.w3.org/2008/05/skos-xl", "skos-xl:"])
+                | replace(["http://purl.org/dc/elements/1.1/", "dc:"])
+                | replace(["http://purl.org/dc/terms/", "dc:"])
+                }}</a>
+        </dt>
+        <dd>
+            {{ _referenced | d({}) | getJsonLdField([cName]) | tag('div') }}
+        </dd>
+        {% endfor %}
+    </dl>
+</div>
+{% endmacro %}
+
+
 <!doctype html>
 
 <!--[if lt IE 7]><html lang="en-US" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
