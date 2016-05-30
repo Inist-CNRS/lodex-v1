@@ -31,9 +31,9 @@ _referenced
        </div>
     </div>
     {{ _content.jsonld | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | class("fa fa-dollar") | tag('span') }}
-    {{ _referenced | getJsonLdField(['http://purl.org/dc/terms/title']) | expect({"content": "n/a"}) | tag("h1") }}
+	{{ _referenced | d({}) | getJsonLdField(['http://purl.org/dc/terms/title']) | expect({"content": "n/a"}) | tag("h1") }}
     <p class="byline vcard">
-		<a class="link fa fa-link" href="{{ _referenced.@id }}"> {{ _referenced.@id|d('n/a') }}</a> <br>
+		<a class="link fa fa-link" href="{{ _referenced.@id|d('#') }}"> {{ _referenced.@id|d('n/a') }}</a> <br>
 		<div class="date fa fa-clock-o"> Updated on <time datetime="" pubdate="">{{ _content.jsonld | getJsonLdField('http://purl.org/dc/terms/modified') | expect({ content: "n/a"}) | tag('span') }} </time></div> <br>
 		<div class="user fa fa-user"> by {{ _content.jsonld | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | tag('span') }}</div> <br>
     </p>
@@ -42,10 +42,18 @@ _referenced
     <dl class="dl-horizontal lead">
 		<dt><a href="http://purl.org/dc/terms/isPartOf">dc:isPartOf</a></dt>
 		<dd>
-			<a href="{{_referenced.@id}}">{{_referenced.@id|d('n/a')}}</a>
+			<a href="{{_referenced.@id|d('#')}}">{{_referenced.@id|d('n/a')}}</a>
 		</dd>
 		<dt><a href="http://purl.org/dc/terms/source">dc:source</a></dt>
-		{{ _referenced | getJsonLdField(['http://purl.org/dc/terms/source']) | expect({"content": "n/a"}) | tag("dd") }}
+		<dd>
+		<!--
+	  bug : 	  
+	  <a href="{{ _referenced | d({}) | getJsonLdField(['http://purl.org/dc/terms/source']) | expect({'content': 'n/a'}) | tag('') }}"></a>
+		-->
+			<a href="#">
+				{{ _referenced | d({}) | getJsonLdField(['http://purl.org/dc/terms/source']) | expect({"content": "n/a"}) | tag("span") }}
+			</a>
+		</dd>
 	</dl>
     <hr/>
     <dl class="dl-horizontal lead">
@@ -72,7 +80,7 @@ _referenced
     </dl>
     <hr/>
     <dl class="dl-horizontal lead">
-        {% for cName in _referenced | select(".@context .@id")  | dedupe(true) %}
+        {% for cName in _referenced  | d({}) | select(".@context .@id")  | dedupe(true) %}
         <dt>
             <a href="{{ cName }}">{{ cName
                 | replace(["http://www.w3.org/2004/02/skos/core#", "skos:"])
@@ -82,7 +90,7 @@ _referenced
                 }}</a>
         </dt>
         <dd>
-            {{ _referenced | getJsonLdField([cName]) | tag('div') }}
+            {{ _referenced | d({}) | getJsonLdField([cName]) | tag('div') }}
         </dd>
         {% endfor %}
     </dl>
