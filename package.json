@@ -43,6 +43,7 @@
     "castor-load-nq": "latest",
     "castor-load-xml": "latest",
     "debug": "latest",
+    "heartbeats": "^3.1.3",
     "jbj-array": "^1.0.0",
     "jbj-nlp": "^1.1.0",
     "jbj-parse": "^1.0.0",
