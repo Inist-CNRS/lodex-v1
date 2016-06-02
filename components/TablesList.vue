@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="/">LODEX</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -48,7 +48,7 @@ export default {
 		}
 	},
 	methods: {
-		reload() {
+		reload(done) {
 			let self = this;
 			let url = '/index/*?alt=jsonld';
 			self.$http.get(url).then(function (response) {
@@ -59,6 +59,9 @@ export default {
 						response.data[0].isSelected = true
 						self.store.allTables = response.data
 						self.store.currentTable = response.data[0]
+						if (typeof done === 'function') {
+							done();
+						}
 					}
 			}, console.error);
 		},
@@ -95,7 +98,10 @@ export default {
 	},
 	events: {
 		'stared': function (ta) {
-			this.reload();
+			const self = this
+			self.reload(function() {
+				self.choose(ta);
+			});
 		}
 	},
 

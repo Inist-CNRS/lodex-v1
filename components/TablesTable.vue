@@ -72,7 +72,7 @@ export default {
   methods: {
     load(done) {
       let self = this;
-      let limit = 5;
+      let limit = 50;
       let page = Number(self.page)
       page = Number.isNaN(page) ? 1 : page
       let offset = limit * (page - 1)

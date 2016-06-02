@@ -11,6 +11,7 @@
 <script>
 
 export default {
+	props: ['filename'],
 	ready () {
 	  let self = this;
       $('#modal-load-input-filename').fileupload({
@@ -35,7 +36,6 @@ export default {
 	},
 	data () {
 		return {
-			filename : '',
 			indicator: '?'
 		}
 	},

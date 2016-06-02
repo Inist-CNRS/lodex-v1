@@ -2,7 +2,7 @@
   <menu></menu>
   <div class="container-fluid">
 	<item></item>
-	<array></array>
+	<array v-ref:items></array>
   </div>
 </template>
 
@@ -12,15 +12,15 @@ import TablesItem from './TablesItem.vue'
 import TablesTable from './TablesTable.vue'
 
 export default {
+	events: {
+		'refresh': function () {
+			this.$refs.items.load()
+		}
+	},
 	components: {
 		'menu': TablesList,
 		'item': TablesItem,
 		'array': TablesTable
-	},
-	data () {
-		return {
-			'hello': 'Hello'
-		}
 	}
 }
 </script>
