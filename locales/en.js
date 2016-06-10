@@ -77,5 +77,12 @@
 	"Close": "Close",
 	"Try to log in.": "Try to log in.",
 	"Log in": "Log in",
-	"Try to start (or retstart) Mongo.": "Try to start (or restart) Mongo."
+	"Try to start (or retstart) Mongo.": "Try to start (or restart) Mongo.",
+	"Edit Resource Reference": "Edit Resource Reference",
+	"Excel file": "Excel file",
+	"TSV file": "TSV file",
+	"Language": "Language",
+	"Displayed on the home page": "Displayed on the home page",
+	"Crown": "Crown",
+	"Réf.": "Réf."
 }
