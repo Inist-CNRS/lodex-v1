@@ -107,7 +107,14 @@ module.exports = {
     "v3.js",
     "rest-crud.js"
   ],
-  filters: ["jbj-array", "jbj-parse", "jbj-template", "jbj-rdfa", "jbj-nlp"],
+  filters: [
+    "jbj-array", 
+    "jbj-parse", 
+    "jbj-template", 
+    "jbj-rdfa", 
+    "jbj-nlp",
+    "lodash.js"
+  ],
   allowedAltValues : ['dry', 'csv', 'jsonld', 'nq', 'nq.xlsx', 'jbj', 'xls', 'tsv', 'html', 'raw'],
   "indexColumns" : {
     "isRoot" : {

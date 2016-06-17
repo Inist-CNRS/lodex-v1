@@ -48,11 +48,11 @@ _referenced
             {% for doc in _documents %}
             <tr>
                 <td data-title="URI">
-                    <a href="{{ doc._content.jsonld.@id }}/">{{ doc._content.jsonld.@id }}</a>
+                    <a href="{{ doc._content.jsonld.@id }}/">{{ doc._content.jsonld.@id|truncateField(30) }}</a>
                 </td>
                 {% for name, con in _columns %}
                 {% if con.primary == 'true' %}
-                <td data-title="{{ con.label }}">{{doc._content.jsonld[name]}}</td>
+                <td data-title="{{ con.label }}">{{doc._content.jsonld[name]|truncateField(50) }}</td>
                 {% endif %}
                 {% endfor %}
             </tr>
