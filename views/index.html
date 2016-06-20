@@ -24,13 +24,14 @@ _referenced
 
 
 {% block header %}
-{{ resource(_content.jsonld, _referenced, _documents) }}
+{{ resource(_referenced) }}
 {% endblock %}
 
 {% block body %}
 
 <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Resources contained</a></li>
+	<li role="presentation" class=""><a href="{{ _referenced | d({}) | getJsonLdField('http://purl.org/dc/terms/isPartOf') | get('content') }}">isPartOf</a></li>
+	<li role="presentation" class="active"><a href="#">hasPart</a></li>
 </ul>
 <div id="no-more-tables">
     <table class="table-bordered table-striped table-condensed cf">
@@ -48,11 +49,11 @@ _referenced
             {% for doc in _documents %}
             <tr>
                 <td data-title="URI">
-                    <a href="{{ doc._content.jsonld.@id }}/">{{ doc._content.jsonld.@id|truncateField(30) }}</a>
+                    <a href="{{ doc._content.jsonld.@id }}/">{{ doc._content.jsonld.@id }}</a>
                 </td>
                 {% for name, con in _columns %}
                 {% if con.primary == 'true' %}
-                <td data-title="{{ con.label }}">{{doc._content.jsonld[name]|truncateField(50) }}</td>
+                <td data-title="{{ con.label }}">{{doc._content.jsonld[name] }}</td>
                 {% endif %}
                 {% endfor %}
             </tr>

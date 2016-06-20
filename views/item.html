@@ -20,13 +20,14 @@
 
 
 {% block header %}
-{{ resource(_content.jsonld, _referenced, _documents) }}
+{{ resource(_content.jsonld) }}
 {% endblock %}
 
 {% block body %}
 {% if themeName == 'istex' %}
 <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">in ISTEX</a></li>
+	<li role="presentation" class=""><a href="{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/isPartOf') | get('content') }}">isPartOf</a></li>
+	<li role="presentation" class="active"><a href="#">in ISTEX</a></li>
 </ul>
 <div istex-results></div>
 <script type="text/javascript">
