@@ -24,6 +24,11 @@ _referenced
 
 
 {% block header %}
+<div class="postmeta updated color_gray">
+	<div class="pull-right">
+		<div class="badgenbdoc">{{ _documents| d([]) | length }}</div>Ressources
+	</div>
+</div>
 {{ resource(_referenced) }}
 {% endblock %}
 
