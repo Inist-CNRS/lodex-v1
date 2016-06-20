@@ -1,14 +1,11 @@
 {% extends "./themes/" + themeName + ".html" %}
 
 
-
 {% block head %}
 <title> {{ _table._label | d(_table._wid) | d('n/a') | e }}  </title>
 <meta name="description" content="{{ _table._text | d('n/a') | e }}">
 <meta name="author" content="">
 {% endblock %}
-
-
 
 
 {% block styles %}
@@ -23,20 +20,27 @@
 {{ resource(_content.jsonld) }}
 {% endblock %}
 
+
 {% block body %}
-{% if themeName == 'istex' %}
 <ul class="nav nav-tabs">
 	<li role="presentation" class=""><a href="{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/isPartOf') | get('content') }}">isPartOf</a></li>
+	<li role="presentation" class=""><a href="{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/hasPart') | get('content') }}">hasPart</a></li>
+	{% if themeName == 'istex' %}
 	<li role="presentation" class="active"><a href="#">in ISTEX</a></li>
+	{% endif %}
 </ul>
 <div istex-results></div>
+{% endblock %}
+
+
+{% block scripts %}
+{% if themeName == 'istex' %}
 <script type="text/javascript">
 var istexConfig = {
-    query: '* AND genre.raw:("{{_content.jsonld.englishLabel}}")',
+    query: '"{{ _content.jsonld | getJsonLdField('http://purl.org/dc/terms/identifier') | get('content') }}"',
     hideButton: true
 };
 </script>
-
 <script src="/assets/js/angular.min.js"></script>
 <script src="/assets/js/rzslider.js" type="text/javascript"></script>
 <script src="/assets/js/istex-widget.min.js" type="text/javascript"></script>
