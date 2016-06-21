@@ -12,7 +12,7 @@ body{margin:0;}
 .srent a:link{text-decoration:none;height:30px}
 .srent a:active,.srent a:visited,.srent a:hover{text-decoration:underline;}
 .srent a:link,.srent a:active, .srent a:visited, .srent a:hover{color:black; display:block;text-align:center; font-size:0.8em;}
-.srent li li{background-color:transparent;border-right:1px solid #eaeade;border-bottom:1px solid #eaeade;border-left:1px solid #eaeade;padding-left:10px;color:#fff}
+.srent li li{background-color:white;border-right:1px solid #eaeade;border-bottom:1px solid #eaeade;border-left:1px solid #eaeade;padding-left:10px;color:#fff}
 .srent li li, .srent li li a, .srent li li a:hover, .srent li li a:focus{display:block;	width:100px;}
 .srent li li a:link, .srent li li a:active, .srent li li a:visited, .srent li li a:hover, .srent li li a:focus{text-align:left;	}
 .srent li li a:hover, .srent li li a:focus{text-align:left; display:block; width:100px; height:30px;}
