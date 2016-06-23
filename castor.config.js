@@ -108,10 +108,10 @@ module.exports = {
     "rest-crud.js"
   ],
   filters: [
-    "jbj-array", 
-    "jbj-parse", 
-    "jbj-template", 
-    "jbj-rdfa", 
+    "jbj-array",
+    "jbj-parse",
+    "jbj-template",
+    "jbj-rdfa",
     "jbj-nlp",
     "lodash.js"
   ],
