@@ -11,25 +11,109 @@
 {% block styles %}
 {% if themeName == 'istex' %}
 <link rel="stylesheet" type="text/css" href="/assets/css/rzslider.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/rzslider.css">
+<link rel="stylesheet" type="text/css" href="/libs/bootstrap-vertical-tabs/bootstrap.vertical-tabs.min.css">
 <link rel="stylesheet" type="text/css" href="http://istex.github.io/styleAngular/style.min.css">
 {% endif %}
 {% endblock %}
 
 
 {% block header %}
-{{ resource(_content.jsonld) }}
+<div>
+	<!-- Tab panes -->
+	<div class="col-xs-11">
+		<div class="tab-content">
+			<div class="tab-pane active" id="notice">
+
+				{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | class("fa fa-dollar") | tag('span') }}
+				{{ _content.jsonld | d({}) | getJsonLdField(['http://purl.org/dc/terms/title']) | expect({"content": "n/a"}) | tag("h1") }}
+				<p class="byline vcard">
+					<a class="link fa fa-link"> {{ _content.@id|d('n/a') }}</a> <br>
+					<div class="date fa fa-clock-o"> Updated on <time datetime="" pubdate="">{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/modified') | expect({ content: "n/a"}) | tag('span') }} </time></div> <br>
+					<div class="user fa fa-user"> by {{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | tag('span') }}</div> <br>
+				</p>
+				{{ _content.jsonld | d({}) | getJsonLdField(['http://purl.org/dc/terms/creator']) | expect({"content": "No description available"}) | tag('p') }}
+				<hr/>
+				<dl class="dl-horizontal lead">
+					{% for cName in _content.jsonld | d({}) | select(".@context .@id")  | dedupe(true) %}
+					<dt>
+					<a href="{{ cName }}">{{ cName
+						| replace(["http://www.w3.org/2004/02/skos/core#", "skos:"])
+						| replace(["http://www.w3.org/2008/05/skos-xl", "skos-xl:"])
+						| replace(["http://purl.org/dc/elements/1.1/", "dc:"])
+						| replace(["http://purl.org/dc/terms/", "dc:"])
+						}}</a>
+					</dt>
+					<dd>
+					{{ _content.jsonld | d({}) | getJsonLdField(cName) | tag('div') }}
+					</dd>
+					{% endfor %}
+				</dl>
+			</div>
+			<div class="tab-pane" id="export">
+				<hr/>
+				<dl class="dl-horizontal lead">
+					<ul class="nav nav-pills nav-justified">
+						<li role="presentation">
+							<a href="?alt=xlsx"><span class="fa fa-file-excel-o fa-3x"></span><br/>Excel</a>
+						</li>
+						<li role="presentation">
+							<a href="?alt=tsv"><span class="fa fa-list fa-3x"></span><br>TSV</a>
+						</li>
+						<li role="presentation">
+							<a href="?alt=csv"><span class="fa fa-table fa-3x"></span><br>CSV</a>
+						</li>
+						<li role="presentation">
+							<a href="?alt=nq"><span class="fa fa-bars fa-3x"></span><br>N-Quads</a>
+						</li>
+						<li role="presentation">
+							<a href="?alt=nq.xlsx"><span class="fa fa-file-excel-o fa-3x"></span><br>N-Quads<br>(Excel)</a>
+						</li>
+						<li role="presentation">
+							<a href="?alt=jsonld"><span class="fa fa-file-o fa-3x"></span><br> JSON LD</a>
+						</li>
+					</ul>
+				</dl>
+			</div>
+		</div>
+	</div>
+		<div class="col-xs-1"> <!-- required for floating -->
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs tabs-right vertical-text">
+			<li class="active"><a href="#notice" data-toggle="tab">Notice</a></li>
+			<li><a href="#export" data-toggle="tab">Export</a></li>
+		</ul>
+	</div>
+
+	  <div class="clearfix"></div>
+</div>
+
 {% endblock %}
 
 
 {% block body %}
-<ul class="nav nav-tabs">
-	<li role="presentation" class=""><a href="{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/isPartOf') | get('content') }}">isPartOf</a></li>
-	<li role="presentation" class=""><a href="{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/hasPart') | get('content') }}">hasPart</a></li>
-	{% if themeName == 'istex' %}
-	<li role="presentation" class="active"><a href="#">in ISTEX</a></li>
-	{% endif %}
-</ul>
-<div istex-results></div>
+<div>
+
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">est contenu</a></li>
+		<li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">contient</a></li>
+		<li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">ISTEX</a></li>
+	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="tab1">
+			<a href="{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/isPartOf') | get('content') }}">est contenu</a>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="tab2">
+			<a href="{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/hasPart') | get('content') }}">contient</a>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="tab3">
+			<div istex-results></div>
+		</div>
+	</div>
+
+</div>
 {% endblock %}
 
 
@@ -37,8 +121,8 @@
 {% if themeName == 'istex' %}
 <script type="text/javascript">
 var istexConfig = {
-    query: '"{{ _content.jsonld | getJsonLdField('http://purl.org/dc/terms/identifier') | get('content') }}"',
-    hideButton: true
+	query: '"{{ _content.jsonld | getJsonLdField('http://purl.org/dc/terms/identifier') | get('content') }}"',
+	hideButton: true
 };
 </script>
 <script src="/assets/js/angular.min.js"></script>

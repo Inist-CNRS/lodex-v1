@@ -16,9 +16,16 @@ module.exports = function(exec, execmap) {
       opt.length = arg.length || 30;
       opt.omission = arg.omission || '…';
       opt.separator = arg.separator || ' ';
-      return truncate(obj.toString(), opt);      
+      return truncate(obj.toString(), opt);
     }, "truncateField");
   };
+
+  filters.values = function(obj, args) {
+    return Object.keys(obj).map(function(key) {
+      return obj[key];
+    })
+  }
+
 
   return filters;
 }

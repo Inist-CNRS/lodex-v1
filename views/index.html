@@ -10,19 +10,6 @@
 <meta name="author" content="">
 {% endblock %}
 
-            <!--
-_referenced
-| jsonld('compacted')
-| prefix([{"http://www.w3.org/2004/02/skos/core#", "skos:"}, {"http://www.w3.org/2008/05/skos-xl", "skos-xl:"}])
-| mapping([{"http://www.w3.org/2004/02/skos/core#prefLabel", "Term"}])
-| get(['http://purl.org/dc/elements/1.1/identifier', http://purl.org/dc/elements/identifier])
-| coalesce(true)
-| first(true)
-| tag('dd')
- 
-       -->
-
-
 {% block header %}
 <div class="postmeta updated color_gray">
 	<div class="pull-right">
@@ -43,6 +30,8 @@ _referenced
         <thead class="cf">
             <tr>
                 <th>URI</th>
+				{{ _columns | json()  }}
+				{{ _columns | foreach( { "inject" : { "h1" :  {"$t<" : { get : "label" } } } }) | values() | xml()  }}
                 {% for name, con in _columns %}
                 {% if con.primary == 'true' %}
                 <th>{{ con.label }}</th>
@@ -51,20 +40,20 @@ _referenced
             </tr>
         </thead>
         <tbody>
-            {% for doc in _documents %}
+            {% asyncEach doc in _documents %}
             <tr>
                 <td data-title="URI">
                     <a href="{{ doc._content.jsonld.@id }}/">{{ doc._content.jsonld.@id }}</a>
                 </td>
-                {% for name, con in _columns %}
+                {# asyncEach name, con in _columns %}
                 {% if con.primary == 'true' %}
-                <td data-title="{{ con.label }}">{{doc._content.jsonld[name] }}</td>
+				<td data-title="{{ con.label }}">{{ doc._content.jsonld | get(name) }}</td>
                 {% endif %}
-                {% endfor %}
+                {% endeach #}
             </tr>
-            {% endfor %}
+            {% endeach %}
         </tbody>
-    </table>
+	</table>
 </div>
 
 {% endblock %}
