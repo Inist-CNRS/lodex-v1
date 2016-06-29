@@ -45,7 +45,7 @@
                 </td>
                 {% asyncEach name, con in _columns %}
                 {% if con.primary == 'true' %}
-				<td data-title="{{ con.label }}">{{ doc._content.jsonld | get(name) }}</td>
+				<td data-title="{{ con.label }}">{{ doc._content.jsonld | get(name) | textToHtml }}</td>
                 {% endif %}
                 {% endeach %}
             </tr>
