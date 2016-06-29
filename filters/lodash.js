@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 var truncate = require('lodash.truncate');
 
 module.exports = function(exec, execmap) {
@@ -11,21 +11,21 @@ module.exports = function(exec, execmap) {
       if (typeof arg != 'object') {
         arg = {
           length: Number(arg)
-        }
+        };
       }
-      opt.length = arg.length || 30;
-      opt.omission = arg.omission || '…';
+      opt.length = arg.length || 30;
+      opt.omission = arg.omission || '…';
       opt.separator = arg.separator || ' ';
       return truncate(obj.toString(), opt);
-    }, "truncateField");
+    }, 'truncateField');
   };
 
   filters.values = function(obj, args) {
     return Object.keys(obj).map(function(key) {
       return obj[key];
-    })
-  }
+    });
+  };
 
 
   return filters;
-}
+};

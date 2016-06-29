@@ -1,4 +1,4 @@
-{   
+{
   "ignore": [
     "data/*",
     "README.md",
@@ -6,7 +6,8 @@
     "nodemon.json",
     "package.json",
     "Dockerfile",
-    "views/assets",
-    "views/libs"
-  ]
+    "assets/*",
+    "libs/*"
+  ],
+  "ext": "js, json, html"
 }

@@ -30,8 +30,6 @@
         <thead class="cf">
             <tr>
                 <th>URI</th>
-				{{ _columns | json()  }}
-				{{ _columns | foreach( { "inject" : { "h1" :  {"$t<" : { get : "label" } } } }) | values() | xml()  }}
                 {% for name, con in _columns %}
                 {% if con.primary == 'true' %}
                 <th>{{ con.label }}</th>
@@ -45,11 +43,11 @@
                 <td data-title="URI">
                     <a href="{{ doc._content.jsonld.@id }}/">{{ doc._content.jsonld.@id }}</a>
                 </td>
-                {# asyncEach name, con in _columns %}
+                {% asyncEach name, con in _columns %}
                 {% if con.primary == 'true' %}
-				<td data-title="{{ con.label }}">{{ doc._content.jsonld | get(name) }}</td>
+				<td data-title="{{ con.label }}">{{ doc._content.jsonld | get(name) | textToHtml }}</td>
                 {% endif %}
-                {% endeach #}
+                {% endeach %}
             </tr>
             {% endeach %}
         </tbody>
