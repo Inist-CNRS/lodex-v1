@@ -30,8 +30,10 @@
         <thead class="cf">
             <tr>
                 <th>URI</th>
+                {% set columnsNb = 1 %}
                 {% for name, con in _columns %}
-                {% if con.primary == 'true' %}
+                {% if con.primary == 'true' and columnsNb < 5 %}
+                {% set columnsNb = columnsNb + 1 %}
                 <th>{{ con.label }}</th>
                 {% endif %}
                 {% endfor %}
@@ -43,8 +45,10 @@
                 <td data-title="URI">
                     <a href="{{ doc._content.jsonld.@id }}/">{{ doc._content.jsonld.@id }}</a>
                 </td>
+                {% set columnsNb = 1 %}
                 {% asyncEach name, con in _columns %}
-                {% if con.primary == 'true' %}
+                {% if con.primary == 'true' and columnsNb < 5 %}
+                {% set columnsNb = columnsNb + 1 %}
 				<td data-title="{{ con.label }}">{{ doc._content.jsonld | get(name) | textToHtml }}</td>
                 {% endif %}
                 {% endeach %}
