@@ -2,15 +2,18 @@
 	"$titlePage" : {
 		"get" : "title"
 	},
+	"$format" : {
+		"set" : "jsonld" // "csv"
+	},
 	"$docs" : {
-	    "set" : "http://named-entity.lod.istex.fr/",
-		"parseURL": true,
-		"extend" : {
-			"query" : {
-				"alt": "jsonld"
+		"inject" : {
+			"alt<" : {
+				"get" : "format"
 			}
 		},
+		"querystring" : true,
+		"prepend": "http://named-entity.lod.istex.fr/?",
 		"fetch": true,
-		"parseJSON": true
+		"parseJSON": true // "parseCSVFile": ","
 	}
 }
