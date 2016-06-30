@@ -3,7 +3,14 @@
 		"get" : "title"
 	},
 	"$docs" : {
-		"fetch": "http://named-entity.lod.istex.fr/?alt=jsonld",
-		"parseJSON": true,
+	    "set" : "http://named-entity.lod.istex.fr/",
+		"parseURL": true,
+		"extend" : {
+			"query" : {
+				"alt": "jsonld"
+			}
+		},
+		"fetch": true,
+		"parseJSON": true
 	}
 }
