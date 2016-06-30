@@ -4,15 +4,17 @@ LODEX is an experimentation aiming to link [ISTEX](http://www.istex.fr) data to 
 
 > **Warning**: LODEX is not funded by ISTEX.
 
+## Installation
+
+See the [Installation instructions](Installation.md) page.
+
 ## Start
 
 To start `lodex`:
 
 ```bash
-$ lodex /path/to/repository
+$ lodex
 ```
-
-The repository pointed can be empty.
 
 ## Settings
 
