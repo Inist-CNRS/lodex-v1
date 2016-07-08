@@ -1,29 +1,29 @@
-{% extends "./themes/" + config.themeName + ".html" %}
+{% extends "./themes/" + configuration.themeName + ".html" %}
 
 {% block styles %}
 <link href="/assets/css/index.css" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block head %}
-<title>{{ _label | d($_wid) | d('n/a') | e }}</title>
-<meta name="description" content="{{ table._text | d($_wid) | d('n/a') | e }}">
+<title>{{ titre }}</title>
+<meta name="description" content="{{ description }}">
 <meta name="author" content="">
 {% endblock %}
 
 {% block header %}
 <div class="postmeta updated color_gray">
 	<div class="pull-right">
-		<div class="badgenbdoc">{{ _documents| d([]) | length }}</div>Ressources
+		<div class="badgenbdoc">{{ total }}</div>Ressources
 	</div>
 </div>
-{{ resource(_referenced) }}
+{{ resource(resource) }}
 {% endblock %}
 
 {% block body %}
 
 <ul class="nav nav-tabs">
-	<li role="presentation" class=""><a href="{{ _referenced | d({}) | getJsonLdField('http://purl.org/dc/terms/isPartOf') | get('content') }}">isPartOf</a></li>
-	<li role="presentation" class="active"><a href="#">hasPart</a></li>
+	<li role="presentation" class=""><a href="{{ data._referenced | d({}) | getJsonLdField('http://purl.org/dc/terms/isPartOf') | get('content') }}">is Part Of</a></li>
+	<li role="presentation" class="active"><a href="#">has Part</a></li>
 </ul>
 <div id="no-more-tables">
     <table class="table-bordered table-striped table-condensed cf">
@@ -31,29 +31,29 @@
             <tr>
                 <th>URI</th>
                 {% set columnsNb = 1 %}
-                {% for name, con in _columns %}
-                {% if con.primary == 'true' and columnsNb < 5 %}
+                {% for name, con in colonnes %}
+                {% if columnsNb < 5 %}
                 {% set columnsNb = columnsNb + 1 %}
-                <th>{{ con.label }}</th>
+                <th>{{ name }}</th>
                 {% endif %}
                 {% endfor %}
             </tr>
         </thead>
         <tbody>
-            {% asyncEach doc in _documents %}
+            {% for doc in documents %}
             <tr>
                 <td data-title="URI">
-                    <a href="{{ doc._content.jsonld.@id }}/">{{ doc._content.jsonld.@id }}</a>
+                    <a href="{{ doc.@id.raw }}/">{{ doc.@id.raw }}</a>
                 </td>
                 {% set columnsNb = 1 %}
-                {% asyncEach name, con in _columns %}
-                {% if con.primary == 'true' and columnsNb < 5 %}
+                {% for name, con in colonnes %}
+                {% if columnsNb < 5 %}
                 {% set columnsNb = columnsNb + 1 %}
-				<td data-title="{{ con.label }}">{{ doc._content.jsonld | get(name) | textToHtml }}</td>
+				<td data-title="{{ name }}">{{ doc[name].html }}</td>
                 {% endif %}
-                {% endeach %}
+                {% endfor %}
             </tr>
-            {% endeach %}
+            {% endfor %}
         </tbody>
 	</table>
 </div>

@@ -1,1 +1,58 @@
-{}
+{
+	"$titre" : {
+		"get" : ["data._label", "data._wid"],
+		"coalesce": true,
+		"first" :true,
+		"default": "n/a"
+	},
+	"$description" : {
+		"get" : ["data._text", "data._wid"],
+		"coalesce": true,
+		"first" :true,
+		"default": "n/a"
+	},
+	"$configuration": {
+		"get" : "config",
+		"mask" : "title,description,themeName"
+	},
+	"$parametres": {
+		"get" : "parameters"
+	},
+	"$colonnes": {
+		"get" : "records._documents.0._content.jsonld.@context"
+	},
+	"$contenu" : {
+		"get#1" : "data._referenced",
+		"getJsonLdField" : "http://purl.org/dc/terms/isPartOf",
+		"get#2" : "content"
+	},
+	"$ressource" :{
+		"get": "data._referenced"
+	},
+	"$total" :{
+		"get" : "records._documents",
+		"size": true
+	},
+	"$documents": {
+		"get" : "records._documents",
+		"foreach": {
+			"get": "_content.jsonld",
+			"extend": {
+				"@context" : null
+			},
+			"foreach" : {
+				"inject": {
+					"raw<" : {
+						"get": true
+					},
+					"html<" : {
+						"get": true,
+						"truncateField": 50,
+						"textToHtml": true
+					}
+				}
+			}
+		}
+	},
+	"mask" : "titre,description,configuration,parameters,colonnes,contenu,ressource,total,documents"
+}
