@@ -2,8 +2,8 @@
 
 
 {% block head %}
-<title> {{ _table._label | d(_table._wid) | d('n/a') | e }}  </title>
-<meta name="description" content="{{ _table._text | d('n/a') | e }}">
+<title> {{ data._table._label | d(_table._wid) | d('n/a') | e }}  </title>
+<meta name="description" content="{{ data._table._text | d('n/a') | e }}">
 <meta name="author" content="">
 {% endblock %}
 
@@ -25,17 +25,17 @@
 		<div class="tab-content">
 			<div class="tab-pane active" id="notice">
 
-				{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | class("fa fa-dollar") | tag('span') }}
-				{{ _content.jsonld | d({}) | getJsonLdField(['http://purl.org/dc/terms/title']) | expect({"content": "n/a"}) | tag("h1") }}
+				{{ data._content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | class("fa fa-dollar") | tag('span') }}
+				{{ data._content.jsonld | d({}) | getJsonLdField(['http://purl.org/dc/terms/title']) | expect({"content": "n/a"}) | tag("h1") }}
 				<p class="byline vcard">
-					<a class="link fa fa-link"> {{ _content.@id|d('n/a') }}</a> <br>
-					<div class="date fa fa-clock-o"> Updated on <time datetime="" pubdate="">{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/modified') | expect({ content: "n/a"}) | tag('span') }} </time></div> <br>
-					<div class="user fa fa-user"> by {{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | tag('span') }}</div> <br>
+					<a class="link fa fa-link"> {{ data._content.@id|d('n/a') }}</a> <br>
+					<div class="date fa fa-clock-o"> Updated on <time datetime="" pubdate="">{{ data._content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/modified') | expect({ content: "n/a"}) | tag('span') }} </time></div> <br>
+					<div class="user fa fa-user"> by {{ data._content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | tag('span') }}</div> <br>
 				</p>
-				{{ _content.jsonld | d({}) | getJsonLdField(['http://purl.org/dc/terms/creator']) | expect({"content": "No description available"}) | tag('p') }}
+				{{ data._content.jsonld | d({}) | getJsonLdField(['http://purl.org/dc/terms/creator']) | expect({"content": "No description available"}) | tag('p') }}
 				<hr/>
 				<dl class="dl-horizontal lead">
-					{% for cName in _content.jsonld | d({}) | select(".@context .@id")  | dedupe(true) %}
+					{% for cName in data._content.jsonld | d({}) | select(".@context .@id")  | dedupe(true) %}
 					<dt>
 					<a href="{{ cName }}">{{ cName
 						| replace(["http://www.w3.org/2004/02/skos/core#", "skos:"])
@@ -45,7 +45,7 @@
 						}}</a>
 					</dt>
 					<dd>
-					{{ _content.jsonld | d({}) | getJsonLdField(cName) | tag('div') }}
+					{{ data._content.jsonld | d({}) | getJsonLdField(cName) | tag('div') }}
 					</dd>
 					{% endfor %}
 				</dl>
@@ -103,10 +103,10 @@
 	<!-- Tab panes -->
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="tab1">
-			<a href="{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/isPartOf') | get('content') }}">est contenu</a>
+			<a href="{{ data._content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/isPartOf') | get('content') }}">est contenu</a>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="tab2">
-			<a href="{{ _content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/hasPart') | get('content') }}">contient</a>
+			<a href="{{ data._content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/hasPart') | get('content') }}">contient</a>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="tab3">
 			<div istex-results></div>
@@ -121,7 +121,7 @@
 {% if themeName == 'istex' %}
 <script type="text/javascript">
 var istexConfig = {
-	query: '"{{ _content.jsonld | getJsonLdField('http://purl.org/dc/terms/identifier') | get('content') }}"',
+	query: '"{{ data._content.jsonld | getJsonLdField('http://purl.org/dc/terms/identifier') | get('content') }}"',
 	hideButton: true
 };
 </script>
