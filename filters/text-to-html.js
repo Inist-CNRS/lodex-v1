@@ -9,7 +9,6 @@ module.exports = function(exec, execmap) {
   var filters = {};
 
   filters.textToHtml = function textToHtml(obj, args) {
-    debug('textToHtml(', obj, ')');
     return exec(args, function(args) {
       assert(typeof obj === 'string');
       // Encode into hexadecimal entities
