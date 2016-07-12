@@ -2,7 +2,7 @@
 
 var path = require('path');
 var basename = path.basename(__filename, '.js');
-var debug = require('debug')('castor:' + basename);
+var debug = require('debug')('lodex:' + basename);
 var assert = require('assert');
 
 module.exports = function(exec, execmap) {
@@ -10,6 +10,7 @@ module.exports = function(exec, execmap) {
 
   filters.textToHtml = function textToHtml(obj, args) {
     return exec(args, function(args) {
+      debug('textToHtml(', obj, ',', args, ')');
       assert(typeof obj === 'string');
       // Encode into hexadecimal entities
       // < -> &#60;
