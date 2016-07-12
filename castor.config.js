@@ -113,7 +113,7 @@ module.exports = {
     "jbj-template",
     "jbj-rdfa",
     "jbj-nlp",
-    "lodash.js",
+    "jbj-misc.js",
     "text-to-html.js"
   ],
   allowedAltValues : ['dry', 'csv', 'jsonld', 'nq', 'nq.xlsx', 'jbj', 'xls', 'tsv', 'html', 'raw'],

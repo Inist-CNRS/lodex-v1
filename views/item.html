@@ -1,20 +1,18 @@
-{% extends "./themes/" + config.themeName + ".html" %}
+{% extends "./themes/" + configuration.themeName + ".html" %}
 
 
 {% block head %}
-<title> {{ data._table._label | d(_table._wid) | d('n/a') | e }}  </title>
-<meta name="description" content="{{ data._table._text | d('n/a') | e }}">
+<title> {{ titre }}  </title>
+<meta name="description" content="{{ description }}">
 <meta name="author" content="">
 {% endblock %}
 
 
 {% block styles %}
-{% if themeName == 'istex' %}
 <link rel="stylesheet" type="text/css" href="/assets/css/rzslider.css">
 <link rel="stylesheet" type="text/css" href="/assets/css/rzslider.css">
 <link rel="stylesheet" type="text/css" href="/libs/bootstrap-vertical-tabs/bootstrap.vertical-tabs.min.css">
 <link rel="stylesheet" type="text/css" href="http://istex.github.io/styleAngular/style.min.css">
-{% endif %}
 {% endblock %}
 
 
@@ -25,27 +23,22 @@
 		<div class="tab-content">
 			<div class="tab-pane active" id="notice">
 
-				{{ data._content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | class("fa fa-dollar") | tag('span') }}
-				{{ data._content.jsonld | d({}) | getJsonLdField(['http://purl.org/dc/terms/title']) | expect({"content": "n/a"}) | tag("h1") }}
+				{{ ressource.identifiant }}
+				{{ ressource.titre }}
 				<p class="byline vcard">
-					<a class="link fa fa-link"> {{ data._content.@id|d('n/a') }}</a> <br>
-					<div class="date fa fa-clock-o"> Updated on <time datetime="" pubdate="">{{ data._content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/modified') | expect({ content: "n/a"}) | tag('span') }} </time></div> <br>
-					<div class="user fa fa-user"> by {{ data._content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/identifier') | expect({ content: "n/a"}) | tag('span') }}</div> <br>
+					<a class="link fa fa-link"> {{ ressource.permalien }}</a> <br>
+					<div class="date fa fa-clock-o"> Updated on <time datetime="" pubdate="">{{ ressource.misajourle }} </time></div> <br>
+					<div class="user fa fa-user"> by {{ ressource.createur }}</div> <br>
 				</p>
-				{{ data._content.jsonld | d({}) | getJsonLdField(['http://purl.org/dc/terms/creator']) | expect({"content": "No description available"}) | tag('p') }}
+				{{ ressource.description }}
 				<hr/>
 				<dl class="dl-horizontal lead">
-					{% for cName in data._content.jsonld | d({}) | select(".@context .@id")  | dedupe(true) %}
+					{% for name, col in colonnes %}
 					<dt>
-					<a href="{{ cName }}">{{ cName
-						| replace(["http://www.w3.org/2004/02/skos/core#", "skos:"])
-						| replace(["http://www.w3.org/2008/05/skos-xl", "skos-xl:"])
-						| replace(["http://purl.org/dc/elements/1.1/", "dc:"])
-						| replace(["http://purl.org/dc/terms/", "dc:"])
-						}}</a>
+					<a href="{{ col.raw }}">{{ col.label }}</a>
 					</dt>
 					<dd>
-					{{ data._content.jsonld | d({}) | getJsonLdField(cName) | tag('div') }}
+					{{ ressource[name].html }}
 					</dd>
 					{% endfor %}
 				</dl>
@@ -103,10 +96,10 @@
 	<!-- Tab panes -->
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="tab1">
-			<a href="{{ data._content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/isPartOf') | get('content') }}">est contenu</a>
+			<a href="{{ liens.estContenu }}">est contenu</a>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="tab2">
-			<a href="{{ data._content.jsonld | d({}) | getJsonLdField('http://purl.org/dc/terms/hasPart') | get('content') }}">contient</a>
+			<a href="{{ liens.contient }} ">contient</a>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="tab3">
 			<div istex-results></div>
@@ -118,16 +111,13 @@
 
 
 {% block scripts %}
-{% if themeName == 'istex' %}
 <script type="text/javascript">
 var istexConfig = {
-	query: '"{{ data._content.jsonld | getJsonLdField('http://purl.org/dc/terms/identifier') | get('content') }}"',
+	query: '"{{ liens.istex }}"',
 	hideButton: true
 };
 </script>
 <script src="/assets/js/angular.min.js"></script>
 <script src="/assets/js/rzslider.js" type="text/javascript"></script>
 <script src="/assets/js/istex-widget.min.js" type="text/javascript"></script>
-{% endif %}
-
 {% endblock %}

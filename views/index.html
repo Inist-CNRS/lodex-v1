@@ -31,7 +31,7 @@
             <tr>
                 <th>URI</th>
                 {% set columnsNb = 1 %}
-                {% for name, con in colonnes %}
+                {% for name, col in colonnes %}
                 {% if columnsNb < 5 %}
                 {% set columnsNb = columnsNb + 1 %}
                 <th>{{ name }}</th>
@@ -46,7 +46,7 @@
                     <a href="{{ doc.@id.raw }}/">{{ doc.@id.raw }}</a>
                 </td>
                 {% set columnsNb = 1 %}
-                {% for name, con in colonnes %}
+                {% for name, col in colonnes %}
                 {% if columnsNb < 5 %}
                 {% set columnsNb = columnsNb + 1 %}
 				<td data-title="{{ name }}">{{ doc[name].html }}</td>

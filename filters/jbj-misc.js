@@ -1,5 +1,6 @@
 'use strict';
 var truncate = require('lodash.truncate');
+var omit = require('object.omit');
 
 module.exports = function(exec, execmap) {
 
@@ -26,6 +27,9 @@ module.exports = function(exec, execmap) {
     });
   };
 
+  filters.omit = function(obj, args) {
+    return omit(obj, args)
+  }
 
   return filters;
 };
