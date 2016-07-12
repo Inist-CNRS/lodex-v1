@@ -28,8 +28,11 @@ module.exports = function(exec, execmap) {
   };
 
   filters.omit = function(obj, args) {
-    return omit(obj, args)
-  }
+    if (typeof args === 'string') {
+      args = args.split(',');
+    }
+    return omit(obj, args);
+  };
 
   return filters;
 };
