@@ -1,5 +1,5 @@
 /* global $, document, JSONEditor, nColumns, view, window, navigator, alert */
-/*eslint strict: "off"*/
+/*eslint strict: "off", global-require: "off", no-console: ["error", {allow: ["warn", "error"]}]*/
 (function() {
   'use strict';
 
@@ -152,7 +152,7 @@
         .node('!.*', function(item) {
           var items = viewList.get('items');
           items.push(item);
-          console.log('item', item);
+          // console.log('item', item);
           viewList.set('items', items);
           if (first) {
             // viewColumn.set('sampleURL', encodeURIComponent(window.location.href.replace(/\/+$/,'').concat('/').concat(item._wid).concat('/*?alt=raw&firstOnly=1')));
@@ -398,24 +398,24 @@
                   document.location.pathname.replace(/\/+$/, '') + '/' +
                   idColumn + '/';
 
-        console.log('before', {
-          'previousScheme'  : viewColumn.get('pscheme'),
-          'previousPrimary' : viewColumn.get('pprimary'),
-          'previousValue'   : viewColumn.get('pvalue'),
-          'previousName'    : viewColumn.get('pname'),
-          'previousLabel'   : viewColumn.get('plabel'),
-          'previousLanguage': viewColumn.get('planguage'),
-          'previousComment' : viewColumn.get('pcomment')
-        });
-        console.log('after', {
-          'propertyScheme'  : $('#modal-editcolumn-input-scheme').val(),
-          'propertyPrimary' : viewColumn.get('primary'),
-          'propertyValue'   : je5.get(),
-          'propertyName'    : idColumn,
-          'propertyLabel'   : viewColumn.get('label'),
-          'propertyLanguage': viewColumn.get('language'),
-          'propertyComment' : viewColumn.get('comment')
-        });
+        // console.log('before', {
+        //   'previousScheme'  : viewColumn.get('pscheme'),
+        //   'previousPrimary' : viewColumn.get('pprimary'),
+        //   'previousValue'   : viewColumn.get('pvalue'),
+        //   'previousName'    : viewColumn.get('pname'),
+        //   'previousLabel'   : viewColumn.get('plabel'),
+        //   'previousLanguage': viewColumn.get('planguage'),
+        //   'previousComment' : viewColumn.get('pcomment')
+        // });
+        // console.log('after', {
+        //   'propertyScheme'  : $('#modal-editcolumn-input-scheme').val(),
+        //   'propertyPrimary' : viewColumn.get('primary'),
+        //   'propertyValue'   : je5.get(),
+        //   'propertyName'    : idColumn,
+        //   'propertyLabel'   : viewColumn.get('label'),
+        //   'propertyLanguage': viewColumn.get('language'),
+        //   'propertyComment' : viewColumn.get('comment')
+        // });
 
         $.ajax({
           type: 'POST',
@@ -573,7 +573,7 @@
              window.location.host + '/index/' + idPage + '/*?alt=raw')
         .done(function(items) {
           viewPage.set('_wid', items[0]._wid);
-          viewPage.set('_ref', items[0]._ref || '');
+          viewPage.set('_ref', items[0]._ref ||'');
           $('#modal-editpage-input-template').summernote({
             height: 200,
             dialogsInBody: true,
@@ -607,7 +607,7 @@
           //          'template': $('#modal-editpage-input-template').summernote('code'),
           'ref': viewPage.get('_ref')
         };
-        console.log('POST ' + url, form);
+        // console.log('POST ' + url, form);
         $.ajax({
           type: 'POST',
           url: url,

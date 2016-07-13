@@ -1,4 +1,7 @@
-views/assets/js/ie-emulation-modes-warning.js
-views/assets/js/ie10-viewport-bug-workaround.js
-views/assets/js/ie8-responsive-file-warning.js
+assets/js/angular.min.js
+assets/js/ie-emulation-modes-warning.js
+assets/js/ie10-viewport-bug-workaround.js
+assets/js/ie8-responsive-file-warning.js
+assets/js/istex-widget.min.js
+assets/js/rzslider.js
 

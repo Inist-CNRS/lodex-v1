@@ -1,4 +1,5 @@
 /* global document, window */
+/*eslint no-unused-vars: "off" */
 'use strict';
 var JSONEditorOptions = { mode: 'code' };
 var pc = require('paperclip/lib/node.js');
