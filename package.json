@@ -36,7 +36,7 @@
     "babel-runtime": "^6.6.1",
     "babelify": "^7.3.0",
     "body-parser": "^1.15.2",
-    "castor-core": "^7.0.0-0",
+    "castor-core": "^8.0.0-0",
     "castor-load": "^4.6.0",
     "castor-load-csv": "latest",
     "castor-load-excel": "latest",
