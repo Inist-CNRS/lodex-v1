@@ -100,6 +100,7 @@ module.exports = {
   },
   */
   routes: [
+    "status.js",
     "config.js",
     "echo.js",
     "auth.js",
