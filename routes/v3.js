@@ -5,7 +5,6 @@ var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('castor:routes:' + basename)
   , datamodel = require('datamodel')
-  , express =  require('express')
   ;
 
 module.exports = function(router, core) {
@@ -43,8 +42,8 @@ module.exports = function(router, core) {
   });
 
 
-  require('./v3/upload.js')(router, core);
-  require('./v3/load.js')(router, core);
+  //require('./v3/upload.js')(router, core);
+//  require('./v3/load.js')(router, core);
   require('./v3/setcol.js')(router, core);
   require('./v3/settab.js')(router, core);
   require('./v3/setroot.js')(router, core);

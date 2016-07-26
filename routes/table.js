@@ -4,10 +4,8 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('castor:routes:' + basename)
-  , express = require('express')
   , assert = require('assert')
   , datamodel = require('datamodel')
-  , Errors = require('../helpers/errors.js')
   , cors = require('cors')
   , slashes = require("connect-slashes")
   ;
@@ -22,13 +20,15 @@ module.exports = function(router, core) {
   // Define route parameters
   //
   router.param('resourceName', function(req, res, next, value) {
-    req.routeParams.resourceName = value;
+     if (value.search(/^\w+$/) !== -1) {
+       req.routeParams.resourceName = value;
+     }
     next();
   });
 
   router.route(prefixURL + '/:resourceName')
   .all(cors())
-  .all(slashes())
+//  .all(slashes())
   .get(function(req, res, next) {
     debug('get /:resourceName', req.routeParams);
     if (req.routeParams.resourceName === undefined) {

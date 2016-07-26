@@ -4,7 +4,6 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('castor:routes:' + basename)
-  , Errors = require('../../helpers/errors.js')
   , bodyParser = require('body-parser')
   , datamodel = require('datamodel')
  ;
