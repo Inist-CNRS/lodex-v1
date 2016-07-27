@@ -2,18 +2,26 @@
 'use strict'
 
 module.exports = {
-  browserifyModules: [
-    "paperclip/lib/node.js",
-    "oboe",
-    "mongodb-querystring",
-    "url",
-    "components/backoffice"
-  ],
-  browserifyTransformers: [
-    'vueify'
-  ],
   rootURL : '/',
   maxFileSize: 536870912,
+  collectionNameHotFolder : 'data',
+  defaultRootCollection: 'data',
+  mimeTypes : {
+    'text/plain' : [
+      'trig',
+      'n3',
+      'nq',
+      'ttl'
+    ],
+    "application/json" : [
+      'json',
+      'jsonad',
+      'jsonld',
+      'raw',
+      'jbj',
+      'min'
+    ]
+  },
   acceptFileTypes: [
     'csv',
     'xml',
@@ -24,6 +32,21 @@ module.exports = {
     'n3',
     'nt',
     'json'
+  ],
+  allowedAltValues : [
+    'min',
+    'csv',
+    'jsonld',
+    'nq',
+    'n3',
+    'ttl',
+    'trig',
+    'jbj',
+    'xls',
+    'tsv',
+    'html',
+    'jsonad',
+    'raw'
   ],
   /*  access: [
     {
@@ -41,6 +64,7 @@ module.exports = {
       }
     }
   ],
+  /*
   authorizations: [
     {
       pattern : "* /index/",
@@ -55,6 +79,7 @@ module.exports = {
       require : "valid-user.js"
     }
   ],
+  */
   loaders: [
     {
       pattern : "**/*.table",
@@ -93,12 +118,6 @@ module.exports = {
       require : "castor-load-jsoncorpus"
     }
   ],
-  /*
-  models : {
-    postColumn : 'post-column.js',
-    postTable : 'post-table.js'
-  },
-  */
   routes: [
     "status.js",
     "config.js",
@@ -117,59 +136,38 @@ module.exports = {
     "jbj-misc.js",
     "text-to-html.js"
   ],
-  allowedAltValues : ['dry', 'csv', 'jsonld', 'nq', 'nq.xlsx', 'jbj', 'xls', 'tsv', 'html', 'raw'],
-  "indexColumns" : {
-    "isRoot" : {
-      "label" : "Is on main page",
-      "scheme" : "https://schema.org/isAccessibleForFree",
-      "type": "https://www.w3.org/TR/xmlschema-2/#boolean",
-      "get" : "_root",
-      "cast": "boolean",
-      "default" : false
+  downloaders: [
+    {
+      pattern : '*',
+      require : 'jsonld.js'
     },
-    "title" : {
-      "label" : "Title",
-      "scheme" : "http://purl.org/dc/elements/1.1/title",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "get": ["_content.json.title", "title", "_label", "_wid"],
-      "coalesce": true,
-      "first" : true
+    {
+      pattern : 'nq',
+      require : 'nquads.js',
     },
-    "name" : {
-      "label" : "Name",
-      "scheme" : "http://purl.org/dc/terms/identifier",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "get" : "_wid"
+    {
+      pattern : 'n3',
+      require : 'n3.js',
     },
-    "updated" : {
-      "label" : "Updated",
-      "scheme" : "http://purl.org/dc/terms/modified",
-      "type": "https://www.w3.org/TR/xmlschema-2/#date",
-      "get" : "dateSynchronised"
+    {
+      pattern : 'ttl',
+      require : 'ttl.js',
+    },
+    {
+      pattern : 'trig',
+      require : 'trig.js',
+    },
+    {
+      pattern : 'jsonld',
+      require : 'export.js',
+    },
+    {
+      pattern : '+(jsonad|html)',
+      require : 'enrich.js',
+    },
+    {
+      pattern : 'html',
+      require : 'render.js'
     }
-  },
-  "defaultColumns": {
-    "title": {
-      "label" : "Title",
-      "scheme" : "http://purl.org/dc/terms/title",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "get": ["_content.json.title", "title", "_label", "_wid"],
-      "coalesce": true,
-      "first" : true
-    },
-    "description": {
-      "label" : "Description",
-      "scheme" : "http://purl.org/dc/terms/description",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "get": ["_content.json.description", "description", "_text"],
-      "coalesce": true,
-      "first" : true
-    },
-    "updated" : {
-      "label" : "Updated",
-      "scheme" : "http://purl.org/dc/terms/modified",
-      "type": "https://www.w3.org/TR/xmlschema-2/#date",
-      "get" : "dateSynchronised"
-    }
-  }
-}
+  ]
+ }

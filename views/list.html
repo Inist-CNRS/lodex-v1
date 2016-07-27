@@ -1,0 +1,48 @@
+{% extends "./themes/istex.html" %}
+
+{% block styles %}
+<link href="/assets/css/index.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block head %}
+<title>{{ titre }}</title>
+<meta name="description" content="{{ description }}">
+<meta name="author" content="">
+{% endblock %}
+
+{% block header %}
+<div class="postmeta updated color_gray">
+	<div class="pull-right">
+		<div class="badgenbdoc">{{ total }}</div>Ressources
+	</div>
+</div>
+{% endblock %}
+
+{% block body %}
+
+<div id="no-more-tables">
+    <table class="table-bordered table-striped table-condensed cf">
+        <thead class="cf">
+            <tr>
+                <th>URI</th>
+                {% for name, col in documents[0].colonnes %}
+                <th>{{ col.html }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for doc in documents %}
+            <tr>
+                <td data-title="URI">
+					{{ doc.ressource.@id.html }}
+                </td>
+                {% for name, col in doc.colonnes %}
+				<td>{{ doc.ressource[name].html }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+	</table>
+</div>
+
+{% endblock %}
