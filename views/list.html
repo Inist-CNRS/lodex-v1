@@ -26,7 +26,7 @@
             {% for doc in documents %}
             <tr>
                 <td data-title="URI">
-					<a href="{{ doc.ressource.@id.raw }}?alt=html">{{ doc.ressource.id.label }}</a>
+					<a href="{{ doc.ressource.@id.raw }}?alt=html">{{ doc.ressource.name.label }}</a>
                 </td>
                 {% for name, col in doc.colonnes %}
 				<td>{{ doc.ressource[name].html }}</td>
