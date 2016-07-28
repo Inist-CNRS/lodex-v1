@@ -10,7 +10,6 @@
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  {% block head %}{% endblock %}
 
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
@@ -47,7 +46,6 @@ body > div.container {
   margin-top : 80px;
 }
   </style>
-  {% block styles %}{% endblock %}
 </head>
 
 <body class="home blog">
@@ -90,13 +88,11 @@ body > div.container {
     <div id="content" class="row clearfix">
 
       <div id="main" class="col-md-10 clearfix" role="main">
-        {% block header %}{% endblock %}
         <div>
-          {% block body %}{% endblock %}
+          <a href="/*?alt=html">view all ressources</a> 
         </div>
       </div>
       <div id="sidebar" class="pull-right col-md-2">
-        {% block sidebar %}
         <div id="twitter_feed_widget-2" class="widget widget_twitter_feed_widget">
           <!--
             <h4 class="widgettitle">Timeline Twitter</h4>
@@ -119,7 +115,6 @@ body > div.container {
           </div>
           <!--  end  feedwind code -->
         </div>
-        {% endblock %}
 
       </div>
     </div>
@@ -215,7 +210,6 @@ body > div.container {
   <script type="text/javascript" charset="utf-8" src="/libs/bootstrap-material-design/dist/js/material.min.js"></script>
   <script type="text/javascript" charset="utf-8"> $(document).ready(function() { $.material.init(); }); </script>
 
-  {% block scripts %}{% endblock %}
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script type="text/javascript" charset="utf-8" src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 
