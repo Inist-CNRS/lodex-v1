@@ -74,7 +74,7 @@ Each field should contain:
 - `title`: a free title for the field
 - `scheme`: the URI of a property (maybe found on the [LoV](http://lov.okfn.org/dataset/lov/))
 - `type`: the URI of an [XML Schema type](https://www.w3.org/TR/xmlschema-2/#built-in-primitive-datatypes) (string, boolean, decimal, float, double, duration, dateTime, time, date, ...)
-- `content`: the JBJ stylesheet allowing to set the content of the field (from the raw document)
+- `content<`: the JBJ stylesheet allowing to set the content of the field (from the raw document)
 
 ### baseURL
 
@@ -84,9 +84,10 @@ To generate non-local URI, you need to set the `baseURL` field in the `config.lo
 
 The name of the theme used (see `views/themes`).
 
-Example:
+Example of minimal `config.local.js` (lacking `datasetFields` and
+`collectionFields` configuration):
 
-```json
+```javascript
 'use strict';
 module.exports =
 {
