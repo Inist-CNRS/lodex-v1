@@ -20,5 +20,8 @@ module.exports = function(options, core) {
         }
       })
     }
+    else {
+      submit()
+    }
   }
 }

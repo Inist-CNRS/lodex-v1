@@ -3,10 +3,18 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('castor:downloaders:' + basename)
-  ;
+  , JBJ = require('jbj');
+
+
+JBJ.use(require('jbj-array'));
+JBJ.use(require('jbj-parse'));
+JBJ.use(require('jbj-template'));
+JBJ.use(require('jbj-rdfa'));
+JBJ.use(require('jbj-nlp'));
+JBJ.use(require('../filters/jbj-misc.js'));
+JBJ.use(require('../filters/text-to-html.js'));
 
 module.exports = function(options, core) {
-  var JBJ = core.jbj;
   options = options || {};
   return function (data, submit) {
 
@@ -60,6 +68,10 @@ module.exports = function(options, core) {
         "omit": "@context",
         "foreach" : {
           "inject": {
+            "label<" : {
+              "default": 'n/a',
+              "truncateField": 50
+            },
             "raw<" : {
               "default": 'n/a'
             },
