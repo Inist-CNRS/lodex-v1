@@ -26,8 +26,8 @@
 					"get" : "@id",
 					"replace#1" : ["http://www.w3.org/2004/02/skos/core#", "skos:"],
 					"replace#2" : ["http://www.w3.org/2008/05/skos-xl", "skos-xl:"],
-					"replace#3" : ["http://purl.org/dc/elements/1.1/", "dc:"],
-					"replace#4" : ["http://purl.org/dc/terms/", "dc:"],
+					"replace#3" : ["http://purl.org/dc/elements/1.1/", "dce:"],
+					"replace#4" : ["http://purl.org/dc/terms/", "dcterms:"],
 					"replace#5" : ["https://schema.org/", "schema:"],
 					"replace#6" : ["http://schema.org/", "schema:"]
 				},
@@ -40,7 +40,6 @@
 					"get" : "@id"
 				}
 			}
-
 		}
 	},
 	"$ressource" : {
@@ -66,7 +65,8 @@
 			"content": "n/a"
 		},
 		"class" : "fa fa-dollar",
-		"tag" : "span"
+		"tag" : "span",
+		"toHtml": true
 	},
 	"$header.titre": {
 		"get" : "data._content.jsonld",
@@ -75,7 +75,8 @@
 			"content": "n/a"
 		},
 		"class" : "fa fa-dollar",
-		"tag" : "h1"
+		"tag" : "h1",
+		"toHtml": true
 	},
 	"$header.description": {
 		"get" : "data._content.jsonld",
@@ -83,7 +84,8 @@
 		"expect" : {
 			"content": "No description available"
 		},
-		"tag" : "p"
+		"tag" : "p",
+		"toHtml": true
 	},
 	"$header.createur": {
 		"get" : "data._content.jsonld",
@@ -91,7 +93,8 @@
 		"expect" : {
 			"content": "n/a"
 		},
-		"tag" : "span"
+		"tag" : "span",
+		"toHtml": true
 	},
 	"$header.misajourle": {
 		"get" : "data._content.jsonld",
@@ -99,7 +102,8 @@
 		"expect" : {
 			"content": "n/a"
 		},
-		"tag" : "span"
+		"tag" : "span",
+		"toHtml": true
 	},
 	"$header.permalien" : {
 		"get" : "data._content.jsonld.@id"
@@ -128,6 +132,6 @@
 		"getJsonLdField" : "http://purl.org/dc/terms/identifier",
 		"get#2" : "content"
 	},
-	"mask" : "titre,description,configuration,parameters,colonnes,header,ressource,contient,liens"
+	"mask" : "titre,description,configuration,parametres,colonnes,header,ressource,contient,liens"
 
 }
