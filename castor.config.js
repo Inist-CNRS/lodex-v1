@@ -2,7 +2,7 @@
 'use strict'
 
 module.exports = {
-  rootURL : '/',
+  rootURL : '/index.html',
   maxFileSize: 536870912,
   collectionNameHotFolder : 'data',
   defaultRootCollection: 'data',
@@ -123,14 +123,20 @@ module.exports = {
     "config.js",
     "echo.js",
     "auth.js",
-    "table.js",
-    "v3.js",
     "rest-crud.js"
   ],
   downloaders: [
     {
       pattern : '*',
       require : 'jsonld.js'
+    },
+    {
+      pattern : 'csv',
+      require : 'csv.js'
+    },
+    {
+      pattern : '+(xls|xlsx)',
+      require : 'excel.js'
     },
     {
       pattern : 'nq',
