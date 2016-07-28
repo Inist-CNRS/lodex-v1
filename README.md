@@ -76,6 +76,34 @@ Each field should contain:
 - `type`: the URI of an [XML Schema type](https://www.w3.org/TR/xmlschema-2/#built-in-primitive-datatypes) (string, boolean, decimal, float, double, duration, dateTime, time, date, ...)
 - `content`: the JBJ stylesheet allowing to set the content of the field (from the raw document)
 
+### baseURL
+
+To generate non-local URI, you need to set the `baseURL` field in the `config.local.js`, which will replace the `http://127.0.0.1:3000` part of the URIs.
+
+### themeName
+
+The name of the theme used (see `views/themes`).
+
+Example:
+
+```json
+'use strict';
+module.exports =
+{
+  themeName : 'istex',
+  baseURL: 'http://example.lod.istex.fr',
+  heartrate: 100,
+  access: [
+    {
+      login: 'francois',
+      plain: 'c0mpL3XPassW0rD',
+      display: 'François Parmentier'
+    }
+  ]
+};
+
+```
+
 ## Contribute
 
 Here are few indicators of the quality of the code, they can be used as indications on what can be improved:
