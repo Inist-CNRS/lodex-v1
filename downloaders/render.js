@@ -1,8 +1,8 @@
 'use strict';
 
-var path = require('path')
-  , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:downloaders:' + basename)
+var path = require('path'),
+  basename = path.basename(__filename, '.js'),
+  debug = require('debug')('castor:downloaders:' + basename)
   ;
 
 module.exports = function(options, core) {
@@ -12,7 +12,7 @@ module.exports = function(options, core) {
     onEach: function (data, submit) {
       var self = this;
       if (!self.documents) {
-        self.documents = []
+        self.documents = [];
       }
       self.documents.push(data);
       submit();
@@ -23,5 +23,5 @@ module.exports = function(options, core) {
       var locals = self.documents.length === 1 ? self.documents[0] : { documents : self.documents };
       self.stream.render(template, locals);
     }
-  }
-}
+  };
+};

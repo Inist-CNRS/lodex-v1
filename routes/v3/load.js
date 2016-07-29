@@ -1,18 +1,19 @@
 /*jshint node:true,laxcomma:true*/
 'use strict';
 
-var path = require('path')
-  , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:routes:' + basename)
-  , fs = require('fs')
-  , url = require('url')
-  , bodyParser = require('body-parser')
-  , crypto = require('crypto')
-  , Errors = require('../../helpers/errors.js')
-  , Loader = require('castor-load')
-  , JBJ = require('jbj')
-  , extend = require('extend')
-  ;
+var path = require('path');
+var basename = path.basename(__filename, '.js');
+var debug = require('debug')('castor:routes:' + basename);
+var fs = require('fs');
+var url = require('url');
+var bodyParser = require('body-parser');
+var crypto = require('crypto');
+var Errors = require('../../helpers/errors.js');
+var Loader = require('castor-load');
+var JBJ = require('jbj');
+var extend = require('extend');
+var os = require('os');
+var extendLoader = require('../../loaders/extend.js');
 
 module.exports = function(router, core) {
 
@@ -26,16 +27,16 @@ module.exports = function(router, core) {
       return next(new Errors.InvalidParameters('No body.'));
     }
     if (typeof req.body.hash !== 'object') {
-      req.body.hash = {}
+      req.body.hash = {};
     }
     if (typeof req.body.text !== 'object') {
-      req.body.text = {}
+      req.body.text = {};
     }
     if (typeof req.body.label !== 'object') {
-      req.body.label = {}
+      req.body.label = {};
     }
     if (typeof req.body.enrich !== 'object') {
-      req.body.enrich = {}
+      req.body.enrich = {};
     }
     if (req.body.type === 'fork') {
       req.body.cutter = '!.*._content.json';
@@ -44,42 +45,44 @@ module.exports = function(router, core) {
     if (resourceName === 'index') {
       return next(new Errors.Forbidden('`index` is read only'));
     }
-    if (!resourceName || resourceName === '') {
+    if (!resourceName || resourceName === '') {
       return next(new Errors.Forbidden('Invalid call.'));
     }
 
     // TODO : check if resourceName already exists
     var common = {
-      baseURL : String(core.config.get('baseURL')).replace(/\/+$/,'')
-    }
+      baseURL : String(core.config.get('baseURL')).replace(/\/+$/, '')
+    };
 
-    var addField = function (fieldname, stylesheet) {
-      return function (input, submit) {
-        debug('JBJ fieldname', stylesheet);
-        if (typeof stylesheet === 'object') {
-          debug('JBJ stylesheet', stylesheet);
-        }
-        else {
-          submit(null, input);
-        }
-      }
-    }
+    // unused!
+    // var addField = function (fieldname, stylesheet) {
+    //   return function (input, submit) {
+    //     debug('JBJ fieldname', stylesheet);
+    //     if (typeof stylesheet === 'object') {
+    //       debug('JBJ stylesheet', stylesheet);
+    //     }
+    //     else {
+    //       submit(null, input);
+    //     }
+    //   };
+    // };
 
     var options = {
-      "collectionName" : resourceName,
-      "connexionURI" : core.config.get('connectionURI'),
-      "concurrency" : core.config.get('concurrency'),
-      "delay" : core.config.get('delay'),
-      "maxFileSize" : core.config.get('maxFileSize'),
-      "writeConcern" : core.config.get('writeConcern'),
-      "ignore" : core.config.get('filesToIgnore'),
-      "watch" : false
+      collectionName : resourceName,
+      connexionURI : core.config.get('connectionURI'),
+      concurrency : core.config.get('concurrency'),
+      delay : core.config.get('delay'),
+      maxFileSize : core.config.get('maxFileSize'),
+      writeConcern : core.config.get('writeConcern'),
+      ignore : core.config.get('filesToIgnore'),
+      watch : false
     };
     debug('options', options);
-    // Be careful, at this time, loader code should be different ! cf. https://github.com/castorjs/castor-load/blob/master/lib/mount.js#L58
+    // Be careful, at this time, loader code should be different ! cf.
+    // https://github.com/castorjs/castor-load/blob/master/lib/mount.js#L58
 
     var ldr = new Loader(__dirname, options);
-    ldr.use('**/*', require('../../loaders/extend.js')(common));
+    ldr.use('**/*', extendLoader(common));
     core.loaders.forEach(function(loader) {
       var opts = loader[2] || {};
       if (loader[0].indexOf('.json') >=0  && req.body.cutter) {
@@ -138,7 +141,7 @@ module.exports = function(router, core) {
     });
 
     if (req.body.type === 'file' && typeof req.body.file === 'object') {
-      var p = require('os').tmpdir(); // upload go to tmpdir
+      var p = os.tmpdir(); // upload go to tmpdir
       fs.readdir(p, function (err, files) {
         if (err) {
           throw err;
@@ -158,10 +161,10 @@ module.exports = function(router, core) {
     }
     else if (req.body.type === 'keyboard') {
       ldr.push(url.format({
-        protocol: "http",
-        hostname: "127.0.0.1",
+        protocol: 'http',
+        hostname: '127.0.0.1',
         port: core.config.get('port'),
-        pathname: "/-/v3/echo/keyboard." + req.body.loader,
+        pathname: '/-/v3/echo/keyboard.' + req.body.loader,
         query: {
           plain : req.body.keyboard
         }
@@ -176,21 +179,21 @@ module.exports = function(router, core) {
     else if (req.body.type === 'fork') {
       var sourceName = path.basename(referer.pathname);
       debug('fork from',  url.format({
-        protocol: "http",
-        hostname: "127.0.0.1",
+        protocol: 'http',
+        hostname: '127.0.0.1',
         port: core.config.get('port'),
-        pathname: "/" + sourceName + '/*',
+        pathname: '/' + sourceName + '/*',
         query: {
-          alt: "raw"
+          alt: 'raw'
         }
       }));
       ldr.push(url.format({
-        protocol: "http",
-        hostname: "127.0.0.1",
+        protocol: 'http',
+        hostname: '127.0.0.1',
         port: core.config.get('port'),
-        pathname: "/" + sourceName + '/*',
+        pathname: '/' + sourceName + '/*',
         query: {
-          alt: "raw"
+          alt: 'raw'
         }
       }), {}, {}, function(doc) {
         doc.filename = 'forked.json';
@@ -203,4 +206,4 @@ module.exports = function(router, core) {
     res.json({});
   });
 
-}
+};

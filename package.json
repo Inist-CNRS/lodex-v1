@@ -7,6 +7,7 @@
     "lodex": "lodex"
   },
   "scripts": {
+    "lint": "eslint ext=.js,.vue components/ downloaders/ filters/ loaders/ routes/",
     "test": "mocha",
     "start": "./lodex"
   },
