@@ -1,9 +1,9 @@
 'use strict';
 
-var path = require('path')
-  , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:downloaders:' + basename)
-  , jsonld = require('jsonld')
+var path = require('path'),
+  basename = path.basename(__filename, '.js'),
+  debug = require('debug')('castor:downloaders:' + basename),
+  jsonld = require('jsonld')
   ;
 
 module.exports = function(options, core) {
@@ -18,10 +18,10 @@ module.exports = function(options, core) {
         else {
           submit(null, out);
         }
-      })
+      });
     }
     else {
-      submit()
+      submit();
     }
-  }
-}
+  };
+};

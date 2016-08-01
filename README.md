@@ -60,15 +60,50 @@ Wherever the settings file is, it is a JSON file.
 
 ## Use
 
-To be able to do anything with the LODEX, you have to first *create a table*.
+First copy `config.sample.js` into `config.local.js`, and put the file(s) to
+load in the `data` directory.
 
-In order to create a table:
-- [start lodex](#start),
-- go to the URL given (usually http://localhost:3000/),
-- click on "Back office",
-- click on "Table", then "Create new one"
+As the backoffice no more works (after version 0.8.5), you have to configure the fields in the `config.local.js`.
 
-There should be a table, visible by clicking on "Index".
+### fields
+
+- `datasetFields` describe the fields applying to all collections of the dataset
+- `collectionFields` describe the fields applying only to the collection (formerly called table)
+
+Each field should contain:
+- `title`: a free title for the field
+- `scheme`: the URI of a property (maybe found on the [LoV](http://lov.okfn.org/dataset/lov/))
+- `type`: the URI of an [XML Schema type](https://www.w3.org/TR/xmlschema-2/#built-in-primitive-datatypes) (string, boolean, decimal, float, double, duration, dateTime, time, date, ...)
+- `content<`: the JBJ stylesheet allowing to set the content of the field (from the raw document)
+
+### baseURL
+
+To generate non-local URI, you need to set the `baseURL` field in the `config.local.js`, which will replace the `http://127.0.0.1:3000` part of the URIs.
+
+### themeName
+
+The name of the theme used (see `views/themes`).
+
+Example of minimal `config.local.js` (lacking `datasetFields` and
+`collectionFields` configuration):
+
+```javascript
+'use strict';
+module.exports =
+{
+  themeName : 'istex',
+  baseURL: 'http://example.lod.istex.fr',
+  heartrate: 100,
+  access: [
+    {
+      login: 'francois',
+      plain: 'c0mpL3XPassW0rD',
+      display: 'François Parmentier'
+    }
+  ]
+};
+
+```
 
 ## Contribute
 

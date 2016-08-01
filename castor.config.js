@@ -140,31 +140,31 @@ module.exports = {
     },
     {
       pattern : 'nq',
-      require : 'nquads.js',
+      require : 'nquads.js'
     },
     {
       pattern : 'n3',
-      require : 'n3.js',
+      require : 'n3.js'
     },
     {
       pattern : 'ttl',
-      require : 'ttl.js',
+      require : 'ttl.js'
     },
     {
       pattern : 'trig',
-      require : 'trig.js',
+      require : 'trig.js'
     },
     {
       pattern : 'jsonld',
-      require : 'export.js',
+      require : 'export.js'
     },
     {
       pattern : '+(jsonad|html)',
-      require : 'enrich.js',
+      require : 'enrich.js'
     },
     {
       pattern : 'html',
       require : 'render.js'
     }
   ]
- }
+}
