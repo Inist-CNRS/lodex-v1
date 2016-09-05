@@ -19,6 +19,7 @@ module.exports = {
       'jsonld',
       'raw',
       'jbj',
+      'dry',
       'min'
     ]
   },
@@ -34,6 +35,7 @@ module.exports = {
     'json'
   ],
   allowedAltValues : [
+    'dry',
     'min',
     'csv',
     'jsonld',
