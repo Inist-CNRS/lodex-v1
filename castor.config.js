@@ -2,7 +2,7 @@
 'use strict'
 
 module.exports = {
-  rootURL : '/index.html',
+  rootURL : '/*?alt=html',
   maxFileSize: 536870912,
   collectionNameHotFolder : 'data',
   defaultRootCollection: 'data',
