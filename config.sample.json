@@ -1,9 +1,5 @@
 {
-  "access": [{
-    "login": "bob",
-    "plain": "dylan",
-    "display": "Bob Dylan"
-  }],
+  "defaultRootCollection" : "hotfolder",
   "datasetFields": {
     "isRoot": {
       "title": "Is on main page",
