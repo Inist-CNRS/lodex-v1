@@ -119,3 +119,7 @@ To run `lodex`, use:
 ```bash
 $ DEBUG=castor*,console* ./lodex /datas/lodex/empty/
 ```
+
+To understand, see:
+
+ - [General specifications](https://docs.google.com/presentation/d/1SpPWMXYkbw9FcTuXC2LFrp6Krfue2_aLkGzYMB4UpoI/pub?start=false&loop=false&delayms=3000)
