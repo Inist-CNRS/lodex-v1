@@ -156,7 +156,6 @@ module.exports = function(options, core) {
 
     };
 
-    debug('JBJ', JBJ.getActions());
     JBJ.render(stylesheet, {data:data}, function(err, res) {
       submit(err, res);
     });
