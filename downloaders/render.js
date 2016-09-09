@@ -17,8 +17,11 @@ module.exports = function(options, core) {
       self.documents.push(data);
       submit();
     },
-    onEnd:  function(submit) {
+    onEnd:  function() {
       var self = this;
+      if (self.documents === undefined) {
+        self.documents = [];
+      }
       var template = self.documents.length === 1 ? 'item.html' : 'list.html';
       var locals = self.documents.length === 1 ? self.documents[0] : { documents : self.documents };
       self.stream.render(template, locals);
