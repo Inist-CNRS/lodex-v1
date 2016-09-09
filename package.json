@@ -32,7 +32,7 @@
   "homepage": "https://github.com/Inist-CNRS/lodex#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "castor-core": "^8.0.7",
+    "castor-core": "^8.0.9",
     "castor-load": "^4.6.0",
     "castor-load-csv": "latest",
     "castor-load-excel": "latest",
