@@ -2,8 +2,6 @@
 
 LODEX is an experimentation aiming to link [ISTEX](http://www.istex.fr) data to the web of data.
 
-> **Warning**: LODEX is not funded by ISTEX.
-
 ## Installation
 
 See the [Installation instructions](Installation.md) page.
