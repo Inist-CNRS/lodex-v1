@@ -2,7 +2,8 @@
 'use strict'
 
 module.exports = {
-  rootURL : '/*?alt=html',
+  rootURL : '/corpus.html',
+  rootKEY : 'corpus',
   maxFileSize: 536870912,
   collectionNameHotFolder : 'data',
   defaultRootCollection: 'data',
