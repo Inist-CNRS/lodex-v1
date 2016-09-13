@@ -1,29 +1,25 @@
 # see https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
 FROM node:argon
 
-# Copy the local code source
-# and tell docker this folder
-# must be used when running a
-# container.
-COPY . /app
+# Tell docker this folder must be used when running a container.
 WORKDIR /app
-
-# Run the test to make sure
-# the docker image will be ok.
-# If the test fails, the image
-# will not be built
+# Install the node modules only
+COPY ./package.json /app
 RUN rm -rf ./node_modules && \
     npm install --production && \
     npm cache clean
+# Copy the local code source
+COPY . /app
 
-# data folder is a volume because it will
-# contains the user's data files (ex: CSV)
-VOLUME /app/data
 
-RUN mkdir -p /opt/ezmaster/config/
-RUN ln -s /app/data.json /opt/ezmaster/config/config.json
-RUN ln -s /app/data /opt/ezmaster/data
+# ezmasterizing of lodex
+# See https://github.com/Inist-CNRS/ezmaster#ezmasterizing-an-application
+RUN echo '{ \
+  "httpPort": 3000, \
+  "configPath": "/app/example/data.json", \
+  "dataPath":   "/app/example/data/" \
+}' > /etc/ezmaster.json
 
 # run the application
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
+ENTRYPOINT ./docker-entrypoint.sh
 EXPOSE 3000
