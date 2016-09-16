@@ -1,6 +1,6 @@
 {
   "name": "lodex",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "Linked Open Data and ISTEX",
   "main": "index.js",
   "bin": {
@@ -9,7 +9,8 @@
   "scripts": {
     "lint": "eslint ext=.js,.vue components/ downloaders/ filters/ loaders/ routes/",
     "test": "mocha",
-    "start": "./lodex"
+    "start": "./lodex",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
