@@ -17,7 +17,7 @@ module.exports = function(options, core) {
       data._content.jsonld['@id'] = data._uri;
       data._content.jsonld['@context'] = {};
       Object.keys(data._columns).forEach(function(propertyName) {
-        var node = data._columns[propertyName] || data._index._columns[propertyName];
+        var node = data._columns[propertyName] || data._collection._columns[propertyName];
         if (node.scheme) {
           data._content.jsonld[propertyName] = node.content;
           data._content.jsonld['@context'][propertyName] = {};

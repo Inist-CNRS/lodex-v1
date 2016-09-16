@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$(cat /app/data.json)" == "{}" ]; then
-	cp -f /app/config.sample.json /app/data.json
+if [ "$EZMASTER_MONGODB_HOST_PORT" != "" ]; then
+  ./cli /app/example/data --connexionURI "mongodb://${EZMASTER_MONGODB_HOST_PORT:-ezvis_db:27017}/lodex" --port 3000
+else
+  ./cli /app/example/data --connexionURI "mongodb://$MONGO_HOST_PORT/$MONGO_DATABASE" --port 3000
 fi
-
-exec /app/lodex /app/data
