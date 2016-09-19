@@ -48,6 +48,7 @@
     "jbj": "^7.1.1",
     "jbj-array": "^1.0.0",
     "jbj-nlp": "^1.1.0",
+    "jbj-numerical": "^1.0.0",
     "jbj-parse": "^2.0.0",
     "jbj-rdfa": "^1.1.2",
     "jbj-template": "^2.0.0",
