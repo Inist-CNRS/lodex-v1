@@ -93,8 +93,18 @@ module.exports = {
       require : "castor-load-xml"
     },
     {
+      pattern : "**/*.tsv",
+      require : "castor-load-csv",
+      options : {
+        separator : "\t"
+      }
+    },
+    {
       pattern : "**/*.csv",
-      require : "castor-load-csv"
+      require : "castor-load-csv",
+      options : {
+        separator : ","
+      }
     },
     {
       pattern : "**/*.xls",
