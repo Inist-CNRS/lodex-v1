@@ -128,6 +128,15 @@ module.exports = {
     "auth.js",
     "rest-crud.js"
   ],
+  filters: [
+    "jbj-array",
+    "jbj-misc.js",
+    "jbj-nlp",
+    "jbj-numerical",
+    "jbj-parse",
+    "jbj-rdfa",
+    "jbj-template"
+  ],
   downloaders: [
     {
       pattern : '*',
