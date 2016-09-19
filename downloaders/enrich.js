@@ -152,7 +152,10 @@ module.exports = function(options, core) {
         'getJsonLdField' : 'http://purl.org/dc/terms/identifier',
         'get#2' : 'content'
       },
-      mask : 'titre,description,configuration,parameters,colonnes,header,ressource,contient,liens'
+      '$_columns' : {
+        'get' : 'data._columns'
+      },
+      mask : 'titre,description,configuration,parameters,colonnes,header,ressource,contient,liens,_columns'
 
     };
 
