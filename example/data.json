@@ -1,21 +1,20 @@
 {
-  "defaultRootCollection" : "hotfolder",
+  "defaultRootCollection": "data",
+  "collectionNameHotFolder": "data",
+  "title": "An example on films",
   "datasetFields": {
     "isRoot": {
-      "title": "Is on main page",
+      "label": "Is on main page",
       "scheme": "https://schema.org/isAccessibleForFree",
       "type": "https://www.w3.org/TR/xmlschema-2/#boolean",
-      "content<": {
-        "get": "_root",
-        "cast": "boolean",
-        "default": false
-      }
+      "content": true
     },
     "title": {
       "label": "Title",
       "scheme": "http://purl.org/dc/elements/1.1/title",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "fr",
+      "comment": "Always get a title",
       "content<": {
         "get": ["_content.json.title", "title", "_label", "_wid"],
         "coalesce": true,
@@ -23,7 +22,7 @@
       }
     },
     "name": {
-      "title": "Name",
+      "label": "Name",
       "scheme": "http://purl.org/dc/terms/identifier",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "content<": {
@@ -31,7 +30,7 @@
       }
     },
     "updated": {
-      "title": "Updated",
+      "label": "Updated",
       "scheme": "http://purl.org/dc/terms/modified",
       "type": "https://www.w3.org/TR/xmlschema-2/#date",
       "content<": {
@@ -39,43 +38,59 @@
       }
     }
   },
-  "collectionFields": {
-    "label": {
-      "title": "Title",
+  "documentFields": {
+    "title": {
+      "label": "Title",
       "scheme": "http://purl.org/dc/terms/title",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "fr",
+      "visible": true,
       "content<": {
         "get": "_content.json.title"
       }
     },
     "year": {
-      "title": "Year",
+      "label": "Year",
       "scheme": "http://purl.org/dc/terms/issued",
       "type": "https://www.w3.org/TR/xmlschema-2/#gYear",
+      "visible": true,
       "content<": {
         "get": "_content.json.year"
       }
     },
     "actors": {
-      "title": "Actors",
+      "label": "Actors",
       "scheme": "http://schema.org/actors",
+      "visible": true,
       "content<": {
         "get": "_content.json.actors",
-        "parseCSV" : "/",
+        "parseCSV": "/",
         "foreach": {
           "trim": true
         }
       }
     },
+    "director": {
+      "label": "Director",
+      "scheme": "http://purl.org/ontology/bibo/director",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "visible": true,
+      "content<": {
+        "get": "_content.json.director"
+      }
+    },
     "updated": {
-      "title": "Updated",
+      "label": "Updated",
       "scheme": "http://purl.org/dc/terms/modified",
       "type": "https://www.w3.org/TR/xmlschema-2/#date",
       "content<": {
         "get": "dateSynchronised"
       }
     }
-  }
+  },
+  "access": [{
+    "login": "bob",
+    "plain": "dylan",
+    "display": "Bob Dylan"
+  }]
 }
-
