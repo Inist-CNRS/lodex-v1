@@ -92,8 +92,9 @@ body > div.container {
   <div class="container" style="margin-top:10px;">
     <div class="jumbotron alert  alert-info alert-dismissible fade in" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-      <h1>LODEX</h1>
-      <p class="text-info"> lorem ipsum</p>
+      <p>
+      <img src="/assets/img/logo_lodex_200.png" height="20"> Sed viverra, nulla vitae egestas ornare, ante mauris varius turpis, quis efficitur mi nibh ut leo. Pellentesque sed ullamcorper massa. Nulla sed dignissim velit. Nunc non luctus mauris. Quisque in mi maximus, facilisis dolor in, condimentum diam. Duis hendrerit at nisi facilisis molestie. Integer lacus velit, porttitor scelerisque tellus sit amet, sollicitudin bibendum est. Aenean rutrum enim ut odio blandit laoreet. Maecenas ac faucibus massa, sollicitudin eleifend magna. Donec varius vulputate elit, nec fringilla mi malesuada eu.
+      </p>
     </div>
   </div>
 
@@ -119,8 +120,10 @@ body > div.container {
             <input type="radio" />Exports</a>
           <a href="#ontology" class="btn btn-default" data-toggle="tab">
             <input type="radio" />Ontology</a>
-          <a href="#contact" class="btn btn-default" data-toggle="tab">
-            <input type="radio" />Contact</a>
+          <!--
+          <a href="#graph" class="btn btn-default" data-toggle="tab">
+            <input type="radio" />graph</a>
+          -->
         </div>
 
         <div class="tab-content">
@@ -155,26 +158,99 @@ body > div.container {
             Le jeu de données est disponible sur ce site selon une syntaxe "tableau", avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD et N-Quads.
             </p>
             <p>
-            Ils sont librement téléchargeable au travers de ces 5 fichiers d'export :
+            Ils sont librement téléchargeable au travers de plsuierus format :
             </p>
-            <ul class="list-inline text-center">
+            <ul class="list-unstyled">
               <li>
-                <a class="download" href="?alt=xlsx"><span class="fa fa-file-excel-o fa-3x"></span><br> Excel</a>
+                <h3>XSLX</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.xlsx" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                  <a href="http://file-format.lod.istex.fr/=/xslx" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
               </li>
               <li>
-                <a class="download" href="?alt=tsv"><span class="fa fa-list fa-3x"></span><br> TSV</a>
+                <h3>TSV</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.tsv" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                    <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
               </li>
               <li>
-                <a class="download" href="?alt=csv"><span class="fa fa-table fa-3x"></span><br> CSV</a>
+                <h3>CSV</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.csv" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                    <a href="http://file-format.lod.istex.fr/=/csv" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
               </li>
               <li>
-                <a class="download" href="?alt=nq"><span class="fa fa-bars fa-3x"></span><br> N-Quads</a>
+                <h3>N-Quads</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.nq" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                    <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
               </li>
               <li>
-                <a class="download" href="?alt=nq.xlsx"><span class="fa fa-file-excel-o fa-3x"></span><br><em> Excel (RDF)</em></a>
+                <h3>N-Quads (Excel)</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.nqx" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                    <a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
               </li>
               <li>
-                <a class="download" href="?alt=json"><span class="fa fa-file-o fa-3x"></span><br> JSON LD</a>
+                <h3>JSONLD</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.jsonld" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                    <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
+              </li>
+              <li>
+                <h3>Turtle</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.ttl" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                    <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
               </li>
             </ul>
             <section class="page-content entry-content clearfix" itemprop="articleBody">
@@ -212,7 +288,7 @@ body > div.container {
             </div>
 
           </div>
-          <div class="tab-pane" id="contact">Contact Content</div>
+          <div class="tab-pane" id="graph">Content</div>
         </div>
       </div>
 
@@ -274,12 +350,10 @@ body > div.container {
 
               <div class="col-sm-6 col-md-3">
                 <ul>
-                  <li> <a href="http://lodex.inist.fr" target="_blank">Le blog du projet</a>  </li>
-                  <li> <a href="http://lodex.inist.fr/feed" target="_blank"> <abbr title="Really Simple Syndication">RSS du blog</abbr> </a> </li>
-                  <li>  <a href="/index/">Back office</a> </li>
+                  <li>  <a href="http://lodex.inist.fr" target="_blank">Le blog du projet</a>  </li>
                   <li>  <a href="/mention.html">Mentions légales</a> </li>
                   <li>  <a href="/cookies.html">Cookies et statistiques</a> </li>
-                  <li>  <a href="https://github.com/Inist-CNRS/lodex" title="Fork me on GitHub" target="_blank">Dépôt Github du projet</a></li>
+                  <li>  <a href="https://github.com/Inist-CNRS/lodex" title="Fork me on GitHub" target="_blank"><img src="/assets/img/GitHub-Mark-32px.png" height="16"> Dépôt Github du projet</a></li>
                 </ul>
               </div>
 
