@@ -9,13 +9,13 @@ install: ## install depedencies thanks to a dockerized npm install
 	@make docker-chown
 
 run-debug: ## run lodex in debug mode (with local mongo and nodejs and without docker)
-	@DEBUG=castor*,console* NODE_ENV=development ./lodex
+	@DEBUG=castor*,console* NODE_ENV=development npm start
 
 run-dev: ## run lodex in dev mode (with local mongo and nodejs/nodemon and without docker)
-	@DEBUG=castor*,console* NODE_ENV=development ./node_modules/.bin/nodemon ./lodex
+	@DEBUG=castor*,console* NODE_ENV=development ./node_modules/.bin/nodemon npm start
 
 run-prod: ## run lodex in production mode (with local mongo and nodejs and without docker)
-	@NODE_ENV=production ./lodex
+	@NODE_ENV=production npm start
 
 docker-build: ## build the docker inistcnrs/lodex image localy
 	@docker build -t inistcnrs/lodex --build-arg http_proxy --build-arg https_proxy .

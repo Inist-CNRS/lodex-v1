@@ -10,7 +10,9 @@
     "lint": "eslint ext=.js,.vue components/ downloaders/ filters/ loaders/ routes/",
     "test": "mocha",
     "start": "./lodex",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "build": "browserify -t vueify components/list.js -o public/assets/js/list.js && echo $?",
+    "prestart": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -56,12 +58,21 @@
     "lodash.truncate": "^4.3.0",
     "mongodb-querystring": "^1.0.3",
     "n3": "^0.5.0",
-    "object.omit": "^2.0.0"
+    "object.omit": "^2.0.0",
+    "vue-resource": "^1.0.2"
   },
   "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-runtime": "^6.11.6",
+    "browserify": "^13.1.0",
     "eslint": "^2.3.0",
     "istanbul": "^0.4.2",
     "mocha": "^2.5.3",
-    "nodemon": "^1.9.1"
+    "nodemon": "^1.9.1",
+    "vue": "^1.0.26",
+    "vue-hot-reload-api": "^2.0.6",
+    "vueify": "^8.7.0"
   }
 }
