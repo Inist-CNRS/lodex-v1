@@ -49,7 +49,7 @@ body > div.container {
   margin-top : 80px;
 }
   </style>
-  <link href="/assets/css/index.css" rel="stylesheet" type="text/css">
+  <link href="/assets/css/list.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -293,26 +293,17 @@ body > div.container {
       </div>
 
       <div id="sidebar" class="pull-right col-md-2">
-        <a href="#" class="btn btn-danger btn-sm btn-block" role="button">FIXME</a>
-        <hr />
-        <h3>Facette #1</h3>
-        <ul class="nav nav-pills nav-stacked">
-          <li class="active"><span class="badge pull-right">239</span><a href="#">Value #0</a> </li>
-          <li><a href="#"><span class="badge pull-right">108</span>Value #1</a></li>
-          <li><a href="#"><span class="badge pull-right">32</span>Value #2</a></li>
-          <li><a href="#"><span class="badge pull-right">6</span>Value #3</a></li>
-          <li><a href="#"><span class="badge pull-right">3</span>Value #4</a></li>
-        </ul>
-        <hr />
-        <h3>Facette #2</h3>
-        <ul class="nav nav-pills nav-stacked">
-          <li class="active"><span class="badge pull-right">32</span><a href="#">Value #0</a> </li>
-          <li><a href="#"><span class="badge pull-right">29</span>Value #1</a></li>
-          <li><a href="#"><span class="badge pull-right">23</span>Value #2</a></li>
-          <li><a href="#"><span class="badge pull-right">16</span>Value #3</a></li>
-          <li><a href="#"><span class="badge pull-right">13</span>Value #4</a></li>
-        </ul>
-
+        <div id="metrics" class="row">
+          <div class="text-center col-xs-8 col-sm-6">
+            <metric title="Ressources" query="$count?" mode="value"/>
+          </div>
+          <div class="text-center col-xs-4 col-sm-6">
+            <metric title="Properties" query="$keys?field=_columns"/>
+          </div>
+        </div>
+        <div>
+          <facet title="Les titres" field="_columns.title.content"/>
+        </div>
       </div>
     </div>
 
@@ -338,8 +329,8 @@ body > div.container {
               </div> <!-- end widget -->
 
               <div class="col-sm-6 col-md-3">
-              <!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'http://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "http://lodex.inist.fr/feed/",rssmikle_frame_width: "300",rssmikle_frame_height: "400",frame_height_by_article: "1",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "off",autoscroll: "off",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "Sur le blog LODEX",rssmikle_title_link: "http://lodex.inist.fr",rssmikle_title_bgcolor: "#418BA5",rssmikle_title_color: "#FFFDFC",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#eaeade",rssmikle_item_bgimage: "",rssmikle_item_title_length: "55",rssmikle_item_title_color: "#418BA5",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "off",rssmikle_item_description_length: "150",rssmikle_item_description_color: "#666666",rssmikle_item_date: "off",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "1",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:300px;"><a href="http://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!--  end  feedwind code -->
-               </div>
+                <!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'http://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "http://lodex.inist.fr/feed/",rssmikle_frame_width: "300",rssmikle_frame_height: "400",frame_height_by_article: "1",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "off",autoscroll: "off",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "Sur le blog LODEX",rssmikle_title_link: "http://lodex.inist.fr",rssmikle_title_bgcolor: "#418BA5",rssmikle_title_color: "#FFFDFC",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#eaeade",rssmikle_item_bgimage: "",rssmikle_item_title_length: "55",rssmikle_item_title_color: "#418BA5",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "off",rssmikle_item_description_length: "150",rssmikle_item_description_color: "#666666",rssmikle_item_date: "off",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "1",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:300px;"><a href="http://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!--  end  feedwind code -->
+              </div>
 
               <div class="col-sm-6 col-md-3">
                 <ul>
@@ -383,7 +374,7 @@ body > div.container {
 
     </footer> <!-- end footer -->
 
-    <script type="text/javascript" charset="utf-8" src="/assets/js/list.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/assets/js/list.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="/libs/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="/libs/jquery-migrate/dist/jquery-migrate.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="/libs/modernizr/dist/modernizr.custom.min.js"></script>

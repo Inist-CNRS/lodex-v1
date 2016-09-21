@@ -9,9 +9,11 @@ install: ## install depedencies thanks to a dockerized npm install
 	@make docker-chown
 
 run-debug: ## run lodex in debug mode (with local mongo and nodejs and without docker)
+	@npm run build
 	@DEBUG=castor*,console* NODE_ENV=development npm start
 
 run-dev: ## run lodex in dev mode (with local mongo and nodejs/nodemon and without docker)
+	@npm run build
 	@DEBUG=castor*,console* NODE_ENV=development ./node_modules/.bin/nodemon npm start
 
 run-prod: ## run lodex in production mode (with local mongo and nodejs and without docker)

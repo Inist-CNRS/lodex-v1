@@ -7,12 +7,12 @@
     "lodex": "lodex"
   },
   "scripts": {
+    "build": "browserify -d -t vueify components/list.js -p [minifyify --map list.js.map --output public/assets/js/list.js.map] > public/assets/js/list.min.js",
     "lint": "eslint ext=.js,.vue components/ downloaders/ filters/ loaders/ routes/",
     "test": "mocha",
     "start": "./lodex",
     "postversion": "git push && git push --tags",
-    "build": "browserify -t vueify components/list.js -o public/assets/js/list.js && echo $?",
-    "prestart": "npm run build"
+    "preversion": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -69,6 +69,7 @@
     "browserify": "^13.1.0",
     "eslint": "^2.3.0",
     "istanbul": "^0.4.2",
+    "minifyify": "^7.3.3",
     "mocha": "^2.5.3",
     "nodemon": "^1.9.1",
     "vue": "^1.0.26",
