@@ -10,6 +10,7 @@
     "lint": "eslint ext=.js,.vue components/ downloaders/ filters/ loaders/ routes/",
     "test": "mocha",
     "start": "./lodex",
+    "preversion": "npm run build && git add public/assets/js/list.js",
     "postversion": "git push && git push --tags",
     "build": "browserify -t vueify components/list.js -o public/assets/js/list.js && echo $?",
     "prestart": "npm run build"
