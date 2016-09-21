@@ -1,0 +1,144 @@
+{
+  "loaders": [
+    {
+      "pattern": "**/*.csv",
+      "require": "castor-load-csv",
+      "options": { "separator": ","}
+    }
+  ],
+  "defaultRootCollection": "named-entity",
+  "collectionNameHotFolder": "named-entity",
+  "title": "Named entities",
+  "description": "Cette table correspond à une reprise du choix d'annotation des données ISTEX avec des entités nommées : mots ou groupes de mots présentant un intérêt particulier sur le plan sémantique et pouvant être catégorisés. Il s’agit de noms propres (personnes, lieux,organisations) ou d’autres unités lexicales (dates, projets financés, URL).",
+  "uniqueIdentifierWith" : {
+    "get": "_content.json.Identifiant",
+    "slug": true
+  },
+  "datasetFields": {
+    "isRoot": {
+      "label": "Is on main page",
+      "scheme": "https://schema.org/isAccessibleForFree",
+      "type": "https://www.w3.org/TR/xmlschema-2/#boolean",
+      "content": true
+    },
+    "title": {
+      "label": "Title",
+      "scheme": "http://purl.org/dc/elements/1.1/title",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "fr",
+      "comment": "Always get a title",
+      "content<": {
+        "get": ["_content.json.title", "title", "_label", "_wid"],
+        "coalesce": true,
+        "first": true
+      }
+    },
+    "name": {
+      "label": "Name",
+      "scheme": "http://purl.org/dc/terms/identifier",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "content<": {
+        "get": "_content.json.Identifiant",
+        "slug": true
+      }
+    },
+    "updated": {
+      "label": "Updated",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "type": "https://www.w3.org/TR/xmlschema-2/#date",
+      "content<": {
+        "get": "dateSynchronised"
+      }
+    }
+  },
+  "documentFields": {
+    "title": {
+      "label": "Title",
+      "scheme": "http://purl.org/dc/terms/title",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "fr",
+      "visible": true,
+      "content<": {
+        "get": "_content.json.Titre"
+      }
+    },
+    "frenchLabel": {
+      "label": "French label",
+      "scheme": "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "fr",
+      "content<": {
+        "get": "_content.json.Libellé français"
+      }
+    },
+    "englishLabel": {
+      "label": "English label",
+      "scheme": "http://www.w3.org/2004/02/skos/core#prefLabel",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "en",
+      "visible": true,
+      "content<": {
+        "get": "_content.json.Libellé anglais"
+      }
+    },
+    "frenchDefinition": {
+      "label": "French definition",
+      "scheme": "http://www.w3.org/2004/02/skos/core#definition",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "fr",
+      "content<": {
+        "get": "_content.json.Définition fr"
+      }
+    },
+    "englishDefinition": {
+      "label": "English definition",
+      "scheme": "http://www.w3.org/2004/02/skos/core#definition",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "en",
+      "visible": true,
+      "content<": {
+        "get": "_content.json.Définition eng"
+      }
+    },
+    "frenchExample": {
+      "label": "French example",
+      "scheme": "http://www.w3.org/2004/02/skos/core#example",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "fr",
+      "content<": {
+        "get": "_content.json.Exemple fr"
+      }
+    },
+    "englishExample": {
+      "label": "English example",
+      "scheme": "http://www.w3.org/2004/02/skos/core#example",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "en",
+      "visible": true,
+      "content<": {
+        "get": "_content.json.Exemple eng"
+      }
+    },
+    "note": {
+      "label": "Writing instructions",
+      "scheme": "http://www.w3.org/2004/02/skos/core#note",
+      "lang": "fr",
+      "content<": {
+        "get": "_content.json.Consigne d'écriture"
+      }
+    },
+    "updated": {
+      "label": "Updated",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "type": "https://www.w3.org/TR/xmlschema-2/#date",
+      "content<": {
+        "get": "dateSynchronised"
+      }
+    }
+  },
+  "access": [{
+    "login": "bob",
+    "plain": "dylan",
+    "display": "Bob Dylan"
+  }]
+}

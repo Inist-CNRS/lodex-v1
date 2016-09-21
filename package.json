@@ -1,6 +1,6 @@
 {
   "name": "lodex",
-  "version": "0.9.12",
+  "version": "0.9.13",
   "description": "Linked Open Data and ISTEX",
   "main": "index.js",
   "bin": {
@@ -11,6 +11,7 @@
     "lint": "eslint ext=.js,.vue components/ downloaders/ filters/ loaders/ routes/",
     "test": "mocha",
     "start": "./lodex",
+    "preversion": "npm run build && git add public/assets/js/list.js",
     "postversion": "git push && git push --tags",
     "preversion": "npm run build"
   },

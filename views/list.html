@@ -134,7 +134,9 @@ body > div.container {
                   <tr>
                     <th>URI</th>
                     {% for name, col in documents[0]._columns %}
-                    <th>{{ col.title }}</th>
+                    {% if col.visible %}
+                    <th>{{ col.label }}</th>
+                    {% endif %}
                     {% endfor %}
                   </tr>
                 </thead>
@@ -145,7 +147,9 @@ body > div.container {
                       <a href="{{ doc.ressource.@id.raw }}?alt=html">{{ doc.ressource.name.label }}</a>
                     </td>
                     {% for name, col in doc.colonnes %}
+                    {% if doc._columns[name].visible %}
                     <td>{{ doc.ressource[name].html }}</td>
+                    {% endif %}
                     {% endfor %}
                   </tr>
                   {% endfor %}
