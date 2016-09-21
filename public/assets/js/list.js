@@ -1,32 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-  data: function data() {
-    return {
-      // Note: modifying `msg` below will not cause changes to occur with
-      // hot-reload. As reloaded components preserve their initial state,
-      // modifying these values will have no effect.
-      msg: 'Hello World!'
-    };
-  }
-};
-if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"hello\">\n  <h1>{{ msg }}</h1>\n</div>\n"
-if (module.hot) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  if (!module.hot.data) {
-    hotAPI.createRecord("_v-20c492b8", module.exports)
-  } else {
-    hotAPI.update("_v-20c492b8", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
-  }
-})()}
-},{"vue":5,"vue-hot-reload-api":3}],2:[function(require,module,exports){
 
 // The entryPoint calls the project components.
 
@@ -37,6 +9,7 @@ var Vue = require('vue')
 
 Vue.use(require('vue-resource'));
 
+/*
 var facet = require('./facet.vue')
 
 new Vue({
@@ -52,134 +25,191 @@ new Vue({
   }
 
 });
+*/
 
-},{"./facet.vue":1,"vue":5,"vue-resource":4}],3:[function(require,module,exports){
-var Vue // late bind
-var map = window.__VUE_HOT_MAP__ = Object.create(null)
-var installed = false
-var isBrowserify = false
-var initHookName = 'beforeCreate'
+},{"vue":4,"vue-resource":3}],2:[function(require,module,exports){
+// shim for using process in browser
+var process = module.exports = {};
 
-exports.install = function (vue, browserify) {
-  if (installed) return
-  installed = true
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
 
-  Vue = vue
-  isBrowserify = browserify
+var cachedSetTimeout;
+var cachedClearTimeout;
 
-  // compat with < 2.0.0-alpha.7
-  if (Vue.config._lifecycleHooks.indexOf('init') > -1) {
-    initHookName = 'init'
-  }
-
-  exports.compatible = Number(Vue.version.split('.')[0]) >= 2
-  if (!exports.compatible) {
-    console.warn(
-      '[HMR] You are using a version of vue-hot-reload-api that is ' +
-      'only compatible with Vue.js core ^2.0.0.'
-    )
-    return
-  }
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
 }
-
-/**
- * Create a record for a hot module, which keeps track of its constructor
- * and instances
- *
- * @param {String} id
- * @param {Object} options
- */
-
-exports.createRecord = function (id, options) {
-  var Ctor = null
-  if (typeof options === 'function') {
-    Ctor = options
-    options = Ctor.options
-  }
-  makeOptionsHot(id, options)
-  map[id] = {
-    Ctor: Vue.extend(options),
-    instances: []
-  }
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
 }
-
-/**
- * Make a Component options object hot.
- *
- * @param {String} id
- * @param {Object} options
- */
-
-function makeOptionsHot (id, options) {
-  injectHook(options, initHookName, function () {
-    map[id].instances.push(this)
-  })
-  injectHook(options, 'beforeDestroy', function () {
-    var instances = map[id].instances
-    instances.splice(instances.indexOf(this), 1)
-  })
-}
-
-/**
- * Inject a hook to a hot reloadable component so that
- * we can keep track of it.
- *
- * @param {Object} options
- * @param {String} name
- * @param {Function} hook
- */
-
-function injectHook (options, name, hook) {
-  var existing = options[name]
-  options[name] = existing
-    ? Array.isArray(existing)
-      ? existing.concat(hook)
-      : [existing, hook]
-    : [hook]
-}
-
-function tryWrap (fn) {
-  return function (id, arg) {
-    try { fn(id, arg) } catch (e) {
-      console.error(e)
-      console.warn('Something went wrong during Vue component hot-reload. Full reload required.')
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
     }
-  }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
 }
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
 
-exports.rerender = tryWrap(function (id, fns) {
-  var record = map[id]
-  record.Ctor.options.render = fns.render
-  record.Ctor.options.staticRenderFns = fns.staticRenderFns
-  record.instances.slice().forEach(function (instance) {
-    instance.$options.render = fns.render
-    instance.$options.staticRenderFns = fns.staticRenderFns
-    instance._staticTrees = [] // reset static trees
-    instance.$forceUpdate()
-  })
-})
 
-exports.reload = tryWrap(function (id, options) {
-  makeOptionsHot(id, options)
-  var record = map[id]
-  record.Ctor.extendOptions = options
-  var newCtor = Vue.extend(options)
-  record.Ctor.options = newCtor.options
-  record.Ctor.cid = newCtor.cid
-  if (newCtor.release) {
-    // temporary global mixin strategy used in < 2.0.0-alpha.6
-    newCtor.release()
-  }
-  record.instances.slice().forEach(function (instance) {
-    if (instance.$parent) {
-      instance.$parent.$forceUpdate()
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
     } else {
-      console.warn('Root or manually mounted instance modified. Full reload required.')
+        queueIndex = -1;
     }
-  })
-})
+    if (queue.length) {
+        drainQueue();
+    }
+}
 
-},{}],4:[function(require,module,exports){
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+},{}],3:[function(require,module,exports){
 /*!
  * vue-resource v1.0.2
  * https://github.com/vuejs/vue-resource
@@ -1691,8 +1721,8 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = plugin;
-},{}],5:[function(require,module,exports){
-(function (global){
+},{}],4:[function(require,module,exports){
+(function (process,global){
 /*!
  * Vue.js v1.0.26
  * (c) 2016 Evan You
@@ -2636,7 +2666,7 @@ var config = Object.defineProperties({
    * Disabled by default in production builds.
    */
 
-  devtools: "development" !== 'production',
+  devtools: process.env.NODE_ENV !== 'production',
 
   /**
    * Internal flag to indicate the delimiters have been
@@ -2705,7 +2735,7 @@ var config = Object.defineProperties({
 var warn = undefined;
 var formatComponentName = undefined;
 
-if ("development" !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   (function () {
     var hasConsole = typeof console !== 'undefined';
 
@@ -2817,7 +2847,7 @@ function query(el) {
     var selector = el;
     el = document.querySelector(el);
     if (!el) {
-      "development" !== 'production' && warn('Cannot find element: ' + selector);
+      process.env.NODE_ENV !== 'production' && warn('Cannot find element: ' + selector);
     }
   }
   return el;
@@ -3242,7 +3272,7 @@ var commonTagRE = /^(div|p|span|img|a|b|i|br|ul|ol|li|h1|h2|h3|h4|h5|h6|code|pre
 var reservedTagRE = /^(slot|partial|component)$/i;
 
 var isUnknownElement = undefined;
-if ("development" !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   isUnknownElement = function (el, tag) {
     if (tag.indexOf('-') > -1) {
       // http://stackoverflow.com/a/28210364/1070244
@@ -3277,7 +3307,7 @@ function checkComponentAttr(el, options) {
       var is = hasAttrs && getIsBinding(el, options);
       if (is) {
         return is;
-      } else if ("development" !== 'production') {
+      } else if (process.env.NODE_ENV !== 'production') {
         var expectedTag = options._componentNameMap && options._componentNameMap[tag];
         if (expectedTag) {
           warn('Unknown custom element: <' + tag + '> - ' + 'did you mean <' + expectedTag + '>? ' + 'HTML is case-insensitive, remember to use kebab-case in templates.');
@@ -3358,7 +3388,7 @@ strats.data = function (parentVal, childVal, vm) {
       return parentVal;
     }
     if (typeof childVal !== 'function') {
-      "development" !== 'production' && warn('The "data" option should be a function ' + 'that returns a per-instance value in component ' + 'definitions.', vm);
+      process.env.NODE_ENV !== 'production' && warn('The "data" option should be a function ' + 'that returns a per-instance value in component ' + 'definitions.', vm);
       return parentVal;
     }
     if (!parentVal) {
@@ -3392,7 +3422,7 @@ strats.data = function (parentVal, childVal, vm) {
 
 strats.el = function (parentVal, childVal, vm) {
   if (!vm && childVal && typeof childVal !== 'function') {
-    "development" !== 'production' && warn('The "el" option should be a function ' + 'that returns a per-instance value in component ' + 'definitions.', vm);
+    process.env.NODE_ENV !== 'production' && warn('The "el" option should be a function ' + 'that returns a per-instance value in component ' + 'definitions.', vm);
     return;
   }
   var ret = childVal || parentVal;
@@ -3481,18 +3511,18 @@ function guardComponents(options) {
     var components = options.components = guardArrayAssets(options.components);
     var ids = Object.keys(components);
     var def;
-    if ("development" !== 'production') {
+    if (process.env.NODE_ENV !== 'production') {
       var map = options._componentNameMap = {};
     }
     for (var i = 0, l = ids.length; i < l; i++) {
       var key = ids[i];
       if (commonTagRE.test(key) || reservedTagRE.test(key)) {
-        "development" !== 'production' && warn('Do not use built-in or reserved HTML elements as component ' + 'id: ' + key);
+        process.env.NODE_ENV !== 'production' && warn('Do not use built-in or reserved HTML elements as component ' + 'id: ' + key);
         continue;
       }
       // record a all lowercase <-> kebab-case mapping for
       // possible custom element case error warning
-      if ("development" !== 'production') {
+      if (process.env.NODE_ENV !== 'production') {
         map[key.replace(/-/g, '').toLowerCase()] = hyphenate(key);
       }
       def = components[key];
@@ -3553,7 +3583,7 @@ function guardArrayAssets(assets) {
       asset = assets[i];
       var id = typeof asset === 'function' ? asset.options && asset.options.name || asset.id : asset.name || asset.id;
       if (!id) {
-        "development" !== 'production' && warn('Array-syntax assets must provide a "name" or "id" field.');
+        process.env.NODE_ENV !== 'production' && warn('Array-syntax assets must provide a "name" or "id" field.');
       } else {
         res[id] = asset;
       }
@@ -3576,7 +3606,7 @@ function guardArrayAssets(assets) {
 function mergeOptions(parent, child, vm) {
   guardComponents(child);
   guardProps(child);
-  if ("development" !== 'production') {
+  if (process.env.NODE_ENV !== 'production') {
     if (child.propsData && !vm) {
       warn('propsData can only be used as an instantiation option.');
     }
@@ -3632,7 +3662,7 @@ function resolveAsset(options, type, id, warnMissing) {
   assets[camelizedId = camelize(id)] ||
   // Pascal Case ID
   assets[camelizedId.charAt(0).toUpperCase() + camelizedId.slice(1)];
-  if ("development" !== 'production' && warnMissing && !res) {
+  if (process.env.NODE_ENV !== 'production' && warnMissing && !res) {
     warn('Failed to resolve ' + type.slice(0, -1) + ': ' + id, options);
   }
   return res;
@@ -4437,7 +4467,7 @@ function getPath(obj, path) {
  */
 
 var warnNonExistent;
-if ("development" !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   warnNonExistent = function (path, vm) {
     warn('You are setting a non-existent path "' + path.raw + '" ' + 'on a vm instance. Consider pre-initializing the property ' + 'with the "data" option for more reliable reactivity ' + 'and better performance.', vm);
   };
@@ -4470,7 +4500,7 @@ function setPath(obj, path, val) {
       obj = obj[key];
       if (!isObject(obj)) {
         obj = {};
-        if ("development" !== 'production' && last._isVue) {
+        if (process.env.NODE_ENV !== 'production' && last._isVue) {
           warnNonExistent(path, last);
         }
         set(last, key, obj);
@@ -4481,7 +4511,7 @@ function setPath(obj, path, val) {
       } else if (key in obj) {
         obj[key] = val;
       } else {
-        if ("development" !== 'production' && obj._isVue) {
+        if (process.env.NODE_ENV !== 'production' && obj._isVue) {
           warnNonExistent(path, obj);
         }
         set(obj, key, val);
@@ -4589,7 +4619,7 @@ function restore(str, i) {
 
 function compileGetter(exp) {
   if (improperKeywordsRE.test(exp)) {
-    "development" !== 'production' && warn('Avoid using reserved keywords in expression: ' + exp);
+    process.env.NODE_ENV !== 'production' && warn('Avoid using reserved keywords in expression: ' + exp);
   }
   // reset state
   saved.length = 0;
@@ -4617,7 +4647,7 @@ function makeGetterFn(body) {
     return new Function('scope', 'return ' + body + ';');
     /* eslint-enable no-new-func */
   } catch (e) {
-    if ("development" !== 'production') {
+    if (process.env.NODE_ENV !== 'production') {
       /* istanbul ignore if */
       if (e.toString().match(/unsafe-eval|CSP/)) {
         warn('It seems you are using the default build of Vue.js in an environment ' + 'with Content Security Policy that prohibits unsafe-eval. ' + 'Use the CSP-compliant build instead: ' + 'http://vuejs.org/guide/installation.html#CSP-compliant-build');
@@ -4643,7 +4673,7 @@ function compileSetter(exp) {
       setPath(scope, path, val);
     };
   } else {
-    "development" !== 'production' && warn('Invalid setter expression: ' + exp);
+    process.env.NODE_ENV !== 'production' && warn('Invalid setter expression: ' + exp);
   }
 }
 
@@ -4765,7 +4795,7 @@ function runBatcherQueue(queue) {
     has[id] = null;
     watcher.run();
     // in dev build, check and stop circular updates.
-    if ("development" !== 'production' && has[id] != null) {
+    if (process.env.NODE_ENV !== 'production' && has[id] != null) {
       circular[id] = (circular[id] || 0) + 1;
       if (circular[id] > config._maxUpdateCount) {
         warn('You may have an infinite update loop for watcher ' + 'with expression "' + watcher.expression + '"', watcher.vm);
@@ -4867,7 +4897,7 @@ Watcher.prototype.get = function () {
   try {
     value = this.getter.call(scope, scope);
   } catch (e) {
-    if ("development" !== 'production' && config.warnExpressionErrors) {
+    if (process.env.NODE_ENV !== 'production' && config.warnExpressionErrors) {
       warn('Error when evaluating expression ' + '"' + this.expression + '": ' + e.toString(), this.vm);
     }
   }
@@ -4903,7 +4933,7 @@ Watcher.prototype.set = function (value) {
   try {
     this.setter.call(scope, scope, value);
   } catch (e) {
-    if ("development" !== 'production' && config.warnExpressionErrors) {
+    if (process.env.NODE_ENV !== 'production' && config.warnExpressionErrors) {
       warn('Error when evaluating setter ' + '"' + this.expression + '": ' + e.toString(), this.vm);
     }
   }
@@ -4911,7 +4941,7 @@ Watcher.prototype.set = function (value) {
   var forContext = scope.$forContext;
   if (forContext && forContext.alias === this.expression) {
     if (forContext.filters) {
-      "development" !== 'production' && warn('It seems you are using two-way binding on ' + 'a v-for alias (' + this.expression + '), and the ' + 'v-for has filters. This will not work properly. ' + 'Either remove the filters or use an array of ' + 'objects and bind to object properties instead.', this.vm);
+      process.env.NODE_ENV !== 'production' && warn('It seems you are using two-way binding on ' + 'a v-for alias (' + this.expression + '), and the ' + 'v-for has filters. This will not work properly. ' + 'Either remove the filters or use an array of ' + 'objects and bind to object properties instead.', this.vm);
       return;
     }
     forContext._withLock(function () {
@@ -4992,7 +5022,7 @@ Watcher.prototype.update = function (shallow) {
     this.queued = true;
     // record before-push error stack in debug mode
     /* istanbul ignore if */
-    if ("development" !== 'production' && config.debug) {
+    if (process.env.NODE_ENV !== 'production' && config.debug) {
       this.prevError = new Error('[vue] async stack trace');
     }
     pushWatcher(this);
@@ -5021,7 +5051,7 @@ Watcher.prototype.run = function () {
       // so the full cross-tick stack trace is available.
       var prevError = this.prevError;
       /* istanbul ignore if */
-      if ("development" !== 'production' && config.debug && prevError) {
+      if (process.env.NODE_ENV !== 'production' && config.debug && prevError) {
         this.prevError = null;
         try {
           this.cb.call(this.vm, value, oldValue);
@@ -5704,7 +5734,7 @@ var vFor = {
     }
 
     if (!this.alias) {
-      "development" !== 'production' && warn('Invalid v-for expression "' + this.descriptor.raw + '": ' + 'alias is required.', this.vm);
+      process.env.NODE_ENV !== 'production' && warn('Invalid v-for expression "' + this.descriptor.raw + '": ' + 'alias is required.', this.vm);
       return;
     }
 
@@ -6058,7 +6088,7 @@ var vFor = {
       if (!cache[id]) {
         cache[id] = frag;
       } else if (trackByKey !== '$index') {
-        "development" !== 'production' && this.warnDuplicate(value);
+        process.env.NODE_ENV !== 'production' && this.warnDuplicate(value);
       }
     } else {
       id = this.id;
@@ -6066,11 +6096,11 @@ var vFor = {
         if (value[id] === null) {
           value[id] = frag;
         } else {
-          "development" !== 'production' && this.warnDuplicate(value);
+          process.env.NODE_ENV !== 'production' && this.warnDuplicate(value);
         }
       } else if (Object.isExtensible(value)) {
         def(value, id, frag);
-      } else if ("development" !== 'production') {
+      } else if (process.env.NODE_ENV !== 'production') {
         warn('Frozen v-for objects cannot be automatically tracked, make sure to ' + 'provide a track-by key.');
       }
     }
@@ -6097,7 +6127,7 @@ var vFor = {
       frag = value[this.id];
     }
     if (frag && (frag.reused || frag.fresh)) {
-      "development" !== 'production' && this.warnDuplicate(value);
+      process.env.NODE_ENV !== 'production' && this.warnDuplicate(value);
     }
     return frag;
   },
@@ -6281,7 +6311,7 @@ function getTrackByKey(index, key, value, trackByKey) {
   return trackByKey ? trackByKey === '$index' ? index : trackByKey.charAt(0).match(/\w/) ? getPath(value, trackByKey) : value[trackByKey] : key || value;
 }
 
-if ("development" !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   vFor.warnDuplicate = function (value) {
     warn('Duplicate value found in v-for="' + this.descriptor.raw + '": ' + JSON.stringify(value) + '. Use track-by="$index" if ' + 'you are expecting duplicate values.', this.vm);
   };
@@ -6305,7 +6335,7 @@ var vIf = {
       this.anchor = createAnchor('v-if');
       replace(el, this.anchor);
     } else {
-      "development" !== 'production' && warn('v-if="' + this.expression + '" cannot be ' + 'used on an instance root element.', this.vm);
+      process.env.NODE_ENV !== 'production' && warn('v-if="' + this.expression + '" cannot be ' + 'used on an instance root element.', this.vm);
       this.invalid = true;
     }
   },
@@ -6748,7 +6778,7 @@ var model = {
     // friendly warning...
     this.checkFilters();
     if (this.hasRead && !this.hasWrite) {
-      "development" !== 'production' && warn('It seems you are using a read-only filter with ' + 'v-model="' + this.descriptor.raw + '". ' + 'You might want to use a two-way filter to ensure correct behavior.', this.vm);
+      process.env.NODE_ENV !== 'production' && warn('It seems you are using a read-only filter with ' + 'v-model="' + this.descriptor.raw + '". ' + 'You might want to use a two-way filter to ensure correct behavior.', this.vm);
     }
     var el = this.el;
     var tag = el.tagName;
@@ -6760,7 +6790,7 @@ var model = {
     } else if (tag === 'TEXTAREA') {
       handler = handlers.text;
     } else {
-      "development" !== 'production' && warn('v-model does not support element type: ' + tag, this.vm);
+      process.env.NODE_ENV !== 'production' && warn('v-model does not support element type: ' + tag, this.vm);
       return;
     }
     el.__v_model = this;
@@ -6876,7 +6906,7 @@ var on$1 = {
     }
 
     if (typeof handler !== 'function') {
-      "development" !== 'production' && warn('v-on:' + this.arg + '="' + this.expression + '" expects a function value, ' + 'got ' + handler, this.vm);
+      process.env.NODE_ENV !== 'production' && warn('v-on:' + this.arg + '="' + this.expression + '" expects a function value, ' + 'got ' + handler, this.vm);
       return;
     }
 
@@ -6970,7 +7000,7 @@ var style = {
       var isImportant = importantRE.test(value) ? 'important' : '';
       if (isImportant) {
         /* istanbul ignore if */
-        if ("development" !== 'production') {
+        if (process.env.NODE_ENV !== 'production') {
           warn('It\'s probably a bad idea to use !important with inline rules. ' + 'This feature will be deprecated in a future version of Vue.');
         }
         value = value.replace(importantRE, '').trim();
@@ -7081,13 +7111,13 @@ var bind$1 = {
 
       // only allow binding on native attributes
       if (disallowedInterpAttrRE.test(attr) || attr === 'name' && (tag === 'PARTIAL' || tag === 'SLOT')) {
-        "development" !== 'production' && warn(attr + '="' + descriptor.raw + '": ' + 'attribute interpolation is not allowed in Vue.js ' + 'directives and special attributes.', this.vm);
+        process.env.NODE_ENV !== 'production' && warn(attr + '="' + descriptor.raw + '": ' + 'attribute interpolation is not allowed in Vue.js ' + 'directives and special attributes.', this.vm);
         this.el.removeAttribute(attr);
         this.invalid = true;
       }
 
       /* istanbul ignore if */
-      if ("development" !== 'production') {
+      if (process.env.NODE_ENV !== 'production') {
         var raw = attr + '="' + descriptor.raw + '": ';
         // warn src
         if (attr === 'src') {
@@ -7196,7 +7226,7 @@ var el = {
 
 var ref = {
   bind: function bind() {
-    "development" !== 'production' && warn('v-ref:' + this.arg + ' must be used on a child ' + 'component. Found on <' + this.el.tagName.toLowerCase() + '>.', this.vm);
+    process.env.NODE_ENV !== 'production' && warn('v-ref:' + this.arg + ' must be used on a child ' + 'component. Found on <' + this.el.tagName.toLowerCase() + '>.', this.vm);
   }
 };
 
@@ -7370,7 +7400,7 @@ var component = {
         this.setComponent(this.expression);
       }
     } else {
-      "development" !== 'production' && warn('cannot mount component "' + this.expression + '" ' + 'on already mounted element: ' + this.el);
+      process.env.NODE_ENV !== 'production' && warn('cannot mount component "' + this.expression + '" ' + 'on already mounted element: ' + this.el);
     }
   },
 
@@ -7534,7 +7564,7 @@ var component = {
         this.cache[this.Component.cid] = child;
       }
       /* istanbul ignore if */
-      if ("development" !== 'production' && this.el.hasAttribute('transition') && child._isFragment) {
+      if (process.env.NODE_ENV !== 'production' && this.el.hasAttribute('transition') && child._isFragment) {
         warn('Transitions will not work on a fragment instance. ' + 'Template: ' + child.$options.template, child);
       }
       return child;
@@ -7707,7 +7737,7 @@ function compileProps(el, propOptions, vm) {
     name = names[i];
     options = propOptions[name] || empty;
 
-    if ("development" !== 'production' && name === '$data') {
+    if (process.env.NODE_ENV !== 'production' && name === '$data') {
       warn('Do not use $data as prop.', vm);
       continue;
     }
@@ -7717,7 +7747,7 @@ function compileProps(el, propOptions, vm) {
     // so we need to camelize the path here
     path = camelize(name);
     if (!identRE$1.test(path)) {
-      "development" !== 'production' && warn('Invalid prop key: "' + name + '". Prop keys ' + 'must be valid identifiers.', vm);
+      process.env.NODE_ENV !== 'production' && warn('Invalid prop key: "' + name + '". Prop keys ' + 'must be valid identifiers.', vm);
       continue;
     }
 
@@ -7753,7 +7783,7 @@ function compileProps(el, propOptions, vm) {
       } else {
         prop.dynamic = true;
         // check non-settable path for two-way bindings
-        if ("development" !== 'production' && prop.mode === propBindingModes.TWO_WAY && !settablePathRE.test(value)) {
+        if (process.env.NODE_ENV !== 'production' && prop.mode === propBindingModes.TWO_WAY && !settablePathRE.test(value)) {
           prop.mode = propBindingModes.ONE_WAY;
           warn('Cannot bind two-way prop with non-settable ' + 'parent path: ' + value, vm);
         }
@@ -7761,13 +7791,13 @@ function compileProps(el, propOptions, vm) {
       prop.parentPath = value;
 
       // warn required two-way
-      if ("development" !== 'production' && options.twoWay && prop.mode !== propBindingModes.TWO_WAY) {
+      if (process.env.NODE_ENV !== 'production' && options.twoWay && prop.mode !== propBindingModes.TWO_WAY) {
         warn('Prop "' + name + '" expects a two-way binding type.', vm);
       }
     } else if ((value = getAttr(el, attr)) !== null) {
       // has literal binding!
       prop.raw = value;
-    } else if ("development" !== 'production') {
+    } else if (process.env.NODE_ENV !== 'production') {
       // check possible camelCase prop usage
       var lowerCaseName = path.toLowerCase();
       value = /[A-Z\-]/.test(name) && (el.getAttribute(lowerCaseName) || el.getAttribute(':' + lowerCaseName) || el.getAttribute('v-bind:' + lowerCaseName) || el.getAttribute(':' + lowerCaseName + '.once') || el.getAttribute('v-bind:' + lowerCaseName + '.once') || el.getAttribute(':' + lowerCaseName + '.sync') || el.getAttribute('v-bind:' + lowerCaseName + '.sync'));
@@ -7922,7 +7952,7 @@ function getPropDefaultValue(vm, prop) {
   var def = options['default'];
   // warn against non-factory defaults for Object & Array
   if (isObject(def)) {
-    "development" !== 'production' && warn('Invalid default value for prop "' + prop.name + '": ' + 'Props with type Object/Array must use a factory function ' + 'to return the default value.', vm);
+    process.env.NODE_ENV !== 'production' && warn('Invalid default value for prop "' + prop.name + '": ' + 'Props with type Object/Array must use a factory function ' + 'to return the default value.', vm);
   }
   // call factory function for non-Function types
   return typeof def === 'function' && options.type !== Function ? def.call(vm) : def;
@@ -7958,7 +7988,7 @@ function assertProp(prop, value, vm) {
     }
   }
   if (!valid) {
-    if ("development" !== 'production') {
+    if (process.env.NODE_ENV !== 'production') {
       warn('Invalid prop: type check failed for prop "' + prop.name + '".' + ' Expected ' + expectedTypes.map(formatType).join(', ') + ', got ' + formatValue(value) + '.', vm);
     }
     return false;
@@ -7966,7 +7996,7 @@ function assertProp(prop, value, vm) {
   var validator = options.validator;
   if (validator) {
     if (!validator(value)) {
-      "development" !== 'production' && warn('Invalid prop: custom validator check failed for prop "' + prop.name + '".', vm);
+      process.env.NODE_ENV !== 'production' && warn('Invalid prop: custom validator check failed for prop "' + prop.name + '".', vm);
       return false;
     }
   }
@@ -7989,7 +8019,7 @@ function coerceProp(prop, value, vm) {
   if (typeof coerce === 'function') {
     return coerce(value);
   } else {
-    "development" !== 'production' && warn('Invalid coerce for prop "' + prop.name + '": expected function, got ' + typeof coerce + '.', vm);
+    process.env.NODE_ENV !== 'production' && warn('Invalid coerce for prop "' + prop.name + '": expected function, got ' + typeof coerce + '.', vm);
     return value;
   }
 }
@@ -8196,7 +8226,7 @@ function Transition(el, id, hooks, vm) {
   // check css transition type
   this.type = hooks && hooks.type;
   /* istanbul ignore if */
-  if ("development" !== 'production') {
+  if (process.env.NODE_ENV !== 'production') {
     if (this.type && this.type !== TYPE_TRANSITION && this.type !== TYPE_ANIMATION) {
       warn('invalid CSS transition type for transition="' + this.id + '": ' + this.type, vm);
     }
@@ -8607,7 +8637,7 @@ function compile(el, options, partial) {
 
 function linkAndCapture(linker, vm) {
   /* istanbul ignore if */
-  if ("development" === 'production') {
+  if (process.env.NODE_ENV === 'production') {
     // reset directives before every capture in production
     // mode, so that when unlinking we don't need to splice
     // them out (which turns out to be a perf hit).
@@ -8677,7 +8707,7 @@ function teardownDirs(vm, dirs, destroying) {
   var i = dirs.length;
   while (i--) {
     dirs[i]._teardown();
-    if ("development" !== 'production' && !destroying) {
+    if (process.env.NODE_ENV !== 'production' && !destroying) {
       vm._directives.$remove(dirs[i]);
     }
   }
@@ -8739,7 +8769,7 @@ function compileRoot(el, options, contextOptions) {
       // non-component, just compile as a normal element.
       replacerLinkFn = compileDirectives(el.attributes, options);
     }
-  } else if ("development" !== 'production' && containerAttrs) {
+  } else if (process.env.NODE_ENV !== 'production' && containerAttrs) {
     // warn container directives for fragment instances
     var names = containerAttrs.filter(function (attr) {
       // allow vue-loader/vueify scoped css attributes
@@ -9181,7 +9211,7 @@ function compileDirectives(attrs, options) {
       arg = name;
       pushDir('bind', directives.bind, tokens);
       // warn against mixing mustaches with v-bind
-      if ("development" !== 'production') {
+      if (process.env.NODE_ENV !== 'production') {
         if (name === 'class' && Array.prototype.some.call(attrs, function (attr) {
           return attr.name === ':class' || attr.name === 'v-bind:class';
         })) {
@@ -9382,7 +9412,7 @@ function transcludeTemplate(el, options) {
     if (options.replace) {
       /* istanbul ignore if */
       if (el === document.body) {
-        "development" !== 'production' && warn('You are mounting an instance with a template to ' + '<body>. This will replace <body> entirely. You ' + 'should probably use `replace: false` here.');
+        process.env.NODE_ENV !== 'production' && warn('You are mounting an instance with a template to ' + '<body>. This will replace <body> entirely. You ' + 'should probably use `replace: false` here.');
       }
       // there are many cases where the instance must
       // become a fragment instance: basically anything that
@@ -9411,7 +9441,7 @@ function transcludeTemplate(el, options) {
       return el;
     }
   } else {
-    "development" !== 'production' && warn('Invalid template option: ' + template);
+    process.env.NODE_ENV !== 'production' && warn('Invalid template option: ' + template);
   }
 }
 
@@ -9478,7 +9508,7 @@ function resolveSlots(vm, content) {
       (contents[name] || (contents[name] = [])).push(el);
     }
     /* eslint-enable no-cond-assign */
-    if ("development" !== 'production' && getBindAttr(el, 'slot')) {
+    if (process.env.NODE_ENV !== 'production' && getBindAttr(el, 'slot')) {
       warn('The "slot" attribute must be static.', vm.$parent);
     }
   }
@@ -9568,7 +9598,7 @@ function stateMixin (Vue) {
     var el = options.el;
     var props = options.props;
     if (props && !el) {
-      "development" !== 'production' && warn('Props will not be compiled if no `el` option is ' + 'provided at instantiation.', this);
+      process.env.NODE_ENV !== 'production' && warn('Props will not be compiled if no `el` option is ' + 'provided at instantiation.', this);
     }
     // make sure to convert string selectors into element now
     el = options.el = query(el);
@@ -9586,7 +9616,7 @@ function stateMixin (Vue) {
     var data = this._data = dataFn ? dataFn() : {};
     if (!isPlainObject(data)) {
       data = {};
-      "development" !== 'production' && warn('data functions should return an object.', this);
+      process.env.NODE_ENV !== 'production' && warn('data functions should return an object.', this);
     }
     var props = this._props;
     // proxy data on instance
@@ -9601,7 +9631,7 @@ function stateMixin (Vue) {
       //    template prop present
       if (!props || !hasOwn(props, key)) {
         this._proxy(key);
-      } else if ("development" !== 'production') {
+      } else if (process.env.NODE_ENV !== 'production') {
         warn('Data field "' + key + '" is already defined ' + 'as a prop. To provide default value for a prop, use the "default" ' + 'prop option; if you want to pass prop values to an instantiation ' + 'call, use the "propsData" option.', this);
       }
     }
@@ -9854,7 +9884,7 @@ function eventsMixin (Vue) {
       if (method) {
         vm[action](key, method, options);
       } else {
-        "development" !== 'production' && warn('Unknown method: "' + handler + '" when ' + 'registering callback for ' + action + ': "' + key + '".', vm);
+        process.env.NODE_ENV !== 'production' && warn('Unknown method: "' + handler + '" when ' + 'registering callback for ' + action + ': "' + key + '".', vm);
       }
     } else if (handler && type === 'object') {
       register(vm, action, key, handler.handler, handler);
@@ -9982,7 +10012,7 @@ function Directive(descriptor, vm, el, host, scope, frag) {
   this._scope = scope;
   this._frag = frag;
   // store directives on node in dev mode
-  if ("development" !== 'production' && this.el) {
+  if (process.env.NODE_ENV !== 'production' && this.el) {
     this.el._vue_directives = this.el._vue_directives || [];
     this.el._vue_directives.push(this);
   }
@@ -10160,7 +10190,7 @@ Directive.prototype.set = function (value) {
     this._withLock(function () {
       this._watcher.set(value);
     });
-  } else if ("development" !== 'production') {
+  } else if (process.env.NODE_ENV !== 'production') {
     warn('Directive.set() can only be used inside twoWay' + 'directives.');
   }
 };
@@ -10223,7 +10253,7 @@ Directive.prototype._teardown = function () {
         unwatchFns[i]();
       }
     }
-    if ("development" !== 'production' && this.el) {
+    if (process.env.NODE_ENV !== 'production' && this.el) {
       this.el._vue_directives.$remove(this);
     }
     this.vm = this.el = this._watcher = this._listeners = null;
@@ -10556,7 +10586,7 @@ function miscMixin (Vue) {
             cbs[i](res);
           }
         }, function reject(reason) {
-          "development" !== 'production' && warn('Failed to resolve async component' + (typeof value === 'string' ? ': ' + value : '') + '. ' + (reason ? '\nReason: ' + reason : ''));
+          process.env.NODE_ENV !== 'production' && warn('Failed to resolve async component' + (typeof value === 'string' ? ': ' + value : '') + '. ' + (reason ? '\nReason: ' + reason : ''));
         });
       }
     } else {
@@ -11131,7 +11161,7 @@ function lifecycleAPI (Vue) {
 
   Vue.prototype.$mount = function (el) {
     if (this._isCompiled) {
-      "development" !== 'production' && warn('$mount() should be called only once.', this);
+      process.env.NODE_ENV !== 'production' && warn('$mount() should be called only once.', this);
       return;
     }
     el = query(el);
@@ -11638,7 +11668,7 @@ function installGlobalAPI (Vue) {
       return extendOptions._Ctor;
     }
     var name = extendOptions.name || Super.options.name;
-    if ("development" !== 'production') {
+    if (process.env.NODE_ENV !== 'production') {
       if (!/^[a-zA-Z][\w-]*$/.test(name)) {
         warn('Invalid component name: "' + name + '". Component names ' + 'can only contain alphanumeric characaters and the hyphen.');
         name = null;
@@ -11729,7 +11759,7 @@ function installGlobalAPI (Vue) {
         return this.options[type + 's'][id];
       } else {
         /* istanbul ignore if */
-        if ("development" !== 'production') {
+        if (process.env.NODE_ENV !== 'production') {
           if (type === 'component' && (commonTagRE.test(id) || reservedTagRE.test(id))) {
             warn('Do not use built-in or reserved HTML elements as component ' + 'id: ' + id);
           }
@@ -11760,12 +11790,12 @@ setTimeout(function () {
   if (config.devtools) {
     if (devtools) {
       devtools.emit('init', Vue);
-    } else if ("development" !== 'production' && inBrowser && /Chrome\/\d+/.test(window.navigator.userAgent)) {
+    } else if (process.env.NODE_ENV !== 'production' && inBrowser && /Chrome\/\d+/.test(window.navigator.userAgent)) {
       console.log('Download the Vue Devtools for a better development experience:\n' + 'https://github.com/vuejs/vue-devtools');
     }
   }
 }, 0);
 
 module.exports = Vue;
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[2]);
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"_process":2}]},{},[1]);

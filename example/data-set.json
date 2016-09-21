@@ -1,0 +1,128 @@
+{
+  "defaultRootCollection": "data-set",
+  "collectionNameHotFolder": "data-set",
+  "title": "Data set",
+  "description": "Cette table correspond à une collection de jeux de données produites par deux équipes ISTEX : jeu type article (article-type) et jeu entités nommées (named-entity). Il s’agit, à partir de cette table maîtresse d'accéder aux données appartenant à chaque jeu.",
+  "uniqueIdentifierWith" : {
+    "get": "_content.json.Identifiant",
+    "slug": true
+  },
+  "datasetFields": {
+    "isRoot": {
+      "label": "Is on main page",
+      "scheme": "https://schema.org/isAccessibleForFree",
+      "type": "https://www.w3.org/TR/xmlschema-2/#boolean",
+      "content": true
+    },
+    "title": {
+      "label": "Title",
+      "scheme": "http://purl.org/dc/elements/1.1/title",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "fr",
+      "comment": "Always get a title",
+      "content<": {
+        "get": ["_content.json.title", "title", "_label", "_wid"],
+        "coalesce": true,
+        "first": true
+      }
+    },
+    "name": {
+      "label": "Name",
+      "scheme": "http://purl.org/dc/terms/identifier",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "comment": "****** Don't remove this field! ",
+      "content<": {
+        "get": "_content.json.Identifiant",
+        "slug": true
+      }
+    },
+    "updated": {
+      "label": "Updated",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "type": "https://www.w3.org/TR/xmlschema-2/#date",
+      "content<": {
+        "get": "dateSynchronised"
+      }
+    }
+  },
+  "documentFields": {
+    "title": {
+      "label": "Title",
+      "scheme": "http://purl.org/dc/terms/title",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "fr",
+      "visible": true,
+      "content<": {
+        "get": "_content.json.titre"
+      }
+    },
+    "description": {
+      "label": "Description",
+      "scheme": "http://purl.org/dc/terms/description",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "fr",
+      "visible": true,
+      "content<": {
+        "get": "_content.json.Description"
+      }
+    },
+    "contains": {
+      "label": "Contains",
+      "scheme": "http://purl.org/dc/terms/hasPart",
+      "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
+      "visible": true,
+      "content<": {
+        "get": "_content.json.Contient"
+      }
+    },
+    "created": {
+      "label": "Creation date",
+      "scheme": "http://purl.org/dc/terms/created",
+      "type": "https://www.w3.org/TR/xmlschema-2/#date",
+      "content<": {
+        "get": "_content.json.Date de création"
+      }
+    },
+    "creator": {
+      "label": "Creator",
+      "scheme": "http://purl.org/dc/terms/creator",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "content<": {
+        "get": "_content.json.Créateur"
+      }
+    },
+    "license": {
+      "label": "License",
+      "scheme": "http://purl.org/dc/terms/license",
+      "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
+      "content<": {
+        "get": "_content.json.Licence"
+      }
+    },
+    "publisher": {
+      "label": "Publisher",
+      "scheme": "http://purl.org/dc/terms/publisher",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "content<": {
+        "get": "_content.json.Editeur"
+      }
+    },
+    "examples": {
+      "label": "Examples",
+      "scheme": "http://www.w3.org/2004/02/skos/core#example",
+      "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
+      "content<": {
+        "get": ["_content.json.exemple1","_content.json.exemple2","_content.json.exemple"]
+      }
+    },
+    "updated": {
+      "label": "Updated",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "type": "https://www.w3.org/TR/xmlschema-2/#date",
+      "visible": true,
+      "content<": {
+        "get": "dateSynchronised"
+      }
+    }
+  }
+}
