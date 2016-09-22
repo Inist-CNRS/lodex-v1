@@ -49,7 +49,6 @@ module.exports = function(router, core) {
       return next(new Errors.Forbidden('Invalid call.'));
     }
 
-    // TODO : check if resourceName already exists
     var common = {
       baseURL : String(core.config.get('baseURL')).replace(/\/+$/, '')
     };

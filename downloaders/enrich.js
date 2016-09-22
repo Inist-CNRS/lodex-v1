@@ -14,9 +14,11 @@ JBJ.use(require('jbj-nlp'));
 JBJ.use(require('../filters/jbj-misc.js'));
 JBJ.use(require('../filters/text-to-html.js'));
 
+
+var stylesheet = require('../views.stylesheet.json');
+
 module.exports = function(options, core) {
   options = options || {};
-  var stylesheet = require('../views.stylesheet.json');
 
   return function (data, submit) {
 
