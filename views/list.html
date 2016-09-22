@@ -103,38 +103,63 @@ body > div.container {
 
       <div id="main" class="col-md-10 clearfix" role="main">
         <div class="pull-right">
-          <span class="text-muted"><b>1</b>–<b>50</b> of <b>277</b></span>
-          <div class="btn-group btn-group-sm">
-            <button type="button" class="btn btn-default">
-              <span class="glyphicon glyphicon-chevron-left"></span>
+          <!-- Single button -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Graphical views <span class="caret"></span>
             </button>
-            <button type="button" class="btn btn-default">
-              <span class="glyphicon glyphicon-chevron-right"></span>
-            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Yean over Year </a></li>
+              <li><a href="#">Heat Map of authors</a></li>
+              <li><a href="#">Map view</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Another idea ?</a></li>
+            </ul>
           </div>
         </div>
         <div id="tab" class="btn-group" data-toggle="buttons">
-          <a href="#tableau" class="btn btn-default active" data-toggle="tab">
+          <a href="#overview" class="btn btn-default active" data-toggle="tab">
+            <input type="radio" />Overview</a>
+          <a href="#tableau" class="btn btn-default" data-toggle="tab">
             <input type="radio" />Tableau</a>
           <a href="#exports" class="btn btn-default" data-toggle="tab">
             <input type="radio" />Exports</a>
           <a href="#ontology" class="btn btn-default" data-toggle="tab">
             <input type="radio" />Ontology</a>
           <!--
-          <a href="#graph" class="btn btn-default" data-toggle="tab">
+            <a href="#graph" class="btn btn-default" data-toggle="tab">
             <input type="radio" />graph</a>
           -->
         </div>
 
         <div class="tab-content">
-          <div class="tab-pane active" id="tableau">
+          <div class="tab-pane active" id="overview">
+            <div class="bs-example" data-example-id="media-alignment">
+              {% for doc in documents %}
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="media">
+                    <div class="media-left" style="color:#c4d735;">
+                      <i class="fa fa-leaf fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div class="media-body">
+                      <div class="media-heading"><a href="{{ doc.ressource.@id.raw }}?alt=html">{{ doc._columns.title.content|d('no `title` column.') }}</a></div>
+                      <p>{{ doc._columns.title.content|d('no `description` column.') }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane" id="tableau">
             <div id="no-more-tables">
               <table class="table-bordered table-striped table-condensed cf">
                 <thead class="cf">
                   <tr>
                     <th>URI</th>
                     {% for name, col in documents[0]._columns %}
-                    {% if col.visible %}
+                    {% if col.displayAreas.table %}
                     <th>{{ col.label }}</th>
                     {% endif %}
                     {% endfor %}
@@ -147,7 +172,7 @@ body > div.container {
                       <a href="{{ doc.ressource.@id.raw }}?alt=html">{{ doc.ressource.name.label }}</a>
                     </td>
                     {% for name, col in doc.colonnes %}
-                    {% if doc._columns[name].visible %}
+                    {% if doc._columns[name].displayAreas.table %}
                     <td>{{ doc.ressource[name].html }}</td>
                     {% endif %}
                     {% endfor %}
@@ -187,7 +212,7 @@ body > div.container {
                   </a>
                   </dt>
                   <dd>
-                    <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">Plus d'information</a>
+                  <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">Plus d'information</a>
                   </dd>
                 </dl>
               </li>
@@ -200,7 +225,7 @@ body > div.container {
                   </a>
                   </dt>
                   <dd>
-                    <a href="http://file-format.lod.istex.fr/=/csv" data-lodex="outer">Plus d'information</a>
+                  <a href="http://file-format.lod.istex.fr/=/csv" data-lodex="outer">Plus d'information</a>
                   </dd>
                 </dl>
               </li>
@@ -213,7 +238,7 @@ body > div.container {
                   </a>
                   </dt>
                   <dd>
-                    <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">Plus d'information</a>
+                  <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">Plus d'information</a>
                   </dd>
                 </dl>
               </li>
@@ -226,7 +251,7 @@ body > div.container {
                   </a>
                   </dt>
                   <dd>
-                    <a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">Plus d'information</a>
+                  <a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">Plus d'information</a>
                   </dd>
                 </dl>
               </li>
@@ -239,7 +264,7 @@ body > div.container {
                   </a>
                   </dt>
                   <dd>
-                    <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">Plus d'information</a>
+                  <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">Plus d'information</a>
                   </dd>
                 </dl>
               </li>
@@ -252,7 +277,7 @@ body > div.container {
                   </a>
                   </dt>
                   <dd>
-                    <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">Plus d'information</a>
+                  <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">Plus d'information</a>
                   </dd>
                 </dl>
               </li>
@@ -306,7 +331,12 @@ body > div.container {
           </div>
         </div>
         <div>
-          <facet title="Les titres" field="_columns.title.content"/>
+          {% for name, col in documents[0]._columns %}
+          {% if col.displayAreas.facet %}
+          <facet title="{{ col.label }}" field="_columns.{{ name }}.content"/>
+          {% endif %}
+          {% endfor %}
+
         </div>
       </div>
     </div>

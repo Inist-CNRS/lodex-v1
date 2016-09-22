@@ -71,8 +71,6 @@
   margin-right:auto;
 }
 
-div.circle-badge strong {
-}
-
-div.circle-badge small {
+div.tab-pane {
+  padding:30px
 }
