@@ -11,9 +11,8 @@
     "lint": "eslint ext=.js,.vue components/ downloaders/ filters/ loaders/ routes/",
     "test": "mocha",
     "start": "./lodex",
-    "preversion": "npm run build && git add public/assets/js/list.js",
-    "postversion": "git push && git push --tags",
-    "preversion": "npm run build"
+    "preversion": "npm run build && git add public/assets/js/list.min.js",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
