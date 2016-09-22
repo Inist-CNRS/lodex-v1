@@ -16,8 +16,8 @@ COPY . /app
 # See https://github.com/Inist-CNRS/ezmaster#ezmasterizing-an-application
 RUN echo '{ \
   "httpPort": 3000, \
-  "configPath": "/app/example/data.json", \
-  "dataPath":   "/app/example/data/" \
+  "configPath": "/app/example/films.json", \
+  "dataPath":   "/app/example/films/" \
 }' > /etc/ezmaster.json
 
 # run the application
