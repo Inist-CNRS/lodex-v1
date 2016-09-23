@@ -79,7 +79,8 @@
         }
       },
       "displayAreas": {
-        "table": true
+        "table": true,
+        "facet": true
       }
     },
     "director": {
