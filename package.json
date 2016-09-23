@@ -7,7 +7,7 @@
     "lodex": "lodex"
   },
   "scripts": {
-    "build": "browserify -d -t vueify components/list.js -p [minifyify] > public/assets/js/list.min.js",
+    "build": "browserify -d -t vueify components/list.js -p [minifyify --no-map] > public/assets/js/list.min.js",
     "build-dev": "browserify -d -t vueify components/list.js > public/assets/js/list.min.js",
     "lint": "eslint ext=.js,.vue components/ downloaders/ filters/ loaders/ routes/",
     "test": "mocha",
