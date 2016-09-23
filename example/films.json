@@ -2,6 +2,12 @@
   "defaultRootCollection": "data",
   "collectionNameHotFolder": "data",
   "title": "An example on films",
+  "uniqueIdentifierWith" : {
+    "get": "_content.json.title",
+    "comment": "long enough to be discriminant",
+    "truncate": 21,
+    "slug": true
+  },
   "datasetFields": {
     "isRoot": {
       "label": "Is on main page",
@@ -44,39 +50,47 @@
       "scheme": "http://purl.org/dc/terms/title",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "fr",
-      "visible": true,
       "content<": {
         "get": "_content.json.title"
+      },
+      "displayAreas": {
+        "table": true
       }
     },
     "year": {
       "label": "Year",
       "scheme": "http://purl.org/dc/terms/issued",
       "type": "https://www.w3.org/TR/xmlschema-2/#gYear",
-      "visible": true,
       "content<": {
         "get": "_content.json.year"
+      },
+      "displayAreas": {
+        "table": true
       }
     },
     "actors": {
       "label": "Actors",
       "scheme": "http://schema.org/actors",
-      "visible": true,
       "content<": {
         "get": "_content.json.actors",
         "parseCSV": "/",
         "foreach": {
           "trim": true
         }
+      },
+      "displayAreas": {
+        "table": true
       }
     },
     "director": {
       "label": "Director",
       "scheme": "http://purl.org/ontology/bibo/director",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "visible": true,
       "content<": {
         "get": "_content.json.director"
+      },
+      "displayAreas": {
+        "table": true
       }
     },
     "updated": {

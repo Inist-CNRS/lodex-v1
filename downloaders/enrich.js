@@ -14,8 +14,11 @@ JBJ.use(require('jbj-nlp'));
 JBJ.use(require('../filters/jbj-misc.js'));
 JBJ.use(require('../filters/text-to-html.js'));
 
+
+
 module.exports = function(options, core) {
   options = options || {};
+  // eslint-disable-next-line global-require
   var stylesheet = require('../views.stylesheet.json');
 
   return function (data, submit) {

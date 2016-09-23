@@ -1,6 +1,6 @@
 {
   "name": "lodex",
-  "version": "0.9.14",
+  "version": "0.9.16",
   "description": "Linked Open Data and ISTEX",
   "main": "index.js",
   "bin": {

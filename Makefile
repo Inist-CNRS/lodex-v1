@@ -20,6 +20,7 @@ run-prod: ## run lodex in production mode (with local mongo and nodejs and witho
 	@NODE_ENV=production npm start
 
 docker-build: ## build the docker inistcnrs/lodex image localy
+	@npm run build
 	@docker build -t inistcnrs/lodex --build-arg http_proxy --build-arg https_proxy .
 
 docker-run-debug: ## run lodex in debug mode with dockerized nodejs and mongodb process
