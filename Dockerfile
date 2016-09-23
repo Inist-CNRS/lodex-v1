@@ -16,9 +16,13 @@ COPY . /app
 # See https://github.com/Inist-CNRS/ezmaster#ezmasterizing-an-application
 RUN echo '{ \
   "httpPort": 3000, \
-  "configPath": "/app/example/films.json", \
-  "dataPath":   "/app/example/films/" \
+  "configPath": "/app/data.json", \
+  "dataPath":   "/app/data/" \
 }' > /etc/ezmaster.json
+
+# Default data / configuration
+ADD https://raw.githubusercontent.com/Inist-CNRS/lodex/master/example/films/films.csv /app/data/films.csv
+ADD https://raw.githubusercontent.com/Inist-CNRS/lodex/master/example/films.json /app/data.json
 
 # run the application
 ENTRYPOINT ./docker-entrypoint.sh
