@@ -28,7 +28,10 @@ export default {
 			let self = this;
 			let qry = {
 				"field" : self.field,
-				"$limit" : 5
+				"$limit" : 5,
+				"$sort" : {
+					"value" : -1
+				}
 			}
 			let url = window.location.protocol
 			.concat('//')

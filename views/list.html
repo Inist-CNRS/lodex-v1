@@ -153,6 +153,8 @@ body > div.container {
             </div>
           </div>
           <div class="tab-pane" id="tableau">
+            <tableau />
+            <!--
             <div id="no-more-tables">
               <table class="table-bordered table-striped table-condensed cf">
                 <thead class="cf">
@@ -181,6 +183,7 @@ body > div.container {
                 </tbody>
               </table>
             </div>
+            -->
           </div>
           <div class="tab-pane" id="exports">
             <p>
@@ -333,7 +336,9 @@ body > div.container {
         <div>
           {% for name, col in documents[0]._columns %}
           {% if col.displayAreas.facet %}
-          <facet title="{{ col.label }}" field="_columns.{{ name }}.content"/>
+          <div id="facet-{{ name }}">
+            <facet title="{{ col.label }}" field="_columns.{{ name }}.content"/>
+          </div>
           {% endif %}
           {% endfor %}
 

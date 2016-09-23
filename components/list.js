@@ -11,6 +11,7 @@ Vue.use(require('vue-resource'));
 
 var facet = require('./facet.vue')
 var metric = require('./metric.vue')
+var tableau = require('./tableau.vue')
 
 module.exports = new Vue({
 
@@ -22,6 +23,7 @@ module.exports = new Vue({
     // For exemple, we put the table.vue component
     // into <instancestable></instancestable> in template.html.
     facet: facet,
+    tableau: tableau,
     metric: metric
   }
 

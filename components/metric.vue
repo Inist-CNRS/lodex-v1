@@ -4,7 +4,7 @@
 			<strong style="font-family: 'Oswald', sans-serif;  font-size: 28px;  font-weight: bold;" >{{ value }}</strong>
 		</div>
 		<div>
-			<small style="font-family: 'Oswald', sans-serif;  font-size: 14px;">{{ title }}</small>
+			<small class="mtitle">{{ title }}</small>
 		</div>
 	</div>
 </template>
@@ -45,3 +45,10 @@ export default {
 	}
 }
 </script>
+<style>
+.mtitle {
+	font-family: 'Oswald', sans-serif;
+	font-size: 14px;
+	text-transform: uppercase;
+}
+</style>
