@@ -15,10 +15,11 @@ JBJ.use(require('../filters/jbj-misc.js'));
 JBJ.use(require('../filters/text-to-html.js'));
 
 
-var stylesheet = require('../views.stylesheet.json');
 
 module.exports = function(options, core) {
   options = options || {};
+  // eslint-disable-next-line global-require
+  var stylesheet = require('../views.stylesheet.json');
 
   return function (data, submit) {
 
