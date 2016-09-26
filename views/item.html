@@ -1,123 +1,419 @@
-{% extends "./themes/istex.html" %}
+<!doctype html>
+
+<!--[if lt IE 7]><html lang="en-US" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html lang="en-US" class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html lang="en-US" class="no-js lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en-US" class="no-js"><!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>{{ titre }}</title>
+  <meta name="description" content="{{ description }}">
+  <meta name="author" content="">
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link rel="apple-touch-icon" href="/assets/img/favicon/apple-icon-touch.png">
+  <link rel="icon" href="/assets/img/favicon/favicon-96x96.png">
+
+  <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+
+  <!--[if IE]>
+    <link rel="shortcut icon" href="/assets/img/favicon/favicon.ico">
+  <![endif]-->
+  <meta name="msapplication-TileColor" content="#f01d4f">
+  <meta name="msapplication-TileImage" content="/assets/img/win8-tile-icon.png">
 
 
-{% block head %}
-<title> {{ titre }}  </title>
-<meta name="description" content="{{ description }}">
-<meta name="author" content="">
-{% endblock %}
+  <!-- Bootstrap core CSS -->
+  <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" >
+
+  <link rel='stylesheet' id='bones-stylesheet-css' href='/assets/css/style.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='istex-stylesheet-css' href='/assets/css/surenteteistex.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='istex-stylesheet-css' href='/assets/css/testimonials.css' type='text/css' media='all' />
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <style>
+body > div.container {
+  margin-top : 80px;
+}
+  </style>
+  <link href="/assets/css/list.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="home blog">
+
+  <header class="header">
+    <nav role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div id="surentete" class="bsbb">
+            <a class="logoistex" href="http://www.istex.fr/" ><img src="/assets/img/istex_img/LogoIstexANR.png" title="Financement : ANR-10-IDEX-0004-02" alt="Istex investissement d'avenir"></a>
+            <!--<img  class="logoanr" src="imagesI/LogoANR.png" alt="investissement d'avenir"> -->
+            <ul class="srent">
+              <li> <a href="http://api.istex.fr/documentation/" ><img src="/assets/img/istex_img/LogoApi.png" alt="" >API</a> </li>
+              <li> <a href="http://demo.istex.fr" ><img src="/assets/img/istex_img/LogoDemo.png" alt="" >demo</a> </li>
+              <li> <a href="http://widgets.istex.fr" ><img src="/assets/img/istex_img/LogoWidget.png" alt="" >widget</a> </li>
+              <li> <a href="http://blog.istex.fr" ><img src="/assets/img/istex_img/LogoBlog.png" alt="" >blog</a> </li>
+              <li>
+                <a href="http://#" ><img src="/assets/img/istex_img/LogoVerrou.png"  alt="s'identifier" ></a>
+                <ul class="srentss">
+                  <li><a href="http://wiki.istex.fr" ><img src="/assets/img/istex_img/LogoWiki.png" alt="" >wiki</a></li>
+                  <li><a href="http://kanban.istex.fr" ><img src="/assets/img/istex_img/Logokanban.png" alt="" >kanban</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="http://#" ><img src="/assets/img/istex_img/LogoTwitter.png" alt="twitter" ></a>
+                <ul class="srentss">
+                  <li> <a href="https://twitter.com/istexdev" >istexdev</a></li>
+                  <li> <a href="https://twitter.com/Projet_ISTEX" >projet istex</a></li>
+                </ul>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container" style="margin-top:10px;">
+    <div class="jumbotron alert  alert-info alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <p>
+      <img src="/assets/img/logo_lodex_200.png" height="20"> Sed viverra, nulla vitae egestas ornare, ante mauris varius turpis, quis efficitur mi nibh ut leo. Pellentesque sed ullamcorper massa. Nulla sed dignissim velit. Nunc non luctus mauris. Quisque in mi maximus, facilisis dolor in, condimentum diam. Duis hendrerit at nisi facilisis molestie. Integer lacus velit, porttitor scelerisque tellus sit amet, sollicitudin bibendum est. Aenean rutrum enim ut odio blandit laoreet. Maecenas ac faucibus massa, sollicitudin eleifend magna. Donec varius vulputate elit, nec fringilla mi malesuada eu.
+      </p>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div id="content" class="row clearfix">
+
+      <div id="main" class="col-md-10 clearfix" role="main">
+        <div class="pull-right">
+          <!-- Single button -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Views <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#">view1 </a></li>
+              <li><a href="#">view2 </a></li>
+              <li><a href="#">view3 </a></li>
+              
+            </ul>
+          </div>
+        </div>
+        <div id="tab" class="btn-group" data-toggle="buttons">
+          <a href="#ressource" class="btn btn-default active" data-toggle="tab">
+            <input type="radio" />Ressource</a>
+          <a href="#exports" class="btn btn-default" data-toggle="tab">
+            <input type="radio" />Exports</a>
+          
+          
+        </div>
+
+        <div class="tab-content">
+          <div class="tab-pane active" id="ressource">
+            <div class="bs-example" data-example-id="media-alignment">
+             
+              <h2>TITRE DE LA RESSOURCE</h2>
+               
+	
+		
+            <div id="tb-testimonial" class="testimonial testimonial-info">
+                <div class="testimonial-section">
+                   <p>Description</p>
+                    Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
+            	</div>
+            	</div>
+              
+            <div id="tb-testimonial" class="testimonial testimonial-success">
+                <div class="testimonial-section">
+                   <p>Propriétés</p>
+                     <ul>
+    <li>
+      
+      <h5>Headline</h5>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </li>
+       
+    <li>
+      
+       <h5>Headline</h5>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </li>
+ 
+    <li>
+      
+       <h5>Headline</h5>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </li>
+ 
+    <li>
+     
+      <h5>Headline</h5>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </li>
+  </ul>
+            	</div>
+               
+            </div> 
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="media">
+                    <div class="media-left" style="color:#c4d735;">
+                      <i class="fa fa-leaf fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div class="media-body">
+                      <div class="media-heading">trucs?</div>
+                    
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+               </div>
+             
+            
+          
+          
+        
+          <div class="tab-pane" id="exports">
+            <p>
+            La ressource est disponible sur ce site avec les formats CSV, TSV, JSON-LD et N-Quads.
+            </p>
+            <p>
+           Elle est librement téléchargeable au travers de plusieurs formats&nbsp;:
+            </p>
+            <ul class="list-unstyled">
+              <li>
+                <h3>XSLX</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.xlsx" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                  <a href="http://file-format.lod.istex.fr/=/xslx" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
+              </li>
+              <li>
+                <h3>TSV</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.tsv" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                  <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
+              </li>
+              <li>
+                <h3>CSV</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.csv" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                  <a href="http://file-format.lod.istex.fr/=/csv" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
+              </li>
+              <li>
+                <h3>N-Quads</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.nq" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                  <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
+              </li>
+              <li>
+                <h3>N-Quads (Excel)</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.nqx" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                  <a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
+              </li>
+              <li>
+                <h3>JSONLD</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.jsonld" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                  <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
+              </li>
+              <li>
+                <h3>Turtle</h3>
+                <dl class="dl-horizontal lead">
+                  <dt>
+                  <a  href="/corpus.ttl" class="btn btn-default">
+                    <span class="fa fa-download"></span> Télécharger
+                  </a>
+                  </dt>
+                  <dd>
+                  <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">Plus d'information</a>
+                  </dd>
+                </dl>
+              </li>
+            </ul>
+            <section class="page-content entry-content clearfix" itemprop="articleBody">
+              <a href="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence.gif" rel="attachment wp-att-214"><img class="size-medium wp-image-214 alignnone" src="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence-300x166.gif" alt="licence-ouverte-open-licence" width="300" height="166"></a>
+              <p>Les données mise en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. &nbsp;Comme les données ISTEX, Elles sont &nbsp;placées sous le régime de la licence ouverte/open licence Etalab (cf. <a href="http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf">contrat de licence type</a>).</p>
+              <p>&nbsp;</p>
+              <blockquote data-secret="QLzNqK36kW" class="wp-embedded-content" style="display: none;"><p><a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence">Licence Ouverte / Open Licence</a></p></blockquote>
+              <p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" src="https://www.etalab.gouv.fr/licence-ouverte-open-licence/embed#?secret=QLzNqK36kW" data-secret="QLzNqK36kW" width="500" height="300" title="Inclure un article WordPress" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+            </section>
+          </div>
+         
+        
+        </div>
+      </div>
+
+      <div id="sidebar" class="pull-right col-md-2">
+        <div id="metrics" class="row">
+          <div class="text-center col-xs-10 col-sm-10">
+            <metric title="Ressources" query="$count?" mode="value"/>
+          </div>
+          <!--<div class="text-center col-xs-4 col-sm-6">
+            <metric title="Properties" query="$keys?field=_columns"/>
+          </div>-->
+        </div>
+        <div>
+          {% for name, col in documents[0]._columns %}
+          {% if col.displayAreas.facet %}
+          <div id="facet-{{ name }}">
+            <facet title="{{ col.label }}" field="_columns.{{ name }}.content"/>
+          </div>
+          {% endif %}
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
 
 
-{% block styles %}
-<link rel="stylesheet" type="text/css" href="/assets/css/rzslider.css">
-<link rel="stylesheet" type="text/css" href="/assets/css/rzslider.css">
-<link rel="stylesheet" type="text/css" href="/libs/bootstrap-vertical-tabs/bootstrap.vertical-tabs.min.css">
-<link rel="stylesheet" type="text/css" href="http://istex.github.io/styleAngular/style.min.css">
-{% endblock %}
+    <footer id="footer" class="clearfix">
+      <div id="footer-widgets">
+        <div class="container-fluid">
+
+          <div id="footer-wrapper">
+
+            <div class="row">
+
+              <div class="col-sm-6 col-md-3">
+                <div id="twitter_feed_widget-2" class="widget widget_twitter_feed_widget">
+                  <a class="twitter-timeline" href="https://twitter.com/istexdev"
+                                              data-widget-id="715626428440657920"
+                                              data-tweet-limit="1"
+                                              data-chrome="noheader nofooter noborders transparent noscrollbar"
+                                              > Tweets de @istexdev</a>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+                
+                            
+          
+
+              </div> <!-- end widget -->
+
+              <div class="col-sm-6 col-md-3">
+                <!-- start feedwind code --><script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'http://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "http://lodex.inist.fr/feed/",rssmikle_frame_width: "300",rssmikle_frame_height: "400",frame_height_by_article: "1",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "off",autoscroll: "off",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "on",rssmikle_title_sentence: "Sur le blog LODEX",rssmikle_title_link: "http://lodex.inist.fr",rssmikle_title_bgcolor: "#418BA5",rssmikle_title_color: "#FFFDFC",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#eaeade",rssmikle_item_bgimage: "",rssmikle_item_title_length: "55",rssmikle_item_title_color: "#418BA5",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "off",rssmikle_item_description_length: "150",rssmikle_item_description_color: "#666666",rssmikle_item_date: "off",rssmikle_timezone: "Etc/GMT",datetime_format: "%b %e, %Y %l:%M %p",item_description_style: "text+tn",item_thumbnail: "full",item_thumbnail_selection: "auto",article_num: "1",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:300px;"><a href="http://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!--  end  feedwind code -->
+              </div>
+
+              <div class="col-sm-6 col-md-3">
+                <ul>
+                  <li>  <a href="http://lodex.inist.fr" target="_blank">Le blog du projet</a>  </li>
+                  <li>  <a href="/mention.html">Mentions légales</a> </li>
+                  <li>  <a href="/cookies.html">Cookies et statistiques</a> </li>
+                  <li>  <a href="https://github.com/Inist-CNRS/lodex" title="Fork me on GitHub" target="_blank"><img src="/assets/img/GitHub-Mark-32px.png" height="16"> Dépôt Github du projet</a></li>
+                </ul>
+              </div>
+
+              <div class="col-sm-6 col-md-3">
+                <div id="search-3" class="widget widgetFooter widget_search">
+                  <a href="http://www.cnrs.fr/" title="CNRS" target="_blank"><img src="/assets/img/cnrs130.png" alt="CNRS" title="Le site du CNRS"></a>
+                </div>
+
+              </div>
+            </div>
+
+          </div> <!-- end .row -->
+
+        </div> <!-- end #footer-wrapper -->
+
+      </div> <!-- end .container -->
+  </div> <!-- end #footer-widgets -->
+
+  <div id="sub-floor">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-md-4 copyright">
+          © 2016 LODEX
+        </div>
 
 
-{% block header %}
-<div>
-	<!-- Tab panes -->
-	<div class="col-xs-11">
-		<div class="tab-content">
-			<div class="tab-pane active" id="notice">
+        <div class="col-md-4 col-md-offset-4 attribution">
+          Built by <a href="http://www.inist.fr" target="_blank">Inist-CNRS</a>
+        </div>
+      </div> <!-- end .row -->
+    </div>
+  </div>
 
-				{{ ressource.identifiant }}
-				{{ ressource.titre }}
-				<p class="byline vcard">
-					<a class="link fa fa-link"> {{ ressource.permalien }}</a> <br>
-					<div class="date fa fa-clock-o"> Updated on <time datetime="" pubdate="">{{ ressource.misajourle }} </time></div> <br>
-					<div class="user fa fa-user"> by {{ ressource.createur }}</div> <br>
-				</p>
-				{{ ressource.description }}
-				<hr/>
-				<dl class="dl-horizontal lead">
-					{% for name, col in colonnes %}
-					<dt>
-					<a href="{{ col.raw }}">{{ col.label }}</a>
-					</dt>
-					<dd>
-					{{ ressource[name].html }}
-					</dd>
-					{% endfor %}
-				</dl>
-			</div>
-			<div class="tab-pane" id="export">
-				<hr/>
-				<dl class="dl-horizontal lead">
-					<ul class="nav nav-pills nav-justified">
-						<li role="presentation">
-							<a href="?alt=xlsx"><span class="fa fa-file-excel-o fa-3x"></span><br/>Excel</a>
-						</li>
-						<li role="presentation">
-							<a href="?alt=tsv"><span class="fa fa-list fa-3x"></span><br>TSV</a>
-						</li>
-						<li role="presentation">
-							<a href="?alt=csv"><span class="fa fa-table fa-3x"></span><br>CSV</a>
-						</li>
-						<li role="presentation">
-							<a href="?alt=nq"><span class="fa fa-bars fa-3x"></span><br>N-Quads</a>
-						</li>
-						<li role="presentation">
-							<a href="?alt=nq.xlsx"><span class="fa fa-file-excel-o fa-3x"></span><br>N-Quads<br>(Excel)</a>
-						</li>
-						<li role="presentation">
-							<a href="?alt=jsonld"><span class="fa fa-file-o fa-3x"></span><br> JSON LD</a>
-						</li>
-					</ul>
-				</dl>
-			</div>
-		</div>
-	</div>
-		<div class="col-xs-1"> <!-- required for floating -->
-		<!-- Nav tabs -->
-		<ul class="nav nav-tabs tabs-right vertical-text">
-			<li class="active"><a href="#notice" data-toggle="tab">Notice</a></li>
-			<li><a href="#export" data-toggle="tab">Export</a></li>
-		</ul>
-	</div>
+    </footer> <!-- end footer -->
 
-	  <div class="clearfix"></div>
-</div>
+    <script type="text/javascript" charset="utf-8" src="/assets/js/list.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/libs/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/libs/jquery-migrate/dist/jquery-migrate.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/libs/modernizr/dist/modernizr.custom.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/libs/bootstrap-material-design/dist/js/ripples.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/libs/bootstrap-material-design/dist/js/material.min.js"></script>
+    <script type="text/javascript" charset="utf-8"> $(document).ready(function() { $.material.init(); }); </script>
 
-{% endblock %}
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script type="text/javascript" charset="utf-8" src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 
+    <!-- Piwik -->
+    <script type="text/javascript"> var _paq = _paq || []; _paq.push([function() { var self=this; function getOriginalVisitorCookieTimeout() { var now=new Date(), nowTs=Math.round(now.getTime()/1000), visitorInfo=self.getVisitorInfo(); var createTs = parseInt(visitorInfo[2]); var cookieTimeout=33696000; var originalTimeout=createTs+cookieTimeout-nowTs; return originalTimeout; } getOriginalVisitorCookieTimeout(); this.setVisitorCookieTimeout(getOriginalVisitorCookieTimeout()); }]); _paq.push(['trackPageView']); _paq.push(['enableLinkTracking']); (function() { var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik.inist.fr//"; _paq.push(['setTrackerUrl', u+'piwik.php']); _paq.push(['setSiteId', 132]); var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript'; g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s); })(); </script> <noscript><p><img src="http://piwik.inist.fr/piwik.php?idsite=132" style="border:0" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
 
-{% block body %}
-<div>
+</body>
 
-	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">est contenu</a></li>
-		<li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">contient</a></li>
-		<li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">ISTEX</a></li>
-	</ul>
-
-	<!-- Tab panes -->
-	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active" id="tab1">
-			<a href="{{ liens.estContenu }}">est contenu</a>
-		</div>
-		<div role="tabpanel" class="tab-pane" id="tab2">
-			<a href="{{ liens.contient }} ">contient</a>
-		</div>
-		<div role="tabpanel" class="tab-pane" id="tab3">
-			<div istex-results></div>
-		</div>
-	</div>
-
-</div>
-{% endblock %}
-
-
-{% block scripts %}
-<script type="text/javascript">
-var istexConfig = {
-	query: '"{{ liens.istex }}"',
-	hideButton: true
-};
-</script>
-<script src="/assets/js/angular.min.js"></script>
-<script src="/assets/js/rzslider.js" type="text/javascript"></script>
-<script src="/assets/js/istex-widget.min.js" type="text/javascript"></script>
-{% endblock %}
+</html> <!-- end page. what a ride! -->
