@@ -28,7 +28,7 @@
 					<a href="{{ doc.ressource['@id'].raw }}?alt=html">{{ doc.ressource.name.label }}</a>
 				</td>
 				<td v-for="(colkey, col) in columns">
-					{{ doc.ressource[colkey].html }}
+					{{{ doc.ressource[colkey].html }}}
 				</td>
 			</tr>
 		</tbody>
