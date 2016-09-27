@@ -26,6 +26,7 @@ export default {
 		reload(done) {
 			let self = this;
 			let qry = {
+				draw : Date.now()
 			}
 			let url = window.location.protocol
 			.concat('//')

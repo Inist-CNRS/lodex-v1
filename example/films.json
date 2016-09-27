@@ -1,111 +1,129 @@
 {
-  "defaultRootCollection": "data",
-  "collectionNameHotFolder": "data",
-  "title": "An example on films",
-  "uniqueIdentifierWith" : {
-    "get": "_content.json.title",
-    "comment": "long enough to be discriminant",
-    "truncate": 21,
-    "slug": true
-  },
-  "datasetFields": {
-    "isRoot": {
-      "label": "Is on main page",
-      "scheme": "https://schema.org/isAccessibleForFree",
-      "type": "https://www.w3.org/TR/xmlschema-2/#boolean",
-      "content": true
-    },
-    "title": {
-      "label": "Title",
-      "scheme": "http://purl.org/dc/elements/1.1/title",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "lang": "fr",
-      "comment": "Always get a title",
-      "content<": {
-        "get": ["_content.json.title", "title", "_label", "_wid"],
-        "coalesce": true,
-        "first": true
-      }
-    },
-    "name": {
-      "label": "Name",
-      "scheme": "http://purl.org/dc/terms/identifier",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "content<": {
-        "get": "_wid"
-      }
-    },
-    "updated": {
-      "label": "Updated",
-      "scheme": "http://purl.org/dc/terms/modified",
-      "type": "https://www.w3.org/TR/xmlschema-2/#date",
-      "content<": {
-        "get": "dateSynchronised"
-      }
-    }
-  },
-  "documentFields": {
-    "title": {
-      "label": "Title",
-      "scheme": "http://purl.org/dc/terms/title",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "lang": "fr",
-      "content<": {
-        "get": "_content.json.title"
-      },
-      "displayAreas": {
-        "table": true
-      }
-    },
-    "year": {
-      "label": "Year",
-      "scheme": "http://purl.org/dc/terms/issued",
-      "type": "https://www.w3.org/TR/xmlschema-2/#gYear",
-      "content<": {
-        "get": "_content.json.year"
-      },
-      "displayAreas": {
-        "table": true
-      }
-    },
-    "actors": {
-      "label": "Actors",
-      "scheme": "http://schema.org/actors",
-      "content<": {
-        "get": "_content.json.actors",
-        "parseCSV": "/",
-        "foreach": {
-          "trim": true
-        }
-      },
-      "displayAreas": {
-        "table": true,
-        "facet": true
-      }
-    },
-    "director": {
-      "label": "Director",
-      "scheme": "http://purl.org/ontology/bibo/director",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "content<": {
-        "get": "_content.json.director"
-      },
-      "displayAreas": {
-        "table": true
-      }
-    },
-    "updated": {
-      "label": "Updated",
-      "scheme": "http://purl.org/dc/terms/modified",
-      "type": "https://www.w3.org/TR/xmlschema-2/#date",
-      "content<": {
-        "get": "dateSynchronised"
-      }
-    }
-  },
-  "access": [{
-    "login": "bob",
-    "plain": "dylan",
-    "display": "Bob Dylan"
-  }]
+	"defaultRootCollection": "data",
+	"collectionNameHotFolder": "data",
+	"title": "An example on films",
+	"datasetFields": {
+		"title1" : {
+			"label" : "Dataset title",
+			"scheme": "http://purl.org/dc/terms/title",
+			"type": "string",
+			"format" : "raw",
+			"lang": "en",
+			"content": "Films"
+		},
+		"desc1" : {
+			"label" : "Dataset description",
+			"scheme": "http://purl.org/dc/terms/description",
+			"type": "string",
+			"format" : "markdown",
+			"lang": "en",
+			"content": "Several films to demontrate the usage of __LODEX__"
+		},
+		"date1": {
+			"label": "Updated",
+			"scheme": "http://purl.org/dc/terms/modified",
+			"type": "date",
+			"format" : "LL",
+			"content<": {
+				"get": "_collection._dataset._updated"
+			}
+		},
+		"chart1" : {
+			"label": "Per year",
+			"type": "object",
+			"format": "component",
+			"scheme": "https://...",
+			"content" : {
+				"histogram" : {
+					"height" : "200",
+					"column" :"year",
+					"color" : "'#bdd7e7"
+				}
+			}
+		},
+		"model1" : {
+			"label": "Ontology model",
+			"type": "object",
+			"format": "component",
+			"scheme": "https://...",
+			"content" : {
+				"img" : {
+					"height" : "200",
+					"src" : "https://docs.google.com/drawings/d/11tUnqGoV-7dHdyOyHH4b1rtyIipqZAPryHr2np862dk/pub?w=1440&h=1080"
+				}
+			}
+		}
+	},
+	"collectionFields": {
+		"title": {
+			"label": "Title",
+			"scheme": "http://purl.org/dc/terms/title",
+			"type": "string",
+			"lang": "fr",
+			"displayAreas" : {
+				"facet" : false,
+				"table" : true
+			},
+			"content<": {
+				"get": "_content.json.title"
+			}
+		},
+		"description": {
+			"label": "Description",
+			"scheme": "http://purl.org/dc/terms/description",
+			"type": "string",
+			"content": "n/a"
+		},
+		"year": {
+			"label": "Year",
+			"scheme": "http://purl.org/dc/terms/issued",
+			"type": "date",
+			"displayAreas" : {
+				"facet" : true,
+				"table" : true
+			},
+			"content<": {
+				"get": "_content.json.year"
+			}
+		},
+		"actors": {
+			"label": "Actors",
+			"scheme": "http://schema.org/actors",
+			"displayAreas" : {
+				"table" : true
+			},
+			"content<": {
+				"get": "_content.json.actors",
+				"parseCSV": "/",
+				"foreach": {
+					"trim": true
+				}
+			}
+		},
+		"director": {
+			"label": "Director",
+			"scheme": "http://purl.org/ontology/bibo/director",
+			"type": "string",
+			"displayAreas" : {
+				"facet" : true,
+				"table" : true
+			},
+			"content<": {
+				"get": "_content.json.director"
+			}
+		},
+		"updated": {
+			"label": "Updated",
+			"scheme": "http://purl.org/dc/terms/modified",
+			"type": "date",
+			"content<": {
+				"get": "dateSynchronised"
+			}
+		}
+	},
+	"access": [{
+		"login": "bob",
+		"plain": "dylan",
+		"display": "Bob Dylan"
+	}]
 }
