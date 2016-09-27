@@ -3,7 +3,7 @@
 		"get" : ["data._label", "data._wid"],
 		"coalesce" : true,
 		"first" : true,
-		"default" : "n/a"
+		"default" : "?"
 	},
 	"$description" : {
 		"get" : ["data._text", "data._wid"],
@@ -17,6 +17,12 @@
 	},
 	"$parametres": {
 		"get" : "parameters"
+	},
+	"$areas" : {
+		"get" : "data._columns",
+		"foreach" : {
+			"select" : ".cover:val(\"dataset\") ~ .content"
+		}
 	},
 	"$colonnes" : {
 		"get" : "data._content.jsonld.@context",
@@ -133,5 +139,5 @@
 	"$_columns" : {
 		"get" : "data._columns"
 	},
-	"mask" : "titre,description,configuration,parameters,colonnes,header,ressource,contient,liens,_columns"
+	"mask" : "titre,description,configuration,parameters,colonnes,header,ressource,contient,liens,_columns,areas"
 }

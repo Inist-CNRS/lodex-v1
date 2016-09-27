@@ -102,6 +102,30 @@ body > div.container {
     <div id="content" class="row clearfix">
 
       <div id="main" class="col-md-10 clearfix" role="main">
+        <div>
+          {% for name, col in documents[0]._columns %}
+          {% if col.cover == 'dataset' and col.scheme == 'http://purl.org/dc/terms/title' %}
+          <h1>{{ col.content }}</h1>
+          {% endif %}
+          {% endfor %}
+
+          {% for name, col in documents[0]._columns %}
+          {% if col.cover == 'dataset' and col.scheme == 'http://purl.org/dc/terms/description' %}
+          <p> {{ col.content }} </p>
+          {% endif %}
+          {% endfor %}
+
+          {% for name, col in documents[0]._columns %}
+          {% if col.cover == 'dataset' and col.scheme == 'http://purl.org/dc/terms/modified' %}
+          <p>
+            <i class="fa fa-clock-o" aria-hidden="true"></i> <time> {{ col.content }} </time>
+          </p>
+          {% endif %}
+          {% endfor %}
+
+
+
+        </div>
         <div class="pull-right">
           <!-- Single button -->
           <div class="btn-group">
@@ -337,7 +361,7 @@ body > div.container {
           {% for name, col in documents[0]._columns %}
           {% if col.displayAreas.facet %}
           <div id="facet-{{ name }}">
-            <facet title="{{ col.label }}" field="_columns.{{ name }}.content"/>
+            <facet title="{{ col.label }}" field="{{ name }}"/>
           </div>
           {% endif %}
           {% endfor %}
