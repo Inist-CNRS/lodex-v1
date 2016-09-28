@@ -27,6 +27,7 @@ export default {
 		reload(done) {
 			let self = this;
 			let qry = {
+				"draw" : Date.now(),
 				"field" : "_columns." + self.field + ".content",
 				"$limit" : 5,
 				"$sort" : {

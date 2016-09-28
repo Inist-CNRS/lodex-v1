@@ -32,7 +32,7 @@ export default {
 			.concat('//')
 			.concat(window.location.host)
 			.concat('/' + self.query )
-			.concat(MQS.stringify(qry, {}));
+			.concat('&'+MQS.stringify(qry, {}));
 			self.$http.get(url).then(function (response) {
 					if (self.mode === 'value') {
 							self.value = response.data[0].value;

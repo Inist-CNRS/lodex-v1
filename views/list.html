@@ -35,8 +35,12 @@
   <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" >
 
+
   <link rel='stylesheet' id='bones-stylesheet-css' href='/assets/css/style.css' type='text/css' media='all' />
   <link rel='stylesheet' id='istex-stylesheet-css' href='/assets/css/surenteteistex.css' type='text/css' media='all' />
+  <link rel="stylesheet" id='chartist-stylesheet-css' href="/libs/chartist/dist/chartist.min.css" type='text/css' media='all' />
+  <script src="/libs/chartist/dist/chartist.min.js"></script>
+
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -102,229 +106,273 @@ body > div.container {
     <div id="content" class="row clearfix">
 
       <div id="main" class="col-md-10 clearfix" role="main">
-        <div>
-          {% for name, col in documents[0]._columns %}
-          {% if col.cover == 'dataset' and col.scheme == 'http://purl.org/dc/terms/title' %}
-          <h1>{{ col.content.html }}</h1>
-          {% endif %}
-          {% endfor %}
+        <div class="row">
+          <div class="col-xs-10 col-sm-8">
+            <div class="tab-content">
+              <div class="tab-pane active" id="carousel-topic">
+                <div class="lib-panel">
+                  <div class="row box-shadow">
+                    <div class="col-md-6">
+                      <div class="lib-row lib-header">
+                        {% for name, col in documents[0]._columns %}
+                        {% if col.cover == 'dataset' and col.scheme == 'http://purl.org/dc/terms/title' %}
+                        <h1>{{ col.content.html }}</h1>
+                        {% endif %}
+                        {% endfor %}
+                        <div class="lib-header-seperator"></div>
+                      </div>
+                      <div class="lib-row lib-desc">
+                        {% for name, col in documents[0]._columns %}
+                        {% if col.cover == 'dataset' and col.scheme == 'http://purl.org/dc/terms/description' %}
+                        <p> {{ col.content.html }} </p>
+                        {% endif %}
+                        {% endfor %}
 
-          {% for name, col in documents[0]._columns %}
-          {% if col.cover == 'dataset' and col.scheme == 'http://purl.org/dc/terms/description' %}
-          <p> {{ col.content.html }} </p>
-          {% endif %}
-          {% endfor %}
-
-          {% for name, col in documents[0]._columns %}
-          {% if col.cover == 'dataset' and col.scheme == 'http://purl.org/dc/terms/modified' %}
-          <p>
-            <i class="fa fa-clock-o" aria-hidden="true"></i> <time> {{ col.content.html }} </time>
-          </p>
-          {% endif %}
-          {% endfor %}
-
-
-
-        </div>
-        <div class="pull-right">
-          <!-- Single button -->
-          <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Graphical views <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a href="#">Yean over Year </a></li>
-              <li><a href="#">Heat Map of authors</a></li>
-              <li><a href="#">Map view</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Another idea ?</a></li>
-            </ul>
+                        {% for name, col in documents[0]._columns %}
+                        {% if col.cover == 'dataset' and col.scheme == 'http://purl.org/dc/terms/modified' %}
+                        <p>
+                        <i class="fa fa-clock-o" aria-hidden="true"></i> <time> {{ col.content.html }} </time>
+                        </p>
+                        {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div id="test"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% for name, col in documents[0]._columns %}
+              {% if col.displayAreas.insert %}
+              <div  class="tab-pane" id="carousel-{{ name }}">
+                <div class="lib-panel">
+                  <div class="row box-shadow">
+                    <div class="col-md-6">
+                      <div class="lib-row lib-header">
+                        <h1>{{ col.label|d('no label.') }}</h1>
+                        <div class="lib-header-seperator"></div>
+                      </div>
+                      <div class="lib-row lib-desc">
+                        {{ col.help|d('no help.') }}
+                        Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      {{ col.content.html }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <div class="text-center col-xs-2 col-sm-4">
+            <div class="list-group">
+              <button data-target="#carousel-topic" data-toggle="tab"  type="button" class="list-group-item">Topic</button>
+              {% for name, col in documents[0]._columns %}
+              {% if col.displayAreas.insert %}
+              <button data-target="#carousel-{{ name }}" data-toggle="tab"  type="button" class="list-group-item">{{ col.label|d('No label.') }}</button>
+              {% endif %}
+              {% endfor %}
+            </div>
           </div>
         </div>
-        <div id="tab" class="btn-group" data-toggle="buttons">
-          <a href="#overview" class="btn btn-default active" data-toggle="tab">
-            <input type="radio" />Overview</a>
-          <a href="#tableau" class="btn btn-default" data-toggle="tab">
-            <input type="radio" />Tableau</a>
-          <a href="#exports" class="btn btn-default" data-toggle="tab">
-            <input type="radio" />Exports</a>
-          <a href="#ontology" class="btn btn-default" data-toggle="tab">
-            <input type="radio" />Ontology</a>
-          <!--
-            <a href="#graph" class="btn btn-default" data-toggle="tab">
-            <input type="radio" />graph</a>
-          -->
-        </div>
 
-        <div class="tab-content">
-          <div class="tab-pane active" id="overview">
-            <div class="bs-example" data-example-id="media-alignment">
-              {% for doc in documents %}
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <div class="media">
-                    <div class="media-left" style="color:#c4d735;">
-                      <i class="fa fa-leaf fa-2x" aria-hidden="true"></i>
-                    </div>
-                    <div class="media-body">
-                      <div class="media-heading">
+        <div>
+          <div class="social pull-right">
+            <ul>
+              <li><a href="https://twitter.com/intent/tweet?url={{ documents[0]._uri }}"  target="_blank"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="https://plus.google.com/share?url={{ documents[0]._uri }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="#"><i class="fa fa-github"></i></a></li>
+              <li><a href="#"><i class="fa fa-dropbox"></i></a></li>
+            </ul>
+          </div>
+          <div id="tab" class="btn-group" data-toggle="buttons">
+            <a href="#overview" class="btn btn-default active" data-toggle="tab">
+              <input type="radio" />Overview</a>
+            <a href="#tableau" class="btn btn-default" data-toggle="tab">
+              <input type="radio" />Tableau</a>
+            <a href="#exports" class="btn btn-default" data-toggle="tab">
+              <input type="radio" />Exports</a>
+            <a href="#ontology" class="btn btn-default" data-toggle="tab">
+              <input type="radio" />Ontology</a>
+            <!--
+              <a href="#graph" class="btn btn-default" data-toggle="tab">
+              <input type="radio" />graph</a>
+            -->
+          </div>
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="overview">
+              <div class="bs-example" data-example-id="media-alignment">
+                {% for doc in documents %}
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <div class="media">
+                      <div class="media-left" style="color:#c4d735;">
+                        <i class="fa fa-leaf fa-2x" aria-hidden="true"></i>
+                      </div>
+                      <div class="media-body">
+                        <div class="media-heading">
                           {% for name, col in doc._columns %}
                           {% if col.cover == 'collection' and col.scheme == 'http://purl.org/dc/terms/title' %}
                           <a href="{{ doc._uri }}?alt=html"> {{ col.content.html }} </a>
                           {% endif %}
                           {% endfor %}
+                        </div>
+                        {% for name, col in doc._columns %}
+                        {% if col.cover == 'collection' and col.scheme == 'http://purl.org/dc/terms/description' %}
+                        <p> {{ col.content.html }} </p>
+                        {% endif %}
+                        {% endfor %}
                       </div>
-                      {% for name, col in doc._columns %}
-                      {% if col.cover == 'collection' and col.scheme == 'http://purl.org/dc/terms/description' %}
-                      <p> {{ col.content.html }} </p>
-                      {% endif %}
-                      {% endfor %}
                     </div>
                   </div>
                 </div>
+                {% endfor %}
               </div>
-              {% endfor %}
+            </div>
+            <div class="tab-pane" id="tableau">
+              <tableau />
+            </div>
+            <div class="tab-pane" id="exports">
+              <p>
+              Le jeu de données est disponible sur ce site selon une syntaxe "tableau", avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD et N-Quads.
+              </p>
+              <p>
+              Ils sont librement téléchargeable au travers de plusieurs formats&nbsp;:
+              </p>
+              <ul class="list-unstyled">
+                <li>
+                  <h3>XSLX</h3>
+                  <dl class="dl-horizontal lead">
+                    <dt>
+                    <a  href="/corpus.xlsx" class="btn btn-default">
+                      <span class="fa fa-download"></span> Télécharger
+                    </a>
+                    </dt>
+                    <dd>
+                    <a href="http://file-format.lod.istex.fr/=/xslx" data-lodex="outer">Plus d'information</a>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <h3>TSV</h3>
+                  <dl class="dl-horizontal lead">
+                    <dt>
+                    <a  href="/corpus.tsv" class="btn btn-default">
+                      <span class="fa fa-download"></span> Télécharger
+                    </a>
+                    </dt>
+                    <dd>
+                    <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">Plus d'information</a>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <h3>CSV</h3>
+                  <dl class="dl-horizontal lead">
+                    <dt>
+                    <a  href="/corpus.csv" class="btn btn-default">
+                      <span class="fa fa-download"></span> Télécharger
+                    </a>
+                    </dt>
+                    <dd>
+                    <a href="http://file-format.lod.istex.fr/=/csv" data-lodex="outer">Plus d'information</a>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <h3>N-Quads</h3>
+                  <dl class="dl-horizontal lead">
+                    <dt>
+                    <a  href="/corpus.nq" class="btn btn-default">
+                      <span class="fa fa-download"></span> Télécharger
+                    </a>
+                    </dt>
+                    <dd>
+                    <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">Plus d'information</a>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <h3>N-Quads (Excel)</h3>
+                  <dl class="dl-horizontal lead">
+                    <dt>
+                    <a  href="/corpus.nqx" class="btn btn-default">
+                      <span class="fa fa-download"></span> Télécharger
+                    </a>
+                    </dt>
+                    <dd>
+                    <a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">Plus d'information</a>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <h3>JSONLD</h3>
+                  <dl class="dl-horizontal lead">
+                    <dt>
+                    <a  href="/corpus.jsonld" class="btn btn-default">
+                      <span class="fa fa-download"></span> Télécharger
+                    </a>
+                    </dt>
+                    <dd>
+                    <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">Plus d'information</a>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <h3>Turtle</h3>
+                  <dl class="dl-horizontal lead">
+                    <dt>
+                    <a  href="/corpus.ttl" class="btn btn-default">
+                      <span class="fa fa-download"></span> Télécharger
+                    </a>
+                    </dt>
+                    <dd>
+                    <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">Plus d'information</a>
+                    </dd>
+                  </dl>
+                </li>
+              </ul>
+              <section class="page-content entry-content clearfix" itemprop="articleBody">
+                <a href="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence.gif" rel="attachment wp-att-214"><img class="size-medium wp-image-214 alignnone" src="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence-300x166.gif" alt="licence-ouverte-open-licence" width="300" height="166"></a>
+                <p>Les données mise en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. &nbsp;Comme les données ISTEX, Elles sont &nbsp;placées sous le régime de la licence ouverte/open licence Etalab (cf. <a href="http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf">contrat de licence type</a>).</p>
+                <p>&nbsp;</p>
+                <blockquote data-secret="QLzNqK36kW" class="wp-embedded-content" style="display: none;"><p><a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence">Licence Ouverte / Open Licence</a></p></blockquote>
+                <p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" src="https://www.etalab.gouv.fr/licence-ouverte-open-licence/embed#?secret=QLzNqK36kW" data-secret="QLzNqK36kW" width="500" height="300" title="Inclure un article WordPress" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+              </section>
+            </div>
+            <div class="tab-pane" id="ontology">
+              <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vestibulum efficitur commodo. Fusce aliquam sem nibh, a feugiat turpis eleifend non. Vestibulum ut tincidunt nisi, vitae ullamcorper nulla. Fusce ultricies sodales mattis. Sed eu leo condimentum, rutrum risus vitae, porta ante. Morbi nec dui eget velit semper vestibulum. Pellentesque iaculis congue mi. Etiam dictum leo consequat metus facilisis, porta sollicitudin nibh gravida. Integer sit amet magna molestie, bibendum libero at, congue risus. Vivamus eget vehicula turpis. Suspendisse potenti. Pellentesque tempor bibendum malesuada. Vivamus et erat nunc.
+              </p>
+              <div>
+                {% for key, col in documents[0]._columns %}
+                <h4> {{ col.title }}</h4>
+                <dl class="dl-horizontal lead">
+                  <dt>label</dt>
+                  <dd>
+                  {{ documents[0].colonnes[key].label|d('?') }}
+                  </dd>
+                  <dt>scheme</dt>
+                  <dd>
+                  <a href="{{ col.scheme }}"></a>
+                  </dd>
+                  <dt>type</dt>
+                  <dd>
+                  {{ col.type }}
+                  </dd>
+                </dl>
+
+                {% endfor %}
+
+              </div>
+
             </div>
           </div>
-          <div class="tab-pane" id="tableau">
-            <tableau />
-          </div>
-          <div class="tab-pane" id="exports">
-            <p>
-            Le jeu de données est disponible sur ce site selon une syntaxe "tableau", avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD et N-Quads.
-            </p>
-            <p>
-            Ils sont librement téléchargeable au travers de plusieurs formats&nbsp;:
-            </p>
-            <ul class="list-unstyled">
-              <li>
-                <h3>XSLX</h3>
-                <dl class="dl-horizontal lead">
-                  <dt>
-                  <a  href="/corpus.xlsx" class="btn btn-default">
-                    <span class="fa fa-download"></span> Télécharger
-                  </a>
-                  </dt>
-                  <dd>
-                  <a href="http://file-format.lod.istex.fr/=/xslx" data-lodex="outer">Plus d'information</a>
-                  </dd>
-                </dl>
-              </li>
-              <li>
-                <h3>TSV</h3>
-                <dl class="dl-horizontal lead">
-                  <dt>
-                  <a  href="/corpus.tsv" class="btn btn-default">
-                    <span class="fa fa-download"></span> Télécharger
-                  </a>
-                  </dt>
-                  <dd>
-                  <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">Plus d'information</a>
-                  </dd>
-                </dl>
-              </li>
-              <li>
-                <h3>CSV</h3>
-                <dl class="dl-horizontal lead">
-                  <dt>
-                  <a  href="/corpus.csv" class="btn btn-default">
-                    <span class="fa fa-download"></span> Télécharger
-                  </a>
-                  </dt>
-                  <dd>
-                  <a href="http://file-format.lod.istex.fr/=/csv" data-lodex="outer">Plus d'information</a>
-                  </dd>
-                </dl>
-              </li>
-              <li>
-                <h3>N-Quads</h3>
-                <dl class="dl-horizontal lead">
-                  <dt>
-                  <a  href="/corpus.nq" class="btn btn-default">
-                    <span class="fa fa-download"></span> Télécharger
-                  </a>
-                  </dt>
-                  <dd>
-                  <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">Plus d'information</a>
-                  </dd>
-                </dl>
-              </li>
-              <li>
-                <h3>N-Quads (Excel)</h3>
-                <dl class="dl-horizontal lead">
-                  <dt>
-                  <a  href="/corpus.nqx" class="btn btn-default">
-                    <span class="fa fa-download"></span> Télécharger
-                  </a>
-                  </dt>
-                  <dd>
-                  <a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">Plus d'information</a>
-                  </dd>
-                </dl>
-              </li>
-              <li>
-                <h3>JSONLD</h3>
-                <dl class="dl-horizontal lead">
-                  <dt>
-                  <a  href="/corpus.jsonld" class="btn btn-default">
-                    <span class="fa fa-download"></span> Télécharger
-                  </a>
-                  </dt>
-                  <dd>
-                  <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">Plus d'information</a>
-                  </dd>
-                </dl>
-              </li>
-              <li>
-                <h3>Turtle</h3>
-                <dl class="dl-horizontal lead">
-                  <dt>
-                  <a  href="/corpus.ttl" class="btn btn-default">
-                    <span class="fa fa-download"></span> Télécharger
-                  </a>
-                  </dt>
-                  <dd>
-                  <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">Plus d'information</a>
-                  </dd>
-                </dl>
-              </li>
-            </ul>
-            <section class="page-content entry-content clearfix" itemprop="articleBody">
-              <a href="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence.gif" rel="attachment wp-att-214"><img class="size-medium wp-image-214 alignnone" src="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence-300x166.gif" alt="licence-ouverte-open-licence" width="300" height="166"></a>
-              <p>Les données mise en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. &nbsp;Comme les données ISTEX, Elles sont &nbsp;placées sous le régime de la licence ouverte/open licence Etalab (cf. <a href="http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf">contrat de licence type</a>).</p>
-              <p>&nbsp;</p>
-              <blockquote data-secret="QLzNqK36kW" class="wp-embedded-content" style="display: none;"><p><a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence">Licence Ouverte / Open Licence</a></p></blockquote>
-              <p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" src="https://www.etalab.gouv.fr/licence-ouverte-open-licence/embed#?secret=QLzNqK36kW" data-secret="QLzNqK36kW" width="500" height="300" title="Inclure un article WordPress" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
-            </section>
-          </div>
-          <div class="tab-pane" id="ontology">
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vestibulum efficitur commodo. Fusce aliquam sem nibh, a feugiat turpis eleifend non. Vestibulum ut tincidunt nisi, vitae ullamcorper nulla. Fusce ultricies sodales mattis. Sed eu leo condimentum, rutrum risus vitae, porta ante. Morbi nec dui eget velit semper vestibulum. Pellentesque iaculis congue mi. Etiam dictum leo consequat metus facilisis, porta sollicitudin nibh gravida. Integer sit amet magna molestie, bibendum libero at, congue risus. Vivamus eget vehicula turpis. Suspendisse potenti. Pellentesque tempor bibendum malesuada. Vivamus et erat nunc.
-            </p>
-            <div>
-              {% for key, col in documents[0]._columns %}
-              <h4> {{ col.title }}</h4>
-              <dl class="dl-horizontal lead">
-                <dt>label</dt>
-                <dd>
-                {{ documents[0].colonnes[key].label|d('?') }}
-                </dd>
-                <dt>scheme</dt>
-                <dd>
-                <a href="{{ col.scheme }}"></a>
-                </dd>
-                <dt>type</dt>
-                <dd>
-                {{ col.type }}
-                </dd>
-              </dl>
-
-              {% endfor %}
-
-            </div>
-
-          </div>
-          <div class="tab-pane" id="graph">Content</div>
         </div>
       </div>
 
@@ -425,6 +473,15 @@ body > div.container {
     <script type="text/javascript" charset="utf-8" src="/libs/bootstrap-material-design/dist/js/ripples.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="/libs/bootstrap-material-design/dist/js/material.min.js"></script>
     <script type="text/javascript" charset="utf-8"> $(document).ready(function() { $.material.init(); }); </script>
+    <script>
+// https://github.com/gionkunz/chartist-js/issues/169
+// http://jsbin.com/bawofakogu/1/edit?html,css,js,output
+$(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
+         $('.histogram').each(function(i, e) {
+           e.__chartist__.update();
+         });
+});
+    </script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script type="text/javascript" charset="utf-8" src="/assets/js/ie10-viewport-bug-workaround.js"></script>
@@ -432,7 +489,6 @@ body > div.container {
     <!-- Piwik -->
     <script type="text/javascript"> var _paq = _paq || []; _paq.push([function() { var self=this; function getOriginalVisitorCookieTimeout() { var now=new Date(), nowTs=Math.round(now.getTime()/1000), visitorInfo=self.getVisitorInfo(); var createTs = parseInt(visitorInfo[2]); var cookieTimeout=33696000; var originalTimeout=createTs+cookieTimeout-nowTs; return originalTimeout; } getOriginalVisitorCookieTimeout(); this.setVisitorCookieTimeout(getOriginalVisitorCookieTimeout()); }]); _paq.push(['trackPageView']); _paq.push(['enableLinkTracking']); (function() { var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik.inist.fr//"; _paq.push(['setTrackerUrl', u+'piwik.php']); _paq.push(['setSiteId', 132]); var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript'; g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s); })(); </script> <noscript><p><img src="http://piwik.inist.fr/piwik.php?idsite=132" style="border:0" alt="" /></p></noscript>
     <!-- End Piwik Code -->
-
 </body>
 
 </html> <!-- end page. what a ride! -->
