@@ -2,6 +2,12 @@
 	"defaultRootCollection": "data",
 	"collectionNameHotFolder": "data",
 	"title": "An example on films",
+  "uniqueIdentifierWith": {
+    "get": "_content.json.title",
+    "comment": "long enough to be discriminant",
+    "truncate": 21,
+    "slug": true
+  },
 	"datasetFields": {
 		"title1" : {
 			"label" : "Dataset title",
