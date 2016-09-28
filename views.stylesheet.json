@@ -8,5 +8,8 @@
 	"$_uri" : {
 		"get" : "data._uri"
 	},
-	"mask" : "_uri,_columns,areas"
+	"$_wid": {
+		"get": "data._wid"
+	},
+	"mask" : "_uri,_columns,areas,_wid"
 }

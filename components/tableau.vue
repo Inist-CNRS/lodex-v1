@@ -25,7 +25,7 @@
 		<tbody>
 		  <tr v-for="(index, doc) in items">
 				<td data-title="URI">
-					<a href="{{ doc._uri }}?alt=html">#</a>
+					<a href="{{ doc._uri }}?alt=html">{{ doc._wid }}</a>
 				</td>
 				<td v-for="(colkey, col) in columns">
 					{{{ doc._columns[colkey].content.raw }}}
