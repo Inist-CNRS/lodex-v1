@@ -5,7 +5,7 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
-if [ -e "data/json" ];  then
+if [ -e "data.json" ];  then
     cp ./data.json "example/$1.json"
 else
     echo "data.json does not exist"
