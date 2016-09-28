@@ -1,8 +1,6 @@
 {
   "defaultRootCollection": "data",
   "collectionNameHotFolder": "data",
-  "title": "Article types",
-  "description": "Cette table correspond à la sélection retenue et assumée par l'équipe Istex data et adoptée par l'équipe LODEX. Elle résulte de l'analyse des informations fournies par les éditeurs sur l'élément type de document-article. Ceux-ci constituent une des facettes permettant de valoriser les ressources ISTEX conformément aux normes du web sémantique.",
   "uniqueIdentifierWith" : {
     "get": "_content.json.Nomenclature ISTEX"
   },
@@ -13,28 +11,31 @@
       "type": "https://www.w3.org/TR/xmlschema-2/#boolean",
       "content": true
     },
-    "title": {
+    "title1": {
       "label": "Title",
-      "scheme": "http://purl.org/dc/elements/1.1/title",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "lang": "fr",
-      "comment": "Always get a title",
-      "content<": {
-        "get": ["_content.json.étiquette en", "_content.json.title", "title", "_label", "_wid"],
-        "coalesce": true,
-        "first": true
-      }
-    },
-    "description": {
-      "label": "Definition",
-      "scheme": "http://www.w3.org/2004/02/skos/core#definition",
+      "scheme": "http://purl.org/dc/terms/title",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "en",
+      "comment": "Always get a title - displayed in corpus/overview",
+      "content": "Article types"
+    },
+    "description1": {
+      "label": "Description",
+      "scheme": "http://purl.org/dc/terms/description",
+      "type": "string",
+      "lang": "fr",
+      "content": "Cette table correspond à la sélection retenue et assumée par l'équipe Istex data et adoptée par l'équipe LODEX. Elle résulte de l'analyse des informations fournies par les éditeurs sur l'élément type de document-article. Ceux-ci constituent une des facettes permettant de valoriser les ressources ISTEX conformément aux normes du web sémantique."
+    },
+    "date1": {
+      "label": "Updated",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "type": "date",
+      "format" : "LL",
       "content<": {
-        "get": "_content.json.définition eng"
+        "get": "_collection._dataset._updated"
       }
     },
-    "name": {
+    "name1": {
       "label": "Name",
       "scheme": "http://purl.org/dc/terms/identifier",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
@@ -51,22 +52,22 @@
       }
     }
   },
-  "documentFields": {
+  "collectionFields": {
     "title": {
       "label": "Title",
-      "scheme": "http://purl.org/dc/elements/1.1/title",
+      "scheme": "http://purl.org/dc/terms/title",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "lang": "fr",
-      "comment": "Always get a title",
+      "lang": "en",
       "content<": {
         "get": "_content.json.étiquette en"
       }
     },
     "description": {
       "label": "Definition",
-      "scheme": "http://www.w3.org/2004/02/skos/core#definition",
+      "scheme": "http://purl.org/dc/terms/description",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "en",
+      "comment": "Always get a description - displayed in corpus/overview",
       "content<": {
         "get": "_content.json.définition eng"
       }
