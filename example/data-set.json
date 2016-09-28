@@ -1,8 +1,6 @@
 {
-  "defaultRootCollection": "data-set",
-  "collectionNameHotFolder": "data-set",
-  "title": "Data set",
-  "description": "Cette table correspond à une collection de jeux de données produites par deux équipes ISTEX : jeu type article (article-type) et jeu entités nommées (named-entity). Il s’agit, à partir de cette table maîtresse d'accéder aux données appartenant à chaque jeu.",
+  "defaultRootCollection": "data",
+  "collectionNameHotFolder": "data",
   "uniqueIdentifierWith" : {
     "get": "_content.json.Identifiant",
     "slug": true
@@ -14,26 +12,28 @@
       "type": "https://www.w3.org/TR/xmlschema-2/#boolean",
       "content": true
     },
-    "title": {
+    "title1": {
       "label": "Title",
-      "scheme": "http://purl.org/dc/elements/1.1/title",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "lang": "fr",
-      "comment": "Always get a title",
-      "content<": {
-        "get": ["_content.json.title", "title", "_label", "_wid"],
-        "coalesce": true,
-        "first": true
-      }
+      "scheme": "http://purl.org/dc/terms/title",
+      "type": "string",
+      "lang": "en",
+      "comment": "Always get a title - displayed in corpus/overview",
+      "content": "Data set"
     },
-    "name": {
-      "label": "Name",
-      "scheme": "http://purl.org/dc/terms/identifier",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "comment": "****** Don't remove this field! ",
+    "description1": {
+      "label": "Description",
+      "scheme": "http://purl.org/dc/terms/description",
+      "type": "string",
+      "lang": "fr",
+      "content": "Cette table correspond à une collection de jeux de données produites par deux équipes ISTEX : jeu type article (article-type) et jeu entités nommées (named-entity). Il s’agit, à partir de cette table maîtresse d'accéder aux données appartenant à chaque jeu."
+    },
+    "date1": {
+      "label": "Updated",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "type": "date",
+      "format" : "LL",
       "content<": {
-        "get": "_content.json.Identifiant",
-        "slug": true
+        "get": "_collection._dataset._updated"
       }
     },
     "updated": {
@@ -45,40 +45,47 @@
       }
     }
   },
-  "documentFields": {
+  "collectionFields": {
     "title": {
       "label": "Title",
       "scheme": "http://purl.org/dc/terms/title",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "type": "string",
       "lang": "fr",
-      "visible": true,
       "content<": {
         "get": "_content.json.titre"
+      },
+      "displayAreas": {
+        "table": true
       }
     },
     "description": {
       "label": "Description",
       "scheme": "http://purl.org/dc/terms/description",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "type": "string",
       "lang": "fr",
-      "visible": true,
       "content<": {
         "get": "_content.json.Description"
+      },
+      "displayAreas": {
+        "table": true
       }
     },
     "contains": {
       "label": "Contains",
       "scheme": "http://purl.org/dc/terms/hasPart",
-      "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
-      "visible": true,
+      "type": "string",
+      "format": "markdown",
       "content<": {
         "get": "_content.json.Contient"
+      },
+      "displayAreas": {
+        "table": true
       }
     },
     "created": {
       "label": "Creation date",
       "scheme": "http://purl.org/dc/terms/created",
-      "type": "https://www.w3.org/TR/xmlschema-2/#date",
+      "type": "date",
       "content<": {
         "get": "_content.json.Date de création"
       }
@@ -86,7 +93,7 @@
     "creator": {
       "label": "Creator",
       "scheme": "http://purl.org/dc/terms/creator",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "type": "string",
       "content<": {
         "get": "_content.json.Créateur"
       }
@@ -94,7 +101,7 @@
     "license": {
       "label": "License",
       "scheme": "http://purl.org/dc/terms/license",
-      "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
+      "type": "string",
       "content<": {
         "get": "_content.json.Licence"
       }
@@ -102,7 +109,7 @@
     "publisher": {
       "label": "Publisher",
       "scheme": "http://purl.org/dc/terms/publisher",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "type": "string",
       "content<": {
         "get": "_content.json.Editeur"
       }
@@ -110,7 +117,7 @@
     "examples": {
       "label": "Examples",
       "scheme": "http://www.w3.org/2004/02/skos/core#example",
-      "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
+      "type": "string",
       "content<": {
         "get": ["_content.json.exemple1","_content.json.exemple2","_content.json.exemple"]
       }
@@ -118,10 +125,13 @@
     "updated": {
       "label": "Updated",
       "scheme": "http://purl.org/dc/terms/modified",
-      "type": "https://www.w3.org/TR/xmlschema-2/#date",
-      "visible": true,
+      "type": "date",
+      "format": "LL",
       "content<": {
         "get": "dateSynchronised"
+      },
+      "displayAreas": {
+        "table": true
       }
     }
   }

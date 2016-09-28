@@ -27,7 +27,7 @@ export default {
 		reload(done) {
 			let self = this;
 			let qry = {
-				"field" : self.field,
+				"field" : "_columns." + self.field + ".content",
 				"$limit" : 5,
 				"$sort" : {
 					"value" : -1

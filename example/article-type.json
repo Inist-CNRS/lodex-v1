@@ -2,8 +2,7 @@
   "defaultRootCollection": "data",
   "collectionNameHotFolder": "data",
   "uniqueIdentifierWith" : {
-    "get": "_content.json.Identifiant",
-    "slug": true
+    "get": "_content.json.Nomenclature ISTEX"
   },
   "datasetFields": {
     "isRoot": {
@@ -18,14 +17,14 @@
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "en",
       "comment": "Always get a title - displayed in corpus/overview",
-      "content": "Named entities"
+      "content": "Article types"
     },
     "description1": {
       "label": "Description",
       "scheme": "http://purl.org/dc/terms/description",
       "type": "string",
       "lang": "fr",
-      "content": "Cette table correspond à une reprise du choix d'annotation des données ISTEX avec des entités nommées : mots ou groupes de mots présentant un intérêt particulier sur le plan sémantique et pouvant être catégorisés. Il s’agit de noms propres (personnes, lieux,organisations) ou d’autres unités lexicales (dates, projets financés, URL)."
+      "content": "Cette table correspond à la sélection retenue et assumée par l'équipe Istex data et adoptée par l'équipe LODEX. Elle résulte de l'analyse des informations fournies par les éditeurs sur l'élément type de document-article. Ceux-ci constituent une des facettes permettant de valoriser les ressources ISTEX conformément aux normes du web sémantique."
     },
     "date1": {
       "label": "Updated",
@@ -36,13 +35,12 @@
         "get": "_collection._dataset._updated"
       }
     },
-    "name": {
+    "name1": {
       "label": "Name",
       "scheme": "http://purl.org/dc/terms/identifier",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "content<": {
-        "get": "_content.json.Identifiant",
-        "slug": true
+        "get": "_content.json.Nomenclature ISTEX"
       }
     },
     "updated": {
@@ -59,20 +57,19 @@
       "label": "Title",
       "scheme": "http://purl.org/dc/terms/title",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "en",
       "content<": {
-        "get": "_content.json.Titre"
-      },
-      "displayAreas": {
-        "table": true
+        "get": "_content.json.étiquette en"
       }
     },
     "description": {
-      "label": "Title",
+      "label": "Definition",
       "scheme": "http://purl.org/dc/terms/description",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "en",
+      "comment": "Always get a description - displayed in corpus/overview",
       "content<": {
-        "get": "_content.json.Libellé anglais"
+        "get": "_content.json.définition eng"
       }
     },
     "frenchLabel": {
@@ -81,7 +78,7 @@
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "fr",
       "content<": {
-        "get": "_content.json.Libellé français"
+        "get": "_content.json.étiquette fr"
       }
     },
     "englishLabel": {
@@ -90,7 +87,7 @@
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "en",
       "content<": {
-        "get": "_content.json.Libellé anglais"
+        "get": "_content.json.étiquette en"
       },
       "displayAreas": {
         "table": true
@@ -102,7 +99,7 @@
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "fr",
       "content<": {
-        "get": "_content.json.Définition fr"
+        "get": "_content.json.définition fr"
       }
     },
     "englishDefinition": {
@@ -111,39 +108,49 @@
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "en",
       "content<": {
-        "get": "_content.json.Définition eng"
+        "get": "_content.json.définition eng"
       },
       "displayAreas": {
         "table": true
       }
     },
-    "frenchExample": {
-      "label": "French example",
-      "scheme": "http://www.w3.org/2004/02/skos/core#example",
+    "englishDefinitionNLM": {
+      "label": "English definition",
+      "scheme": "http://www.w3.org/2004/02/skos/core#definition",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "en",
+      "content<": {
+        "get": "_content.json.définition eng NLM"
+      }
+    },
+    "frenchComments": {
+      "label": "French comments",
+      "scheme": "http://www.w3.org/2004/02/skos/core#note",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "fr",
       "content<": {
-        "get": "_content.json.Exemple fr"
+        "get": "_content.json.Commentaires"
       }
     },
-    "englishExample": {
-      "label": "English example",
+    "frenchNote": {
+      "label": "Additional notes",
+      "scheme": "http://www.w3.org/2004/02/skos/core#scopeNote",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "fr",
+      "content<": {
+        "get": "_content.json.Note supplémentaire"
+      }
+    },
+    "examples": {
+      "label": "Examples",
       "scheme": "http://www.w3.org/2004/02/skos/core#example",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "en",
       "content<": {
-        "get": "_content.json.Exemple eng"
+        "get": "_content.json.exemples"
       },
       "displayAreas": {
         "table": true
-      }
-    },
-    "note": {
-      "label": "Writing instructions",
-      "scheme": "http://www.w3.org/2004/02/skos/core#note",
-      "lang": "fr",
-      "content<": {
-        "get": "_content.json.Consigne d'écriture"
       }
     },
     "updated": {

@@ -1,6 +1,6 @@
 {
   "name": "lodex",
-  "version": "0.9.19",
+  "version": "0.9.23",
   "description": "Linked Open Data and ISTEX",
   "main": "index.js",
   "bin": {
@@ -13,7 +13,8 @@
     "test": "mocha",
     "start": "./lodex",
     "insertversion": "sed -i \"s#\\(LODEX version \\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" public/about.html",
-    "preversion": "npm run insertversion && npm run build && git add public/assets/js/list.min.js public/about.html",
+    "preversion": "npm run build && git add public/assets/js/list.min.js",
+    "version": "npm run insertversion && git add public/about.html",
     "postversion": "git push && git push --tags"
   },
   "repository": {
@@ -37,7 +38,7 @@
   "homepage": "https://github.com/Inist-CNRS/lodex#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "castor-core": "^8.4.1",
+    "castor-core": "^8.5.0",
     "castor-load": "^4.6.0",
     "castor-load-csv": "latest",
     "castor-load-excel": "latest",
@@ -49,6 +50,7 @@
     "datamodel": "^1.5.1",
     "debug": "latest",
     "heartbeats": "^3.1.3",
+    "htmlspecialchars": "^1.0.5",
     "jbj": "^7.1.1",
     "jbj-array": "^1.0.0",
     "jbj-nlp": "^1.1.0",
@@ -58,10 +60,13 @@
     "jbj-template": "^2.0.0",
     "jsonld": "^0.4.11",
     "lodash.truncate": "^4.3.0",
+    "marked": "^0.3.6",
+    "moment": "^2.15.1",
     "mongodb-querystring": "^1.0.3",
     "n3": "^0.5.0",
     "object.omit": "^2.0.0",
-    "vue-resource": "^1.0.2"
+    "vue-resource": "^1.0.2",
+    "xml-mapping": "^1.7.1"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",

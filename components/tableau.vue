@@ -25,10 +25,10 @@
 		<tbody>
 		  <tr v-for="(index, doc) in items">
 				<td data-title="URI">
-					<a href="{{ doc.ressource['@id'].raw }}?alt=html">{{ doc.ressource.name.label }}</a>
+					<a href="{{ doc._uri }}.html">{{ doc._wid }}</a>
 				</td>
 				<td v-for="(colkey, col) in columns">
-					{{{ doc.ressource[colkey].html }}}
+					{{{ doc._columns[colkey].content.html }}}
 				</td>
 			</tr>
 		</tbody>

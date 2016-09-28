@@ -102,6 +102,30 @@ body > div.container {
     <div id="content" class="row clearfix">
 
       <div id="main" class="col-md-10 clearfix" role="main">
+        <div>
+          {% for name, col in documents[0]._columns %}
+          {% if col.cover == 'dataset' and col.scheme == 'http://purl.org/dc/terms/title' %}
+          <h1>{{ col.content.html }}</h1>
+          {% endif %}
+          {% endfor %}
+
+          {% for name, col in documents[0]._columns %}
+          {% if col.cover == 'dataset' and col.scheme == 'http://purl.org/dc/terms/description' %}
+          <p> {{ col.content.html }} </p>
+          {% endif %}
+          {% endfor %}
+
+          {% for name, col in documents[0]._columns %}
+          {% if col.cover == 'dataset' and col.scheme == 'http://purl.org/dc/terms/modified' %}
+          <p>
+            <i class="fa fa-clock-o" aria-hidden="true"></i> <time> {{ col.content.html }} </time>
+          </p>
+          {% endif %}
+          {% endfor %}
+
+
+
+        </div>
         <div class="pull-right">
           <!-- Single button -->
           <div class="btn-group">
@@ -109,7 +133,7 @@ body > div.container {
               Graphical views <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-              <li><a href="#">Yean over Year </a></li>
+              <li><a href="#">Year over Year </a></li>
               <li><a href="#">Heat Map of authors</a></li>
               <li><a href="#">Map view</a></li>
               <li role="separator" class="divider"></li>
@@ -143,8 +167,18 @@ body > div.container {
                       <i class="fa fa-leaf fa-2x" aria-hidden="true"></i>
                     </div>
                     <div class="media-body">
-                      <div class="media-heading"><a href="{{ doc.ressource.@id.raw }}?alt=html">{{ doc._columns.title.content|d('no `title` column.') }}</a></div>
-                      <p>{{ doc._columns.title.content|d('no `description` column.') }}</p>
+                      <div class="media-heading">
+                          {% for name, col in doc._columns %}
+                          {% if col.cover == 'collection' and col.scheme == 'http://purl.org/dc/terms/title' %}
+                          <a href="{{ doc._uri }}?alt=html"> {{ col.content.html }} </a>
+                          {% endif %}
+                          {% endfor %}
+                      </div>
+                      {% for name, col in doc._columns %}
+                      {% if col.cover == 'collection' and col.scheme == 'http://purl.org/dc/terms/description' %}
+                      <p> {{ col.content.html }} </p>
+                      {% endif %}
+                      {% endfor %}
                     </div>
                   </div>
                 </div>
@@ -154,36 +188,6 @@ body > div.container {
           </div>
           <div class="tab-pane" id="tableau">
             <tableau />
-            <!--
-            <div id="no-more-tables">
-              <table class="table-bordered table-striped table-condensed cf">
-                <thead class="cf">
-                  <tr>
-                    <th>URI</th>
-                    {% for name, col in documents[0]._columns %}
-                    {% if col.displayAreas.table %}
-                    <th>{{ col.label }}</th>
-                    {% endif %}
-                    {% endfor %}
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for doc in documents %}
-                  <tr>
-                    <td data-title="URI">
-                      <a href="{{ doc.ressource.@id.raw }}?alt=html">{{ doc.ressource.name.label }}</a>
-                    </td>
-                    {% for name, col in doc.colonnes %}
-                    {% if doc._columns[name].displayAreas.table %}
-                    <td>{{ doc.ressource[name].html }}</td>
-                    {% endif %}
-                    {% endfor %}
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
-            -->
           </div>
           <div class="tab-pane" id="exports">
             <p>
@@ -337,7 +341,7 @@ body > div.container {
           {% for name, col in documents[0]._columns %}
           {% if col.displayAreas.facet %}
           <div id="facet-{{ name }}">
-            <facet title="{{ col.label }}" field="_columns.{{ name }}.content"/>
+            <facet title="{{ col.label }}" field="{{ name }}"/>
           </div>
           {% endif %}
           {% endfor %}

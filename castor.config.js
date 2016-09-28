@@ -182,6 +182,10 @@ module.exports = {
     },
     {
       pattern : '+(jsonad|html)',
+      require : 'format.js'
+    },
+    {
+      pattern : '+(jsonad|html)',
       require : 'enrich.js'
     },
     {
