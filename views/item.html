@@ -23,10 +23,11 @@
 
         <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+         <!-- Material Design fonts -->
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
-        <!--[if IE]>
-<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico">
-<![endif]-->
+<!--[if IE]><link rel="shortcut icon" href="/assets/img/favicon/favicon.ico"><![endif] -->
         <meta name="msapplication-TileColor" content="#f01d4f">
         <meta name="msapplication-TileImage" content="/assets/img/win8-tile-icon.png">
 
@@ -34,10 +35,18 @@
         <!-- Bootstrap core CSS -->
         <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" >
+         <!-- Bootstrap Material Design 
+  <link rel="stylesheet" type="text/css" href="/libs/bootstrap-material-design/dist/css/bootstrap-material-design.css">
+  <link rel="stylesheet" type="text/css" href="/libs/bootstrap-material-design/dist/css/ripples.min.css"> -->
+
 
         <link rel='stylesheet' id='bones-stylesheet-css' href='/assets/css/style.css' type='text/css' media='all' />
         <link rel='stylesheet' id='istex-stylesheet-css' href='/assets/css/surenteteistex.css' type='text/css' media='all' />
-        <link rel='stylesheet' id='istex-stylesheet-css' href='/assets/css/testimonials.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='bootstrap-stylesheet-css' href='/assets/css/testimonials.css' type='text/css' media='all' />
+        
+       
+        <!-- theme semantic UI Bootstrap 
+  <link rel="stylesheet" href="/libs/semantic-ui-bootstrap-master/css/smt-bootstrap.css">-->
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -160,7 +169,9 @@
                                     </div>
                                 </div>
 
+                               <div id="main" class="col-md-6 clearfix">
                                 <div id="tb-testimonial" class="testimonial testimonial-success">
+                                    
                                     <div class="testimonial-section">
                                         <p>Propriétés</p>
                                         <ul>
@@ -191,24 +202,77 @@
                                     </div>
 
                                 </div> 
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div class="media">
-                                            <div class="media-left" style="color:#c4d735;">
-                                                <i class="fa fa-leaf fa-2x" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="media-heading">trucs?</div>
+                         
+                            </div>
+                                     <div id="main" class="col-md-6 clearfix">
+                                <div id="tb-testimonial" class="testimonial testimonial-success">
+                                    
+                                    <div class="testimonial-section">
+                                        <p>Propriétés</p>
+                                        <ul>
+                                            <li>
 
+                                                <h5>Headline</h5>
+                                                <p>Lorem ipsum dolor sit amet...</p>
+                                            </li>
 
-                                            </div>
-                                        </div>
+                                            <li>
+
+                                                <h5>Headline</h5>
+                                                <p>Lorem ipsum dolor sit amet...</p>
+                                            </li>
+
+                                            <li>
+
+                                                <h5>Headline</h5>
+                                                <p>Lorem ipsum dolor sit amet...</p>
+                                            </li>
+
+                                            <li>
+
+                                                <h5>Headline</h5>
+                                                <p>Lorem ipsum dolor sit amet...</p>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </div>
+
+                                </div> 
+                         
                             </div>
                         </div>
+                         <div id="tb-testimonial" class="testimonial testimonial-info">
+                                     <div id="tab" class="btn-group" data-toggle="buttons">
+                                      <a href="#estcontenu" class="btn btn-default  active" data-toggle="tab">
+                            <input type="radio" />Est contenu</a>
+                        <a href="#contient" class="btn btn-default" data-toggle="tab">
+                            <input type="radio" />Contient</a>
+                       
+                             <a href="#istex" class="btn btn-default" data-toggle="tab">
+                            <input type="radio" />Istex</a>
 
 
+                    </div>
+                                     <div class="tab-content">
+                        <div class="tab-pane active" id="estcontenu">
+                           
+                               
+                                    <div class="testimonial-section">
+                                       <h2>Est contenu dans </h2>
+
+                                    
+                                Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
+                                    </div>
+                                </div>
+                                 <div class="tab-pane" id="contient">
+                                  <h2>contient </h2>
+                        </div>
+                        <div class="tab-pane" id="istex">
+                                  <h2>Istex</h2>
+                        </div>
+                         </div>
+ </div>
+  </div>
+  
 
 
 
@@ -286,31 +350,9 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <div class="update-nag">
-                                    <div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                    <div class="update-text">turtle <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">Plus d'information</a>
-                                        <a  href="/corpus.ttl" >
-                                            <span class="fa fa-download"></span> Télécharger
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                          
 
-                           
-
-    
-                    <!--        
-                             <div class="col-md-6">
-                                <div class="update-nag">
-                                    <div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                    <div class="update-text">AAAA <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">Plus d'information</a>
-                                        <a  href="/corpus.tsv" >
-                                            <span class="fa fa-download"></span> Télécharger
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>-->
+                        
 
 
                             <section class="page-content entry-content clearfix" itemprop="articleBody">
@@ -334,6 +376,7 @@
 
 
         </div>
+      
 
 
         <footer id="footer" class="clearfix">
@@ -378,13 +421,14 @@
                                 </div>
 
                             </div>
-                        </div>
+                     
 
                     </div> <!-- end .row -->
+                     </div> <!-- end #footer-wrapper -->
 
-                </div> <!-- end #footer-wrapper -->
-
-            </div> <!-- end .container -->
+ </div> <!-- end .container -->
+               
+           
             </div> <!-- end #footer-widgets -->
 
         <div id="sub-floor">

@@ -1,6 +1,6 @@
 {
   "name": "lodex",
-  "version": "0.9.19",
+  "version": "0.9.23",
   "description": "Linked Open Data and ISTEX",
   "main": "index.js",
   "bin": {
@@ -13,7 +13,8 @@
     "test": "mocha",
     "start": "./lodex",
     "insertversion": "sed -i \"s#\\(LODEX version \\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" public/about.html",
-    "preversion": "npm run insertversion && npm run build && git add public/assets/js/list.min.js public/about.html",
+    "preversion": "npm run build && git add public/assets/js/list.min.js",
+    "version": "npm run insertversion && git add public/about.html",
     "postversion": "git push && git push --tags"
   },
   "repository": {

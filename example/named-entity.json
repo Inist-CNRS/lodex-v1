@@ -1,8 +1,6 @@
 {
   "defaultRootCollection": "data",
   "collectionNameHotFolder": "data",
-  "title": "Named entities",
-  "description": "Cette table correspond à une reprise du choix d'annotation des données ISTEX avec des entités nommées : mots ou groupes de mots présentant un intérêt particulier sur le plan sémantique et pouvant être catégorisés. Il s’agit de noms propres (personnes, lieux,organisations) ou d’autres unités lexicales (dates, projets financés, URL).",
   "uniqueIdentifierWith" : {
     "get": "_content.json.Identifiant",
     "slug": true
@@ -14,16 +12,28 @@
       "type": "https://www.w3.org/TR/xmlschema-2/#boolean",
       "content": true
     },
-    "title": {
+    "title1": {
       "label": "Title",
-      "scheme": "http://purl.org/dc/elements/1.1/title",
+      "scheme": "http://purl.org/dc/terms/title",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "en",
+      "comment": "Always get a title - displayed in corpus/overview",
+      "content": "Named entities"
+    },
+    "description1": {
+      "label": "Description",
+      "scheme": "http://purl.org/dc/terms/description",
+      "type": "string",
       "lang": "fr",
-      "comment": "Always get a title",
+      "content": "Cette table correspond à une reprise du choix d'annotation des données ISTEX avec des entités nommées : mots ou groupes de mots présentant un intérêt particulier sur le plan sémantique et pouvant être catégorisés. Il s’agit de noms propres (personnes, lieux,organisations) ou d’autres unités lexicales (dates, projets financés, URL)."
+    },
+    "date1": {
+      "label": "Updated",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "type": "date",
+      "format" : "LL",
       "content<": {
-        "get": ["_content.json.title", "title", "_label", "_wid"],
-        "coalesce": true,
-        "first": true
+        "get": "_collection._dataset._updated"
       }
     },
     "name": {
@@ -44,17 +54,25 @@
       }
     }
   },
-  "documentFields": {
+  "collectionFields": {
     "title": {
       "label": "Title",
       "scheme": "http://purl.org/dc/terms/title",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "lang": "fr",
       "content<": {
         "get": "_content.json.Titre"
       },
       "displayAreas": {
         "table": true
+      }
+    },
+    "description": {
+      "label": "Title",
+      "scheme": "http://purl.org/dc/terms/description",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "en",
+      "content<": {
+        "get": "_content.json.Libellé anglais"
       }
     },
     "frenchLabel": {
