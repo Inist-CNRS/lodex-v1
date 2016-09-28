@@ -13,8 +13,8 @@
     "test": "mocha",
     "start": "./lodex",
     "insertversion": "sed -i \"s#\\(LODEX version \\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" public/about.html",
-    "preversion": "npm run insertversion && npm run build && git add public/assets/js/list.min.js public/about.html",
-    "postversion": "git push && git push --tags"
+    "preversion": "npm run build && git add public/assets/js/list.min.js",
+    "postversion": "npm run insertversion && git add public/about.html && git push && git push --tags"
   },
   "repository": {
     "type": "git",
