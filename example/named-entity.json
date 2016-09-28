@@ -16,7 +16,7 @@
     },
     "title": {
       "label": "Title",
-      "scheme": "http://purl.org/dc/elements/1.1/title",
+      "scheme": "http://purl.org/dc/terms/title",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "lang": "fr",
       "comment": "Always get a title",
@@ -44,17 +44,25 @@
       }
     }
   },
-  "documentFields": {
+  "collectionFields": {
     "title": {
       "label": "Title",
       "scheme": "http://purl.org/dc/terms/title",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "lang": "fr",
       "content<": {
         "get": "_content.json.Titre"
       },
       "displayAreas": {
         "table": true
+      }
+    },
+    "description": {
+      "label": "Title",
+      "scheme": "http://purl.org/dc/terms/description",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "lang": "en",
+      "content<": {
+        "get": "_content.json.Libellé anglais"
       }
     },
     "frenchLabel": {
