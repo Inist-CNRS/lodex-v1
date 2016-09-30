@@ -37,6 +37,7 @@ module.exports = {
   ],
   allowedAltValues : [
     'dry',
+    'jdx',
     'min',
     'csv',
     'jsonld',
