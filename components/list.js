@@ -13,7 +13,7 @@ Vue.use(require('vue-resource'));
 var facet = require('./facet.vue')
 var metric = require('./metric.vue')
 var tableau = require('./tableau.vue')
-var histogram = require('./histogram.vue')
+var chart = require('./chart.vue')
 
 module.exports = new Vue({
 
@@ -27,7 +27,7 @@ module.exports = new Vue({
     facet: facet,
     tableau: tableau,
     metric: metric,
-    histogram: histogram
+    chart:chart
   }
 
 });

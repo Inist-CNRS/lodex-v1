@@ -40,9 +40,7 @@ export default {
 		reload(done) {
 			let self = this;
 			let qry = {
-				"draw" : Date.now(),
 				"field" : "_columns." + self.field + ".content",
-				"$limit" : 5,
 				"$sort" : {
 					"value" : -1
 				}
@@ -59,7 +57,7 @@ export default {
 					serie.push(i.value);
 				});
 				self.$set('data', { labels :labels, series : [serie] })
-				self.chart = new Chartist[this.type](
+				self.chart = new Chartist[self.type](
 						self.$el,
 						self.data,
 						self.options,

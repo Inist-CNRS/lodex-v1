@@ -215,7 +215,7 @@ body > div.container {
                         <div class="media-heading">
                           {% for name, col in doc._columns %}
                           {% if col.cover == 'collection' and col.scheme == 'http://purl.org/dc/terms/title' %}
-                          <a href="{{ doc._uri }}?alt=html"> {{ col.content.html }} </a>
+                          <a href="{{ doc._uri }}.html"> {{ col.content.html }} </a>
                           {% endif %}
                           {% endfor %}
                         </div>

@@ -12,6 +12,7 @@
 
 <script>
 import MQS from 'mongodb-querystring'
+import clone from 'clone'
 export default {
 	props: ['field', 'title'],
 	ready () {
@@ -27,7 +28,6 @@ export default {
 		reload(done) {
 			let self = this;
 			let qry = {
-				"draw" : Date.now(),
 				"field" : "_columns." + self.field + ".content",
 				"$limit" : 5,
 				"$sort" : {
@@ -40,7 +40,7 @@ export default {
 			.concat('/$distinct?')
 			.concat(MQS.stringify(qry, {}));
 			self.$http.get(url).then(function (response) {
-				self.items = response.data;
+				self.items = clone(response.data);
 			})
 		}
 	}
