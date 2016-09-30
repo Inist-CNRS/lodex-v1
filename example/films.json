@@ -1,7 +1,17 @@
 {
 	"defaultRootCollection": "data",
 	"collectionNameHotFolder": "data",
-	"title": "An example on films",
+	"print": {
+		"header" : {
+			"content" : "L'expérimentation __LODEX__ a pour ambition d'extraire de chaque document présent dans le fonds ISTEX un même type d'information pour créer des jeux de données représentatifs, normalisés et interopérables en respectant au maximun les normes du web sémantique."
+		},
+		"exports" : {
+			"introduction" : "Le jeu de données est disponible sur ce site selon une syntaxe `tableau`, avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD et N-Quads. Ils sont librement téléchargeable au travers de plusieurs formats&nbsp;x:"
+		},
+		"ontology" : {
+			"introduction" : ""
+		}
+	},
 	"datasetFields": {
 		"title1" : {
 			"label" : "Dataset title",
@@ -34,13 +44,13 @@
 			"format": "component",
 			"scheme": "https://...",
 			"content" : {
-				"histogram" : {
+				"chart" : {
 					"type" : "Line",
 					"field" :"year"
 				}
 			},
 			"displayAreas" : {
-				"insert" :true 
+				"insert" :true
 			}
 		},
 		"model1" : {
