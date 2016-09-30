@@ -96,9 +96,7 @@ body > div.container {
   <div class="container" style="margin-top:10px;">
     <div class="jumbotron alert  alert-info alert-dismissible fade in" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-      <p>
-      <img src="/assets/img/logo_lodex_200.png" height="20"> Sed viverra, nulla vitae egestas ornare, ante mauris varius turpis, quis efficitur mi nibh ut leo. Pellentesque sed ullamcorper massa. Nulla sed dignissim velit. Nunc non luctus mauris. Quisque in mi maximus, facilisis dolor in, condimentum diam. Duis hendrerit at nisi facilisis molestie. Integer lacus velit, porttitor scelerisque tellus sit amet, sollicitudin bibendum est. Aenean rutrum enim ut odio blandit laoreet. Maecenas ac faucibus massa, sollicitudin eleifend magna. Donec varius vulputate elit, nec fringilla mi malesuada eu.
-      </p>
+      {{ print.header.content|d('Missing `print.header.content` in your config file') }}
     </div>
   </div>
 
@@ -155,7 +153,6 @@ body > div.container {
                       </div>
                       <div class="lib-row lib-desc">
                         {{ col.help|d('no help.') }}
-                        Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -205,6 +202,7 @@ body > div.container {
 
           <div class="tab-content">
             <div class="tab-pane active" id="overview">
+              {{ print.overview.introduction|d('Missing `print.overview.introduction` in your config file') }}
               <div class="bs-example" data-example-id="media-alignment">
                 {% for doc in documents %}
                 <div class="panel panel-default">
@@ -234,15 +232,11 @@ body > div.container {
               </div>
             </div>
             <div class="tab-pane" id="tableau">
+              {{ print.tableau.introduction|d('Missing `print.tableau.introduction` in your config file') }}
               <tableau />
             </div>
             <div class="tab-pane" id="exports">
-              <p>
-              Le jeu de données est disponible sur ce site selon une syntaxe "tableau", avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD et N-Quads.
-              </p>
-              <p>
-              Ils sont librement téléchargeable au travers de plusieurs formats&nbsp;:
-              </p>
+              {{ print.exports.introduction|d('Missing `print.exports.introduction` in your config file') }}
               <ul class="list-unstyled">
                 <li>
                   <h3>XSLX</h3>
@@ -345,9 +339,7 @@ body > div.container {
               </section>
             </div>
             <div class="tab-pane" id="ontology">
-              <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vestibulum efficitur commodo. Fusce aliquam sem nibh, a feugiat turpis eleifend non. Vestibulum ut tincidunt nisi, vitae ullamcorper nulla. Fusce ultricies sodales mattis. Sed eu leo condimentum, rutrum risus vitae, porta ante. Morbi nec dui eget velit semper vestibulum. Pellentesque iaculis congue mi. Etiam dictum leo consequat metus facilisis, porta sollicitudin nibh gravida. Integer sit amet magna molestie, bibendum libero at, congue risus. Vivamus eget vehicula turpis. Suspendisse potenti. Pellentesque tempor bibendum malesuada. Vivamus et erat nunc.
-              </p>
+              {{ print.ontology.introduction|d('Missing `print.ontology.introduction` in your config file') }}
               <div>
                 {% for key, col in documents[0]._columns %}
                 <h4> {{ col.title }}</h4>
