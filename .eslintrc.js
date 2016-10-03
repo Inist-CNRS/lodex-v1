@@ -18,7 +18,7 @@ module.exports = {
             { "allowSingleLine": true }
         ],
         "callback-return": "error",
-        "camelcase": "error",
+        "camelcase": "warn",
         "comma-dangle": [
             "error",
             "only-multiline"
@@ -65,7 +65,7 @@ module.exports = {
             "error",
             "unix"
         ],
-        "lines-around-comment": "error",
+        "lines-around-comment": "off",
         "max-depth": "error",
         "max-len": ["error", { "code": 100, "tabWidth": 2, "ignoreUrls": true, "ignoreComments": true }],
         "max-nested-callbacks": "error",
@@ -93,7 +93,7 @@ module.exports = {
             "error",
             {"allow": ["info", "error"] }
         ],
-        "no-continue": "error",
+        "no-continue": "off",
         "no-div-regex": "error",
         "no-duplicate-imports": "error",
         "no-else-return": "error",

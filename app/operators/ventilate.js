@@ -27,7 +27,7 @@ module.exports.map = function () {
   fields.forEach(function (xp) {
     field = access(doc, xp);
     if (field !== undefined) {
-      emit(JSON.stringify([xp,field]), 1);
+      emit(JSON.stringify([xp, field]), 1);
     }
   }
 );

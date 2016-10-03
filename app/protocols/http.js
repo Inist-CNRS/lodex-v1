@@ -16,4 +16,4 @@ module.exports = function(options, core) {
       callback(error, body);
     });
   };
-}
+};

@@ -40,17 +40,17 @@ module.exports.reduce = function (key, values) {
     , i = 1
     ;
   for (; i < length; ++i) {
-		if (values[i] != null) {
-			for (name in values[i]) {
-				if (target === values[i][name]) {
-					continue;
-				}
-				if (values[i][name] !== undefined) {
-					target[name] = values[i][name];
-				}
-			}
-		}
-	}
+    if (values[i] != null) {
+      for (name in values[i]) {
+        if (target === values[i][name]) {
+          continue;
+        }
+        if (values[i][name] !== undefined) {
+          target[name] = values[i][name];
+        }
+      }
+    }
+  }
   return target;
 };
 
