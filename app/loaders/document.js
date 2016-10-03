@@ -2,7 +2,7 @@
 'use strict';
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , path = require('path')
+  , debug = require('debug')('lodex:loaders:' + basename)
   , JBJ = require('jbj')
   , objectPath = require('object-path')
   ;
@@ -22,14 +22,14 @@ module.exports = function(options) {
         // Remove all nosave documentFields
         if (options.stylesheet[field].nosave) {
           field = field.slice(1);
-          objectPath.del(res,field);
+          objectPath.del(res, field);
         }
         // Truncate all indexed documentFields
         else if (!options.stylesheet[field].noindex) {
           field = field.slice(1);
           var value = objectPath.get(res, field);
           if (field !== '_text' && typeof value === 'string') {
-            objectPath.set(res,field,value.slice(0,999));
+            objectPath.set(res, field, value.slice(0, 999));
           }
         }
       }

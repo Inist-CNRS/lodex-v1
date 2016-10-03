@@ -10,8 +10,8 @@ module.exports = function(options) {
   return function (input, submit) {
     var loc = URL.parse(input.location, true);
     var nid = randomInt(0, 9007199254740991);
-    input._wid = input.name || 't' + nid;
-    input._content = {
+    input['_wid'] = input.name || 't' + nid;
+    input['_content'] = {
       json : loc.query
     };
     submit(null, input);

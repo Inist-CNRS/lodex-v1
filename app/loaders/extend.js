@@ -6,5 +6,5 @@ module.exports = function(options) {
   return function (input, submit) {
     extend(input, options);
     submit(null, input);
-  }
-}
+  };
+};

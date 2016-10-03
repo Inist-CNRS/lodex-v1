@@ -25,7 +25,7 @@ module.exports = function(options) {
     var readable = input.openStream({
       encoding: options.encoding
     });
-    var seg = new Segmenter({ delimiter: "\n" });
+    var seg = new Segmenter({ delimiter: '\n' });
 
     var timeoutID;
     var qe;
@@ -37,17 +37,18 @@ module.exports = function(options) {
         if (qe.length() < concurrency) {
           canRead = true;
           resume();
-        } else {
+        }
+        else {
           pause(resume);
         }
       }, delay);
     };
 
     readable.on('data', function (chunk) {
-      var lines = seg.fetch(chunk)
+      var lines = seg.fetch(chunk);
 
       each(lines, function(line, next) {
-        ++numb;
+        numb += 1;
         var buf = new Buffer(line, 'base64');
         var doc = clone(input, false);
         doc.content = {};
@@ -63,12 +64,13 @@ module.exports = function(options) {
     readable.on('end', function() {
       if (numb > 0) {
         submit();
-      } else {
+      }
+      else {
         submit(new Error('No line detected !'));
       }
     });
     readable.on('error', function (e) {
       submit(e);
     });
-  }
-}
+  };
+};

@@ -10,10 +10,10 @@ var path = require('path')
 module.exports = function (options) {
   options = options || {};
   return function (req, res, next) {
-    var credentials = auth(req)
+    var credentials = auth(req);
     if (credentials && credentials.name === 'admin') {
       req.user = credentials;
     }
     next();
-  }
-}
+  };
+};
