@@ -48,9 +48,6 @@ Wherever the settings file is, it is a JSON file.
 
 - `connectionURI`: URI to connect to mongoDB (by default: `mongodb://localhost:27017/lodex`)
 - `port`: the port the web application will listen (default: `3000`)
-- `title`: title of the application (default: `Change title`)
-- `description`: description for the application (default: `Change description`)
-- `themeName`: identifier of the template/CSS theme used (default: `default, other possible: `istex`)
 - `baseURL`: base URL for the URIs (by default: `127.0.0.1`)
 - `access`: array of objects containing:
     + `login`
@@ -59,14 +56,8 @@ Wherever the settings file is, it is a JSON file.
 - `strategies`: TODO
 - ...
 
-## Use
 
-First copy `config.sample.js` into `config.local.js`, and put the file(s) to
-load in the `data` directory.
-
-As the backoffice no more works (after version 0.8.5), you have to configure the fields in the `config.local.js`.
-
-### fields
+#### fields
 
 - `datasetFields` describe the fields applying to all collections of the dataset
 - `collectionFields` describe the fields applying only to the collection (formerly called table)
@@ -77,13 +68,12 @@ Each field should contain:
 - `type`: the URI of an [XML Schema type](https://www.w3.org/TR/xmlschema-2/#built-in-primitive-datatypes) (string, boolean, decimal, float, double, duration, dateTime, time, date, ...)
 - `content<`: the JBJ stylesheet allowing to set the content of the field (from the raw document)
 
-### baseURL
+#### baseURL
 
 To generate non-local URI, you need to set the `baseURL` field in the `config.local.js`, which will replace the `http://127.0.0.1:3000` part of the URIs.
 
-### themeName
 
-The name of the theme used (see `views/themes`).
+### Example
 
 Example of minimal `config.local.js` (lacking `datasetFields` and
 `collectionFields` configuration):
@@ -92,9 +82,7 @@ Example of minimal `config.local.js` (lacking `datasetFields` and
 'use strict';
 module.exports =
 {
-  themeName : 'istex',
   baseURL: 'http://example.lod.istex.fr',
-  heartrate: 100,
   access: [
     {
       login: 'francois',
@@ -105,6 +93,8 @@ module.exports =
 };
 
 ```
+
+
 
 ## Contribute
 

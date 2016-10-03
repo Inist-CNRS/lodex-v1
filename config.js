@@ -138,7 +138,8 @@ module.exports = {
     "config.js",
     "echo.js",
     "auth.js",
-    "rest-crud.js"
+    "rest-crud.js",
+    "pages.js"
   ],
   filters: [
     "jbj-array",

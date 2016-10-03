@@ -1,5 +1,11 @@
-<h1>{{ message }}</h1>
-{% if error %}
-<h4> {{ name }}</h4>
-<pre>{{ error.stack.split('\n').slice(1).join('\n') }}</pre>
-{% endif %}
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="container" style="margin-top:10px;">
+	<h1>{{ message }}</h1>
+	{% if error %}
+	<h4> {{ name }}</h4>
+	<pre>{{ error.stack.split('\n').slice(1).join('\n') }}</pre>
+	{% endif %}
+</div>
+{% endblock %}
