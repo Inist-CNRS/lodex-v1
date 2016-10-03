@@ -135,7 +135,7 @@ module.exports = {
         "no-octal-escape": "error",
         "no-param-reassign": "off",
         "no-path-concat": "error",
-        "no-plusplus": "error",
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
         "no-process-env": "off",
         "no-process-exit": "off",
         "no-proto": "error",
