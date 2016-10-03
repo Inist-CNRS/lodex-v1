@@ -1,4 +1,5 @@
 {
+	"databaseName" : "films",
 	"defaultRootCollection": "data",
 	"collectionNameHotFolder": "data",
 	"print": {

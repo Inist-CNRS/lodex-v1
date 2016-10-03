@@ -3,7 +3,6 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('lodex:routes:' + basename)
-  , bodyParser = require('body-parser')
   ;
 
 module.exports = function(router) {
