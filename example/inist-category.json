@@ -1,0 +1,110 @@
+{
+  "defaultRootCollection": "data",
+  "collectionNameHotFolder": "data",
+  "uniqueIdentifierWith" : {
+    "get": "_content.json.Code",
+    "slug": true
+  },
+  "datasetFields": {
+    "isRoot": {
+      "label": "Is on main page",
+      "scheme": "https://schema.org/isAccessibleForFree",
+      "type": "https://www.w3.org/TR/xmlschema-2/#boolean",
+      "content": true
+    },
+    "title1": {
+      "label": "Title",
+      "scheme": "http://purl.org/dc/terms/title",
+      "type": "string",
+      "lang": "en",
+      "comment": "Always get a title - displayed in corpus/overview",
+      "content": "INIST categories"
+    },
+    "description1": {
+      "label": "Description",
+      "scheme": "http://purl.org/dc/terms/description",
+      "type": "string",
+      "lang": "fr",
+      "content": "Plan de classement de l'Inist-CNRS."
+    },
+    "date1": {
+      "label": "Updated",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "type": "date",
+      "format" : "LL",
+      "content<": {
+        "get": "_collection._dataset._updated"
+      }
+    },
+    "updated": {
+      "label": "Updated",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "type": "https://www.w3.org/TR/xmlschema-2/#date",
+      "content<": {
+        "get": "dateSynchronised"
+      }
+    }
+  },
+  "collectionFields": {
+    "title": {
+      "label": "Title",
+      "scheme": "http://purl.org/dc/terms/title",
+      "type": "string",
+      "lang": "en",
+      "content<": {
+        "get": ["_content.json.Verbalisation en anglais", "_content.json.Code"],
+        "first": true
+      },
+      "displayAreas": {
+        "table": true
+      }
+    },
+    "description": {
+      "label": "Description",
+      "scheme": "http://purl.org/dc/terms/description",
+      "type": "string",
+      "lang": "fr",
+      "content<": {
+        "get": "_content.json.Description"
+      },
+      "displayAreas": {
+        "table": true
+      }
+    },
+    "hasTopConcept": {
+      "label": "Has top concept",
+      "scheme": "http://www.w3.org/2004/02/skos/core#hasTopConcept",
+      "type": "string",
+      "content<": {
+        "get": "_content.json.Est tête d'arborescence"
+      },
+      "displayAreas": {
+        "table": true
+      }
+    },
+    "broader": {
+      "label": "Generic",
+      "scheme": "http://www.w3.org/2004/02/skos/core#broader",
+      "type": "string",
+      "content<": {
+        "get": "_content.json.Terme Générique"
+      },
+      "displayAreas": {
+        "table": true
+      }
+    },
+
+    "updated": {
+      "label": "Updated",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "type": "date",
+      "format": "LL",
+      "content<": {
+        "get": "dateSynchronised"
+      },
+      "displayAreas": {
+        "table": true
+      }
+    }
+  }
+}
