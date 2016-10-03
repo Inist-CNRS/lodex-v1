@@ -1,4 +1,3 @@
-/*jslint node:true */
 'use strict';
 
 
@@ -18,7 +17,8 @@ module.exports.map = function () {
     }
     return obj;
   }
-  var values, fields  = exp;
+  var values
+    , fields = exp;
   if (fields.length === 1) {
     values = access(doc, fields[0]);
     if (values !== undefined) {
@@ -63,7 +63,7 @@ module.exports.map = function () {
   // })
   .forEach(function(v, i) {
     values.slice(i + 1).forEach(function(w) {
-      emit(JSON.stringify([v,w]), 1);
+      emit(JSON.stringify([v, w]), 1);
     });
   });
 };
