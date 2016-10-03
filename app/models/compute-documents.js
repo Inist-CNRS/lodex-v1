@@ -3,7 +3,7 @@
 
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:models:' + basename)
+  , debug = require('debug')('lodex:models:' + basename)
   , JBJ = require('jbj')
   , mqs = require('mongodb-querystring')
   , sha1 = function(str) {

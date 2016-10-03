@@ -2,7 +2,7 @@
 'use strict';
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:compute:' + basename)
+  , debug = require('debug')('lodex:compute:' + basename)
   , assert = require('assert')
   , url = require('url')
   , querystring = require('querystring')

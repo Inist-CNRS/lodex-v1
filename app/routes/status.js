@@ -3,7 +3,7 @@
 
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:routes:' + basename)
+  , debug = require('debug')('lodex:routes:' + basename)
   ;
 
 module.exports = function(router, core) {

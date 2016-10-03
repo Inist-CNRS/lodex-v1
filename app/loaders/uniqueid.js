@@ -2,7 +2,7 @@
 'use strict';
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:loaders:' + basename)
+  , debug = require('debug')('lodex:loaders:' + basename)
   , path = require('path')
   , JBJ = require('jbj')
   ;

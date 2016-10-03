@@ -2,7 +2,7 @@
 
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:access:' + basename)
+  , debug = require('debug')('lodex:access:' + basename)
   ;
 
 module.exports = function(options) {

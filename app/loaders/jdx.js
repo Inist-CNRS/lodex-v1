@@ -3,7 +3,7 @@
 var clone = require('clone')
   , Segmenter = require('segmenter')
   , each = require('async-each')
-  , debug = require('debug')('castor:loaders:jdx')
+  , debug = require('debug')('lodex:loaders:jdx')
   ;
 
 module.exports = function(options) {

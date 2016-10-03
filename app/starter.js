@@ -1,7 +1,7 @@
 "use strict";
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:' + basename)
+  , debug = require('debug')('lodex:' + basename)
   , util = require('util')
   , minimist = require('minimist')
   , portfinder = require('portfinder')

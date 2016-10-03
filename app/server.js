@@ -3,7 +3,7 @@
 
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:' + basename)
+  , debug = require('debug')('lodex:' + basename)
   , fs = require('fs')
   , kuler = require('kuler')
   , mime = require('mime')

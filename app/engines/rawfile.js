@@ -2,7 +2,7 @@
 
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:engines:' + basename)
+  , debug = require('debug')('lodex:engines:' + basename)
   , fs = require('fs')
   ;
 

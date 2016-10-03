@@ -2,7 +2,7 @@
 "use strict";
 var path     = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug    = require('debug')('castor:' + basename)
+  , debug    = require('debug')('lodex:' + basename)
   , util     = require('util')
   , assert   = require('assert')
   , include  = require('../helpers/include.js')

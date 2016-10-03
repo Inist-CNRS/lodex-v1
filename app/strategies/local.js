@@ -1,7 +1,7 @@
 'use strict';
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:' + basename)
+  , debug = require('debug')('lodex:' + basename)
   , basename = path.basename(__filename, '.js')
   , sha1 = require('sha1')
   , Strategy = require('passport-local').Strategy

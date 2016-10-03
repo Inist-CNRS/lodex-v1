@@ -2,7 +2,7 @@
 
 var path = require('path');
 var basename = path.basename(__filename, '.js');
-var debug = require('debug')('castor:downloaders:' + basename);
+var debug = require('debug')('lodex:downloaders:' + basename);
 var htmlspecialchars = require('htmlspecialchars');
 var XMLMapping = require('xml-mapping');
 var moment = require('moment');

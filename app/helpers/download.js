@@ -2,7 +2,7 @@
 'use strict';
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('castor:download:' + basename)
+  , debug = require('debug')('lodex:download:' + basename)
   , assert = require('assert')
   , minimatch = require('minimatch')
   , es = require('event-stream')

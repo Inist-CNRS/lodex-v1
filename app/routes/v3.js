@@ -3,7 +3,7 @@
 
 var path = require('path');
 var basename = path.basename(__filename, '.js');
-var debug = require('debug')('castor:routes:' + basename);
+var debug = require('debug')('lodex:routes:' + basename);
 // var datamodel = require('datamodel');
 // var upload = require('./v3/upload.js');
 // var load = require('./v3/load.js');
