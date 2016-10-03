@@ -19,40 +19,43 @@ module.exports = function(router, core) {
   var rootKEY = core.config.get('rootKEY');
 
   function getPublicCollection(origin, cb) {
-    var collectionName = origin._wid + '_P_' + base(origin._rootSince.getTime() - 1451606400000, '0123456789ABCDEFEFGHIJKLMNOPQRSTUVWXYZ');
+    var collectionName = origin['_wid'] + '_P_' +
+      base(origin['_rootSince'].getTime() - 1451606400000,
+      '0123456789ABCDEFEFGHIJKLMNOPQRSTUVWXYZ');
     core.connect().then(function(db) {
       db.collection(collectionName).count().then(function(nbd) {
         if (nbd > 1) {
-          cb(null, collectionName);
+          return cb(null, collectionName);
         }
-        else {
-          var reqopt = {
-            internal : true,
-            body : {
-              url : 'http://127.0.0.1:' + core.config.get('port') + '/' + origin._wid + '/*.jdx'
-            }
+        var reqopt = {
+          internal : true,
+          body : {
+            url : 'http://127.0.0.1:' + core.config.get('port') + '/' + origin['_wid'] + '/*.jdx'
           }
-          core.agent.post('/' + collectionName, reqopt).then(function(reqout) {
-            return core.agent.get('/' + collectionName + "/$keys?field=_columns", {internal:true, json:true}).then(function(columns) {
-              var indexes = Object.keys(columns).map(function(k) {return columns[k]._id }).map(function(columnName) {
-                var idx = {}
-                idx.key = {};
-                idx.key['_columns.' + columnName + '.content'] = 1;
-                idx.background = true;
-                return idx;
-              });
-              db.collection(collectionName).createIndexes(indexes).then(function(r) {
-                debug(indexes.length + ' Indexes created');
-                return cb(null, collectionName);
-              }).catch(function(e) {
-                return debug('Fail to create indexes', e);
-              });
-              return db.close();
-            }).catch(cb);
-          }).catch(cb)
-        }
+        };
+        core.agent.post('/' + collectionName, reqopt).then(function(reqout) {
+          return core.agent.get('/' + collectionName + '/$keys?field=_columns',
+                                { internal:true, json:true })
+          .then(function(columns) {
+            var indexes = Object.keys(columns).map(function(k) { return columns[k]['_id']; })
+            .map(function(columnName) {
+              var idx = {};
+              idx.key = {};
+              idx.key['_columns.' + columnName + '.content'] = 1;
+              idx.background = true;
+              return idx;
+            });
+            db.collection(collectionName).createIndexes(indexes).then(function(r) {
+              debug(indexes.length + ' Indexes created');
+              return cb(null, collectionName);
+            }).catch(function(e) {
+              return debug('Fail to create indexes', e);
+            });
+            return db.close();
+          }).catch(cb);
+        }).catch(cb);
       }).catch(cb);
-    }).catch(cb)
+    }).catch(cb);
   }
 
   function getMasterCollection(cb) {
