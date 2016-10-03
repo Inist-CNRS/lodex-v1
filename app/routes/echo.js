@@ -14,4 +14,4 @@ module.exports = function(router) {
     res.send(mqs.parse(req.query));
   });
 
-}
+};

@@ -155,7 +155,9 @@
           // console.log('item', item);
           viewList.set('items', items);
           if (first) {
-            // viewColumn.set('sampleURL', encodeURIComponent(window.location.href.replace(/\/+$/,'').concat('/').concat(item._wid).concat('/*?alt=raw&firstOnly=1')));
+            // viewColumn.set('sampleURL',
+            //   encodeURIComponent(window.location.href.replace(/\/+$/,'')
+            //   .concat('/').concat(item._wid).concat('/*?alt=raw&firstOnly=1')));
             viewColumn.set('sampleURL',
               window.location.href.replace(/\/+$/, '')
               .concat('/').concat(item._wid).concat('/*?alt=raw&firstOnly=1'));
@@ -327,7 +329,7 @@
           },
           processResults: function(data, params) {
             params.page = params.page || 1;
-            // @see http://stackoverflow.com/questions/29035717/select2-load-data-using-ajax-cannot-select-any-option/29082217#29082217
+            // http://stackoverflow.com/questions/29035717/select2-load-data-using-ajax-cannot-select-any-option/29082217#29082217
             var select2Data = $.map(data.results, function(obj) {
               obj.id = Array.isArray(obj.uri) ? obj.uri.pop() : '?';
               obj.text = obj.prefixedName;
@@ -749,7 +751,7 @@
         viewColumn.set('name', column);
 
         viewColumn.set('pscheme', items[0]._columns[column].scheme);
-        // @see https://stackoverflow.com/questions/30316586/select2-4-0-0-initial-value-with-ajax/30328989#30328989
+        // https://stackoverflow.com/questions/30316586/select2-4-0-0-initial-value-with-ajax/30328989#30328989
         var option = $('<option selected></option>').val(items[0]._columns[column].scheme)
                      .text(items[0]._columns[column].scheme);
         $('#modal-editcolumn-input-scheme').append(option).trigger('change');

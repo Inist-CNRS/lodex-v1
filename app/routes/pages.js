@@ -15,7 +15,7 @@ module.exports = function(router, core) {
   .get(function(req, res, next) {
     var locals = {
       print : core.config.get('print')
-    }
+    };
     res.render('cookies.html', locals);
   });
 
@@ -24,7 +24,7 @@ module.exports = function(router, core) {
   .get(function(req, res, next) {
     var locals = {
       print : core.config.get('print')
-    }
+    };
     res.render('mention.html', locals);
   });
 
@@ -33,7 +33,7 @@ module.exports = function(router, core) {
   .get(function(req, res, next) {
     var locals = {
       print : core.config.get('print')
-    }
+    };
     res.render('about.html', locals);
   });
 

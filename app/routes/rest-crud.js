@@ -4,7 +4,6 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('lodex:routes:' + basename)
-  , datamodel = require('datamodel')
   , bodyParser = require('body-parser')
   , URL = require('url')
   , cors = require('cors')
@@ -44,25 +43,26 @@ module.exports = function(router, core) {
   router.route(prefixURL + '/:resourceName')
   .all(cors())
   .post(bodyParser.json()) // for this.$http.post (vue-resource)
-  .post(bodyParser.urlencoded({ extended: true})) // for $.ajax (jquery)
+  .post(bodyParser.urlencoded({ extended: true })) // for $.ajax (jquery)
   .post(function(req, res, next) {
     if (req.routeParams.resourceName === undefined) {
       return next();
     }
     debug('post /:resourceName', req.routeParams);
-    var collectionName = req.routeParams.resourceName === core.config.get('collectionNameIndex') ? core.config.get('collectionNameIndex') : req.routeParams.resourceName;
+    var collectionName = req.routeParams.resourceName === core.config.get('collectionNameIndex')
+                       ? core.config.get('collectionNameIndex') : req.routeParams.resourceName;
     var loaderOptions =  {
-      "collectionName" : collectionName,
-      "connexionURI" : core.config.get('connectionURI'),
-      "concurrency" : core.config.get('concurrency'),
-      "delay" : core.config.get('delay'),
-      "maxFileSize" : core.config.get('maxFileSize'),
-      "writeConcern" : core.config.get('writeConcern'),
-      "ignore" : core.config.get('filesToIgnore'),
-      "watch" : false
+      collectionName : collectionName,
+      connexionURI : core.config.get('connectionURI'),
+      concurrency : core.config.get('concurrency'),
+      delay : core.config.get('delay'),
+      maxFileSize : core.config.get('maxFileSize'),
+      writeConcern : core.config.get('writeConcern'),
+      ignore : core.config.get('filesToIgnore'),
+      watch : false
     };
     var sharedFields = {
-      baseURL : String(core.config.get('baseURL')).replace(/\/+$/,'')
+      baseURL : String(core.config.get('baseURL')).replace(/\/+$/, '')
     };
     var inputName = URL.parse(req.body.url);
     if (inputName.protocol === 'file:') {
@@ -82,19 +82,19 @@ module.exports = function(router, core) {
     });
     ldr.submit(inputName, function(err, docs) {
       var doc = Array.isArray(docs) ? docs[0] : docs;
-      console.dir(docs);
+      // console.dir(docs);
       if (err) {
         return next(err);
       }
       var qry = {
-        "$query" : {
-          "fid" : doc.fid
+        $query : {
+          fid : doc.fid
         }
-      }
+      };
       var url = '/' + req.routeParams.resourceName + '/*?' + mqs.stringify(qry, {});
       res.location(url);
       res.sendStatus(201);
-    })
+    });
   });
 
 
@@ -103,13 +103,14 @@ module.exports = function(router, core) {
   //
   router.route(prefixURL + '/:resourceName/:documentName')
   .all(cors())
-  .post(bodyParser.text({type: "*/*"}))
+  .post(bodyParser.text({ type: '*/*' }))
   .post(function(req, res, next) {
     if (req.routeParams.resourceName === undefined || req.routeParams.documentName === undefined) {
       return next();
     }
     debug('post /:resourceName/:documentName', req.routeParams);
-    var collectionName = req.routeParams.resourceName === core.config.get('collectionNameIndex') ? core.config.get('collectionNameIndex') : req.routeParams.resourceName;
+    var collectionName = req.routeParams.resourceName === core.config.get('collectionNameIndex')
+                       ? core.config.get('collectionNameIndex') : req.routeParams.resourceName;
     debug('req.body', req.body);
     var mongoOperation = mqs.parse(req.body);
     // TODO :
@@ -117,7 +118,7 @@ module.exports = function(router, core) {
     // Ajouter l'opération pour tracer celui qui a fait la modification
     var mongoQuery = {
       _wid : req.routeParams.documentName
-    }
+    };
 
     core.connect().then(function(mongoDatabaseHandle) {
       function error(err) {
@@ -132,21 +133,29 @@ module.exports = function(router, core) {
           return error(new core.Errors.TableNotFound('The table does not exist.'));
         }
         debug('Original', original);
-        mongoDatabaseHandle.collection(collectionName).updateOne(mongoQuery, mongoOperation).then(function(r1) {
+        mongoDatabaseHandle
+        .collection(collectionName)
+        .updateOne(mongoQuery, mongoOperation)
+        .then(function(r1) {
           debug('Result 1', r1.result);
-          mongoDatabaseHandle.collection(collectionName).findOne(mongoQuery).then(function(modified) {
+          mongoDatabaseHandle
+          .collection(collectionName)
+          .findOne(mongoQuery)
+          // I think we could return the result of findOne, and put .then()
+          // after the first then -> less nesting
+          .then(function(modified) {
             debug('Modified', modified);
             var patch = jsonpatch.compare(original, modified);
             debug('Patch', patch);
             mongoDatabaseHandle.collection(collectionName).updateOne(mongoQuery, {
               $push : {
-                '_patches' : patch
+                _patches : patch
               }
             }).then(function(r2) {
               debug('Result 2', r2.result);
               mongoDatabaseHandle.close();
               res.sendStatus(204);
-            }).catch(error)
+            }).catch(error);
           }).catch(error);
         }).catch(error);
       }).catch(error);

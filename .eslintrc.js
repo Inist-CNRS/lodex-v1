@@ -67,7 +67,7 @@ module.exports = {
         ],
         "lines-around-comment": "error",
         "max-depth": "error",
-        "max-len": ["error", { "code": 100, "tabWidth": 2, "ignoreUrls": true }],
+        "max-len": ["error", { "code": 100, "tabWidth": 2, "ignoreUrls": true, "ignoreComments": true }],
         "max-nested-callbacks": "error",
         "max-params": [
             "error",
@@ -177,7 +177,7 @@ module.exports = {
         "no-useless-rename": "error",
         "no-var": "off",
         "no-void": "error",
-        "no-warning-comments": "error",
+        "no-warning-comments": "warn",
         "no-whitespace-before-property": "error",
         "no-with": "error",
         "object-curly-spacing": [

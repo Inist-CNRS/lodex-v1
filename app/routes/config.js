@@ -1,4 +1,3 @@
-/*jshint node:true,laxcomma:true*/
 'use strict';
 
 var path = require('path')
@@ -11,8 +10,8 @@ module.exports = function(router) {
 
   router.route('/-/config.json')
   .get(function (req, res) {
-      res.set('Content-Type', 'text/javascript');
-      res.jsonp(req.config.expose());
+    res.set('Content-Type', 'text/javascript');
+    res.jsonp(req.config.expose());
   });
 
-}
+};

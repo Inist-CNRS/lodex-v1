@@ -4,7 +4,6 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('lodex:routes:' + basename)
-  , crypto = require('crypto')
   , bodyParser = require('body-parser')
   , url = require('url')
   ;
@@ -12,41 +11,36 @@ var path = require('path')
 
 module.exports = function(router, core) {
 
-  var config = core.config;
   var passport = core.passport;
 
   router.route('/-/login')
-  .post(bodyParser.urlencoded({ extended: true}))
+  .post(bodyParser.urlencoded({ extended: true }))
   .post(function (req, res, next) {
-      debug('req.body', req.body);
-      next();
+    debug('req.body', req.body);
+    next();
   })
-  .post( passport.authenticate('local', { failureRedirect: '/-/login' }),
+  .post(passport.authenticate('local', { failureRedirect: '/-/login' }),
   function(req, res) {
     if (req.body && req.body.url) {
-       var to = url.parse(req.body.url)
-       delete to['port']
-       delete to['host']
-       delete to['hostname']
-       delete to['slashes']
-       delete to['protocol']
-    debug('req.to', to);
+      var to = url.parse(req.body.url);
+      delete to['port'];
+      delete to['host'];
+      delete to['hostname'];
+      delete to['slashes'];
+      delete to['protocol'];
+      debug('req.to', to);
       res.redirect(url.format(to));
     }
     else {
-      res.redirect('/')
+      res.redirect('/');
     }
   });
 
 
   router.route('/-/logout')
   .get(function (req, res) {
-      req.logout();
-      res.redirect('/');
+    req.logout();
+    res.redirect('/');
   });
 
-}
-
-
-
-
+};

@@ -62,28 +62,24 @@ module.exports = function(router, core) {
     core.connect().then(function(db) {
       db.collection(core.config.get('collectionNameIndex'), function(err, coll) {
         if (err) {
-          cb(err)
+          return cb(err);
         }
-        else {
-          coll.find()
-          .sort({'_rootSince': -1})
-          .limit(1)
-          .toArray()
-          .then(function(docs) {
-            db.close();
-            if (docs === null) {
-              cb(new core.Errors.TableNotFound('The root table does not exist.'));
-            }
-            else {
-              debug('Root table is', docs[0]._wid, 'with', docs[0]._rootSince);
-              getPublicCollection(docs[0], cb)
-            }
-          })
-          .catch(function(e) {
-            db.close();
-            cb(e);
-          });
-        }
+        coll.find()
+        .sort({ _rootSince: -1 })
+        .limit(1)
+        .toArray()
+        .then(function(docs) {
+          db.close();
+          if (docs === null) {
+            return cb(new core.Errors.TableNotFound('The root table does not exist.'));
+          }
+          debug('Root table is', docs[0]['_wid'], 'with', docs[0]['_rootSince']);
+          getPublicCollection(docs[0], cb);
+        })
+        .catch(function(e) {
+          db.close();
+          cb(e);
+        });
       });
     }).catch(cb);
   }
@@ -106,8 +102,8 @@ module.exports = function(router, core) {
         req.routeParams.operator = core.computer.operator(value);
         req.routeParams.operatorName = value;
       }
-      catch(e) {
-        next();
+      catch (e) {
+        return next();
       }
     }
     next();
@@ -165,15 +161,15 @@ module.exports = function(router, core) {
   // table "root" & his rows
   //
   //
-  router.route(prefixURL + '/' + rootKEY +'.:format')
+  router.route(prefixURL + '/' + rootKEY + '.:format')
   .get(function(req, res, next) {
     req.url = req.url.replace(rootKEY + '.' + req.routeParams.format, '*');
     req.query.alt = req.routeParams.format;
-    if (req._parsedOriginalUrl.query) {
-      req._parsedOriginalUrl.query += '&alt='+req.routeParams.format;
+    if (req['_parsedOriginalUrl'].query) {
+      req['_parsedOriginalUrl'].query += '&alt=' + req.routeParams.format;
     }
     else {
-      req._parsedOriginalUrl.query = 'alt='+req.routeParams.format;
+      req['_parsedOriginalUrl'].query = 'alt=' + req.routeParams.format;
     }
     next();
   });
@@ -183,10 +179,10 @@ module.exports = function(router, core) {
     if (req.routeParams.star === undefined) {
       return next();
     }
-    debug('get '+ '/:star', req.routeParams, req.query);
+    debug('get ', '/:star', req.routeParams, req.query);
     req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
     if (req.query.alt === 'html' && !req.query['%24limit']) {
-      req._parsedOriginalUrl.query += '&%24limit='.concat(core.config.get('itemsPerPage'));
+      req['_parsedOriginalUrl'].query += '&%24limit='.concat(core.config.get('itemsPerPage'));
     }
     getMasterCollection(function(err, collID) {
       if (err) {
@@ -195,299 +191,308 @@ module.exports = function(router, core) {
       recall({
         port: req.config.get('port'),
         pathname: '/' + collID + '/*',
-        search: req._parsedOriginalUrl.query,  // Don't use req.query because querystring cannot parse array like qs
+        // Don't use req.query because querystring cannot parse array like qs
+        search: req['_parsedOriginalUrl'].query,
       })(res, next);
-      });
     });
+  });
 
 
 
 
 
-    //
-    // table "root" & the default operator
-    //
-    router.route(prefixURL + '/:dollar')
-    .get(function(req, res, next) {
-      if (req.routeParams.dollar === undefined) {
-        return next();
+  //
+  // table "root" & the default operator
+  //
+  router.route(prefixURL + '/:dollar')
+  .get(function(req, res, next) {
+    if (req.routeParams.dollar === undefined) {
+      return next();
+    }
+    debug('get ', '/:dollar', req.routeParams);
+    req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
+    getMasterCollection(function(err, collID) {
+      if (err) {
+        return next(err);
       }
-      debug('get '+ '/:dollar', req.routeParams);
-      req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
-      getMasterCollection(function(err, collID) {
-        if (err) {
-          return next(err);
-        }
-        recall({
-          port: req.config.get('port'),
-          pathname: '/' + collID + '/$',
-          search: req._parsedOriginalUrl.query,  // Don't use req.query because querystring cannot parse array like qs
-        })(res, next);
-        });
-      });
+      recall({
+        port: req.config.get('port'),
+        pathname: '/' + collID + '/$',
+        // Don't use req.query because querystring cannot parse array like qs
+        search: req['_parsedOriginalUrl'].query,
+      })(res, next);
+    });
+  });
 
 
 
 
-      //
-      // table "root" & the operator
-      //
-      router.route(prefixURL + '/:dollar:operator')
-      .get(function(req, res, next) {
-        if (req.routeParams.dollar === undefined || req.routeParams.operator === undefined) {
-          return next();
-        }
-        debug('get '+ '/:dollar:operator', req.routeParams);
-        req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
-        getMasterCollection(function(err, collID) {
-          if (err) {
-            return next(err);
-          }
-          recall({
-            port: req.config.get('port'),
-            pathname: '/' + collID + '/$' + req.routeParams.operatorName,
-            search: req._parsedOriginalUrl.query,  // Don't use req.query because querystring cannot parse array like qs
-          })(res, next);
-          });
-        });
+  //
+  // table "root" & the operator
+  //
+  router.route(prefixURL + '/:dollar:operator')
+  .get(function(req, res, next) {
+    if (req.routeParams.dollar === undefined || req.routeParams.operator === undefined) {
+      return next();
+    }
+    debug('get ', '/:dollar:operator', req.routeParams);
+    req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
+    getMasterCollection(function(err, collID) {
+      if (err) {
+        return next(err);
+      }
+      recall({
+        port: req.config.get('port'),
+        pathname: '/' + collID + '/$' + req.routeParams.operatorName,
+        // Don't use req.query because querystring cannot parse array like qs
+        search: req['_parsedOriginalUrl'].query,
+      })(res, next);
+    });
+  });
 
 
 
 
 
-        //
-        // row of table "root"
-        //
-        router.route(prefixURL + '/' + prefixKEY + '/:documentName.:format')
-        .get(function(req, res, next) {
-          req.url = req.url.replace('.' + req.routeParams.format, '');
-          req.query.alt = req.routeParams.format;
-          if (req._parsedOriginalUrl.query) {
-            req._parsedOriginalUrl.query += '&alt='+req.routeParams.format;
-          }
-          else {
-            req._parsedOriginalUrl.query = 'alt='+req.routeParams.format;
-          }
-          next();
-        });
+  //
+  // row of table "root"
+  //
+  router.route(prefixURL + '/' + prefixKEY + '/:documentName.:format')
+  .get(function(req, res, next) {
+    req.url = req.url.replace('.' + req.routeParams.format, '');
+    req.query.alt = req.routeParams.format;
+    if (req['_parsedOriginalUrl'].query) {
+      req['_parsedOriginalUrl'].query += '&alt=' + req.routeParams.format;
+    }
+    else {
+      req['_parsedOriginalUrl'].query = 'alt=' + req.routeParams.format;
+    }
+    next();
+  });
 
 
 
-        router.route(prefixURL + '/' + prefixKEY + '/:documentName')
-        .all(cors())
-        .get(function(req, res, next) {
-          if (req.routeParams.documentName === undefined) {
-            return next();
-          }
-          debug('get '+ '/' + prefixKEY + '/:documentName', req.routeParams);
-          req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
-          getMasterCollection(function(err, collID) {
-            if (err) {
-              return next(err);
-            }
-            recall({
-              port: req.config.get('port'),
-              pathname: '/' + collID + '/' + req.routeParams.documentName + '/*',
-              search: req._parsedOriginalUrl.query,  // Don't use req.query because querystring cannot parse array like qs
-            })(res, next);
-            })
-          });
-
-
-
-
-          //
-          // row of table "root"
-          //
-          router.route(prefixURL + '/' + prefixKEY + '/:documentName/:star')
-          .all(cors())
-          .get(function(req, res, next) {
-            if (req.routeParams.documentName === undefined) {
-              return next();
-            }
-            debug('get '+ '/' + prefixKEY + '/:documentName', req.routeParams);
-            req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
-            getMasterCollection(function(err, collID) {
-              if (err) {
-                return next(err);
-              }
-              recall({
-                port: req.config.get('port'),
-                pathname: '/' + collID + '/' + req.routeParams.documentName + '/*',
-                query: req.query
-              })(res, next);
-            })
-          });
+  router.route(prefixURL + '/' + prefixKEY + '/:documentName')
+  .all(cors())
+  .get(function(req, res, next) {
+    if (req.routeParams.documentName === undefined) {
+      return next();
+    }
+    debug('get ', '/' + prefixKEY + '/:documentName', req.routeParams);
+    req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
+    getMasterCollection(function(err, collID) {
+      if (err) {
+        return next(err);
+      }
+      recall({
+        port: req.config.get('port'),
+        pathname: '/' + collID + '/' + req.routeParams.documentName + '/*',
+        // Don't use req.query because querystring cannot parse array like qs
+        search: req['_parsedOriginalUrl'].query,
+      })(res, next);
+    });
+  });
 
 
 
 
-          //
-          // REST API : rows of table
-          //
-          router.route(prefixURL + '/:resourceName/:star.:format')
-          .get(function(req, res, next) {
-            req.url = req.url.replace('*.' + req.routeParams.format, '*');
-            req.query.alt = req.routeParams.format;
-            if (req._parsedOriginalUrl.query) {
-              req._parsedOriginalUrl.query += '&alt='+req.routeParams.format;
-            }
-            else {
-              req._parsedOriginalUrl.query = 'alt='+req.routeParams.format;
-            }
-            next();
-          });
-
-
-          router.route(prefixURL + '/:resourceName/:star')
-          .all(cors())
-          .get(function(req, res, next) {
-            if (req.routeParams.resourceName === undefined || req.routeParams.star === undefined) {
-              return next();
-            }
-            debug('get /:resourceName/:star', req.routeParams);
-            req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
-            if (core.config.get('allowedAltValues').indexOf(req.query.alt) === -1) {
-              return res.status(400).send('Bad Request').end();
-            }
-
-            datamodel([core.models.mongo, core.models.getCollection, core.models.getDocuments])
-            .apply(req)
-            .then(function(locals) {
-              var cursor = locals.mongoCursor;
-              var params = {
-                firstOnly : req.query.fo || req.query.firstOnly || false,
-                resourceName : req.routeParams.resourceName,
-                documentName : req.routeParams.documentName,
-                collection : locals.collection
-              }
-              core.downloader.over(req.query.alt, params).apply(cursor, res, next);
-            })
-            .catch(next);
-          });
+  //
+  // row of table "root"
+  //
+  router.route(prefixURL + '/' + prefixKEY + '/:documentName/:star')
+  .all(cors())
+  .get(function(req, res, next) {
+    if (req.routeParams.documentName === undefined) {
+      return next();
+    }
+    debug('get ', '/' + prefixKEY + '/:documentName', req.routeParams);
+    req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
+    getMasterCollection(function(err, collID) {
+      if (err) {
+        return next(err);
+      }
+      recall({
+        port: req.config.get('port'),
+        pathname: '/' + collID + '/' + req.routeParams.documentName + '/*',
+        query: req.query
+      })(res, next);
+    });
+  });
 
 
 
 
-          //
-          // REST API : fields of row
-          //
-          router.route(prefixURL + '/:resourceName/:documentName/:star')
-          .all(cors())
-          .get(function(req, res, next) {
-            if (req.routeParams.resourceName === undefined || req.routeParams.documentName === undefined || req.routeParams.star === undefined) {
-              return next();
-            }
-            debug('get /:resourceName/:documentName/:star', req.routeParams);
-            req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
-            if (core.config.get('allowedAltValues').indexOf(req.query.alt) === -1) {
-              return res.status(400).send('Bad Request').end();
-            }
-            var collectionName = req.routeParams.resourceName === core.config.get('collectionNameIndex') ? core.config.get('collectionNameIndex') : req.routeParams.resourceName;
-            var mongoDatabaseHandle = core.connect();
-            var mongoQuery = {
-              _wid : req.routeParams.documentName,
-              state :  {
-                $nin: [ "deleted", "hidden" ]
-              }
-            }
-
-            function error(err) {
-              if (mongoDatabaseHandle) {
-                mongoDatabaseHandle.close();
-              }
-              next(err);
-            }
+  //
+  // REST API : rows of table
+  //
+  router.route(prefixURL + '/:resourceName/:star.:format')
+  .get(function(req, res, next) {
+    req.url = req.url.replace('*.' + req.routeParams.format, '*');
+    req.query.alt = req.routeParams.format;
+    if (req['_parsedOriginalUrl'].query) {
+      req['_parsedOriginalUrl'].query += '&alt=' + req.routeParams.format;
+    }
+    else {
+      req['_parsedOriginalUrl'].query = 'alt=' + req.routeParams.format;
+    }
+    next();
+  });
 
 
-            datamodel([core.models.mongo, core.models.getCollection, core.models.getDocument])
-            .apply(req)
-            .then(function(locals) {
-              var cursor = locals.mongoCursor;
-              var params = {
-                firstOnly : req.query.fo || req.query.firstOnly || false,
-                resourceName : req.routeParams.resourceName,
-                documentName : req.routeParams.documentName,
-                collection : locals.collection
-              }
-              core.downloader.over(req.query.alt, params).apply(cursor, res, next);
-            })
-            .catch(next);
-          });
+  router.route(prefixURL + '/:resourceName/:star')
+  .all(cors())
+  .get(function(req, res, next) {
+    if (req.routeParams.resourceName === undefined || req.routeParams.star === undefined) {
+      return next();
+    }
+    debug('get /:resourceName/:star', req.routeParams);
+    req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
+    if (core.config.get('allowedAltValues').indexOf(req.query.alt) === -1) {
+      return res.status(400).send('Bad Request').end();
+    }
+
+    datamodel([core.models.mongo, core.models.getCollection, core.models.getDocuments])
+    .apply(req)
+    .then(function(locals) {
+      var cursor = locals.mongoCursor;
+      var params = {
+        firstOnly : req.query.fo || req.query.firstOnly || false,
+        resourceName : req.routeParams.resourceName,
+        documentName : req.routeParams.documentName,
+        collection : locals.collection
+      };
+      core.downloader.over(req.query.alt, params).apply(cursor, res, next);
+    })
+    .catch(next);
+  });
 
 
 
 
-          //
-          // REST API : default computation of table
-          //
-          router.route(prefixURL + '/:resourceName/:dollar')
+  //
+  // REST API : fields of row
+  //
+  router.route(prefixURL + '/:resourceName/:documentName/:star')
+  .all(cors())
+  .get(function(req, res, next) {
+    if (req.routeParams.resourceName === undefined ||
+        req.routeParams.documentName === undefined ||
+        req.routeParams.star === undefined) {
+      return next();
+    }
+    debug('get /:resourceName/:documentName/:star', req.routeParams);
+    req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
+    if (core.config.get('allowedAltValues').indexOf(req.query.alt) === -1) {
+      return res.status(400).send('Bad Request').end();
+    }
+    var collectionName = req.routeParams.resourceName === core.config.get('collectionNameIndex')
+                         ? core.config.get('collectionNameIndex') : req.routeParams.resourceName;
+    var mongoDatabaseHandle = core.connect();
+    var mongoQuery = {
+      _wid : req.routeParams.documentName,
+      state :  {
+        $nin: [ 'deleted', 'hidden' ]
+      }
+    };
 
-          .all(cors())
-          .get(function(req, res, next) {
-            if (req.routeParams.resourceName === undefined || req.routeParams.dollar === undefined) {
-              return next();
-            }
-            debug('get /:resourceName/:dollar', req.routeParams);
-            req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
-            if (core.config.get('allowedAltValues').indexOf(req.query.alt) === -1) {
-              return res.status(400).send('Bad Request').end();
-            }
-            req.query.$query = {
-              _wid : req.routeParams.resourceName
-            }
-            req.query.field = '_label';
-            req.routeParams.resourceName = 'index';
-            req.routeParams.operator = core.computer.operator('labelize');
-            datamodel([core.models.mongo, core.models.computeDocuments])
-            .apply(req)
-            .then(function(locals) {
-              var cursor = locals.mongoCursor;
-              var params = {
-                firstOnly : req.query.fo || req.query.firstOnly || false,
-                resourceName : req.routeParams.resourceName,
-                documentName : req.routeParams.documentName,
-                index : locals.table
-              }
-              core.downloader.over(req.query.alt, params).apply(cursor, res, next);
-            })
-            .catch(next);
-          });
+    function error(err) {
+      if (mongoDatabaseHandle) {
+        mongoDatabaseHandle.close();
+      }
+      next(err);
+    }
 
 
-
-
-          //
-          // REST API : computation of table
-          //
-          router.route(prefixURL + '/:resourceName/:dollar:operator')
-
-          .all(cors())
-          .get(function(req, res, next) {
-            if (req.routeParams.resourceName === undefined || req.routeParams.dollar === undefined || req.routeParams.operator === undefined) {
-              return next();
-            }
-            debug('get /:resourceName/:dollar:operator', req.routeParams);
-            req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
-            if (core.config.get('allowedAltValues').indexOf(req.query.alt) === -1) {
-              return res.status(400).send('Bad Request').end();
-            }
-            datamodel([core.models.mongo, core.models.computeDocuments])
-            .apply(req)
-            .then(function(locals) {
-              var cursor = locals.mongoCursor;
-              var params = {
-                firstOnly : req.query.fo || req.query.firstOnly || false,
-                resourceName : req.routeParams.resourceName,
-                documentName : req.routeParams.documentName,
-                index : locals.table
-              }
-              core.downloader.over(req.query.alt, params).apply(cursor, res, next);
-            })
-            .catch(next);
-          });
+    datamodel([core.models.mongo, core.models.getCollection, core.models.getDocument])
+    .apply(req)
+    .then(function(locals) {
+      var cursor = locals.mongoCursor;
+      var params = {
+        firstOnly : req.query.fo || req.query.firstOnly || false,
+        resourceName : req.routeParams.resourceName,
+        documentName : req.routeParams.documentName,
+        collection : locals.collection
+      };
+      core.downloader.over(req.query.alt, params).apply(cursor, res, next);
+    })
+    .catch(next);
+  });
 
 
 
-          return router;
-        };
+
+  //
+  // REST API : default computation of table
+  //
+  router.route(prefixURL + '/:resourceName/:dollar')
+
+  .all(cors())
+  .get(function(req, res, next) {
+    if (req.routeParams.resourceName === undefined || req.routeParams.dollar === undefined) {
+      return next();
+    }
+    debug('get /:resourceName/:dollar', req.routeParams);
+    req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
+    if (core.config.get('allowedAltValues').indexOf(req.query.alt) === -1) {
+      return res.status(400).send('Bad Request').end();
+    }
+    req.query.$query = {
+      _wid : req.routeParams.resourceName
+    };
+    req.query.field = '_label';
+    req.routeParams.resourceName = 'index';
+    req.routeParams.operator = core.computer.operator('labelize');
+    datamodel([core.models.mongo, core.models.computeDocuments])
+    .apply(req)
+    .then(function(locals) {
+      var cursor = locals.mongoCursor;
+      var params = {
+        firstOnly : req.query.fo || req.query.firstOnly || false,
+        resourceName : req.routeParams.resourceName,
+        documentName : req.routeParams.documentName,
+        index : locals.table
+      };
+      core.downloader.over(req.query.alt, params).apply(cursor, res, next);
+    })
+    .catch(next);
+  });
+
+
+
+
+  //
+  // REST API : computation of table
+  //
+  router.route(prefixURL + '/:resourceName/:dollar:operator')
+
+  .all(cors())
+  .get(function(req, res, next) {
+    if (req.routeParams.resourceName === undefined ||
+        req.routeParams.dollar === undefined ||
+        req.routeParams.operator === undefined) {
+      return next();
+    }
+    debug('get /:resourceName/:dollar:operator', req.routeParams);
+    req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
+    if (core.config.get('allowedAltValues').indexOf(req.query.alt) === -1) {
+      return res.status(400).send('Bad Request').end();
+    }
+    datamodel([core.models.mongo, core.models.computeDocuments])
+    .apply(req)
+    .then(function(locals) {
+      var cursor = locals.mongoCursor;
+      var params = {
+        firstOnly : req.query.fo || req.query.firstOnly || false,
+        resourceName : req.routeParams.resourceName,
+        documentName : req.routeParams.documentName,
+        index : locals.table
+      };
+      core.downloader.over(req.query.alt, params).apply(cursor, res, next);
+    })
+    .catch(next);
+  });
+
+
+
+  return router;
+};
