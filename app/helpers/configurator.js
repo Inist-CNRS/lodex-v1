@@ -1,12 +1,14 @@
 /*jshint node:true,laxcomma:true*/
 'use strict';
-
-var path   = require('path')
+var path = require('path')
+  , basename = path.basename(__filename, '.js')
+  , debug = require('debug')('lodex:helpers:' + basename)
   , extend = require('extend')
   , objectPath = require("object-path")
   , clone = require('clone')
   , fs = require('fs')
   ;
+
 function Configurator() {
 
   if (!(this instanceof Configurator)) {

@@ -3,14 +3,14 @@
 
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('lodex:' + basename)
+  , debug = require('debug')('lodex:helpers:' + basename)
   , util = require('util')
   , assert = require('assert')
   , Errors = require('../helpers/errors.js')
   ;
 
 module.exports = function(basedirs, modname, req) {
-  debug(basedirs, modname);
+  //debug('Paths to search', modname, basedirs);
   req = req === false ? false : true;
   if (modname === undefined) {
     modname = basedirs;

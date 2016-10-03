@@ -6,13 +6,16 @@ LODEX is an experimentation aiming to link [ISTEX](http://www.istex.fr) data to 
 
 See the [Installation instructions](Installation.md) page.
 
-## Start
+## Try it
 
-To start `lodex`:
+To run `lodex` with some examples, use:
 
 ```bash
-$ lodex
+
+$ ./bin/lodex ./example/films/
+
 ```
+
 
 ## Settings
 
@@ -111,12 +114,6 @@ Here are few indicators of the quality of the code, they can be used as indicati
 [![bitHound Dependencies](https://www.bithound.io/github/Inist-CNRS/lodex/badges/dependencies.svg)](https://www.bithound.io/github/Inist-CNRS/lodex/master/dependencies/npm)
 [![bitHound Dev Dependencies](https://www.bithound.io/github/Inist-CNRS/lodex/badges/devDependencies.svg)](https://www.bithound.io/github/Inist-CNRS/lodex/master/dependencies/npm)
 [![bitHound Code](https://www.bithound.io/github/Inist-CNRS/lodex/badges/code.svg)](https://www.bithound.io/github/Inist-CNRS/lodex/master/files)
-
-To run `lodex`, use:
-
-```bash
-$ DEBUG=castor*,console* ./lodex /datas/lodex/empty/
-```
 
 To understand, see:
 

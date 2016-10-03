@@ -3,7 +3,7 @@
 
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('lodex:' + basename)
+  , debug = require('debug')('lodex:helpers:' + basename)
   , util = require('util')
   , fs = require('fs')
   , include = require('../helpers/include.js')

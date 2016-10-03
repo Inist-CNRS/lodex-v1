@@ -1,7 +1,7 @@
 'use strict';
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('lodex:middelwares:' + basename)
+  , debug = require('debug')('lodex:helpers:' + basename)
   , util = require('util')
   , config = require('../config.js')
   , jsDAV = require("jsDAV/lib/jsdav")

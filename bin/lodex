@@ -2,7 +2,11 @@
 /* vim: set ft=javascript: */
 "use strict";
 
-require('../app/starter.js')(function(config, start) {
-//  config.set('theme', __dirname + '/app');
+require('../app')(function(config, start) {
+  // You can change the config before the server start
+  //  config.set('theme', __dirname + '/app');
+  //
+  // You can handle after the server was started (or not)
+  // start(function(err, core) { console.log('Server started !'); })
   start();
 });

@@ -2,7 +2,7 @@
 	"name": "lodex",
 	"version": "0.11.0",
 	"description": "Linked Open Data Publishing System by ISTEX",
-	"main": "app/starter.js",
+	"main": "app/index.js",
 	"bin": {
 		"lodex": "bin/lodex"
 	},
