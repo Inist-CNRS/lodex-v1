@@ -17,7 +17,7 @@ module.exports = function (options) {
     // #3: from Parameters
     if (req.query.lang) {
       locales.unshift(req.query.lang.toLowerCase());
-		}
+    }
 
     // Set
     req.i18n.setLocale(locales[0] || 'en');
@@ -28,4 +28,4 @@ module.exports = function (options) {
 
     next();
   };
-}
+};

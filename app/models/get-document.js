@@ -15,24 +15,24 @@ module.exports = function(model) {
     fill(req.routeParams.resourceName);
   })
   .prepend('mongoQuery', function(req, fill) {
-      var q = {};
-      q._wid = req.routeParams.documentName;
-      q.state = {
-        $nin: [ "deleted", "hidden" ]
-      };
-      debug('mongoQuery on '+this.collectionName, q);
-      fill(q);
+    var q = {};
+    q['_wid'] = req.routeParams.documentName;
+    q.state = {
+      $nin: [ 'deleted', 'hidden' ]
+    };
+    /* eslint-disable no-invalid-this */
+    debug('mongoQuery on ', this.collectionName, q);
+    fill(q);
   })
   .append('mongoCursor', function(req, fill) {
-      if (this.mongoDatabaseHandle instanceof Error) {
-        return fill();
-      }
-      fill(this.mongoDatabaseHandle.collection(this.collectionName).find(this.mongoQuery).limit(1));
-  })
+    if (this.mongoDatabaseHandle instanceof Error) {
+      return fill();
+    }
+    fill(this.mongoDatabaseHandle.collection(this.collectionName).find(this.mongoQuery).limit(1));
+    /* eslint-enable no-invalid-this */
+  });
 
 
   return model;
-}
-
-
+};
 
