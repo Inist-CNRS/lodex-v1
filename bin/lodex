@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+/* vim: set ft=javascript: */
+"use strict";
+
+require('../app/starter.js')(function(config, start) {
+//  config.set('theme', __dirname + '/app');
+  start();
+});

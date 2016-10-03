@@ -1,4 +1,4 @@
 {
-	"directory": "public/libs",
+	"directory": "app/public/libs",
 	"shorthand-resolver": "https://github.com/{{owner}}/{{package}}.git"
 }

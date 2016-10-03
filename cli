@@ -1,7 +1,0 @@
-#!/usr/bin/env node
-/* vim: set ft=javascript: */
-// WARNING: this file is the copy of lodex
-//          it could have been a link, but this not consistant between operating systems
-"use strict";
-
-require('castor-core')(require('./server.js'));

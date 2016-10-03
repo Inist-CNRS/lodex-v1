@@ -1,0 +1,5 @@
+<h1>{{ message }}</h1>
+{% if error %}
+<h4> {{ name }}</h4>
+<pre>{{ error.stack.split('\n').slice(1).join('\n') }}</pre>
+{% endif %}

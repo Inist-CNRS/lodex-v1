@@ -1,0 +1,97 @@
+FORMAT: 1A
+
+
+# Actions routes
+
+
+## Fetch status of the server [GET /-/status.json]
+
+Get status informations. You should enable it on castor.config.js by adding "status.js" in "routes" key.
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "_id": "abc123",
+                "value": "This is a label",
+            }
+
+    + Schema
+
+            {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                }
+            }
+
+## Ping the server [GET /-/echo/{basename}.{extension}?]
+
+Return the query sended. You should enable it on castor.config.js by adding "echo.js" in "routes" key.
+
++ Attributes
+    + basename (string) - any characters
+    + extension (string) - any characters
+
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "test": "ok",
+            }
+
+
+
+## Fetch configuration of the server [GET /-/config.json]
+
+Get configuration informations. You should enable it on castor.config.js by adding "config.js" in "routes" key.
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                maxAge: "1 day",
+                concurrency: 4,
+                writeConcern: 1,
+                ...
+            }
+
+    + Schema
+
+            {
+                "type": "object"
+            }
+
+## Upload file [POST /-/upload]
+
+to upload un file in temporary area and return a token, that could be used to load data in temporary collection. You should enable it on castor.config.js by adding "v3.js" in "routes" key.
+
++ Response 204
+
+
+
+
+## authenticate [POST /-/login]
+
+to log in the server
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "username": "login",
+                "password": "1234",
+            }
+
+## authenticate [GET /-/logout]
+
+to log out the server
+
++ Response 200 (application/json)
+

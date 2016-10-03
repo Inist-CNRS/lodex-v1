@@ -1,0 +1,13 @@
+{
+    "connectionURI": "mongodb://localhost:27017/castortest2",
+    "verbose": true,
+    "loaders": [{
+        "pattern": "**/*.csv",
+        "require": "castor-load-csv"
+    }],
+	"routes" : [
+		"table.js",
+        "status.js"
+	],
+    "heartrate": 100
+}

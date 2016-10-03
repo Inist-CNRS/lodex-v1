@@ -1,0 +1,263 @@
+FORMAT: 1A
+
+
+# Group Master collection
+
+This section describes data that marked as master
+
+## Master collection [GET /{rootKEY}.{format}{?alt,%24query,%24orderby,%24limit,%24offset}]
+
+Represent the master collection
+
++ Attributes
+
+    + rootKEY (string) - name for access to data
+        + Default: `corpus`
+	+ format (string) - Alternative representation type. Default is html.
+
++ Parameters
+
+    + %24query (object) - Query filter serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/v3.0/reference/operator/meta/query/)
+    + %24orderby (object) - Sort on specific fields serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/v3.0/reference/operator/meta/orderby/)
+    + %24limit (object) - Limit the number of results  serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/manual/reference/operator/aggregation/limit/)
+    + %24offset (object) - Skipping results  serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/manual/reference/operator/aggregation/skip/)
+
++ Response 200 (text/html)
+
+        <html>HTML representation</html>
+
+
+## One document of the master collection [GET /=/{documentID}.{format}]
+
+...
+
++ Attributes
+
+    + documentID (string) - the document access key
+	+ format (string) - Alternative representation type. Default is html.
+
+
++ Response 200 (text/html)
+
+        <html>HTML representation</html>
+
+
+## Apply an operator documents on the master collection [GET /%24{operatorID}{?alt,%24query,%24orderby,%24limit,%24offset}]
+
+Applique une opération de map/reduce sur les documents sélectionnés de la colelction princiaple.
+
++ Attributes
+
+    + collectionID (string) - the collection access key
+    + operatorID (string) - the operator ID (see [avaiable list](https://github.com/castorjs/castor-core/tree/master/app/operators))
+        + Default : `labelize`
+
++ Parameters
+
+    + alt (string, optional) - Alternative representation type.
+        + Default: `dry`
+    + %24query (object) - Query filter serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/v3.0/reference/operator/meta/query/)
+    + %24orderby (object) - Sort on specific fields serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/v3.0/reference/operator/meta/orderby/)
+    + %24limit (object) - Limit the number of results  serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/manual/reference/operator/aggregation/limit/)
+    + %24offset (object) - Skipping results  serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/manual/reference/operator/aggregation/skip/)
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "_id": "abc123",
+                "value": "This is a label",
+            }
+
+    + Schema
+
+            {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                }
+            }
+
+
+
+# Group Temporary collection
+
+## Documents of a temporary collection [GET /{collectionID}/\*{?alt,%24query,%24orderby,%24limit,%24offset}]
+
+Affichage des documents sélectionnés d’une collection dans un format JSON minimal si le paramètre alt= n’est pas spécifié.
+
++ Attributes
+
+    + collectionID (string) - the collection access key
+
++ Parameters
+
+    + alt (string, optional) - Alternative representation type.
+        + Default: `dry`
+    + %24query (object) - Query filter serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/v3.0/reference/operator/meta/query/)
+    + %24orderby (object) - Sort on specific fields serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/v3.0/reference/operator/meta/orderby/)
+    + %24limit (object) - Limit the number of results  serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/manual/reference/operator/aggregation/limit/)
+    + %24offset (object) - Skipping results  serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/manual/reference/operator/aggregation/skip/)
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "_id": "abc123",
+                "value": "This is a label",
+            }
+
+    + Schema
+
+            {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                }
+            }
+
+## One document of a temporary collection [GET /{collectionID}/{documentID}/\*{?alt}]
+
+Affichage des champs d’un document d’une collection dans un format JSON minimal si le paramètre alt= n’est pas spécifié.
+
++ Attributes
+
+    + collectionID (string) - the collection access key
+    + documentID (string) - the document access key
+
+
++ Parameters
+
+    + alt (string, optional) - Alternative representation type.
+        + Default: `dry`
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "_id": "abc123",
+                "value": "This is a label",
+            }
+
+    + Schema
+
+            {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                }
+            }
+
+## Apply an operator documents of a temporary collection [GET /{collectionID}/%24{operatorID}{?alt,%24query,%24orderby,%24limit,%24offset}]
+
+Applique l'opération de “labelization” sur les documents sélectionnés d’une collection dans un format JSON minimal si le paramètre alt= n’est pas spécifié.
+
++ Attributes
+
+    + collectionID (string) - the collection access key
+    + operatorID (string) - the operator ID (see [avaiable list](https://github.com/castorjs/castor-core/tree/master/app/operators))
+        + Default : `labelize`
+
++ Parameters
+
+    + alt (string, optional) - Alternative representation type.
+        + Default: `dry`
+    + %24query (object) - Query filter serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/v3.0/reference/operator/meta/query/)
+    + %24orderby (object) - Sort on specific fields serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/v3.0/reference/operator/meta/orderby/)
+    + %24limit (object) - Limit the number of results  serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/manual/reference/operator/aggregation/limit/)
+    + %24offset (object) - Skipping results  serialize by [MQS](https://www.npmjs.com/package/mongodb-querystring) see [MongoDB documentation syntax](https://docs.mongodb.com/manual/reference/operator/aggregation/skip/)
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "_id": "abc123",
+                "value": "This is a label",
+            }
+
+    + Schema
+
+            {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                }
+            }
+
+
+
+# Group CRUD operations
+
+...
+
+## Fill a temporary collection [POST /{?collectionID}]
+
+To load data to temporary collection.
+
++ Attributes
+
+    + collectionID (string) - the collection access key
+
++ Request (application/json)
+
+	+ Body
+
+			{
+				"url" : "https://github.com/castorjs/castor-core/blob/master/package.json"
+			}
+
+	+ Schema
+
+            {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    }
+				}
+            }
+
+
++ Response 201
+
+
+## Patch a document in a temporary collection [POST /{collectionID}/{documentID}]
+
+Apply Mongo operation at one document with [MongoDB querystring](https://www.npmjs.com/package/mongodb-querystring)
+
++ Attributes
+
+    + collectionID (string) - the collection access key
+    + documentID (string) - the document access key
+
++ Request (text/plain)
+
+	+ Body
+
+		 %24set%5B_rootSince%5D=1473347013826%5ED
+
++ Response 204
