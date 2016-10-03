@@ -1,2 +1,2 @@
---ignore-dir=public/libs
+--ignore-dir=app/public/libs
 --ignore-dir=node_modules
