@@ -35,22 +35,6 @@ Chain.prototype.apply = function (cursor, res, next) {
     var stream = cursor;
     var breakPipe = false;
 
-<<<<<<< HEAD
-      res.set('ETag', String('W/').concat(crypto.createHash('md5').update(String(count)).digest('base64').replace(/=+$/, '')));
-      res.set('Content-Type', options.mimeType);
-      res.cacheControl("public", {
-        mustRevalidate: true,
-        maxAge: options.maxAge
-      });
-      res.on('finish', function() {
-        cursor.close();
-      });
-      cursor.on('end', function() {
-        debug('cursor end with ', counter, 'documents');
-      })
-
-
-=======
     if (count === 0) {
       return next(new Errors.TableEmpty('`' + options.collection['_wid'] + '` is empty.'));
     }
@@ -70,6 +54,9 @@ Chain.prototype.apply = function (cursor, res, next) {
     res.on('finish', function() {
       cursor.close();
     });
+    cursor.on('end', function() {
+      debug('cursor end with ', counter, 'documents');
+    });
 
     stream = stream.pipe(es.map(function (data, callback) {
       if (!data['_count']) {
@@ -84,23 +71,11 @@ Chain.prototype.apply = function (cursor, res, next) {
       }
       return callback(null, data);
     }));
->>>>>>> b678fa3ac4425fe4432b05ddd787d2d4554adc0f
 
     if (options.firstOnly) {
       stream = stream.pipe(es.map(function (data, callback) {
-<<<<<<< HEAD
-        if (counter === 0) {
-          debug('streaming started')
-        }
-        if (!data._count) {
-          data._count = [counter++, count];
-        }
-        if (!data._collection) {
-          data._collection = options.collection;
-=======
         if (data['_count'][0] === 0) {
           return callback(null, data);
->>>>>>> b678fa3ac4425fe4432b05ddd787d2d4554adc0f
         }
         return callback();
       }));
