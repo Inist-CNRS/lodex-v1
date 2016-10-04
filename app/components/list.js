@@ -6,8 +6,6 @@ var Vue = require('vue')
 
 Vue.use(require('vue-resource'))
 
-
-
 var facet = require('./facet.vue')
 var metric = require('./metric.vue')
 var tableau = require('./tableau.vue')
@@ -25,7 +23,7 @@ module.exports = new Vue({
     facet: facet,
     tableau: tableau,
     metric: metric,
-    chart:chart
+    chart: chart
   }
 
 })
