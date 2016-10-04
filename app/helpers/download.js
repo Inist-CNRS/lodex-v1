@@ -52,8 +52,16 @@ var path = require('path')
       res.on('finish', function() {
         cursor.close();
       });
+      cursor.on('end', function() {
+        debug('cursor end with ', counter, 'documents');
+      })
+
+
 
       stream = stream.pipe(es.map(function (data, callback) {
+        if (counter === 0) {
+          debug('streaming started')
+        }
         if (!data._count) {
           data._count = [counter++, count];
         }

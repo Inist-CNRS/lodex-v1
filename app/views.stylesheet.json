@@ -5,11 +5,14 @@
 	"$_columns" : {
 		"get" : "data._columns"
 	},
+	"$_count" : {
+		"get" : "data._count"
+	},
 	"$_uri" : {
 		"get" : "data._uri"
 	},
 	"$_wid": {
 		"get": "data._wid"
 	},
-	"mask" : "_uri,_columns,areas,_wid"
+	"mask" : "_uri,_columns,areas,_wid,_count"
 }

@@ -43,7 +43,8 @@ export default {
 				"field" : "_columns." + self.field + ".content",
 				"$sort" : {
 					"value" : -1
-				}
+				},
+				"$limit" : 10
 			}
 			let url = window.location.protocol
 			.concat('//')
