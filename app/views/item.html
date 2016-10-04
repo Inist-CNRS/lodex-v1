@@ -101,11 +101,9 @@
 
         <div class="container" style="margin-top:10px;">
             <div class="jumbotron alert  alert-info alert-dismissible fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <p>
-                    <img src="/assets/img/logo_lodex_200.png" height="20"> Sed viverra, nulla vitae egestas ornare, ante mauris varius turpis, quis efficitur mi nibh ut leo. Pellentesque sed ullamcorper massa. Nulla sed dignissim velit. Nunc non luctus mauris. Quisque in mi maximus, facilisis dolor in, condimentum diam. Duis hendrerit at nisi facilisis molestie. Integer lacus velit, porttitor scelerisque tellus sit amet, sollicitudin bibendum est. Aenean rutrum enim ut odio blandit laoreet. Maecenas ac faucibus massa, sollicitudin eleifend magna. Donec varius vulputate elit, nec fringilla mi malesuada eu.
-                </p>
-            </div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    {{ print.header.content|d('Missing `print.header.content` in your config file') }}
+  </div>
         </div>
 
         <div class="container-fluid">
