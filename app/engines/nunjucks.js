@@ -8,12 +8,12 @@ var path = require('path')
 
 module.exports = function(options, core) {
   options = options || {};
-  options.autoescape = options.autoescape || false;
+  options.autoescape = options.autoescape || false;
   var env = new nunjucks.Environment(
     new nunjucks.FileSystemLoader(options.views || 'views'),
     options
   );
   return function (filePath, fileInput, callback) {
     env.render(filePath, fileInput, callback);
-  }
-}
+  };
+};

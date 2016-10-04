@@ -9,6 +9,6 @@ module.exports = function(options, core) {
   options = options || {};
   return function (heartbeat, last) {
     debug('DING');
-  }
-}
+  };
+};
 

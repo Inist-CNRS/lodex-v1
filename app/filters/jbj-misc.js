@@ -9,7 +9,7 @@ module.exports = function(exec, execmap) {
   filters.truncateField = function(obj, args) {
     return exec(args, function(arg) {
       var opt = {};
-      if (typeof arg != 'object') {
+      if (typeof arg !== 'object') {
         arg = {
           length: Number(arg)
         };
