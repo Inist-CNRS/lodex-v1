@@ -17,4 +17,4 @@ module.exports = function (heartrate) {
     heart.setHeartrate(heartrate);
   }
   return heart;
-}
+};

@@ -199,7 +199,7 @@ module.exports = {
         "prefer-arrow-callback": "off",
         "prefer-const": "error",
         "prefer-reflect": "off",
-        "prefer-rest-params": "error",
+        "prefer-rest-params": "warn",
         "prefer-spread": "error",
         "prefer-template": "off",
         "quote-props": ["error", "as-needed"],

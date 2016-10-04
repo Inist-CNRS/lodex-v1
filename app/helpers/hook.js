@@ -1,5 +1,4 @@
-/*jshint node:true,laxcomma:true*/
-"use strict";
+'use strict';
 var path     = require('path')
   , basename = path.basename(__filename, '.js')
   , debug    = require('debug')('lodex:helpers:' + basename)
@@ -8,8 +7,7 @@ var path     = require('path')
   , include  = require('../helpers/include.js')
   ;
 
-function Hook(nd, hks)
-{
+function Hook(nd, hks) {
   if (!(this instanceof Hook)) {
     return new Hook(nd, hks);
   }
@@ -23,8 +21,7 @@ function Hook(nd, hks)
   }
 }
 
-Hook.prototype.from = function ()
-{
+Hook.prototype.from = function () {
   var self = this;
   Array.prototype.slice.call(arguments, 0).forEach(function(x) {
     if (x) {
@@ -38,8 +35,7 @@ Hook.prototype.from = function ()
   return self;
 };
 
-Hook.prototype.over = function (object)
-{
+Hook.prototype.over = function (object) {
   var self = this;
   assert.equal(typeof object, 'object');
   if (Array.isArray(object)) {
@@ -56,8 +52,7 @@ Hook.prototype.over = function (object)
   return self;
 };
 
-Hook.prototype.apply = function (callback)
-{
+Hook.prototype.apply = function (callback) {
   var self = this;
   assert.equal(typeof callback, 'function');
   self.hooks.forEach(function (item) {
@@ -65,12 +60,12 @@ Hook.prototype.apply = function (callback)
     if (typeof item === 'string') {
       func = item;
     }
-    else if (typeof item === "object") {
-      name = item._id;
-      func = item['require'] || item['script'] || item.value;
+    else if (typeof item === 'object') {
+      name = item['_id'];
+      func = item['require'] || item['script'] || item.value;
     }
     if (func !== undefined) {
-      callback(name, include(self.basedirs, func), item);
+      return callback(name, include(self.basedirs, func), item);
     }
   });
 };

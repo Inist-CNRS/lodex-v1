@@ -11,7 +11,9 @@ var path = require('path')
 
 module.exports = function(basedirs, modname, req) {
   //debug('Paths to search', modname, basedirs);
-  req = req === false ? false : true;
+  if (req !== false) {
+    req = true;
+  }
   if (modname === undefined) {
     modname = basedirs;
     basedirs = [];

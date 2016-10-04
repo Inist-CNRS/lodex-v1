@@ -3,9 +3,6 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('lodex:helpers:' + basename)
-  , assert = require('assert')
-  , url = require('url')
-  , querystring = require('querystring')
   , util = require('util')
   , events = require('events')
   , JBJ = require('jbj')
@@ -36,8 +33,7 @@ function Compute(schema, options) {
 
 util.inherits(Compute, events.EventEmitter);
 
-Compute.prototype.use = function (hash, obj)
-{
+Compute.prototype.use = function (hash, obj) {
   var self = this;
   if (obj.map && obj.reduce && typeof obj.map === 'function' && typeof obj.reduce === 'function') {
     self.bank[hash] = obj;
@@ -45,11 +41,10 @@ Compute.prototype.use = function (hash, obj)
   return self;
 };
 
-Compute.prototype.run = function (cb)
-{
+Compute.prototype.run = function (cb) {
   var self = this;
   debug('run', self.schema);
-  if (typeof self.schema !== 'object' || self.schema === null || self.schema === undefined) {
+  if (typeof self.schema !== 'object' || self.schema === null || self.schema === undefined) {
     return cb(new Error('Invalid JBJ schema'));
   }
   if (Object.keys(self.schema).length === 0) {
@@ -58,32 +53,28 @@ Compute.prototype.run = function (cb)
   JBJ.inject(self.schema, {}, function(err, fields) {
     debug('jbj', err, fields);
     if (err) {
-      cb(err);
+      return cb(err);
     }
-    else {
-      fields.computedDate = new Date();
-      MongoClient.connect(self.options.connectionURI).then(function(db) {
-        db.collection(self.options.collectionName).then(function(coll) {
-          coll.insert(fields, {w:1}, cb);
-          db.close();
-        }).catch(cb);
+    fields.computedDate = new Date();
+    MongoClient.connect(self.options.connectionURI).then(function(db) {
+      db.collection(self.options.collectionName).then(function(coll) {
+        coll.insert(fields, { w:1 }, cb);
+        db.close();
+      }).catch(cb);
     }).catch(cb);
 
-    }
   });
 };
 
-Compute.prototype.operators = function ()
-{
+Compute.prototype.operators = function () {
   var self = this;
   return Object.keys(self.bank);
 };
 
-Compute.prototype.operator = function (key)
-{
+Compute.prototype.operator = function (key) {
   var self = this;
   if (!self.bank[key]) {
-    throw new Error('Unknown key : `' + key+'`');
+    throw new Error('Unknown key : `' + key + '`');
   }
   return self.bank[key];
 };
