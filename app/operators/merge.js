@@ -40,7 +40,7 @@ module.exports.reduce = function (key, values) {
     , i = 1
     ;
   for (; i < length; ++i) {
-    if (values[i] != null) {
+    if (values[i]) {
       for (name in values[i]) {
         if (target === values[i][name]) {
           continue;

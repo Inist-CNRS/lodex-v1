@@ -11,6 +11,7 @@ module.exports = function(options, core) {
   options = options || {};
   traverse(core.config.get('print')).forEach(function (x) {
     if (x && typeof x === 'string') {
+      // eslint-disable-next-line no-invalid-this
       this.update(marked(x));
     }
   });

@@ -8,12 +8,13 @@ var path = require('path'),
 module.exports = function(options, core) {
   options = options || {};
   return function (data, submit) {
-
-    if (data._content && data._content[this.options.syntax]) {
-      submit(null, data._content[this.options.syntax]);
+    /* eslint-disable no-invalid-this */
+    if (data['_content'] && data['_content'][this.options.syntax]) {
+      submit(null, data['_content'][this.options.syntax]);
     }
     else {
       submit(null, {});
     }
+    /* eslint-enable no-invalid-this */
   };
 };

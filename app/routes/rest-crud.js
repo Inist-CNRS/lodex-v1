@@ -16,7 +16,6 @@ var path = require('path')
 module.exports = function(router, core) {
 
   var prefixURL = core.config.get('prefixURL');
-  var prefixKEY = core.config.get('prefixKEY');
 
   //
   // Define route parameters

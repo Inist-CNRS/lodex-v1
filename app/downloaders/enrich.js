@@ -23,7 +23,7 @@ module.exports = function(options, core) {
 
   return function (data, submit) {
 
-    JBJ.render(stylesheet, {data:data}, function(err, res) {
+    JBJ.render(stylesheet, { data:data }, function(err, res) {
       submit(err, res);
     });
   };

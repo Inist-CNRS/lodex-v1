@@ -9,8 +9,8 @@ var path = require('path'),
 module.exports = function(options, core) {
   options = options || {};
   return function (data, submit) {
-    if (data._content.jsonld) {
-      jsonld.toRDF(data._content.jsonld, {format: 'application/nquads'}, function(err, out) {
+    if (data['_content'].jsonld) {
+      jsonld.toRDF(data['_content'].jsonld, { format: 'application/nquads' }, function(err, out) {
         if (err) {
           console.error(err);
           submit(null, {});

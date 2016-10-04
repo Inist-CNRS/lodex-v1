@@ -1,5 +1,5 @@
 /*jshint node:true, laxcomma:true */
-"use strict";
+'use strict';
 
 var path = require('path')
   , basename = path.basename(__filename, '.js')
@@ -11,7 +11,9 @@ var path = require('path')
 
 module.exports = function(basedirs, modname, req) {
   //debug('Paths to search', modname, basedirs);
-  req = req === false ? false : true;
+  if (req !== false) {
+    req = true;
+  }
   if (modname === undefined) {
     modname = basedirs;
     basedirs = [];
@@ -19,7 +21,7 @@ module.exports = function(basedirs, modname, req) {
   assert(typeof modname, 'string');
   basedirs = basedirs
   .filter(function (basedir) {
-    return (typeof basedir === 'string');
+    return typeof basedir === 'string';
   })
   .map(function(basedir) {
     return path.join(basedir, modname);
@@ -37,24 +39,23 @@ module.exports = function(basedirs, modname, req) {
       if (e.code && e.code === 'MODULE_NOT_FOUND') {
         return undefined;
       }
-      else {
-        throw e;
-      }
+      throw e;
     }
   }, undefined);
 
   if (module === undefined) {
-    debug('Module failed.', module)
-    throw new Errors.BadConfig(util.format('Unknown (or Missing or Error in) Module `%s` (%s)', modname, basedirs.join(', ')));
+    debug('Module failed.', module);
+    throw new Errors.BadConfig(
+      util.format('Unknown (or Missing or Error in) Module `%s` (%s)',
+        modname,
+        basedirs.join(', ')));
   }
   else {
-    debug('Module found.', module)
+    debug('Module found.', module);
     if (req) {
       return require(module);
     }
-    else {
-      return module;
-    }
+    return module;
   }
 };
 

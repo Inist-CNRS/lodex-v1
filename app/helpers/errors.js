@@ -1,5 +1,4 @@
-/*jshint node:true, laxcomma:true*/
-"use strict";
+'use strict';
 
 
 module.exports.PropertyNotFound = require('custom-error')('PropertyNotFound');

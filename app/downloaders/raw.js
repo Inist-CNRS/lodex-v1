@@ -8,8 +8,7 @@ var path = require('path')
 module.exports = function(options, core) {
   options = options || {};
   return function (data, submit) {
-    var self = this;
     submit(null, data);
-  }
-}
+  };
+};
 

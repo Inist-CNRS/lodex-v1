@@ -15,10 +15,10 @@ module.exports = function(options, core) {
         if (!self.options.firstOnly) {
           if (self.zero === undefined) {
             self.zero = true;
-            prefix = "[\n";
+            prefix = '[\n';
           }
           else {
-            prefix = ",\n";
+            prefix = ',\n';
           }
         }
         submit(null, prefix + JSON.stringify(data));
@@ -32,7 +32,7 @@ module.exports = function(options, core) {
       if (self.options.mimeType === 'application/json') {
         var eof = '';
         if (!self.options.firstOnly) {
-          eof = "]\n";
+          eof = ']\n';
         }
         submit(null, eof);
       }
@@ -40,6 +40,6 @@ module.exports = function(options, core) {
         submit();
       }
     }
-  }
-}
+  };
+};
 

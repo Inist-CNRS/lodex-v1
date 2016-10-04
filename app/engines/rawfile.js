@@ -10,6 +10,6 @@ module.exports = function(options, core) {
   options = options || {};
   return function (filePath, fileInput, callback) {
     fs.readFile(filePath, callback);
-  }
-}
+  };
+};
 

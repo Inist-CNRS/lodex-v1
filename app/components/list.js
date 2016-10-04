@@ -1,14 +1,9 @@
 
 // The entryPoint calls the project components.
 
-/* global Vue */
-
-'use strict';
 var Vue = require('vue')
 
-Vue.use(require('vue-resource'));
-
-
+Vue.use(require('vue-resource'))
 
 var facet = require('./facet.vue')
 var metric = require('./metric.vue')
@@ -27,8 +22,8 @@ module.exports = new Vue({
     facet: facet,
     tableau: tableau,
     metric: metric,
-    chart:chart
+    chart: chart
   }
 
-});
+})
 

@@ -3,7 +3,6 @@
 var path = require('path'),
   basename = path.basename(__filename, '.js'),
   debug = require('debug')('lodex:downloaders:' + basename),
-  // jsonld = require('jsonld'),
   N3 = require('n3')
   ;
 
@@ -14,16 +13,17 @@ module.exports = function(options, core) {
     onEach: function (data, submit) {
       var self = this;
       if (!self.writer) {
+        // eslint-disable-next-line new-cap
         self.writer = N3.Writer(self.stream, { format: 'Turtle' });
       }
-      if (data._content.jsonld) {
+      if (data['_content'].jsonld) {
         Object
-        .keys(data._content.jsonld['@context'])
+        .keys(data['_content'].jsonld['@context'])
         .map(function(key) {
           return {
-            subject:   data._content.jsonld['@id'],
-            predicate: data._content.jsonld['@context'][key]['@id'],
-            object:    data._content.jsonld[key] || 'n/a'
+            subject:   data['_content'].jsonld['@id'],
+            predicate: data['_content'].jsonld['@context'][key]['@id'],
+            object:    data['_content'].jsonld[key] || 'n/a'
           };
         })
         .forEach(function(triple) {

@@ -122,10 +122,8 @@ module.exports = function(config, online) {
   //  create an heart & set heartrate
   //  load ./heartbeats/
   //
-  var pulse;
   try {
     core.heart = require('./helpers/heart.js')(config.get('heartrate'));
-    pulse = core.heart.newPulse();
   }
   catch (e) {
     return online(e);
@@ -351,26 +349,32 @@ module.exports = function(config, online) {
         objectPath.set(core.states, 'hotfolder.last.browseOver', found);
       });
       ldr.on('watching', function (err, doc) {
+        if (err) { objectPath.set(core.states, 'hotfolder.last.error', err.toString()); }
         objectPath.set(core.states, 'hotfolder.last.watching', doc);
         cptfunc();
       });
       ldr.on('checked', function (err, doc) {
+        if (err) { objectPath.set(core.states, 'hotfolder.last.error', err.toString()); }
         objectPath.set(core.states, 'hotfolder.last.checked', doc);
         cptfunc();
       });
       ldr.on('cancelled', function (err, doc) {
+        if (err) { objectPath.set(core.states, 'hotfolder.last.error', err.toString()); }
         objectPath.set(core.states, 'hotfolder.last.cancelled', doc);
         cptfunc();
       });
       ldr.on('added', function (err, doc) {
+        if (err) { objectPath.set(core.states, 'hotfolder.last.error', err.toString()); }
         objectPath.set(core.states, 'hotfolder.last.added', doc);
         cptfunc();
       });
       ldr.on('changed', function (err, doc) {
+        if (err) { objectPath.set(core.states, 'hotfolder.last.error', err.toString()); }
         objectPath.set(core.states, 'hotfolder.last.changed', doc);
         cptfunc();
       });
       ldr.on('dropped', function (err, doc) {
+        if (err) { objectPath.set(core.states, 'hotfolder.last.error', err.toString()); }
         objectPath.set(core.states, 'hotfolder.last.dropped', doc);
         cptfunc();
       });
@@ -397,7 +401,7 @@ module.exports = function(config, online) {
   // load ./downloaders/
   //
 
-  var dwllock, dwlopts;
+  var dwlopts;
   try {
 
     dwlopts = {
@@ -563,7 +567,6 @@ module.exports = function(config, online) {
   // API routes
   //
 
-  var pageRouter = express.Router();
 
   //
   // Optionals routes
