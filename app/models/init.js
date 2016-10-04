@@ -54,6 +54,7 @@ module.exports = function(model) {
     self.mongoDatabaseHandle.collectionsIndex({ strict:true }, function(err, coll) {
       if (err) {
         self.mongoDatabaseHandle.collectionsIndex(function(err, newcoll) {
+          if (err) { return fill(err); }
           var descs = [self.indexDescription];
           if (req.config.has('dataPath')) {
             descs.push(self.hotfolderDescription);

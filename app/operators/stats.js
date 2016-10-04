@@ -46,10 +46,10 @@ module.exports.reduce = function reduce(key, values) {
 
 module.exports.finalize = function finalize(key, value) {
   value.average = value.sum / value.count;
-  value.population_variance = value.diff / value.count;
-  value.population_standard_deviation = Math.sqrt(value.population_variance);
-  value.sample_variance = value.diff / (value.count - 1);
-  value.sample_standard_deviation = Math.sqrt(value.sample_variance);
+  value.populationVariance = value.diff / value.count;
+  value.populationStandardDeviation = Math.sqrt(value.population_variance);
+  value.sampleVariance = value.diff / (value.count - 1);
+  value.sampleStandardDeviation = Math.sqrt(value.sample_variance);
   delete value.diff;
   return value;
 };

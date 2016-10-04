@@ -42,8 +42,10 @@ Chain.prototype.apply = function (cursor, res, next) {
     debug('processing ' + count + ' document(s) to ',
           options.fileName + ' (' + options.mimeType + ')');
 
+    /* eslint-disable no-useless-escape */
     res.set('ETag', String('W/')
-    .concat(crypto.createHash('md5').update(String(count)).digest('base64').replace(/=+$/, '')));
+    .concat(crypto.createHash('md5').update(String(count)).digest('base64').replace(/\=+$/, '')));
+    /* eslint-enable no-useless-escape */
     res.set('Content-Type', options.mimeType);
     res.cacheControl('public', {
       mustRevalidate: true,
@@ -104,6 +106,7 @@ Chain.prototype.apply = function (cursor, res, next) {
           debug('error onEach', trace.join('/'), e.toString(), item.oneach);
           return callback(null, e);
         }
+        return null;
       }));
     });
 
