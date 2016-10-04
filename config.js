@@ -5,7 +5,6 @@ module.exports = {
   rootURL : '/corpus.html',
   rootKEY : 'corpus',
   maxFileSize: 536870912,
-  itemsPerPage: 5,
   collectionNameHotFolder : 'data',
   defaultRootCollection: 'data',
   mimeTypes : {
