@@ -146,11 +146,11 @@
         .testimonial.testimonial-success .testimonial-section{
             border-color: #5CB85C;
             color: #449d44;
-            background-color: rgba(92, 184, 92, 0.1);
+           /* background-color: rgba(92, 184, 92, 0.1);*/
         }
 
             .testimonial.testimonial-success .testimonial-section:after{
-                border-top-color: #5CB85C;
+                border-top-color: #c4d735;
             }
 
         .testimonial.testimonial-success .testimonial-desc{
@@ -158,11 +158,11 @@
         }
 
             .testimonial.testimonial-success .testimonial-desc img{
-                border-color: #5CB85C;
+                border-color: #c4d735;
             }
 
             .testimonial.testimonial-success .testimonial-writer-name{
-                color: #5CB85C;
+                color: #c4d735;
             }
 
     .testimonial.testimonial-warning{

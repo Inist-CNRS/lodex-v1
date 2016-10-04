@@ -647,7 +647,7 @@ blockquote {
   padding: 10px 20px;
   margin: 0 0 20px;
   font-size: 17.5px;
-  border-left: 5px solid #a6dba0;
+  border-left: 5px solid #c4d735;
 }
 blockquote p:last-child,
 blockquote ul:last-child,
@@ -4363,7 +4363,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   vertical-align: baseline;
   white-space: nowrap;
   text-align: center;
-  background-color: #00a241;
+  background-color: #c4d733;
   border-radius: 10px;
 }
 .badge:empty {

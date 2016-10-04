@@ -108,49 +108,27 @@
 
         <div class="container-fluid">
             <div id="content" class="row clearfix">
-                <div id="sidebar" class="pull-right col-md-2">
-                    <div id="metrics" class="row">
-                        <div class="text-center col-xs-10 col-sm-10">
-                            <metric title="Ressources" query="$count?" mode="value"/>
-                        </div>
-                        <!--<div class="text-center col-xs-4 col-sm-6">
-<metric title="Properties" query="$keys?field=_columns"/>
-</div>-->
-                    </div>
-                    <div>
-                        {% for name, col in documents[0]._columns %}
-                        {% if col.displayAreas.facet %}
-                        <div id="facet-{{ name }}">
-                            <facet title="{{ col.label }}" field="_columns.{{ name }}.content"/>
-                        </div>
-                        {% endif %}
-                        {% endfor %}
-
-                    </div>
-                </div>
+               
+                        
+                        
+               
                 <div id="main" class="col-md-10 clearfix" role="main">
-                    <div class="pull-right">
-                        <!-- Single button -->
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Views <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">view1 </a></li>
-                                <li><a href="#">view2 </a></li>
-                                <li><a href="#">view3 </a></li>
-
-                            </ul>
-                        </div>
-                    </div>
+                   <div class="row">
+        <div class="col-md-12 col-sm-12">
+                   
+                       
                     <div id="tab" class="btn-group" data-toggle="buttons">
                         <a href="#ressource" class="btn btn-default active" data-toggle="tab">
                             <input type="radio" />Ressource</a>
                         <a href="#exports" class="btn btn-default" data-toggle="tab">
                             <input type="radio" />Exports</a>
+                            <a href="#Corpus" class="btn btn-default" data-toggle="tab">
+                            <input type="radio" />Corpus</a>
 
 
                     </div>
+                       
+              
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="ressource">
@@ -162,20 +140,18 @@
 
                                 <div id="tb-testimonial" class="testimonial testimonial-info">
                                     <div class="testimonial-section">
-                                        <h3>Description</h3>
-                                        Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
+                                       <h4>Description</h4>
+                     Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
                                     </div>
                                 </div>
-
+                            </div>
+ 
                                <div id="main" class="col-md-6 clearfix">
                                 <div id="tb-testimonial" class="testimonial testimonial-success">
                                     
                                     <div class="testimonial-section">
-                                        <div class="media-left" style="color:#c4d735;">
-                      <i class="fa fa-leaf fa-2x" aria-hidden="true">Propriétés</i>
-                     
-                    </div>
                                         
+                                         <p>Propriétés</p>
                                         <ul>
                                             <li>
 
@@ -242,38 +218,9 @@
                          
                             </div>
                         </div>
-                         <div id="tb-testimonial" class="testimonial testimonial-info">
-                                     <div id="tab" class="btn-group" data-toggle="buttons">
-                                      <a href="#estcontenu" class="btn btn-default  active" data-toggle="tab">
-                            <input type="radio" />Est contenu</a>
-                        <a href="#contient" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />Contient</a>
                        
-                             <a href="#istex" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />Istex</a>
+                         
 
-
-                    </div>
-                                     <div class="tab-content">
-                        <div class="tab-pane active" id="estcontenu">
-                           
-                               
-                                    <div class="testimonial-section">
-                                       <h2>Est contenu dans </h2>
-
-                                    
-                                Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
-                                    </div>
-                                </div>
-                                 <div class="tab-pane" id="contient">
-                                  <h2>contient </h2>
-                        </div>
-                        <div class="tab-pane" id="istex">
-                                  <h2>Istex</h2>
-                        </div>
-                         </div>
- </div>
-  </div>
   
 
 
@@ -366,7 +313,7 @@
                         </section>
 
                         </div>
-
+  </div>
 
 
                        
@@ -375,11 +322,50 @@
 
                 </div>
             </div>
+ 
 
-
+        
+        <div id="sidebar" class="pull-right col-md-2" role="sidebar">
+            
+                      <div id="metrics" class="row">
+        <div class="text-center col-xs-4 col-sm-10">
+          <metric title="Ressources" query="$count?" mode="value"/>
         </div>
+        <div class="text-center col-xs-4 col-sm-10">
+          <metric title="Properties" query="$keys?field=_columns"/>
+        </div>
+      </div>
+                 
+                  
+                  <div id="tb-testimonial" class="testimonial testimonial-info">
+                                    <div class="testimonial-section">
+                                        <p>Cette donnée est issue du jeux de données </p> 
+                                        
+                     
+                    <h4> Films </h4>
+                     (description du jeu) Several films to demontrate the usage of LODEX / October 3, 2016
+                                    </div>
+                                </div>
+                                
+                               
+                   
+                    <div class="social pull-right">
+          <ul>
+            <li><a href="https://twitter.com/intent/tweet?url={{ documents[0]._uri }}"  target="_blank"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://plus.google.com/share?url={{ documents[0]._uri }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#"><i class="fa fa-github"></i></a></li>
+            <li><a href="#"><i class="fa fa-dropbox"></i></a></li>
+          </ul>
+                    
+                     
+                        
+                          
+                </div>     
       
-
+ </div>
+       </div>
+         </div>
+        
 
         <footer id="footer" class="clearfix">
             <div id="footer-widgets">
@@ -463,9 +449,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script type="text/javascript" charset="utf-8" src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 
-    <!-- Piwik -->
-    <script type="text/javascript"> var _paq = _paq || []; _paq.push([function() { var self=this; function getOriginalVisitorCookieTimeout() { var now=new Date(), nowTs=Math.round(now.getTime()/1000), visitorInfo=self.getVisitorInfo(); var createTs = parseInt(visitorInfo[2]); var cookieTimeout=33696000; var originalTimeout=createTs+cookieTimeout-nowTs; return originalTimeout; } getOriginalVisitorCookieTimeout(); this.setVisitorCookieTimeout(getOriginalVisitorCookieTimeout()); }]); _paq.push(['trackPageView']); _paq.push(['enableLinkTracking']); (function() { var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik.inist.fr//"; _paq.push(['setTrackerUrl', u+'piwik.php']); _paq.push(['setSiteId', 132]); var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript'; g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s); })(); </script> <noscript><p><img src="http://piwik.inist.fr/piwik.php?idsite=132" style="border:0" alt="" /></p></noscript>
-    <!-- End Piwik Code -->
+    
 
     </body>
 
