@@ -80,7 +80,7 @@ module.exports = function(options, core) {
 
         var cdata = {};
         Object.keys(data).filter(function(key) {
-          return key[0] === '_' && key !== '_config'
+          return key[0] === '_' && key !== '_config';
         }).forEach(function(key) {
           cdata[key] = data[key];
         });

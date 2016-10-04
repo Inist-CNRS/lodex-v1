@@ -8,9 +8,8 @@ var path = require('path')
 module.exports = function(config, core) {
   config = config || {};
   return function (data, submit) {
-    var self = this;
-    data._config = config;
+    data['_config'] = config;
     submit(null, data);
-  }
-}
+  };
+};
 

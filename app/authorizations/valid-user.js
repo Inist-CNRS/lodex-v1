@@ -14,5 +14,5 @@ module.exports = function(options) {
     else {
       authorize(null, false);
     }
-  }
-}
+  };
+};

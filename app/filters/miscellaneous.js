@@ -37,9 +37,7 @@ module.exports = function(exec, execmap) {
       if (obj) {
         return obj + arg;
       }
-      else {
-        return '';
-      }
+      return '';
     }, 'and');
   };
 
