@@ -26,21 +26,21 @@ module.exports = function(config) {
     try {
       themefile = include(themedirs, 'castor.config.js', false);
     }
-    catch (e) { console.error(e); return; }
+    catch (e) { themefile = undefined; }
   }
 
   if (themefile === undefined) {
     try {
       themefile = include(themedirs, 'castor.js', false);
     }
-    catch (e) { console.error(e); return; }
+    catch (e) { themefile = undefined; }
   }
 
   if (themefile === undefined) {
     try {
       themefile = include(themedirs, 'config.js', false);
     }
-    catch (e) { console.error(e); return; }
+    catch (e) { themefile = undefined; }
   }
 
 

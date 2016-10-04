@@ -385,22 +385,22 @@ module.exports = function(router, core) {
     if (core.config.get('allowedAltValues').indexOf(req.query.alt) === -1) {
       return res.status(400).send('Bad Request').end();
     }
-    var collectionName = req.routeParams.resourceName === core.config.get('collectionNameIndex')
-                         ? core.config.get('collectionNameIndex') : req.routeParams.resourceName;
-    var mongoDatabaseHandle = core.connect();
-    var mongoQuery = {
-      _wid : req.routeParams.documentName,
-      state :  {
-        $nin: [ 'deleted', 'hidden' ]
-      }
-    };
+    // var collectionName = req.routeParams.resourceName === core.config.get('collectionNameIndex')
+    //                      ? core.config.get('collectionNameIndex') : req.routeParams.resourceName;
+    // var mongoDatabaseHandle = core.connect();
+    // var mongoQuery = {
+    //   _wid : req.routeParams.documentName,
+    //   state :  {
+    //     $nin: [ 'deleted', 'hidden' ]
+    //   }
+    // };
 
-    function error(err) {
-      if (mongoDatabaseHandle) {
-        mongoDatabaseHandle.close();
-      }
-      next(err);
-    }
+    // function error(err) {
+    //   if (mongoDatabaseHandle) {
+    //     mongoDatabaseHandle.close();
+    //   }
+    //   next(err);
+    // }
 
 
     datamodel([core.models.mongo, core.models.getCollection, core.models.getDocument])

@@ -11,7 +11,7 @@ var path = require('path')
   ;
 
 module.exports = function(router, core) {
-  var acceptFileTypes = new RegExp('\.(' + core.config.get('acceptFileTypes').join('|') +
+  var acceptFileTypes = new RegExp('\\.(' + core.config.get('acceptFileTypes').join('|') +
                                    ')$', 'i');
   var jfum = new JFUM({
     minFileSize: 1,
