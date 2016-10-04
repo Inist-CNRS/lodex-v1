@@ -92,7 +92,6 @@ export default {
           self.columns = cols
           self.sortKeys = ksort
         }
-        console.log('items', response.body.length)
         if (response.body.length === undefined) {
           self.offset -= self.step
         }

@@ -18,7 +18,8 @@ module.exports.map = function () {
       prefix = '';
     }
 
-    for (var prop in obj) {
+    Object.keys(obj)
+    .forEach(function (prop) {
       var key = prefix
         , value = obj[prop];
       key += isNaN(parseInt(prop)) ? prop : '0';
@@ -38,7 +39,7 @@ module.exports.map = function () {
           res[key] = true;
         }
       }
-    }
+    });
   }
   browse(doc);
   Object.keys(res).forEach(function(i) {

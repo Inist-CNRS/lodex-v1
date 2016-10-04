@@ -3,6 +3,7 @@
 </template>
 
 <script>
+/* global Chartist */
 import MQS from 'mongodb-querystring'
 const types = ['Line', 'Bar', 'Pie']
 export default {
@@ -59,10 +60,10 @@ export default {
         })
         self.$set('data', { labels: labels, series: [serie] })
         self.chart = new Chartist[self.type](
-            self.$el,
-            self.data,
-            self.options,
-            self.responsiveOptions
+          self.$el,
+          self.data,
+          self.options,
+          self.responsiveOptions
         )
       })
     }

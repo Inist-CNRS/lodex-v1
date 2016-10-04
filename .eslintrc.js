@@ -50,7 +50,7 @@ module.exports = {
             "declaration"
         ],
         "generator-star-spacing": "error",
-        "global-require": "warn",
+        "global-require": "off",
         "guard-for-in": "warn",
         "handle-callback-err": "error",
         "id-blacklist": "error",
@@ -199,7 +199,7 @@ module.exports = {
         "prefer-arrow-callback": "off",
         "prefer-const": "error",
         "prefer-reflect": "off",
-        "prefer-rest-params": "warn",
+        "prefer-rest-params": "off",
         "prefer-spread": "error",
         "prefer-template": "off",
         "quote-props": ["error", "as-needed"],

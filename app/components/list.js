@@ -1,7 +1,6 @@
 
 // The entryPoint calls the project components.
 
-'use strict'
 var Vue = require('vue')
 
 Vue.use(require('vue-resource'))

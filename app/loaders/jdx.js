@@ -15,12 +15,10 @@ module.exports = function(options) {
   return function (input, submit, conf) {
 
 
-    var columns     = []
-      , numb        = 0
+    var numb        = 0
       , concurrency = conf.concurrency || 1
       , delay       = conf.delay || 100
-      , canRead     = true
-      , saturated   = false;
+      ;
 
     var readable = input.openStream({
       encoding: options.encoding
@@ -30,12 +28,10 @@ module.exports = function(options) {
     var timeoutID;
     var qe;
     var pause = function (resume) {
-      canRead = false;
       clearTimeout(timeoutID);
 
       timeoutID = setTimeout(function() {
         if (qe.length() < concurrency) {
-          canRead = true;
           resume();
         }
         else {

@@ -47,7 +47,8 @@
     "**/ie10-viewport-bug-workaround.js",
     "**/ie-emulation-modes-warning.js",
     "**/ie8-responsive-file-warning.js",
-    "**/rzslider.js"
+    "**/rzslider.js",
+    "**/locales/*.js"
   ],
   "test": [
     "**/test/**",
