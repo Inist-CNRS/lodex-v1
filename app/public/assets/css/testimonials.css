@@ -111,13 +111,18 @@
         
     }
         .testimonial.testimonial-info .testimonial-section{
-            border-color: #5BC0DE;
+            /*border-color: #5BC0DE; CECILIA
             color: #31b0d5;
-            background-color: rgba(91, 192, 222, 0.1);
+            background-color: rgba(91, 192, 222, 0.1);*/
+             background-color: #fff ;
+  border-color: #a6dba0;
+  color: #458ca5;           
+
         }
 
             .testimonial.testimonial-info .testimonial-section:after{
-                border-top-color: #5BC0DE;
+               /* border-top-color: #5BC0DE;*/
+              border-top-color:   #458ca5;
             }
 
         .testimonial.testimonial-info .testimonial-desc{
@@ -125,11 +130,13 @@
         }
 
             .testimonial.testimonial-info .testimonial-desc img{
-                border-color: #5BC0DE;
+                border-color: #458ca5;
+                
             }
 
             .testimonial.testimonial-info .testimonial-writer-name{
-                color: #5BC0DE;
+                color: #458ca5;
+                
             }
 
 
