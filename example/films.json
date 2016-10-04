@@ -2,6 +2,7 @@
 	"databaseName" : "films",
 	"defaultRootCollection": "data",
 	"collectionNameHotFolder": "data",
+	"itemsPerPage": 15,
 	"print": {
 		"header" : {
 			"content" : "L'expérimentation __LODEX__ a pour ambition d'extraire de chaque document présent dans le fonds ISTEX un même type d'information pour créer des jeux de données représentatifs, normalisés et interopérables en respectant au maximun les normes du web sémantique."
@@ -48,6 +49,21 @@
 				"chart" : {
 					"type" : "Line",
 					"field" :"year"
+				}
+			},
+			"displayAreas" : {
+				"insert" :true
+			}
+		},
+		"chart2" : {
+			"label": "Distribution per actor",
+			"type": "object",
+			"format": "component",
+			"scheme": "https://...",
+			"content" : {
+				"chart" : {
+					"type" : "Bar",
+					"field" :"actors"
 				}
 			},
 			"displayAreas" : {
