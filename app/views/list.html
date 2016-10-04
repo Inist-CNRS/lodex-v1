@@ -140,9 +140,10 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
         <div class="tab-content">
           <div class="tab-pane active" id="overview">
             {{ print.overview.introduction|d('Missing `print.overview.introduction` in your config file') }}
-            <div class="bs-example" data-example-id="media-alignment">
+			<div class="container">
               {% for doc in documents %}
-              <div class="panel panel-default">
+			  <div class="col-sm-4 col-md-3">
+              <div class="panel panel-default" style="height: 120px">
                 <div class="panel-body">
                   <div class="media">
                     <div class="media-left" style="color:#c4d735;">
@@ -165,6 +166,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
                   </div>
                 </div>
               </div>
+			  </div>
               {% endfor %}
             </div>
           </div>
