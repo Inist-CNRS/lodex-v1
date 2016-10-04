@@ -5,6 +5,7 @@ var path = require('path')
   , traverse = require('traverse')
   ;
 function revive (x) {
+  /* eslint-disable no-invalid-this */
   if (typeof x === 'string') {
     if (x.slice(-2) === '^N') {
       this.update(Number(x.slice(0, -2)));
@@ -16,6 +17,7 @@ function revive (x) {
       this.update(Boolean(Number(x.slice(0, -2))));
     }
   }
+  /* eslint-enable no-invalid-this */
 }
 module.exports = function mq(qry, key, def) {
   var res;
@@ -28,5 +30,5 @@ module.exports = function mq(qry, key, def) {
   }
   // debug('mongoQuery from', qry, 'search', key, 'found', qry[key], 'return', res);
   return res;
-}
+};
 

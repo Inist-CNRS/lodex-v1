@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('lodex:' + basename)
@@ -13,7 +13,7 @@ var path = require('path')
 
 module.exports = function(warmup) {
 
-  // very important : if not set, "request" use proxy for internal calls
+  // very important : if not set, 'request' use proxy for internal calls
   if (!process.env['no_proxy']) {
     process.env['no_proxy'] = '127.0.0.1,localhost';
   }
@@ -42,35 +42,35 @@ module.exports = function(warmup) {
   var appname = path.basename(process.argv[1]);
   var baseurl;
   var usage = [
-    "Usage: " + appname  + " [options...] <path>",
-    "",
-    "Options:",
-    "\t -h, --help          Show usage and exit",
-    "\t -n, --dry-run       Show config and exit",
-    "\t -v, --verbose       Make the operation more talkative",
-    "\t -V, --version       Show version number and quit",
-    "",
-    "It will look in all the obvious places to set the configuration:",
-    " - command line arguments",
-    " - environment variables prefixed with " + appname + "_",
-    " - if you passed an option --config file then from that file",
-    " - a local ." + appname + "rc or the first found looking in ./ ../ ../../ ../../../ etc.",
-    " - $HOME/." + appname + "rc",
-    " - $HOME/." + appname + "/config",
-    " - $HOME/.config/" + appname + "",
-    " - $HOME/.config/" + appname + "/config",
-    " - /etc/" + appname + "rc",
-    " - /etc/" + appname + "/config",
-    " - " + process.cwd() + "/config.local.json",
-    " - " + process.cwd() + "/config.local.js",
-    " - {dataPath}.json",
-    " - {dataPath}.js",
-  ] .join("\n")
-    ;
+    'Usage: ' + appname  + ' [options...] <path>',
+    '',
+    'Options:',
+    '\t -h, --help          Show usage and exit',
+    '\t -n, --dry-run       Show config and exit',
+    '\t -v, --verbose       Make the operation more talkative',
+    '\t -V, --version       Show version number and quit',
+    '',
+    'It will look in all the obvious places to set the configuration:',
+    ' - command line arguments',
+    ' - environment variables prefixed with ' + appname + '_',
+    ' - if you passed an option --config file then from that file',
+    ' - a local .' + appname + 'rc or the first found looking in ./ ../ ../../ ../../../ etc.',
+    ' - $HOME/.' + appname + 'rc',
+    ' - $HOME/.' + appname + '/config',
+    ' - $HOME/.config/' + appname + '',
+    ' - $HOME/.config/' + appname + '/config',
+    ' - /etc/' + appname + 'rc',
+    ' - /etc/' + appname + '/config',
+    ' - ' + process.cwd() + '/config.local.json',
+    ' - ' + process.cwd() + '/config.local.js',
+    ' - {dataPath}.json',
+    ' - {dataPath}.js',
+  ].join('\n')
+  ;
 
 
   if (argv.help) {
-    console.info(usage)
+    console.info(usage);
     process.exit(0);
   }
 
@@ -110,7 +110,7 @@ module.exports = function(warmup) {
   //
   // Default config parameters
   //
-  var Configurator = require('./helpers/configurator.js')
+  var Configurator = require('./helpers/configurator.js');
   var config = new Configurator();
   config.fix('databaseHost',         mongoHostPort);
   config.fix('databaseName',         appname);
@@ -141,12 +141,14 @@ module.exports = function(warmup) {
   config.fix('acceptFileTypes',      []);
   config.fix('allowedAltValues',     ['tsv', 'raw', 'min', 'dry']);
   config.fix('mimeTypes',            {
-    "application/json" : ['json', 'raw', 'jbj', 'min', 'dry']
+    'application/json' : ['json', 'raw', 'jbj', 'min', 'dry']
   });
   config.fix('heartrate',            5000);
-  config.fix('filesToIgnore',        [ "**/.*", "~*", "*~", "*.sw?", "*.old", "*.bak", "**/node_modules", "Thumbs.db" ]);
+  config.fix('filesToIgnore',        [ '**/.*', '~*', '*~', '*.sw?', '*.old', '*.bak',
+                                       '**/node_modules', 'Thumbs.db' ]);
   config.fix('tempPath',             os.tmpdir());
-  config.fix('dataPath',             path.normalize(path.resolve(process.cwd(), path.normalize(argv._.pop() || "./data"))));
+  config.fix('dataPath',             path.normalize(path.resolve(process.cwd(),
+                                      path.normalize(argv._.pop() || './data'))));
   config.fix('viewPath',             path.resolve(__dirname, './app/views/'));
   config.fix('middlewares',          {});
   config.fix('authorizations',       []);
@@ -168,23 +170,23 @@ module.exports = function(warmup) {
   config.fix('datasetFields',        {});
   config.fix('documentFields',       {});
   config.fix('collectionFields',     {
-    "id": {
-      "title" : "ID",
-      "stylesheet" : {
-        "content<" : {
-          "get": "_wid"
+    id: {
+      title : 'ID',
+      stylesheet : {
+        'content<' : {
+          get: '_wid'
         }
       }
     },
-    "title": {
-      "title" : "Title",
-      "stylesheet": {
-        "content<" : {
-          "get": ["_content.json.title", "title", "_text", "basename"],
-          "deduplicate" : true,
-          "cast" : "array",
-          "first": true,
-          "default" : "n/a"
+    title: {
+      title : 'Title',
+      stylesheet: {
+        'content<' : {
+          get: ['_content.json.title', 'title', '_text', 'basename'],
+          deduplicate : true,
+          cast : 'array',
+          first: true,
+          default : 'n/a'
         }
       }
     }
@@ -196,7 +198,8 @@ module.exports = function(warmup) {
   config.load(appname, argv);
 
   if (!fs.existsSync(config.get('dataPath'))) {
-    console.info(kuler('Hotfolder is disabled.', 'olive'),  kuler("No dataPath specified.", "orange"));
+    console.info(kuler('Hotfolder is disabled.', 'olive'),
+                 kuler('No dataPath specified.', 'orange'));
     config.unset('dataPath');
   }
 
@@ -217,7 +220,7 @@ module.exports = function(warmup) {
   portfinder.basePort = config.get('port');
   portfinder.getPort(function (err, newport) {
     if (err instanceof Error) {
-      console.error(kuler("Unable to get a free port. Try to stop some services.", "red"));
+      console.error(kuler('Unable to get a free port. Try to stop some services.', 'red'));
       process.exit(2);
     }
     else {
@@ -233,7 +236,8 @@ module.exports = function(warmup) {
           ];
           dataconfigs.forEach(function(datafile) {
             if (config.local(datafile)) {
-              console.info(kuler('Load local configuration file.', 'olive'), kuler(datafile, 'limegreen'));
+              console.info(kuler('Load local configuration file.', 'olive'),
+                           kuler(datafile, 'limegreen'));
             }
           });
         }
@@ -244,45 +248,55 @@ module.exports = function(warmup) {
         //
         // Default errors tracing
         //
-        if (online === undefined || typeof online !== 'function') {
+        if (online === undefined || typeof online !== 'function') {
           online = function(err, core) {
             if (err instanceof Error) {
-              console.error(kuler("Unable to init the server.", "red"), kuler(err.toString(), 'orangered'));
+              console.error(kuler('Unable to init the server.', 'red'),
+                            kuler(err.toString(), 'orangered'));
               process.exit(3);
               return;
             }
             var pack = config.get('package');
             if (pack) {
-              console.info(kuler('App detected.', 'olive'), kuler(pack.name + ' ' + pack.version, 'limegreen'));
+              console.info(kuler('App detected.', 'olive'),
+                           kuler(pack.name + ' ' + pack.version, 'limegreen'));
             }
             if (argv['dry-run']) {
-              console.info(String(' ').concat(util.inspect(config.config, { showHidden: false, depth: null, colors: true }).slice(1, -1).replace(/,\n/g, "\n").replace(/(\s\s\w+:) /g, "$1\t")));
+              console.info(String(' ').concat(
+                util.inspect(config.config, { showHidden: false, depth: null, colors: true })
+                .slice(1, -1)
+                .replace(/,\n/g, '\n')
+                .replace(/(\s\s\w+:) /g, '$1\t')));
               core.server.close(function() {
-                console.info(kuler('Server is not started.', 'olive'),  kuler(config.get('baseURL') + "/", "limegreen"));
+                console.info(kuler('Server is not started.', 'olive'),
+                             kuler(config.get('baseURL') + '/', 'limegreen'));
                 process.exit(0);
               });
             }
             else {
-              console.info(kuler('Server is listening.', 'olive'),  kuler(config.get('baseURL') + "/", "limegreen"));
+              console.info(kuler('Server is listening.', 'olive'),
+                           kuler(config.get('baseURL') + '/', 'limegreen'));
             }
-          }
+          };
         }
 
         var srv = server(config, online);
 
         process.on('SIGINT', function() {
-          console.info(kuler('Server is killed.', 'olive'),  kuler('Caught SIGINT exiting', "limegreen"));
+          console.info(kuler('Server is killed.', 'olive'),
+                       kuler('Caught SIGINT exiting', 'limegreen'));
           process.exit(1);
         });
 
         process.on('SIGTERM', function() {
           srv.close(function() {
-            console.info(kuler('Server is stopped .', 'olive'),  kuler('Caught SIGTERM exiting', "limegreen"));
+            console.info(kuler('Server is stopped .', 'olive'),
+                         kuler('Caught SIGTERM exiting', 'limegreen'));
             process.exit(1);
           });
         });
-      })
+      });
     }
   });
-}
+};
 

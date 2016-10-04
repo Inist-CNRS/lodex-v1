@@ -166,7 +166,7 @@ module.exports = {
             "error",
             { "args": "none",
               "vars": "all",
-			  "varsIgnorePattern": "debug" }
+			  "varsIgnorePattern": "debug|util" }
         ],
         "no-use-before-define": "error",
         "no-useless-call": "error",
