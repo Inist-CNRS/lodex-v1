@@ -27,9 +27,10 @@ export default {
 			required: true
 		}
 	},
-	ready () {
-		let self = this;
-		self.reload();
+	mounted () {
+		// let self = this;
+		// self.reload();
+		this.$nextTick(this.reload)
 	},
 	data () {
 		return {

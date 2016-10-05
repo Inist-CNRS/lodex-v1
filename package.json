@@ -125,8 +125,8 @@
     "mocha": "^2.5.3",
     "nodemon": "^1.9.1",
     "supertest": "^1.2.0",
-    "vue": "^1.0.26",
+    "vue": "^2.0.1",
     "vue-hot-reload-api": "^2.0.6",
-    "vueify": "^8.7.0"
+    "vueify": "^9.2.4"
   }
 }

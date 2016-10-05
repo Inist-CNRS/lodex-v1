@@ -15,9 +15,10 @@ import MQS from 'mongodb-querystring'
 import clone from 'clone'
 export default {
   props: ['field', 'title'],
-  ready () {
-    const self = this
-    self.reload()
+  mounted () {
+    // const self = this
+    // self.reload()
+    this.$nextTick(this.reload)
   },
   data () {
     return {
