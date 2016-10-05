@@ -35,7 +35,7 @@
         <!-- Bootstrap core CSS -->
         <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" >
-        <!-- Bootstrap Material Design 
+        <!-- Bootstrap Material Design
 <link rel="stylesheet" type="text/css" href="/libs/bootstrap-material-design/dist/css/bootstrap-material-design.css">
 <link rel="stylesheet" type="text/css" href="/libs/bootstrap-material-design/dist/css/ripples.min.css"> -->
 
@@ -45,7 +45,7 @@
         <link rel='stylesheet' id='bootstrap-stylesheet-css' href='/assets/css/testimonials.css' type='text/css' media='all' />
 
 
-        <!-- theme semantic UI Bootstrap 
+        <!-- theme semantic UI Bootstrap
 <link rel="stylesheet" href="/libs/semantic-ui-bootstrap-master/css/smt-bootstrap.css">-->
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -117,14 +117,14 @@
                         <div class="col-md-12 col-sm-12">
                         
 
-                                        <h2>TITRE DE LA RESSOURCE</h2>
+                                        <h2>{{ _columns.title.content.html|d('Missing `title` in your collectionFields') }}</h2>
 
 
 
                                         <div id="tb-testimonial" class="testimonial testimonial-info">
                                             <div class="testimonial-section">
                                                 <h4>Description</h4>
-                                                Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
+                                                 <p>{{ _columns.description.content.html|d('Missing `description` in your collectionFields') }}</p>
                                             </div>
                                         </div>
                                    
@@ -156,7 +156,23 @@
 
                             <div class="tab-content">
                                 <div class="tab-pane active" id="ressource">
+<<<<<<< HEAD
                                    
+=======
+                                    <div class="bs-example" data-example-id="media-alignment">
+
+                                        <h2>{{ _columns.title.content.html|d('Missing `title` in your collectionFields') }}</h2>
+
+
+
+                                        <div id="tb-testimonial" class="testimonial testimonial-info">
+                                            <div class="testimonial-section">
+                                                <h4>Description</h4>
+                                                <p>{{ _columns.description.content.html|d('Missing `description` in your collectionFields') }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+>>>>>>> fbf359947fa5b808694a9f0ee427724b26220a89
 
                                     <div id="main" class="col-md-6 clearfix">
                                         <div id="tb-testimonial" class="testimonial testimonial-success">
@@ -191,7 +207,7 @@
                                                 </ul>
                                             </div>
 
-                                        </div> 
+                                        </div>
 
                                     </div>
                                     <div id="main" class="col-md-6 clearfix">
@@ -226,7 +242,7 @@
                                                 </ul>
                                             </div>
 
-                                        </div> 
+                                        </div>
 
                                     </div>
                                 </div>
@@ -243,14 +259,14 @@
                                     </p>
                                     <p>
                                         Elle est librement téléchargeable au travers de plusieurs formats&nbsp;:
-                                    </p>    
+                                    </p>
                                     <div class="col-md-6">
                                         <div class="update-nag">
                                             <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                            <div class="update-text">XSLX <a href="http://file-format.lod.istex.fr/=/xslx" data-lodex="outer">Plus d'information</a> 
+                                            <div class="update-text">XSLX <a href="http://file-format.lod.istex.fr/=/xslx" data-lodex="outer">Plus d'information</a>
                                                 <a href="/corpus.xlsx">
-                                                    <span class="fa fa-download"></span> 
-                                                    Télécharger</a> 
+                                                    <span class="fa fa-download"></span>
+                                                    Télécharger</a>
                                             </div>
                                         </div>
                                     </div>
@@ -268,22 +284,22 @@
                                     <div class="col-md-6">
                                         <div class="update-nag">
                                             <div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                            <div class="update-text">CSV 
-                                                <a href="file-format.lod.istex.fr/=/csv" data-lodex="outer">Plus d'information</a> 
-                                                <a  href="/corpus.csv" > 
+                                            <div class="update-text">CSV
+                                                <a href="file-format.lod.istex.fr/=/csv" data-lodex="outer">Plus d'information</a>
+                                                <a  href="/corpus.csv" >
                                                     <span class="fa fa-download"></span>
-                                                    Télécharger</a> 
+                                                    Télécharger</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="update-nag">
                                             <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                            <div class="update-text">N-Quads 
-                                                <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">Plus d'information</a> 
-                                                <a  href="/corpus.nq" > 
+                                            <div class="update-text">N-Quads
+                                                <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">Plus d'information</a>
+                                                <a  href="/corpus.nq" >
                                                     <span class="fa fa-download"></span>
-                                                    Télécharger</a> 
+                                                    Télécharger</a>
                                             </div>
                                         </div>
                                     </div>
@@ -302,11 +318,11 @@
                                     <div class="col-md-6">
                                         <div class="update-nag">
                                             <div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                            <div class="update-text">JSONLD 
-                                                <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">Plus d'information</a> 
+                                            <div class="update-text">JSONLD
+                                                <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">Plus d'information</a>
                                                 <a  href="/corpus.jsonld">
-                                                    <span class="fa fa-download"></span> 
-                                                    Télécharger</a> 
+                                                    <span class="fa fa-download"></span>
+                                                    Télécharger</a>
                                             </div>
                                         </div>
                                     </div>
@@ -370,19 +386,19 @@
 
                     <div id="tb-testimonial" class="testimonial testimonial-info">
                         <div class="testimonial-section">
-                            <p>Cette donnée est CONTENUE dns le jeux de données </p> 
+                            <p>Cette donnée est CONTENUE dns le jeux de données </p>
 
 
 
-                            <a href="/corpus.html"><i class="fa fa-leaf " style="color:#c4d735"> Films</i></a>  
-                            <p>Several films to demontrate the usage of LODEX / October 3, 2016</p> 
+                            <a href="/corpus.html"><i class="fa fa-leaf " style="color:#c4d735"> Films</i></a>
+                            <p>Several films to demontrate the usage of LODEX / October 3, 2016</p>
                         </div>
                     </div>
                     <div id="tb-testimonial" class="testimonial testimonial-info">
                         <div class="testimonial-section">
                             <p>Cette donnée contient XX jeux de données </p>
 
-                            <p>Lien vers Contient</p> 
+                            <p>Lien vers Contient</p>
                         </div>
                     </div>
 
@@ -398,7 +414,7 @@
 
 
 
-                    </div>     
+                    </div>
 
                 </div>
             </div>
