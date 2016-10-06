@@ -73,7 +73,11 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 										</div>
 									</div>
 									<div class="col-md-6">
-										<div id="test"></div>
+										{% for name, col in documents[0]._columns %}
+										{% if col.cover == 'dataset' and col.scheme == 'https://schema.org/image' %}
+										{{ col.content.html }}
+										{% endif %}
+										{% endfor %}
 									</div>
 								</div>
 							</div>

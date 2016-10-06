@@ -82,7 +82,7 @@
 				}
 			},
 			"displayAreas" : {
-				"insert" : true
+				"insert" : false
 			}
 		}
 	},
