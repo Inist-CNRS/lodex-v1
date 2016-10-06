@@ -13,7 +13,7 @@ var chart = require('./chart.vue')
 
 module.exports = new Vue({
 
-  el: '.container',
+  el: '#content',
 
   components: {
 
