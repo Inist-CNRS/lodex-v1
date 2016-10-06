@@ -171,13 +171,12 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 						</div>
 						<nav aria-label="Pagination">
 							<ul class="pager">
-								{% set page = 15 %}
-								{% set prev = (documents[0]._count[0] - page) %}
+								{% set prev = (documents[0]._count[0] - itemsPerPage) %}
 								{% set next = (documents[documents.length - 1]._count[0] + 1) %}
 								{% set maxi = (documents[documents.length - 1]._count[1]) %}
-								{% set truc = maxi - page - 1 %}
+								{% set truc = maxi - itemsPerPage - 1 %}
 								<li class="previous {{ "disabled" if (prev < 0)  }}"><a href="?%24offset={{ prev if (prev >= 0) else 0 }}"><span aria-hidden="true">&larr;</span> Older</a></li>
-								<li class="next {{ "disabled" if (next < maxi)  }}"><a href="?%24offset={{ next if (next >= maxi) else 0 }}">Newer <span aria-hidden="true">&rarr;</span></a></li>
+								<li class="next {{ "disabled" if (next >= maxi)  }}"><a href="?%24offset={{ next if (next < maxi) else 0 }}">Newer <span aria-hidden="true">&rarr;</span></a></li>
 							</ul>
 						</nav>
 					</div>

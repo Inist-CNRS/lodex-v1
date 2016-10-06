@@ -34,6 +34,7 @@ module.exports = function(options, core) {
       var template = self.documents.length === 1 ? 'item.html' : 'list.html';
       var locals = self.documents.length === 1 ? self.documents[0] : { documents : self.documents };
       locals.print = core.config.get('print');
+      locals.itemsPerPage = core.config.get('itemsPerPage');
       debug('rendering', template);
       self.stream.render(template, locals);
     }
