@@ -131,7 +131,7 @@ module.exports = function(warmup) {
   config.fix('maxAge',               '1 day');
   config.fix('concurrency',          os.cpus().length);
   config.fix('writeConcern',         1);
-  config.fix('rootURL',              '/index.html');
+  config.fix('rootURL',              '/corpus.html');
   config.fix('loginURL',             '/login.html');
   config.fix('baseURL',              baseurl);
   config.fix('prefixURL',            ''); // ex: /server1
@@ -139,10 +139,24 @@ module.exports = function(warmup) {
   config.fix('rootKEY',              'corpus');
   config.fix('maxFileSize',          10485760); // 10 Mo
   config.fix('acceptFileTypes',      []);
-  config.fix('allowedAltValues',     ['tsv', 'raw', 'min', 'dry']);
-  config.fix('mimeTypes',            {
-    'application/json' : ['json', 'raw', 'jbj', 'min', 'dry']
-  });
+  config.fix('allowedAltValues',     [
+    'dry',
+    'jdx',
+    'min',
+    'csv',
+    'jsonld',
+    'nq',
+    'n3',
+    'ttl',
+    'trig',
+    'jbj',
+    'xls',
+    'tsv',
+    'html',
+    'jsonad',
+    'raw'
+  ]);
+  config.fix('mimeTypes',            {});
   config.fix('heartrate',            5000);
   config.fix('filesToIgnore',        [ '**/.*', '~*', '*~', '*.sw?', '*.old', '*.bak',
                                        '**/node_modules', 'Thumbs.db' ]);

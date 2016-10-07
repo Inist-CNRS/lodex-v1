@@ -1,9 +1,9 @@
 /*eslint strict: "off", quotes:"off", semi: "off" */
 'use strict'
-
+//
+// ATTENTION :Les variables de configuration suivantes ne peuvent pas être surchargée localement.
+// les valeurs par défaut, donc modifiable localement, sont défnies dans le fichier index.js
 module.exports = {
-  rootURL : '/corpus.html',
-  rootKEY : 'corpus',
   maxFileSize: 536870912,
   collectionNameHotFolder : 'data',
   defaultRootCollection: 'data',
@@ -34,23 +34,6 @@ module.exports = {
     'n3',
     'nt',
     'json'
-  ],
-  allowedAltValues : [
-    'dry',
-    'jdx',
-    'min',
-    'csv',
-    'jsonld',
-    'nq',
-    'n3',
-    'ttl',
-    'trig',
-    'jbj',
-    'xls',
-    'tsv',
-    'html',
-    'jsonad',
-    'raw'
   ],
   /*  access: [
     {
