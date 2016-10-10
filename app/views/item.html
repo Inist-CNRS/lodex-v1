@@ -203,7 +203,7 @@
                                 <div class="update-nag">
                                     <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
                                     <div class="update-text">XSLX <a href="http://file-format.lod.istex.fr/=/xslx" data-lodex="outer">Plus d'information</a>
-                                        <a href="/corpus.xlsx">
+                                        <a href="{{ _uri }}.xlsx">
                                             <span class="fa fa-download"></span>
                                             Télécharger</a>
                                     </div>
@@ -214,7 +214,7 @@
                                 <div class="update-nag">
                                     <div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
                                     <div class="update-text">TSV <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">Plus d'information</a>
-                                        <a  href="/corpus.tsv" >
+                                        <a  href="{{ _uri }}.tsv" >
                                             <span class="fa fa-download"></span> Télécharger
                                         </a>
                                     </div>
@@ -225,7 +225,7 @@
                                     <div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
                                     <div class="update-text">CSV
                                         <a href="file-format.lod.istex.fr/=/csv" data-lodex="outer">Plus d'information</a>
-                                        <a  href="/corpus.csv" >
+                                        <a  href="{{ _uri }}.csv" >
                                             <span class="fa fa-download"></span>
                                             Télécharger</a>
                                     </div>
@@ -236,7 +236,7 @@
                                     <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
                                     <div class="update-text">N-Quads
                                         <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">Plus d'information</a>
-                                        <a  href="/corpus.nq" >
+                                        <a  href="{{ _uri }}.nq" >
                                             <span class="fa fa-download"></span>
                                             Télécharger</a>
                                     </div>
@@ -247,7 +247,7 @@
                                 <div class="update-nag">
                                     <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
                                     <div class="update-text">N-Quads (Excel) <a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">Plus d'information</a>
-                                        <a  href="/corpus.nqx" >
+                                        <a  href="{{ _uri }}.nqx" >
                                             <span class="fa fa-download"></span> Télécharger
                                         </a>
                                     </div>
@@ -259,7 +259,7 @@
                                     <div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
                                     <div class="update-text">JSONLD
                                         <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">Plus d'information</a>
-                                        <a  href="/corpus.jsonld">
+                                        <a  href="{{ _uri }}.jsonld">
                                             <span class="fa fa-download"></span>
                                             Télécharger</a>
                                     </div>
@@ -328,7 +328,7 @@
             <div id="tb-testimonial" class="testimonial testimonial-info">
                 <div class="testimonial-section">
                     <p>Cette donnée est CONTENUE dans : {{ _columns.title1.label|d('Missing `title` in your collectionFields') }} 
-                        <a href="/corpus.html"><i class="fa fa-leaf " style="color:#c4d735"> {{ _columns.title1.content.html|d('Missing `title` in your collectionFields') }}</i></a></p>
+                        <a href="{{ _uri }}.html"><i class="fa fa-leaf " style="color:#c4d735"> {{ _columns.title1.content.html|d('Missing `title` in your collectionFields') }}</i></a></p>
                     <p>{{ _columns.desc1.label|d('Missing `desc1` in your collectionFields') }} : {{ _columns.desc1.content.html|d('Missing `desc1` in your collectionFields') }}</p>
                 </div>
             </div>
