@@ -5,10 +5,11 @@ var path = require('path'),
   debug = require('debug')('lodex:downloaders:' + basename);
 
 var type2scheme = {
-  "string" : "https://www.w3.org/TR/xmlschema-2/#string",
-  "date" : "https://www.w3.org/TR/xmlschema-2/#date",
-  "boolean" : "https://www.w3.org/TR/xmlschema-2/#boolean"
-}
+  string : 'https://www.w3.org/TR/xmlschema-2/#string',
+  date : 'https://www.w3.org/TR/xmlschema-2/#date',
+  boolean : 'https://www.w3.org/TR/xmlschema-2/#boolean'
+};
+
 module.exports = function(options, core) {
   options = options || {};
   return function (data, submit) {
