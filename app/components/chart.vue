@@ -45,7 +45,7 @@ export default {
         $sort: {
           value: -1
         },
-		$limit : 10
+        $limit: 10
       }
       const url = window.location.protocol
       .concat('//')
