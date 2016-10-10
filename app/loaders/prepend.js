@@ -10,7 +10,7 @@ module.exports = function(options) {
     input.name = path
     .basename(input.location, path.extname(input.location))
     .replace(/[_\-\.]+/g, ' ');
-    input.identifier = shorthash(input.fid + input.number)
+    input.identifier = shorthash(input.fid + input.number);
 
     submit(null, input);
   };
