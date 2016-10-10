@@ -76,7 +76,7 @@ export default {
       const url = window.location.protocol
       .concat('//')
       .concat(window.location.host)
-      .concat('/corpus.jsonad?')
+      .concat('/*?alt=jsonad&')
       .concat(MQS.stringify(qry, {}))
 
       self.$http.get(url).then(function (response) {
