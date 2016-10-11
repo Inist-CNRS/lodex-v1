@@ -54,8 +54,8 @@ Chain.prototype.apply = function (cursor, res, next) {
     res.on('finish', function() {
       cursor.close();
     });
-    cursor.on('end', function() {
-      debug('cursor end with ', counter, 'documents');
+    cursor.on('readable', function() {
+      debug('opening the pipe with ' + counter + ' document(s) of', count);
     });
 
     stream = stream.pipe(es.map(function (data, callback) {
@@ -114,6 +114,7 @@ Chain.prototype.apply = function (cursor, res, next) {
     });
 
     stream.on('end', function() {
+      debug('Stream ending with ', counter, 'documents of ', count);
       onendrs.forEach(function(idx) {
         var onend = statements[idx].onend;
         if (typeof onend === 'function') {

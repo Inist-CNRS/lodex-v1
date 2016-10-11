@@ -73,7 +73,11 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 										</div>
 									</div>
 									<div class="col-md-6">
-										<div id="test"></div>
+										{% for name, col in documents[0]._columns %}
+										{% if col.cover == 'dataset' and col.scheme == 'https://schema.org/image' %}
+										{{ col.content.html }}
+										{% endif %}
+										{% endfor %}
 									</div>
 								</div>
 							</div>
@@ -171,13 +175,12 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 						</div>
 						<nav aria-label="Pagination">
 							<ul class="pager">
-								{% set page = 15 %}
-								{% set prev = (documents[0]._count[0] - page) %}
+								{% set prev = (documents[0]._count[0] - itemsPerPage) %}
 								{% set next = (documents[documents.length - 1]._count[0] + 1) %}
 								{% set maxi = (documents[documents.length - 1]._count[1]) %}
-								{% set truc = maxi - page - 1 %}
+								{% set truc = maxi - itemsPerPage - 1 %}
 								<li class="previous {{ "disabled" if (prev < 0)  }}"><a href="?%24offset={{ prev if (prev >= 0) else 0 }}"><span aria-hidden="true">&larr;</span> Older</a></li>
-								<li class="next {{ "disabled" if (next < maxi)  }}"><a href="?%24offset={{ next if (next >= maxi) else 0 }}">Newer <span aria-hidden="true">&rarr;</span></a></li>
+								<li class="next {{ "disabled" if (next >= maxi)  }}"><a href="?%24offset={{ next if (next < maxi) else 0 }}">Newer <span aria-hidden="true">&rarr;</span></a></li>
 							</ul>
 						</nav>
 					</div>
@@ -192,7 +195,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 								<h3>XSLX</h3>
 								<dl class="dl-horizontal lead">
 									<dt>
-									<a  href="/corpus.xlsx" class="btn btn-default">
+									<a  href="/*?alt=xlsx" class="btn btn-default">
 										<span class="fa fa-download"></span> Télécharger
 									</a>
 									</dt>
@@ -205,7 +208,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 								<h3>TSV</h3>
 								<dl class="dl-horizontal lead">
 									<dt>
-									<a  href="/corpus.tsv" class="btn btn-default">
+									<a  href="/*?alt=tsv" class="btn btn-default">
 										<span class="fa fa-download"></span> Télécharger
 									</a>
 									</dt>
@@ -218,7 +221,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 								<h3>CSV</h3>
 								<dl class="dl-horizontal lead">
 									<dt>
-									<a  href="/corpus.csv" class="btn btn-default">
+									<a  href="/*?alt=csv" class="btn btn-default">
 										<span class="fa fa-download"></span> Télécharger
 									</a>
 									</dt>
@@ -231,7 +234,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 								<h3>N-Quads</h3>
 								<dl class="dl-horizontal lead">
 									<dt>
-									<a  href="/corpus.nq" class="btn btn-default">
+									<a  href="/*?alt=nq" class="btn btn-default">
 										<span class="fa fa-download"></span> Télécharger
 									</a>
 									</dt>
@@ -244,7 +247,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 								<h3>N-Quads (Excel)</h3>
 								<dl class="dl-horizontal lead">
 									<dt>
-									<a  href="/corpus.nqx" class="btn btn-default">
+									<a  href="/*?alt=nqx" class="btn btn-default">
 										<span class="fa fa-download"></span> Télécharger
 									</a>
 									</dt>
@@ -257,7 +260,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 								<h3>JSONLD</h3>
 								<dl class="dl-horizontal lead">
 									<dt>
-									<a  href="/corpus.jsonld" class="btn btn-default">
+									<a  href="/*?alt=jsonld" class="btn btn-default">
 										<span class="fa fa-download"></span> Télécharger
 									</a>
 									</dt>
@@ -270,7 +273,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 								<h3>Turtle</h3>
 								<dl class="dl-horizontal lead">
 									<dt>
-									<a  href="/corpus.ttl" class="btn btn-default">
+									<a  href="/*?alt=ttl" class="btn btn-default">
 										<span class="fa fa-download"></span> Télécharger
 									</a>
 									</dt>

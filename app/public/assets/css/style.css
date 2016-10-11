@@ -4260,6 +4260,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .pager li > span {
   display: inline-block;
   padding: 5px 14px;
+  color: #00a241; 
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 15px;
@@ -4281,7 +4282,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .pager .disabled > a:hover,
 .pager .disabled > a:focus,
 .pager .disabled > span {
-  color: #00a241;
+  color: #999; 
   background-color: #fff;
   cursor: not-allowed;
 }

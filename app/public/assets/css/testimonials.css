@@ -9,6 +9,7 @@
         width: 100%;
         height: auto;
         padding: 15px;
+        margin-top: 15px;
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         border-radius: 5px;
@@ -19,7 +20,7 @@
         top: 100%;
         left: 50px;
         border: solid transparent;
-        content: " ";
+      /*  content: " ";*/
         position: absolute;
         border-top-color: #fff;
         border-width: 15px;
