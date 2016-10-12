@@ -295,20 +295,24 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 						{{ print.ontology.introduction|d('Missing `print.ontology.introduction` in your config file') }}
 						<div>
 							{% for key, col in documents[0]._columns %}
-							<h4> {{ col.title }}</h4>
+							<h4> {{ col.label|d('?') }}</h4>
 							<dl class="dl-horizontal lead">
-								<dt>label</dt>
-								<dd>
-								{{ documents[0].colonnes[key].label|d('?') }}
-								</dd>
 								<dt>scheme</dt>
 								<dd>
-								<a href="{{ col.scheme }}"></a>
+								<a href="{{ col.scheme }}">{{ col.scheme }}</a>
 								</dd>
+								{% if col.type %}
 								<dt>type</dt>
 								<dd>
 								{{ col.type }}
 								</dd>
+								{% endif %}
+								{% if col.cover %}
+								<dt>cover</dt>
+								<dd>
+								{{ col.cover }}
+								</dd>
+								{% endif %}
 							</dl>
 
 							{% endfor %}

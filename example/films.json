@@ -6,7 +6,7 @@
 	"collectionNameHotFolder": "data",
 	"prefixKEY" : "ark:/12345",
 	"uniqueIdentifierWith" : {
-		"get": "_wid",
+		"get": "identifier",
 		"upcase" : true,
 		"prepend": "ABC-"
 	},

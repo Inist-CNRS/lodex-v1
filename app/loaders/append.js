@@ -2,7 +2,6 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('lodex:loaders:' + basename)
-  , shorthash = require('short-hash')
   ;
 
 module.exports = function(options) {
@@ -19,7 +18,7 @@ module.exports = function(options) {
       delete input['_wid'];
     }
     if (input['_wid'] === undefined) {
-      input['_wid'] = shorthash(input.fid + input.number);
+      input['_wid'] = input.identifier;
     }
 
     // _text
