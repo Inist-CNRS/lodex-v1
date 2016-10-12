@@ -13,9 +13,10 @@
 import MQS from 'mongodb-querystring'
 export default {
   props: ['query', 'title', 'mode'],
-  ready () {
-    const self = this
-    self.reload()
+  mounted () {
+    // const self = this
+    // self.reload()
+    this.$nextTick(this.reload)
   },
   data () {
     return {

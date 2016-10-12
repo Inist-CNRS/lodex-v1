@@ -21,13 +21,14 @@ export default {
       required: true
     }
   },
-  ready () {
-    const self = this
-    self.reload()
+  mounted () {
+    // const self = this
+    // self.reload()
+    this.$nextTick(this.reload)
   },
   data () {
     return {
-      data: { },
+      data: { labels: [], series: [] },
       options: {
         fullWidth: true,
         chartPadding: {
@@ -59,7 +60,8 @@ export default {
           labels.push(i['_id'])
           serie.push(i.value)
         })
-        self.$set('data', { labels: labels, series: [serie] })
+        self.$copyArray(labels, self.data.labels)
+        self.$copyArray([serie], self.data.series)
         self.chart = new Chartist[self.type](
           self.$el,
           self.data,
@@ -67,6 +69,11 @@ export default {
           self.responsiveOptions
         )
       })
+    },
+    $copyArray (from, to) {
+      for (let i = 0; i < from.length; i++) {
+        this.$set(to, i, from[i])
+      }
     }
   }
 }

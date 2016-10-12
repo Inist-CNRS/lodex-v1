@@ -13,7 +13,7 @@
 	"itemsPerPage": 15,
 	"print": {
 		"header" : {
-			"content" : "L'expérimentation __LODEX__ a pour ambition d'extraire de chaque document présent dans le fonds ISTEX un même type d'information pour créer des jeux de données représentatifs, normalisés et interopérables en respectant au maximun les normes du web sémantique."
+			"content" : "L'expérimentation __LODEX__ a pour ambition d'extraire de chaque document présent dans le fonds ISTEX un même type d'information pour créer des jeux de données représentatifs, normalisés et interopérables en respectant au maximum les normes du web sémantique."
 		},
 		"overview" : {
 			"introduction" : "Voici un aperçu des quelques films décrits dans ce jeu de données."
@@ -25,7 +25,7 @@
 			"introduction" : "Ce jeu de données est disponible sur ce site selon une syntaxe `tableau`, avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD et N-Quads. Ils sont librement téléchargeable au travers de plusieurs formats&nbsp;x:"
 		},
 		"ontology" : {
-			"introduction" : "Ce jeu de donées a été modélisé à partir de plusieurs propriétés issues de plsuieurs ontologies différentes"
+			"introduction" : "Ce jeu de données a été modélisé à partir de plusieurs propriétés issues de plusieurs ontologies différentes"
 		}
 	},
 	"datasetFields": {
@@ -118,7 +118,9 @@
 			"label": "Description",
 			"scheme": "http://purl.org/dc/terms/description",
 			"type": "string",
-			"content": "n/a"
+			"content<": {
+        "get": "_content.json.director"
+      }
 		},
 		"year": {
 			"label": "Year",

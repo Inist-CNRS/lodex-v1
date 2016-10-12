@@ -15,7 +15,7 @@
     <thead class="cf">
       <tr>
       <th>URI</th>
-      <th v-for="(colkey, col) in columns" @click="sortBy(colkey)" style="cursor: pointer;">
+      <th v-for="(col, colkey) in columns" @click="sortBy(colkey)" style="cursor: pointer;">
         <i v-if="sortKeys[colkey] === 1" class="fa fa-sort-up pull-right" aria-hidden="true"></i>
         <i v-if="sortKeys[colkey] === 0" class="fa fa-sort pull-right" aria-hidden="true"></i>
         <i v-if="sortKeys[colkey] === -1" class="fa fa-sort-down pull-right" aria-hidden="true"></i>
@@ -23,12 +23,12 @@
       </th>
     </thead>
     <tbody>
-      <tr v-for="(index, doc) in items">
+      <tr v-for="(doc, index) in items">
         <td data-title="URI">
-          <a href="{{ doc._uri }}.html">{{ doc._wid }}</a>
+          <a v-bind:href="doc._uri + '.html'">{{ doc._wid }}</a>
         </td>
-        <td v-for="(colkey, col) in columns">
-          {{{ doc._columns[colkey].content.html }}}
+        <td v-for="(col, colkey) in columns"
+            v-html="doc._columns[colkey].content.html">
         </td>
       </tr>
     </tbody>
@@ -39,9 +39,10 @@
 <script>
 import MQS from 'mongodb-querystring'
 export default {
-  ready () {
-    const self = this
-    self.reload()
+  mounted () {
+    // const self = this
+    // self.reload()
+    this.$nextTick(this.reload)
   },
   data () {
     return {
@@ -96,17 +97,17 @@ export default {
           self.offset -= self.step
         }
         else {
-          self.$set('items', response.body)
+          self.$copyArray(response.body, self.items)
         }
       })
     },
     sortBy: function (key) {
       const self = this
       if (self.sortKeys[key] >= 0) {
-        self.$set('sortKeys.' + key, -1)
+        self.$set(self.sortKeys, key, -1)
       }
       else {
-        self.$set('sortKeys.' + key, 1)
+        self.$set(self.sortKeys, key, 1)
       }
       self.reload()
     },
@@ -122,6 +123,11 @@ export default {
         self.offset = 0
       }
       self.reload()
+    },
+    $copyArray (from, to) {
+      for (let i = 0; i < from.length; i++) {
+        this.$set(to, i, from[i])
+      }
     }
   }
 }

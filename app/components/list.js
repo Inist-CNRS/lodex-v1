@@ -1,7 +1,8 @@
 
 // The entryPoint calls the project components.
 
-var Vue = require('vue')
+// http://vuejs.org/guide/installation.html#Standalone-vs-Runtime-only-Build
+var Vue = require('vue/dist/vue.js')
 
 Vue.use(require('vue-resource'))
 
@@ -12,7 +13,7 @@ var chart = require('./chart.vue')
 
 module.exports = new Vue({
 
-  el: 'body',
+  el: '#content',
 
   components: {
 
