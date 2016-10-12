@@ -2,6 +2,13 @@
 
 LODEX is an experimentation aiming to link [ISTEX](http://www.istex.fr) data to the web of data.
 
+
+[![french trello board](https://raw.githubusercontent.com/Inist-CNRS/ezmaster/master/doc/trello_20x20.png)](https://trello.com/b/7PrF8ckq/lodex-suivi) [![Build Status](https://travis-ci.org/Inist-CNRS/lodex.svg?branch=master)](https://travis-ci.org/Inist-CNRS/ezmaster)
+
+[![Docker status](http://dockeri.co/image/inistcnrs/lodex)](https://registry.hub.docker.com/u/inistcnrs/lodex/)
+
+
+
 ## Installation
 
 See the [Installation instructions](Installation.md) page.
