@@ -3,10 +3,6 @@
 LODEX is an experimentation aiming to link [ISTEX](http://www.istex.fr) data to the web of data.
 
 
-[![french trello board](https://raw.githubusercontent.com/Inist-CNRS/ezmaster/master/doc/trello_20x20.png)](https://trello.com/b/7PrF8ckq/lodex-suivi) [![Build Status](https://travis-ci.org/Inist-CNRS/lodex.svg?branch=master)](https://travis-ci.org/Inist-CNRS/ezmaster)
-
-[![Docker status](http://dockeri.co/image/inistcnrs/lodex)](https://registry.hub.docker.com/u/inistcnrs/lodex/)
-
 
 
 ## Installation
@@ -111,7 +107,8 @@ Here are few indicators of the quality of the code, they can be used as indicati
 [![bitHound Dependencies](https://www.bithound.io/github/Inist-CNRS/lodex/badges/dependencies.svg)](https://www.bithound.io/github/Inist-CNRS/lodex/master/dependencies/npm)
 [![bitHound Dev Dependencies](https://www.bithound.io/github/Inist-CNRS/lodex/badges/devDependencies.svg)](https://www.bithound.io/github/Inist-CNRS/lodex/master/dependencies/npm)
 [![bitHound Code](https://www.bithound.io/github/Inist-CNRS/lodex/badges/code.svg)](https://www.bithound.io/github/Inist-CNRS/lodex/master/files)
+[![Docker status](http://dockeri.co/image/inistcnrs/lodex)](https://registry.hub.docker.com/u/inistcnrs/lodex/)
 
-To understand, see:
+ - To try to understand, see [General specifications](https://docs.google.com/presentation/d/1SpPWMXYkbw9FcTuXC2LFrp6Krfue2_aLkGzYMB4UpoI/pub?start=false&loop=false&delayms=3000)
+ - To try to follow, see [![french trello board](https://raw.githubusercontent.com/Inist-CNRS/ezmaster/master/doc/trello_20x20.png) French Trello](https://trello.com/b/7PrF8ckq/lodex-suivi)
 
- - [General specifications](https://docs.google.com/presentation/d/1SpPWMXYkbw9FcTuXC2LFrp6Krfue2_aLkGzYMB4UpoI/pub?start=false&loop=false&delayms=3000)
