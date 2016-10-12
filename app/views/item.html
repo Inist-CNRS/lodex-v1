@@ -65,14 +65,14 @@
                 <div class="col-md-12 col-sm-12">
 
 
-                    <h2>{{ _columns.title.content.html|d('Missing `title` in your collectionFields') }}</h2>
+                    <h2>{{ _columns|getByScheme('http://purl.org/dc/terms/title')|d('Missing "title" in your collectionFields')}}</h2>
 
 
 
                     <div id="tb-testimonial" class="testimonial testimonial-info">
                         <div class="testimonial-section">
                             <h4>Description</h4>
-                            <p>{{ _columns.description.content.html|d('Missing `description` in your collectionFields') }}</p>
+                            <p>{{ _columns|getByScheme('http://purl.org/dc/terms/description')|d('Missing "description" in your collectionFields')}}</p>
                             <p>Bon pour pas faire moche j'écris quand même une description ici ... </p>
                         </div>
                     </div>
@@ -327,7 +327,7 @@
 
             <div id="tb-testimonial" class="testimonial testimonial-info">
                 <div class="testimonial-section">
-                    <p>Cette donnée est CONTENUE dans : {{ _columns.title1.label|d('Missing `title` in your collectionFields') }} 
+                    <p>Cette donnée est CONTENUE dans : {{ _columns.title1.label|d('Missing `title` in your collectionFields') }}
                         <a href="{{ _uri }}.html"><i class="fa fa-leaf " style="color:#c4d735"> {{ _columns.title1.content.html|d('Missing `title` in your collectionFields') }}</i></a></p>
                     <p>{{ _columns.desc1.label|d('Missing `desc1` in your collectionFields') }} : {{ _columns.desc1.content.html|d('Missing `desc1` in your collectionFields') }}</p>
                 </div>
