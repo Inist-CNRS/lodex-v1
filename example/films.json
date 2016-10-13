@@ -164,6 +164,7 @@
 			"label": "Updated",
 			"scheme": "http://purl.org/dc/terms/modified",
 			"type": "date",
+			"format": "LL",
 			"content<": {
 				"get": "dateSynchronised"
 			}

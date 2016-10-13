@@ -101,20 +101,14 @@
                                         <ul>
 
                                             <li>
-                                                <h5>{{ _columns.id.title|d('Missing `title` in your collectionFields') }}</h5>
-                                                <p>{{ _columns.id.stylesheet.content|d('Missing `title` in your collectionFields') }}</p>
+                                                <h5>{{ _columns.id.title|d('Missing `id.title` in your collectionFields') }}</h5>
+                                                <p>{{ _columns.id.stylesheet.content|d('Missing `id.stylesheet.content` in your collectionFields') }}</p>
                                             </li>
                                             <li>
-                                                <h5>{{ _columns|getByScheme("http://purl.org/dc/terms/title",{select:"label"})|d('Missing `title` in your collectionFields') }} (http://purl.org/dc/terms/title)</h5>
-                                                <p>{{ _columns|getContentByScheme("http://purl.org/dc/terms/title")|d('Missing `dc:title` in your collectionFields') }}</p>
-                                            </li>
-                                            <li>
-                                                <h5>uri  </h5>
-                                                <p>{{ _uri|d('Missing `uri` in your collectionFields') }}</p>
-                                            </li>
-                                            <li>
-                                                <h5>un autre truc ici </h5>
-                                                <p>..ou pas</p>
+                                                <h5>URI</h5>
+                                                <p>
+                                                    <a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
+                                                </p>
                                             </li>
 
                                         </ul>
@@ -123,38 +117,28 @@
                                 </div>
 
                             </div>
+
                             <div class="col-md-6 clearfix">
                                 <div class="testimonial testimonial-success">
 
                                     <div class="testimonial-section">
                                         <p>Propriétés</p>
                                         <ul>
+                                        {% for columnName, column in _columns %}
+                                        {% if column.cover == 'collection' and column.label %}
                                             <li>
-                                                <h5>{{ _columns.year.label|d('Missing `tyear` in your collectionFields') }}  ({{ _columns.year.scheme|d('Missing `scheme` in your collectionFields') }})</h5>
-                                                <p>{{ _columns.year.content.html|d('Missing `year` in your collectionFields') }}</p>
+                                                <h5>{{ column.label }} ({{ column.scheme }})</h5>
+                                                <p>{{ column.content.html }}</p>
                                             </li>
-
-                                            <li>
-                                                <h5>{{ _columns.actors.label|d('Missing `actors` in your collectionFields') }} ({{ _columns.actors.scheme|d('Missing `scheme` in your collectionFields') }})</h5>
-                                                <p>{{ _columns.actors.content.html|d('Missing `actors` in your collectionFields') }}</p>
-                                            </li>
-
-                                            <li>
-                                                <h5>{{ _columns.director.label|d('Missing `director` in your collectionFields') }} ({{ _columns.director.scheme|d('Missing `scheme` in your collectionFields') }})</h5>
-                                                <p>{{ _columns.director.content.html|d('Missing `actors` in your collectionFields') }}</p>
-                                            </li>
-
-                                            <li>
-                                                <h5>{{ _columns.updated.label|d('Missing `desc1` in your collectionFields') }} ({{ _columns.updated.scheme|d('Missing `scheme` in your collectionFields') }})</h5>
-                                                <p>{{ _columns.updated.content.html|d('Missing `desc1` in your collectionFields') }}</p>
-                                            </li>
-
+                                        {% endif %}
+                                        {% endfor %}
                                         </ul>
                                     </div>
 
                                 </div>
 
                             </div>
+
                         </div>
 
 
@@ -235,7 +219,7 @@
 
                             <section class="page-content entry-content clearfix" itemprop="articleBody">
                                 <a href="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence.gif" rel="attachment wp-att-214"><img class="size-medium wp-image-214 alignnone" src="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence-300x166.gif" alt="licence-ouverte-open-licence" width="300" height="166"></a>
-                                <p>Les données mise en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. &nbsp;Comme les données ISTEX, Elles sont &nbsp;placées sous le régime de la licence ouverte/open licence Etalab (cf. <a href="http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf">contrat de licence type</a>).</p>
+                                <p>Les données mise en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. &nbsp;Comme les données ISTEX, elles sont placées sous le régime de la licence ouverte/open licence Etalab (cf. <a href="http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf">contrat de licence type</a>).</p>
                                 <p>&nbsp;</p>
                                 <blockquote data-secret="QLzNqK36kW" class="wp-embedded-content" style="display: none;"><p><a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence">Licence Ouverte / Open Licence</a></p></blockquote>
                                 <p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" src="https://www.etalab.gouv.fr/licence-ouverte-open-licence/embed#?secret=QLzNqK36kW" data-secret="QLzNqK36kW" width="500" height="300" title="Inclure un article WordPress" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
@@ -246,9 +230,9 @@
                             <div class="testimonial testimonial-info">
                                 <div class="testimonial-section">
                                     <p>Cette donnée est CONTENUE dans </p>
-                                    <p> {{ _columns.title1.label|d('Missing `title` in your collectionFields') }} : <a href="/"><i class="fa fa-leaf " style="color:#c4d735"> {{ _columns.title1.content.html|d('Missing `title` in your collectionFields') }}</i></a></p>
-                                    <p>{{ _columns.desc1.label|d('Missing `desc1` in your collectionFields') }} : {{ _columns.desc1.content.html|d('Missing `desc1` in your collectionFields') }}</p>
-                                    <p>{{ _columns.date1.label|d('Missing `desc1` in your collectionFields') }} : {{ _columns.date1.content.html|d('Missing `desc1` in your collectionFields') }}</p>
+                                    <p>{{ _columns|getByScheme("http://purl.org/dc/terms/title", {select: "label", cover: "dataset"})|d('Missing `dc:title` in your datasetFields') }} : <a href="/"><i class="fa fa-leaf" style="color:#c4d735"> {{ _columns|getContentByScheme("http://purl.org/dc/terms/title", {cover: "dataset"})|d('Missing `title` in your datasetFields') }}</i></a></p>
+                                    <p>{{ _columns|getByScheme("http://purl.org/dc/terms/description", {select: "label", cover: "dataset"})|d('Missing `dc:description` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/description", {cover: "dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>
+                                    <p>{{ _columns|getByScheme("http://purl.org/dc/terms/modified", {cover: "dataset", select:"label"})|d('Missing `dc:modified` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/modified")|d('Missing `dc:modified` in your datasetFields') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -288,9 +272,9 @@
 
             <div class="testimonial testimonial-info">
                 <div class="testimonial-section">
-                    <p>Cette donnée est CONTENUE dans : {{ _columns.title1.label|d('Missing `title` in your collectionFields') }}
-                        <a href="{{ _uri }}.html"><i class="fa fa-leaf " style="color:#c4d735"> {{ _columns.title1.content.html|d('Missing `title` in your collectionFields') }}</i></a></p>
-                    <p>{{ _columns.desc1.label|d('Missing `desc1` in your collectionFields') }} : {{ _columns.desc1.content.html|d('Missing `desc1` in your collectionFields') }}</p>
+                    <p>Cette donnée est CONTENUE dans : {{ _columns|getByScheme("http://purl.org/dc/terms/title", {cover:"dataset",select:"label"})|d('Missing `dc:title` in your datasetFields') }}
+                        <a href="{{ _uri }}.html"><i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme("http://purl.org/dc/terms/title",{cover:"dataset"})|d('Missing `dc:title` in your datasetFields') }}</i></a></p>
+                    <p>{{ _columns|getByScheme("http://purl.org/dc/terms/description",{cover:"dataset",select:"label"})|d('Missing `dc:description` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/description",{cover:"dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>
                 </div>
             </div>
 
