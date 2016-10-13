@@ -105,8 +105,8 @@
                                                 <p>{{ _columns.id.stylesheet.content|d('Missing `title` in your collectionFields') }}</p>
                                             </li>
                                             <li>
-                                                <h5>{{ _columns.title.label|d('Missing `title` in your collectionFields') }} ({{ _columns.title.scheme|d('Missing `title` in your collectionFields') }})</h5>
-                                                <p>{{ _columns.title.content.html|d('Missing `title` in your collectionFields') }}</p>
+                                                <h5>{{ _columns|getByScheme("http://purl.org/dc/terms/title",{select:"label"})|d('Missing `title` in your collectionFields') }} (http://purl.org/dc/terms/title)</h5>
+                                                <p>{{ _columns|getContentByScheme("http://purl.org/dc/terms/title")|d('Missing `dc:title` in your collectionFields') }}</p>
                                             </li>
                                             <li>
                                                 <h5>uri  </h5>

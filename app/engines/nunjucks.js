@@ -4,13 +4,15 @@ var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('lodex:engines:' + basename)
   , nunjucks = require('nunjucks')
+  , objectPath = require('object-path')
   ;
 
 var getByScheme = function(document, scheme, options) {
-  // debug('getByScheme', document);
+  debug('getByScheme', document);
   options = options || {};
   var cover = options.cover || 'collection';
   var language = options.language;
+  var select = options.select;
   var fieldNames = Object.keys(document);
 
   var wantedField = fieldNames
@@ -22,7 +24,11 @@ var getByScheme = function(document, scheme, options) {
     wantedField = wantedField
     .filter(function (field) { return field.lang === language; });
   }
-  return wantedField.length ? wantedField[0] : null;
+  var res = wantedField.length ? wantedField[0] : null;
+  if (res && select) {
+    res = objectPath.get(res, select);
+  }
+  return res;
 };
 
 /**
