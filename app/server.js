@@ -178,7 +178,6 @@ module.exports = function(config, online) {
   // load ./loaders/
   //
   core.loaders = [];
-  core.loaders.push(['**/*', require('./loaders/prepend.js'), {}]);
   core.loaders.push(['**/*.jdx', require('./loaders/jdx.js'), {}]);
   core.loaders.push(['**/*.jdx', require('./loaders/reimport.js'), {}]);
 
@@ -188,6 +187,7 @@ module.exports = function(config, online) {
   loaders.apply(function(hash, func, item) {
     core.loaders.push([item.pattern || '**/*', func, item.options]);
   });
+  core.loaders.push(['**/*', require('./loaders/prepend.js'), {}]);
   core.loaders.push(['**/*', require('./loaders/uniqueid.js'),
     { uniqueIdentifierWith: config.get('uniqueIdentifierWith') }]);
   //core.loaders.push(['**/*', require('./loaders/document.js'),
