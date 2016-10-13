@@ -53,14 +53,15 @@
         <div id="main" class="col-md-10 clearfix" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-                    <small><a href="{{ _root }}.html">From {{ _columns.title1.label|d('Missing `title` in your collectionFields') }}</a></small>
-                    <h2>{{ _columns|getByScheme('http://purl.org/dc/terms/title')|d('Missing "title" in your collectionFields')}}</h2>
+                    <small><a href="{{ _root }}.html">From {{ _columns|getContentByScheme('http://purl.org/dc/terms/title', {cover:'dataset'})|d('Missing dc:title in your datasetFields')}}</a></small>
+
+                    <h2>{{ _columns|getContentByScheme('http://purl.org/dc/terms/title')|d('Missing dc:title in your collectionFields')}}</h2>
 
 
                     <div id="tb-testimonial" class="testimonial testimonial-info">
                         <div class="testimonial-section">
                             <h4>Description</h4>
-                            <p>{{ _columns|getByScheme('http://purl.org/dc/terms/description')|d('Missing "description" in your collectionFields')}}</p>
+                            <p>{{ _columns|getContentByScheme('http://purl.org/dc/terms/description')|d('Missing "dc:description" in your collectionFields')}}</p>
                             <p>Bon pour pas faire moche j'écris quand même une description ici ... </p>
                         </div>
                     </div>

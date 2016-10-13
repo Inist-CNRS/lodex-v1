@@ -6,6 +6,25 @@ var path = require('path')
   , nunjucks = require('nunjucks')
   ;
 
+var getByScheme = function(document, scheme, options) {
+  // debug('getByScheme', document);
+  options = options || {};
+  var cover = options.cover || 'collection';
+  var language = options.language;
+  var fieldNames = Object.keys(document);
+
+  var wantedField = fieldNames
+  .map(function (fieldName) { return document[fieldName]; })
+  .filter(function (field) { return field.scheme === scheme; })
+  .filter(function (field) { return field.cover === cover; });
+
+  if (language && wantedField.length > 1) {
+    wantedField = wantedField
+    .filter(function (field) { return field.lang === language; });
+  }
+  return wantedField.length ? wantedField[0] : null;
+};
+
 /**
  * Filter to get a field value in the document which uses a scheme
  *
@@ -56,28 +75,13 @@ var path = require('path')
  *                           - language: 'fr', 'en' (not used by default)
  * @return {string}          value of the document's fields matching the scheme (and the options)
  */
-var getByScheme = function(document, scheme, options) {
-  debug('getByScheme', document);
+var getContentByScheme = function(document, scheme, options) {
   options = options || {};
-  var cover = options.cover || 'collection';
   var format = options.format || 'html';
-  var language = options.language;
-  var fieldNames = Object.keys(document);
-
-  var wantedField = fieldNames
-  .map(function (fieldName) { return document[fieldName]; })
-  .filter(function (field) { return field.scheme === scheme; })
-  .filter(function (field) { return field.cover === cover; });
-
-  if (wantedField.length === 0) {
-    return '';
-  }
-  if (language && wantedField.length > 1) {
-    wantedField = wantedField
-    .filter(function (field) { return field.lang === language; });
-  }
-  return wantedField[0].content[format];
+  var wantedField = getByScheme(document, scheme, options);
+  return wantedField ? wantedField.content[format] : '';
 };
+
 
 module.exports = function(options, core) {
   options = options || {};
@@ -86,7 +90,8 @@ module.exports = function(options, core) {
     new nunjucks.FileSystemLoader(options.views || 'views'),
     options
   );
-  env.addFilter('getByScheme', getByScheme);
+  env.addFilter('getByScheme',        getByScheme);
+  env.addFilter('getContentByScheme', getContentByScheme);
   return function (filePath, fileInput, callback) {
     env.render(filePath, fileInput, callback);
   };
