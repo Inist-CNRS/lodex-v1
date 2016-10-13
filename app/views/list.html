@@ -8,6 +8,7 @@
 {% block style %}
 <link rel="stylesheet" href="/assets/css/list.css"  type="text/css">
 <link rel="stylesheet" id='chartist-stylesheet-css' href="/libs/chartist/dist/chartist.min.css" type='text/css' media='all' />
+<link rel="stylesheet" id="bootstrap-stylesheet-css" href="/assets/css/testimonials.css" type="text/css" media="all" />
 <script src="/libs/chartist/dist/chartist.min.js"></script>
 {% endblock %}
 
@@ -190,99 +191,87 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 					</div>
 					<div class="tab-pane" id="exports">
 						{{ print.exports.introduction|d('Missing `print.exports.introduction` in your config file') }}
-						<ul class="list-unstyled">
-							<li>
-								<h3>XSLX</h3>
-								<dl class="dl-horizontal lead">
-									<dt>
-									<a  href="/*?alt=xlsx" class="btn btn-default">
-										<span class="fa fa-download"></span> Télécharger
-									</a>
-									</dt>
-									<dd>
-									<a href="http://file-format.lod.istex.fr/=/xslx" data-lodex="outer">Plus d'information</a>
-									</dd>
-								</dl>
-							</li>
-							<li>
-								<h3>TSV</h3>
-								<dl class="dl-horizontal lead">
-									<dt>
-									<a  href="/*?alt=tsv" class="btn btn-default">
-										<span class="fa fa-download"></span> Télécharger
-									</a>
-									</dt>
-									<dd>
-									<a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">Plus d'information</a>
-									</dd>
-								</dl>
-							</li>
-							<li>
-								<h3>CSV</h3>
-								<dl class="dl-horizontal lead">
-									<dt>
-									<a  href="/*?alt=csv" class="btn btn-default">
-										<span class="fa fa-download"></span> Télécharger
-									</a>
-									</dt>
-									<dd>
-									<a href="http://file-format.lod.istex.fr/=/csv" data-lodex="outer">Plus d'information</a>
-									</dd>
-								</dl>
-							</li>
-							<li>
-								<h3>N-Quads</h3>
-								<dl class="dl-horizontal lead">
-									<dt>
-									<a  href="/*?alt=nq" class="btn btn-default">
-										<span class="fa fa-download"></span> Télécharger
-									</a>
-									</dt>
-									<dd>
-									<a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">Plus d'information</a>
-									</dd>
-								</dl>
-							</li>
-							<li>
-								<h3>N-Quads (Excel)</h3>
-								<dl class="dl-horizontal lead">
-									<dt>
-									<a  href="/*?alt=nqx" class="btn btn-default">
-										<span class="fa fa-download"></span> Télécharger
-									</a>
-									</dt>
-									<dd>
-									<a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">Plus d'information</a>
-									</dd>
-								</dl>
-							</li>
-							<li>
-								<h3>JSONLD</h3>
-								<dl class="dl-horizontal lead">
-									<dt>
-									<a  href="/*?alt=jsonld" class="btn btn-default">
-										<span class="fa fa-download"></span> Télécharger
-									</a>
-									</dt>
-									<dd>
-									<a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">Plus d'information</a>
-									</dd>
-								</dl>
-							</li>
-							<li>
-								<h3>Turtle</h3>
-								<dl class="dl-horizontal lead">
-									<dt>
-									<a  href="/*?alt=ttl" class="btn btn-default">
-										<span class="fa fa-download"></span> Télécharger
-									</a>
-									</dt>
-									<dd>
-									<a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">Plus d'information</a>
-									</dd>
-								</dl>
-							</li>
-						</ul>
+						
+						
+                            <div class="col-md-6">
+                                <div class="update-nag">
+                                    <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
+                                    <div class="update-text">XSLX <a href="http://file-format.lod.istex.fr/=/xslx" data-lodex="outer">Plus d'information</a>
+                                         <a href="/*?alt=xlsx">
+                                            <span class="fa fa-download"></span>
+                                            Télécharger</a>
+                                    </div>
+                                </div>
+                            </div>
+                           
+
+                            <div class="col-md-6">
+                                <div class="update-nag">
+                                    <div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
+                                    <div class="update-text">TSV <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">Plus d'information</a>
+                                        <a href="/*?alt=tsv" >
+                                            <span class="fa fa-download"></span> Télécharger
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="update-nag">
+                                    <div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
+                                    <div class="update-text">CSV
+                                        <a href="file-format.lod.istex.fr/=/csv" data-lodex="outer">Plus d'information</a>
+                                       <a href="/*?alt=csv" >
+                                            <span class="fa fa-download"></span>
+                                            Télécharger</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="update-nag">
+                                    <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
+                                    <div class="update-text">N-Quads
+                                        <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">Plus d'information</a>
+                                       <a href="/*?alt=nq" >
+                                            <span class="fa fa-download"></span>
+                                            Télécharger</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="update-nag">
+                                    <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
+                                    <div class="update-text">N-Quads (Excel) <a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">Plus d'information</a>
+                                       <a href="/*?alt=nqx" >
+                                            <span class="fa fa-download"></span> Télécharger
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="update-nag">
+                                    <div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
+                                    <div class="update-text">JSONLD
+                                        <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">Plus d'information</a>
+                                        <a href="/*?alt=jsonld">
+                                            <span class="fa fa-download"></span>
+                                            Télécharger</a>
+                                    </div>
+                                </div>
+                            </div>
+                           <div class="col-md-6">
+                                <div class="update-nag">
+                                    <div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
+                                    <div class="update-text">Turtle
+                                        <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">Plus d'information</a>
+                                        <a href="/*?alt=ttl">
+                                            <span class="fa fa-download"></span>
+                                            Télécharger</a>
+                                    </div>
+                                </div>
+                            </div>
+						
 						<section class="page-content entry-content clearfix" itemprop="articleBody">
 							<a href="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence.gif" rel="attachment wp-att-214"><img class="size-medium wp-image-214 alignnone" src="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence-300x166.gif" alt="licence-ouverte-open-licence" width="300" height="166"></a>
 							<p>Les données mise en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. &nbsp;Comme les données ISTEX, Elles sont &nbsp;placées sous le régime de la licence ouverte/open licence Etalab (cf. <a href="http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf">contrat de licence type</a>).</p>

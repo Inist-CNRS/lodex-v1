@@ -8,7 +8,9 @@
 
 
 {% block style %}
+<link rel="stylesheet" href="/assets/css/list.css"  type="text/css">
 <link rel="stylesheet" id="bootstrap-stylesheet-css" href="/assets/css/testimonials.css" type="text/css" media="all" />
+
 <script src="/libs/chartist/dist/chartist.min.js"></script>
 
 <style>
@@ -16,7 +18,7 @@
         margin-top : 80px;
     }
 </style>
-<link href="/assets/css/list.css" rel="stylesheet" type="text/css">
+
 {% endblock %}
 
 
@@ -53,7 +55,7 @@
         <div id="main" class="col-md-10 clearfix" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-                    <small><a href="{{ _root }}.html">From {{ _columns|getContentByScheme('http://purl.org/dc/terms/title', {cover:'dataset'})|d('Missing dc:title in your datasetFields')}}</a></small>
+                    <em><a href="{{ _root }}.html"> From <i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme('http://purl.org/dc/terms/title', {cover:'dataset'})|d('Missing dc:title in your datasetFields')}}</i></a></em>
 
                     <h2>{{ _columns|getContentByScheme('http://purl.org/dc/terms/title')|d('Missing dc:title in your collectionFields')}}</h2>
 
@@ -62,7 +64,7 @@
                         <div class="testimonial-section">
                             <h4>Description</h4>
                             <p>{{ _columns|getContentByScheme('http://purl.org/dc/terms/description')|d('Missing "dc:description" in your collectionFields')}}</p>
-                            <p>Bon pour pas faire moche j'écris quand même une description ici ... </p>
+                            
                         </div>
                     </div>
 
@@ -83,8 +85,7 @@
                             <input type="radio" />Contient</a>
                         <a href="#Istex" class="btn btn-default" data-toggle="tab">
                             <input type="radio" />Istex</a>
-                        <a href="#Corpus" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />Retour corpus</a>
+                        
                     </div>
 
 
@@ -143,12 +144,8 @@
 
 
                         <div class="tab-pane" id="exports">
-                            <p>
-                                La ressource est disponible sur ce site avec les formats CSV, TSV, JSON-LD et N-Quads.
-                            </p>
-                            <p>
-                                Elle est librement téléchargeable au travers de plusieurs formats&nbsp;:
-                            </p>
+                            
+                            {{ print.exportsdata.introduction|d('Missing `print.exportsdata.introduction` in your config file') }}
                             <div class="col-md-6">
                                 <div class="update-nag">
                                     <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
@@ -215,6 +212,18 @@
                                     </div>
                                 </div>
                             </div>
+                           <div class="col-md-6">
+                                <div class="update-nag">
+                                    <div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
+                                    <div class="update-text">Turtle
+                                        <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">Plus d'information</a>
+                                        <a  href="{{ _uri }}.ttl">
+                                            <span class="fa fa-download"></span>
+                                            Télécharger</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
 
 
                             <section class="page-content entry-content clearfix" itemprop="articleBody">
@@ -273,18 +282,20 @@
             <div class="testimonial testimonial-info">
                 <div class="testimonial-section">
                     <p>Cette donnée est CONTENUE dans : {{ _columns|getByScheme("http://purl.org/dc/terms/title", {cover:"dataset",select:"label"})|d('Missing `dc:title` in your datasetFields') }}
-                        <a href="{{ _uri }}.html"><i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme("http://purl.org/dc/terms/title",{cover:"dataset"})|d('Missing `dc:title` in your datasetFields') }}</i></a></p>
+                        <a href="{{ _root }}.html"><i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme("http://purl.org/dc/terms/title",{cover:"dataset"})|d('Missing `dc:title` in your datasetFields') }}</i></a></p>
                     <p>{{ _columns|getByScheme("http://purl.org/dc/terms/description",{cover:"dataset",select:"label"})|d('Missing `dc:description` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/description",{cover:"dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>
                 </div>
             </div>
 
+<!--
             <div class="testimonial testimonial-info">
                 <div class="testimonial-section">
-                    <p>Cette donnée contient XX jeux de données </p>
+                    <p>Cette donnée contient XX données </p>
 
                     <p>Lien vers Contient</p>
                 </div>
             </div>
+-->
 
             <div class="social pull-right">
                 <ul>
