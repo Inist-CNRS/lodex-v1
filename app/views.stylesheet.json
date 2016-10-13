@@ -11,8 +11,11 @@
 	"$_uri" : {
 		"get" : "data._uri"
 	},
+	"$_root" : {
+		"get" : "data._root"
+	},
 	"$_wid": {
 		"get": "data._wid"
 	},
-	"mask" : "_uri,_columns,areas,_wid,_count"
+	"mask" : "_uri,_columns,areas,_wid,_count,_root"
 }

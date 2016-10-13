@@ -63,8 +63,7 @@
         <div id="main" class="col-md-10 clearfix" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-
-
+					<small><a href="{{ _root }}.html">From {{ _columns.title1.label|d('Missing `title` in your collectionFields') }}</a></small>
                     <h2>{{ _columns|getByScheme('http://purl.org/dc/terms/title')|d('Missing "title" in your collectionFields')}}</h2>
 
 
