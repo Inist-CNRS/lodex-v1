@@ -185,7 +185,9 @@ module.exports = function(warmup) {
   config.fix('documentFields',       {});
   config.fix('collectionFields',     {
     id: {
-      title : 'ID',
+      label: 'ID',
+      scheme: 'http://purl.org/dc/terms/identifier',
+      format: 'uri',
       stylesheet : {
         'content<' : {
           get: '_wid'
