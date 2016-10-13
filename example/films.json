@@ -22,7 +22,10 @@
 			"introduction" : "Le tableau ci-après permet de naviguer rapidement parmi les différentes ressources qui composent ce jeu de données."
 		},
 		"exports" : {
-			"introduction" : "Ce jeu de données est disponible sur ce site selon une syntaxe `tableau`, avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD et N-Quads. Ils sont librement téléchargeable au travers de plusieurs formats&nbsp;x:"
+			"introduction" : "Ce jeu de données est disponible sur ce site selon une syntaxe `tableau`, avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD N-Quads et turtle. Ils sont librement téléchargeable au travers de plusieurs formats&nbsp; :"
+		},
+        "exportsdata" : {
+			"introduction" : "Cette donnée est disponible sur ce site avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD, N-Quads et turtle. Elle est librement téléchargeable au travers de plusieurs formats&nbsp; :"
 		},
 		"ontology" : {
 			"introduction" : "Ce jeu de données a été modélisé à partir de plusieurs propriétés issues de plusieurs ontologies différentes"
@@ -164,6 +167,7 @@
 			"label": "Updated",
 			"scheme": "http://purl.org/dc/terms/modified",
 			"type": "date",
+			"format": "LL",
 			"content<": {
 				"get": "dateSynchronised"
 			}

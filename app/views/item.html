@@ -1,31 +1,31 @@
 {% extends "layout.html" %}
 
+
 {% block head %}
-
-
 <title>{{ titre }}</title>
 <meta name="description" content="{{ description }}">
 {% endblock %}
+
+
 {% block style %}
+<link rel="stylesheet" href="/assets/css/list.css"  type="text/css">
+<link rel="stylesheet" id="bootstrap-stylesheet-css" href="/assets/css/testimonials.css" type="text/css" media="all" />
 
-
-
-<link rel='stylesheet' id='bootstrap-stylesheet-css' href='/assets/css/testimonials.css' type='text/css' media='all' />
 <script src="/libs/chartist/dist/chartist.min.js"></script>
-
-
-
 
 <style>
     body > div.container {
         margin-top : 80px;
     }
 </style>
-<link href="/assets/css/list.css" rel="stylesheet" type="text/css">
+
 {% endblock %}
+
+
 {% block foot %}
 <script type="text/javascript" charset="utf-8" src="/assets/js/list.min.js"></script>
 {% endblock %}
+
 
 {% block script %}
 <script>
@@ -37,16 +37,10 @@
         });
     });
 </script>
-
 {% endblock %}
 
+
 {% block main %}
-
-
-
-
-
-
 <div class="container" style="margin-top:10px;">
     <div class="jumbotron alert  alert-info alert-dismissible fade in" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -58,21 +52,19 @@
     <div id="content" class="row clearfix">
 
 
-
-
         <div id="main" class="col-md-10 clearfix" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-					<small><a href="{{ _root }}.html">From {{ _columns.title1.label|d('Missing `title` in your collectionFields') }}</a></small>
-                    <h2>{{ _columns|getByScheme('http://purl.org/dc/terms/title')|d('Missing "title" in your collectionFields')}}</h2>
+                    <em><a href="{{ _root }}.html"> From <i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme('http://purl.org/dc/terms/title', {cover:'dataset'})|d('Missing dc:title in your datasetFields')}}</i></a></em>
+
+                    <h2>{{ _columns|getContentByScheme('http://purl.org/dc/terms/title')|d('Missing dc:title in your collectionFields')}}</h2>
 
 
-
-                    <div id="tb-testimonial" class="testimonial testimonial-info">
+                    <div class="testimonial testimonial-info">
                         <div class="testimonial-section">
                             <h4>Description</h4>
-                            <p>{{ _columns|getByScheme('http://purl.org/dc/terms/description')|d('Missing "description" in your collectionFields')}}</p>
-                            <p>Bon pour pas faire moche j'écris quand même une description ici ... </p>
+                            <p>{{ _columns|getContentByScheme('http://purl.org/dc/terms/description')|d('Missing "dc:description" in your collectionFields')}}</p>
+                            
                         </div>
                     </div>
 
@@ -93,21 +85,16 @@
                             <input type="radio" />Contient</a>
                         <a href="#Istex" class="btn btn-default" data-toggle="tab">
                             <input type="radio" />Istex</a>
-                        <a href="#Corpus" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />Retour corpus</a>
-
-
-
+                        
                     </div>
-
 
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="ressource">
 
 
-                            <div id="main" class="col-md-6 clearfix">
-                                <div id="tb-testimonial" class="testimonial testimonial-success">
+                            <div class="col-md-6 clearfix">
+                                <div class="testimonial testimonial-success">
 
                                     <div class="testimonial-section">
 
@@ -115,30 +102,15 @@
                                         <ul>
 
                                             <li>
-
-
-                                                <h5>{{ _columns.id.title|d('Missing `title` in your collectionFields') }}</h5>
-                                                <p>{{ _columns.id.stylesheet.content|d('Missing `title` in your collectionFields') }}</p>
+                                                <h5>{{ _columns.id.title|d('Missing `id.title` in your collectionFields') }}</h5>
+                                                <p>{{ _columns.id.stylesheet.content|d('Missing `id.stylesheet.content` in your collectionFields') }}</p>
                                             </li>
                                             <li>
-                                                <h5>{{ _columns.title.label|d('Missing `title` in your collectionFields') }} ({{ _columns.title.scheme|d('Missing `title` in your collectionFields') }})</h5>
-                                                <p>{{ _columns.title.content.html|d('Missing `title` in your collectionFields') }}</p>
+                                                <h5>URI</h5>
+                                                <p>
+                                                    <a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
+                                                </p>
                                             </li>
-
-
-                                            <li>
-
-                                                <h5>uri  </h5>
-                                                <p>{{ _uri|d('Missing `uri` in your collectionFields') }}</p>
-                                            </li>
-
- <li>
-
-                                                <h5>un autre truc ici </h5>
-                                                <p>..ou pas</p>
-                                            </li>
-
-
 
                                         </ul>
                                     </div>
@@ -146,58 +118,34 @@
                                 </div>
 
                             </div>
-                            <div id="main" class="col-md-6 clearfix">
-                                <div id="tb-testimonial" class="testimonial testimonial-success">
+
+                            <div class="col-md-6 clearfix">
+                                <div class="testimonial testimonial-success">
 
                                     <div class="testimonial-section">
                                         <p>Propriétés</p>
                                         <ul>
+                                        {% for columnName, column in _columns %}
+                                        {% if column.cover == 'collection' and column.label %}
                                             <li>
-
-                                                <h5>{{ _columns.year.label|d('Missing `tyear` in your collectionFields') }}  ({{ _columns.year.scheme|d('Missing `scheme` in your collectionFields') }})</h5>
-                                                <p>{{ _columns.year.content.html|d('Missing `year` in your collectionFields') }}</p>
+                                                <h5>{{ column.label }} ({{ column.scheme }})</h5>
+                                                <p>{{ column.content.html }}</p>
                                             </li>
-
-                                            <li>
-
-                                                <h5>{{ _columns.actors.label|d('Missing `actors` in your collectionFields') }} ({{ _columns.actors.scheme|d('Missing `scheme` in your collectionFields') }})</h5>
-                                                <p>{{ _columns.actors.content.html|d('Missing `actors` in your collectionFields') }}</p>
-                                            </li>
-
-                                            <li>
-
-                                                <h5>{{ _columns.director.label|d('Missing `director` in your collectionFields') }} ({{ _columns.director.scheme|d('Missing `scheme` in your collectionFields') }})</h5>
-                                                <p>{{ _columns.director.content.html|d('Missing `actors` in your collectionFields') }}</p>
-                                            </li>
-
-                                            <li>
-
-                                                <h5>{{ _columns.updated.label|d('Missing `desc1` in your collectionFields') }} ({{ _columns.updated.scheme|d('Missing `scheme` in your collectionFields') }})</h5>
-                                                <p>{{ _columns.updated.content.html|d('Missing `desc1` in your collectionFields') }}</p>
-                                            </li>
-
-
+                                        {% endif %}
+                                        {% endfor %}
                                         </ul>
                                     </div>
 
                                 </div>
 
                             </div>
+
                         </div>
 
 
-
-
-
-
-
                         <div class="tab-pane" id="exports">
-                            <p>
-                                La ressource est disponible sur ce site avec les formats CSV, TSV, JSON-LD et N-Quads.
-                            </p>
-                            <p>
-                                Elle est librement téléchargeable au travers de plusieurs formats&nbsp;:
-                            </p>
+                            
+                            {{ print.exportsdata.introduction|d('Missing `print.exportsdata.introduction` in your config file') }}
                             <div class="col-md-6">
                                 <div class="update-nag">
                                     <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
@@ -264,11 +212,23 @@
                                     </div>
                                 </div>
                             </div>
+                           <div class="col-md-6">
+                                <div class="update-nag">
+                                    <div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
+                                    <div class="update-text">Turtle
+                                        <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">Plus d'information</a>
+                                        <a  href="{{ _uri }}.ttl">
+                                            <span class="fa fa-download"></span>
+                                            Télécharger</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
 
 
                             <section class="page-content entry-content clearfix" itemprop="articleBody">
                                 <a href="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence.gif" rel="attachment wp-att-214"><img class="size-medium wp-image-214 alignnone" src="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence-300x166.gif" alt="licence-ouverte-open-licence" width="300" height="166"></a>
-                                <p>Les données mise en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. &nbsp;Comme les données ISTEX, Elles sont &nbsp;placées sous le régime de la licence ouverte/open licence Etalab (cf. <a href="http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf">contrat de licence type</a>).</p>
+                                <p>Les données mise en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. &nbsp;Comme les données ISTEX, elles sont placées sous le régime de la licence ouverte/open licence Etalab (cf. <a href="http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf">contrat de licence type</a>).</p>
                                 <p>&nbsp;</p>
                                 <blockquote data-secret="QLzNqK36kW" class="wp-embedded-content" style="display: none;"><p><a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence">Licence Ouverte / Open Licence</a></p></blockquote>
                                 <p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" src="https://www.etalab.gouv.fr/licence-ouverte-open-licence/embed#?secret=QLzNqK36kW" data-secret="QLzNqK36kW" width="500" height="300" title="Inclure un article WordPress" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
@@ -276,17 +236,17 @@
 
                         </div>
                         <div class="tab-pane" id="estcontenu">
-                            <div id="tb-testimonial" class="testimonial testimonial-info">
+                            <div class="testimonial testimonial-info">
                                 <div class="testimonial-section">
                                     <p>Cette donnée est CONTENUE dans </p>
-                                    <p> {{ _columns.title1.label|d('Missing `title` in your collectionFields') }} : <a href="/"><i class="fa fa-leaf " style="color:#c4d735"> {{ _columns.title1.content.html|d('Missing `title` in your collectionFields') }}</i></a></p>
-                                    <p>{{ _columns.desc1.label|d('Missing `desc1` in your collectionFields') }} : {{ _columns.desc1.content.html|d('Missing `desc1` in your collectionFields') }}</p>
-                                    <p>{{ _columns.date1.label|d('Missing `desc1` in your collectionFields') }} : {{ _columns.date1.content.html|d('Missing `desc1` in your collectionFields') }}</p>
+                                    <p>{{ _columns|getByScheme("http://purl.org/dc/terms/title", {select: "label", cover: "dataset"})|d('Missing `dc:title` in your datasetFields') }} : <a href="/"><i class="fa fa-leaf" style="color:#c4d735"> {{ _columns|getContentByScheme("http://purl.org/dc/terms/title", {cover: "dataset"})|d('Missing `title` in your datasetFields') }}</i></a></p>
+                                    <p>{{ _columns|getByScheme("http://purl.org/dc/terms/description", {select: "label", cover: "dataset"})|d('Missing `dc:description` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/description", {cover: "dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>
+                                    <p>{{ _columns|getByScheme("http://purl.org/dc/terms/modified", {cover: "dataset", select:"label"})|d('Missing `dc:modified` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/modified")|d('Missing `dc:modified` in your datasetFields') }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="contient">
-                            <div id="tb-testimonial" class="testimonial testimonial-info">
+                            <div class="testimonial testimonial-info">
                                 <div class="testimonial-section">
                                     <h4>Contient </h4>
                                     Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
@@ -294,7 +254,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="Istex">
-                            <div id="tb-testimonial" class="testimonial testimonial-info">
+                            <div class="testimonial testimonial-info">
                                 <div class="testimonial-section">
                                     <h4>Istex </h4>
                                     Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
@@ -304,41 +264,38 @@
 
                     </div>
 
-
-
                 </div>
-
 
             </div>
         </div>
 
 
-
         <div id="sidebar" class="pull-right col-md-2" role="sidebar">
 
             <div id="metrics" class="row">
-
                 <div class="text-center col-xs-4 col-sm-10">
                     <metric title="Properties" query="$keys?field=_columns"/>
                 </div>
             </div>
 
 
-            <div id="tb-testimonial" class="testimonial testimonial-info">
+            <div class="testimonial testimonial-info">
                 <div class="testimonial-section">
-                    <p>Cette donnée est CONTENUE dans : {{ _columns.title1.label|d('Missing `title` in your collectionFields') }}
-                        <a href="{{ _uri }}.html"><i class="fa fa-leaf " style="color:#c4d735"> {{ _columns.title1.content.html|d('Missing `title` in your collectionFields') }}</i></a></p>
-                    <p>{{ _columns.desc1.label|d('Missing `desc1` in your collectionFields') }} : {{ _columns.desc1.content.html|d('Missing `desc1` in your collectionFields') }}</p>
+                    <p>Cette donnée est CONTENUE dans : {{ _columns|getByScheme("http://purl.org/dc/terms/title", {cover:"dataset",select:"label"})|d('Missing `dc:title` in your datasetFields') }}
+                        <a href="{{ _root }}.html"><i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme("http://purl.org/dc/terms/title",{cover:"dataset"})|d('Missing `dc:title` in your datasetFields') }}</i></a></p>
+                    <p>{{ _columns|getByScheme("http://purl.org/dc/terms/description",{cover:"dataset",select:"label"})|d('Missing `dc:description` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/description",{cover:"dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>
                 </div>
             </div>
-            <div id="tb-testimonial" class="testimonial testimonial-info">
+
+<!--
+            <div class="testimonial testimonial-info">
                 <div class="testimonial-section">
-                    <p>Cette donnée contient XX jeux de données </p>
+                    <p>Cette donnée contient XX données </p>
 
                     <p>Lien vers Contient</p>
                 </div>
             </div>
-
+-->
 
             <div class="social pull-right">
                 <ul>
@@ -347,10 +304,6 @@
                     <li><a href="#"><i class="fa fa-github"></i></a></li>
                     <li><a href="#"><i class="fa fa-dropbox"></i></a></li>
                 </ul>
-
-
-
-
             </div>
 
         </div>
