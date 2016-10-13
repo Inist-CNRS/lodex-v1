@@ -58,7 +58,7 @@
                     <h2>{{ _columns|getContentByScheme('http://purl.org/dc/terms/title')|d('Missing dc:title in your collectionFields')}}</h2>
 
 
-                    <div id="tb-testimonial" class="testimonial testimonial-info">
+                    <div class="testimonial testimonial-info">
                         <div class="testimonial-section">
                             <h4>Description</h4>
                             <p>{{ _columns|getContentByScheme('http://purl.org/dc/terms/description')|d('Missing "dc:description" in your collectionFields')}}</p>
@@ -92,8 +92,8 @@
                         <div class="tab-pane active" id="ressource">
 
 
-                            <div id="main" class="col-md-6 clearfix">
-                                <div id="tb-testimonial" class="testimonial testimonial-success">
+                            <div class="col-md-6 clearfix">
+                                <div class="testimonial testimonial-success">
 
                                     <div class="testimonial-section">
 
@@ -123,8 +123,8 @@
                                 </div>
 
                             </div>
-                            <div id="main" class="col-md-6 clearfix">
-                                <div id="tb-testimonial" class="testimonial testimonial-success">
+                            <div class="col-md-6 clearfix">
+                                <div class="testimonial testimonial-success">
 
                                     <div class="testimonial-section">
                                         <p>Propriétés</p>
@@ -243,7 +243,7 @@
 
                         </div>
                         <div class="tab-pane" id="estcontenu">
-                            <div id="tb-testimonial" class="testimonial testimonial-info">
+                            <div class="testimonial testimonial-info">
                                 <div class="testimonial-section">
                                     <p>Cette donnée est CONTENUE dans </p>
                                     <p> {{ _columns.title1.label|d('Missing `title` in your collectionFields') }} : <a href="/"><i class="fa fa-leaf " style="color:#c4d735"> {{ _columns.title1.content.html|d('Missing `title` in your collectionFields') }}</i></a></p>
@@ -253,7 +253,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="contient">
-                            <div id="tb-testimonial" class="testimonial testimonial-info">
+                            <div class="testimonial testimonial-info">
                                 <div class="testimonial-section">
                                     <h4>Contient </h4>
                                     Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
@@ -261,7 +261,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="Istex">
-                            <div id="tb-testimonial" class="testimonial testimonial-info">
+                            <div class="testimonial testimonial-info">
                                 <div class="testimonial-section">
                                     <h4>Istex </h4>
                                     Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
@@ -286,7 +286,7 @@
             </div>
 
 
-            <div id="tb-testimonial" class="testimonial testimonial-info">
+            <div class="testimonial testimonial-info">
                 <div class="testimonial-section">
                     <p>Cette donnée est CONTENUE dans : {{ _columns.title1.label|d('Missing `title` in your collectionFields') }}
                         <a href="{{ _uri }}.html"><i class="fa fa-leaf " style="color:#c4d735"> {{ _columns.title1.content.html|d('Missing `title` in your collectionFields') }}</i></a></p>
@@ -294,7 +294,7 @@
                 </div>
             </div>
 
-            <div id="tb-testimonial" class="testimonial testimonial-info">
+            <div class="testimonial testimonial-info">
                 <div class="testimonial-section">
                     <p>Cette donnée contient XX jeux de données </p>
 
