@@ -53,7 +53,7 @@ coverage: ## run istanbul to have how much % of the lodex code is covered by tes
 
 #lint": "jshint --exclude-path node_modes */**/*.js",
 lint: ## to check the coding rules
-	@./node_modules/.bin/eslint ext=.js,.vue *.js heartbeats/ downloaders/ filters/ helpers/ loaders/ test/ views/ assets/ routes/
+	@./node_modules/.bin/eslint ext=.js,.vue *.js app/ test/
 
 clean: ## remove node_modules and temp files
 	@rm -Rf ./node_modules/ ./npm-debug.log
