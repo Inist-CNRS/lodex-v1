@@ -166,12 +166,16 @@ module.exports = {
       require : 'export.js'
     },
     {
-      pattern : '+(jsonad|html)',
+      pattern : '+(jsonad|html|iframe)',
       require : 'format.js'
     },
     {
       pattern : '+(jsonad|html)',
       require : 'enrich.js'
+    },
+    {
+      pattern : 'iframe',
+      require : 'iframe.js'
     },
     {
       pattern : 'html',
