@@ -154,7 +154,8 @@ module.exports = function(warmup) {
     'tsv',
     'html',
     'jsonad',
-    'raw'
+    'raw',
+    'iframe'
   ]);
   config.fix('mimeTypes',            {});
   config.fix('heartrate',            5000);
@@ -188,22 +189,18 @@ module.exports = function(warmup) {
       label: 'ID',
       scheme: 'http://purl.org/dc/terms/identifier',
       format: 'uri',
-      stylesheet : {
-        'content<' : {
-          get: '_wid'
-        }
+      'content<' : {
+        get: '_wid'
       }
     },
     title: {
-      title : 'Title',
-      stylesheet: {
-        'content<' : {
-          get: ['_content.json.title', 'title', '_text', 'basename'],
-          deduplicate : true,
-          cast : 'array',
-          first: true,
-          default : 'n/a'
-        }
+      label : 'Title',
+      'content<' : {
+        get: ['_content.json.title', 'title', '_text', 'basename'],
+        deduplicate : true,
+        cast : 'array',
+        first: true,
+        default : 'n/a'
       }
     }
   });

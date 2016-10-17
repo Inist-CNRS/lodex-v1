@@ -64,7 +64,7 @@
                         <div class="testimonial-section">
                             <h4>Description</h4>
                             <p>{{ _columns|getContentByScheme('http://purl.org/dc/terms/description')|d('Missing "dc:description" in your collectionFields')}}</p>
-                            
+
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@
                             <input type="radio" />Contient</a>
                         <a href="#Istex" class="btn btn-default" data-toggle="tab">
                             <input type="radio" />Istex</a>
-                        
+
                     </div>
 
 
@@ -129,7 +129,11 @@
                                         {% if column.cover == 'collection' and column.label %}
                                             <li>
                                                 <h5>{{ column.label }} ({{ column.scheme }})</h5>
+                                                {% if column.content and column.content.html %}
                                                 <p>{{ column.content.html }}</p>
+                                                {% elif column.content and column.content.raw %}
+                                                <p>{{ column.content.raw }}</p>
+                                                {% endif %}
                                             </li>
                                         {% endif %}
                                         {% endfor %}
@@ -144,7 +148,7 @@
 
 
                         <div class="tab-pane" id="exports">
-                            
+
                             {{ print.exportsdata.introduction|d('Missing `print.exportsdata.introduction` in your config file') }}
                             <div class="col-md-6">
                                 <div class="update-nag">
@@ -223,7 +227,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
 
 
                             <section class="page-content entry-content clearfix" itemprop="articleBody">
