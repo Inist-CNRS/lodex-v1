@@ -11,6 +11,7 @@
 
 <script>
 import MQS from 'mongodb-querystring'
+import clone from 'clone'
 export default {
   props: ['query', 'title', 'mode'],
   mounted () {
@@ -27,7 +28,6 @@ export default {
     reload (done) {
       const self = this
       const qry = {
-        draw: Date.now()
       }
       const url = window.location.protocol
       .concat('//')
@@ -36,10 +36,10 @@ export default {
       .concat('&' + MQS.stringify(qry, {}))
       self.$http.get(url).then(function (response) {
         if (self.mode === 'value') {
-          self.value = response.data[0].value
+          self.value = clone(response.data[0].value)
         }
         else {
-          self.value = response.data.length
+          self.value = clone(response.data.length)
         }
       })
     }
