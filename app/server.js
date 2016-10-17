@@ -412,7 +412,7 @@ module.exports = function(config, online) {
     core.downloader.use('*', require('./downloaders/config.js')(config.expose(), core));
     core.downloader.use('*', require('./downloaders/fields.js')({}, core));
     core.downloader.use('*', require('./downloaders/uri.js')({}, core));
-    core.downloader.use('min', require('./downloaders/min.js')({
+    core.downloader.use('*', require('./downloaders/min.js')({
       uniqueValueWith : config.get('uniqueValueWith')
     }, core));
     core.downloader.use('dry', require('./downloaders/dry.js')({}, core));

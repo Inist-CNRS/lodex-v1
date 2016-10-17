@@ -162,7 +162,7 @@ module.exports = {
       require : 'trig.js'
     },
     {
-      pattern : 'jsonld',
+      pattern : '+(jsonld|min)',
       require : 'export.js'
     },
     {

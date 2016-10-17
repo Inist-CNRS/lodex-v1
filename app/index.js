@@ -192,16 +192,6 @@ module.exports = function(warmup) {
       'content<' : {
         get: '_wid'
       }
-    },
-    title: {
-      label : 'Title',
-      'content<' : {
-        get: ['_content.json.title', 'title', '_text', 'basename'],
-        deduplicate : true,
-        cast : 'array',
-        first: true,
-        default : 'n/a'
-      }
     }
   });
   config.fix('uniqueValueWith',       {});

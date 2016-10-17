@@ -10,7 +10,8 @@ module.exports = function(options, core) {
   options = options || {};
   options.uniqueValueWith = options.uniqueValueWith ? options.uniqueValueWith : {};
 
-  if (typeof options.uniqueValueWith !== 'object' ||
+
+    if (typeof options.uniqueValueWith !== 'object' ||
       Object.keys(options.uniqueValueWith).length === 0) {
     options.uniqueValueWith = {
       get: ['value', '_content.json.title', 'title', '_label', '_text', 'basename'],
@@ -38,9 +39,15 @@ module.exports = function(options, core) {
       });
     }
     else {
+      if (!data['_content']) {
+        data['_content'] = {};
+      }
+
+
       debug('stylesheet', stylesheet);
       JBJ.inject(stylesheet, data, function(err, res) {
-        submit(err, res);
+        data['_content'].min = res;
+        submit(err, data);
       });
     }
   };

@@ -1,7 +1,7 @@
 {
 	"databaseName" : "films",
 	"rootURL" : "/ark:/12345/ABC.html",
-  "rootKEY" : "ark:/12345/ABC",
+	"rootKEY" : "ark:/12345/ABC",
 	"defaultRootCollection": "data",
 	"collectionNameHotFolder": "data",
 	"prefixKEY" : "ark:/12345",
@@ -24,7 +24,7 @@
 		"exports" : {
 			"introduction" : "Ce jeu de données est disponible sur ce site selon une syntaxe `tableau`, avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD N-Quads et turtle. Ils sont librement téléchargeable au travers de plusieurs formats&nbsp; :"
 		},
-        "exportsdata" : {
+		"exportsdata" : {
 			"introduction" : "Cette donnée est disponible sur ce site avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD, N-Quads et turtle. Elle est librement téléchargeable au travers de plusieurs formats&nbsp; :"
 		},
 		"ontology" : {
@@ -122,8 +122,8 @@
 			"scheme": "http://purl.org/dc/terms/description",
 			"type": "string",
 			"content<": {
-        "get": "_content.json.director"
-      }
+				"get": "_content.json.director"
+			}
 		},
 		"year": {
 			"label": "Year",
@@ -170,6 +170,39 @@
 			"format": "LL",
 			"content<": {
 				"get": "dateSynchronised"
+			}
+		},
+		"rating": {
+			"label": "Rating",
+			"scheme": "http://schema.org/commentCount",
+			"type": "number",
+			"content<": {
+				"get": "rating"
+			}
+		},
+		"ratingFrom": {
+			"about" : "rating",
+			"label": "IMDB contributor rating",
+			"scheme": "http://purl.org/dc/terms/source",
+			"type": "string",
+			"content": "IMdb"
+		},
+		"seeAlso": {
+			"label": "IMDB Rating",
+			"scheme": "http://purl.org/dc/terms/modified",
+			"type": "uri",
+			"format": "url",
+			"content<": {
+				"get": "imdb"
+			}
+		},
+		"from": {
+			"label": "Corpus Name",
+			"scheme": "http://purl.org/dc/terms/source",
+			"type": "uri",
+			"format": "lodex",
+			"content<": {
+				"get": "_root"
 			}
 		}
 	},
