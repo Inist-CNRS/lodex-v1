@@ -46,7 +46,6 @@ module.exports = function(options, core) {
     }
     else {
 
-      debug('stylesheet', stylesheet);
       JBJ.inject(stylesheet, data, function(err, res) {
         data['_content'].min = res;
         submit(err, data);
