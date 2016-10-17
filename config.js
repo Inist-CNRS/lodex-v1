@@ -51,22 +51,12 @@ module.exports = {
       }
     }
   ],
-  /*
   authorizations: [
-    {
-      pattern : "* /index/",
-      require : "valid-user.js"
-    },
-    {
-      pattern : "* /index/*",
-      require : "valid-user.js"
-    },
     {
       pattern : "* /backoffice.html",
       require : "valid-user.js"
     }
   ],
-  */
   loaders: [
     {
       pattern : "**/*.table",

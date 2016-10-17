@@ -7,35 +7,24 @@ var debug = require('debug')('lodex:routes:' + basename);
 
 module.exports = function(router, core) {
 
-  //
-  // Define routes
-  //
+  var pages = [
+    'cookies.html',
+    'mention.html',
+    'about.html',
+    'login.html'
+  ];
 
-  router.route('/cookies.html')
-  .get(function(req, res, next) {
-    var locals = {
-      print : core.config.get('print')
-    };
-    res.render('cookies.html', locals);
-  });
-
-
-  router.route('/mention.html')
-  .get(function(req, res, next) {
-    var locals = {
-      print : core.config.get('print')
-    };
-    res.render('mention.html', locals);
-  });
-
-
-  router.route('/about.html')
-  .get(function(req, res, next) {
-    var locals = {
-      print : core.config.get('print')
-    };
-    res.render('about.html', locals);
-  });
-
+  pages.forEach(function(page) {
+    router.route('/' + page)
+    .get(function(req, res, next) {
+      var locals = {
+        lang : req.lang,
+        url : require('url').parse(req.protocol + '://' + req.get('host') + req.originalUrl),
+        query : req.query,
+        print : core.config.get('print')
+      };
+      res.render(page, locals);
+    });
+  })
 
 };

@@ -19,7 +19,7 @@ module.exports = function(router, core) {
     debug('req.body', req.body);
     next();
   })
-  .post(passport.authenticate('local', { failureRedirect: '/-/login' }),
+  .post(passport.authenticate('local', { failureRedirect: '/login.html' }),
   function(req, res) {
     if (req.body && req.body.url) {
       var to = url.parse(req.body.url);
