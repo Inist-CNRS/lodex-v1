@@ -32,17 +32,19 @@ module.exports = function(options, core) {
     'value<': options.uniqueValueWith
   };
   return function (data, submit) {
+    if (!data['_content']) {
+      data['_content'] = {};
+    }
+
+
     if (!data['_wid'] && data['_id'] && data.value) {
-      submit(null, {
+      data['_content'].min = {
         _id : data['_id'],
         value: data.value
-      });
+      };
+      submit(null, data);
     }
     else {
-      if (!data['_content']) {
-        data['_content'] = {};
-      }
-
 
       debug('stylesheet', stylesheet);
       JBJ.inject(stylesheet, data, function(err, res) {
