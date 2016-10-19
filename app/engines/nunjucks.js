@@ -88,6 +88,23 @@ var getContentByScheme = function(document, scheme, options) {
   return wantedField ? wantedField.content[format] : '';
 };
 
+/**
+ * Convert columns object into an array of columns which cover value is given
+ *
+ * @param  {Object} columns a hash of fields
+ * @param  {string} cover   the part of fields wanted (dataset, collection, document)
+ * @return {Array}          array of selected columns
+ */
+var cover = function(columns, cover) {
+  cover = cover || 'collection';
+  var keys = Object.keys(columns);
+  var filteredColumns = keys
+  .map(function(key) {
+    return columns[key];
+  })
+  .filter(function(column) { return column.cover === cover; });
+  return filteredColumns;
+};
 
 module.exports = function(options, core) {
   options = options || {};
@@ -96,6 +113,7 @@ module.exports = function(options, core) {
     new nunjucks.FileSystemLoader(options.views || 'views'),
     options
   );
+  env.addFilter('cover',              cover);
   env.addFilter('getByScheme',        getByScheme);
   env.addFilter('getContentByScheme', getContentByScheme);
   return function (filePath, fileInput, callback) {

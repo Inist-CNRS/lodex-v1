@@ -1,1 +1,35 @@
-embeddedItem.html!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" id="bones-stylesheet-css" href="/assets/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" id="bootstrap-stylesheet-css" href="/assets/css/testimonials.css" type="text/css" media="all" />
+  <script src="/libs/chartist/dist/chartist.min.js"></script>
+</head>
+<body>
+  <div id="content" class="row clearfix">
+    <div class="testimonial testimonial-success">
+      <div class="testimonial-section">
+        <p>Properties <a href="{{_uri}}.html">{{_uri}}</a></p>
+        <ul>
+        {% for column in _columns|cover("collection") %}
+          <li>
+            <h5>{{ column.label|d('Missing label for that column')}} ({{ column.scheme|d('Missing scheme for that column') }})</h5>
+            <p>{{ column.content.html | d(column.content.raw, true) | d(column.content, true) | d('Missing content for that column', true) }}</p>
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--<p>columns: {{ _columns|dump }}</p>-->
+  <!--<p>root: {{ _root|dump }}</p>-->
+  <!--<p>uri: {{ _uri|dump }}</p>-->
+  <!--<p>name: {{ name|dump }}</p>-->
+  <!--<p>count: {{ _count|dump }}</p>-->
+<script type="text/javascript" charset="utf-8" src="/assets/js/list.min.js"></script>
+</body>
+</html>
