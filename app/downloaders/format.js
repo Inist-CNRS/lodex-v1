@@ -15,6 +15,7 @@ module.exports = function(options, core) {
 
     Object.keys(data['_columns']).forEach(function(col) {
       var format = data['_columns'][col].format || 'raw';
+      var type   = data['_columns'][col].type;
       data['_columns'][col].content = {
         raw : data['_columns'][col].content,
         html: ''
@@ -25,7 +26,7 @@ module.exports = function(options, core) {
       else if (format === 'component') {
         data['_columns'][col].content.html = XMLMapping.dump(data['_columns'][col].content.raw);
       }
-      else if (data['_columns'][col].type === 'date' && format) {
+      else if (type === 'date' && format) {
         debug('date', typeof data['_columns'][col].content.raw, data['_columns'][col].content.raw,
               data['_columns'][col].format);
         data['_columns'][col].content.html = moment(data['_columns'][col].content.raw)
