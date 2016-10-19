@@ -58,3 +58,6 @@ lint: ## to check the coding rules
 clean: ## remove node_modules and temp files
 	@rm -Rf ./node_modules/ ./npm-debug.log
 
+apidoc: ## generate HTML documentation from API Blueprint
+	@docker run -it --rm -v $$(pwd):/app -w /app --net=host -e NODE_ENV -e http_proxy -e https_proxy node:${NODE_VERSION} npm run apidoc
+	@make docker-chown
