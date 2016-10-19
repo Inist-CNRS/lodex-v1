@@ -34,6 +34,10 @@ module.exports = function(options, core) {
       else if (format === 'markdown') {
         data['_columns'][col].content.html = marked(data['_columns'][col].content.raw);
       }
+      else if (format === 'url') {
+        data['_columns'][col].content.html = '<a href="' + data['_columns'][col].content.raw +
+          '">' + data['_columns'][col].content.raw + '</a>';
+      }
     });
     submit(null, data);
   };

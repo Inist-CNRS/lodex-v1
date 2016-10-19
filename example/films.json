@@ -177,7 +177,9 @@
 			"scheme": "http://schema.org/commentCount",
 			"type": "number",
 			"content<": {
-				"get": "rating"
+				"get": "_content.json.rating",
+				"replace": [",","."],
+				"cast": "number"
 			}
 		},
 		"ratingFrom": {
@@ -189,11 +191,11 @@
 		},
 		"seeAlso": {
 			"label": "IMDB Rating",
-			"scheme": "http://purl.org/dc/terms/modified",
+			"scheme": "http://purl.org/dc/terms/source",
 			"type": "uri",
 			"format": "url",
 			"content<": {
-				"get": "imdb"
+				"get": "_content.json.imdb"
 			}
 		},
 		"from": {
