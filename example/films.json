@@ -16,18 +16,22 @@
 			"content" : "L'expérimentation __LODEX__ a pour ambition d'extraire de chaque document présent dans le fonds ISTEX un même type d'information pour créer des jeux de données représentatifs, normalisés et interopérables en respectant au maximum les normes du web sémantique."
 		},
 		"overview" : {
+			"label": "Aperçu",
 			"introduction" : "Voici un aperçu des quelques films décrits dans ce jeu de données."
 		},
 		"tableau" : {
+			"label": "Tableau",
 			"introduction" : "Le tableau ci-après permet de naviguer rapidement parmi les différentes ressources qui composent ce jeu de données."
 		},
 		"exports" : {
+			"label": "Exports",
 			"introduction" : "Ce jeu de données est disponible sur ce site selon une syntaxe `tableau`, avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD N-Quads et turtle. Ils sont librement téléchargeable au travers de plusieurs formats&nbsp; :"
 		},
 		"exportsdata" : {
 			"introduction" : "Cette donnée est disponible sur ce site avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD, N-Quads et turtle. Elle est librement téléchargeable au travers de plusieurs formats&nbsp; :"
 		},
 		"ontology" : {
+			"label": "Ontologie",
 			"introduction" : "Ce jeu de données a été modélisé à partir de plusieurs propriétés issues de plusieurs ontologies différentes"
 		}
 	},

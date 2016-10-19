@@ -129,13 +129,13 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 				</div>
 				<div id="tab" class="btn-group" data-toggle="buttons">
 					<a href="#overview" class="btn btn-default active" data-toggle="tab">
-						<input type="radio" />Overview</a>
+						<input type="radio" />{{ print.overview.label|d('Missing `print.overview.label` in your config file') }}</a>
 					<a href="#tableau" class="btn btn-default" data-toggle="tab">
-						<input type="radio" />Tableau</a>
+						<input type="radio" />{{ print.tableau.label|d('Missing `print.tableau.label` in your config file') }}</a>
 					<a href="#exports" class="btn btn-default" data-toggle="tab">
-						<input type="radio" />Exports</a>
+						<input type="radio" />{{ print.exports.label|d('Missing `print.exports.label` in your config file') }}</a>
 					<a href="#ontology" class="btn btn-default" data-toggle="tab">
-						<input type="radio" />Ontology</a>
+						<input type="radio" />{{ print.ontology.label|d('Missing `print.ontology.label` in your config file') }}</a>
 					<!--
 		 <a href="#graph" class="btn btn-default" data-toggle="tab">
 		 <input type="radio" />graph</a>
