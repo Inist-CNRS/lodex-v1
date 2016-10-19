@@ -10,7 +10,7 @@
 <body>
   <div class="testimonial ">
     <div class="testimonial-section">
-      <blockquote cite="{{ documents[0]._root }}.html">
+      <blockquote cite="{{ documents[0]._root }}.html" style="padding: 0">
         <h2>
           <a href="{{ documents[0]._root }}.html"><i class="fa fa-leaf" style="color:#c4d735">
             {{ documents[0]._columns|getContentByScheme("http://purl.org/dc/terms/title", {cover: "dataset"})|d('Missing `dc:title` in your datasetFields') }}</i></a>
