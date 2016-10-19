@@ -158,13 +158,13 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 												<div class="media-heading">
 													{% for name, col in doc._columns %}
 													{% if col.cover == 'collection' and col.scheme == 'http://purl.org/dc/terms/title' %}
-													<a href="{{ doc._uri }}.html"> {{ col.content.html }} </a>
+													<a href="{{ doc._uri }}.html" title="{{ col.content.html }}"> {{ col.content.html|truncate(15) }} </a>
 													{% endif %}
 													{% endfor %}
 												</div>
 												{% for name, col in doc._columns %}
 												{% if col.cover == 'collection' and col.scheme == 'http://purl.org/dc/terms/description' %}
-												<p> {{ col.content.html }} </p>
+												<p> {{ col.content.html|truncate(100) }} </p>
 												{% endif %}
 												{% endfor %}
 											</div>
@@ -191,8 +191,8 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 					</div>
 					<div class="tab-pane" id="exports">
 						{{ print.exports.introduction|d('Missing `print.exports.introduction` in your config file') }}
-						
-						
+
+
                             <div class="col-md-6">
                                 <div class="update-nag">
                                     <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
@@ -203,7 +203,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
                                     </div>
                                 </div>
                             </div>
-                           
+
 
                             <div class="col-md-6">
                                 <div class="update-nag">
@@ -271,7 +271,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
                                     </div>
                                 </div>
                             </div>
-						
+
 						<section class="page-content entry-content clearfix" itemprop="articleBody">
 							<a href="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence.gif" rel="attachment wp-att-214"><img class="size-medium wp-image-214 alignnone" src="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence-300x166.gif" alt="licence-ouverte-open-licence" width="300" height="166"></a>
 							<p>Les données mise en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. &nbsp;Comme les données ISTEX, Elles sont &nbsp;placées sous le régime de la licence ouverte/open licence Etalab (cf. <a href="http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf">contrat de licence type</a>).</p>
