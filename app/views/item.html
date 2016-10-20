@@ -232,7 +232,7 @@
 
                             <section class="page-content entry-content clearfix" itemprop="articleBody">
                                 <a href="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence.gif" rel="attachment wp-att-214"><img class="size-medium wp-image-214 alignnone" src="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence-300x166.gif" alt="licence-ouverte-open-licence" width="300" height="166"></a>
-                                <p>Les données mise en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. &nbsp;Comme les données ISTEX, elles sont placées sous le régime de la licence ouverte/open licence Etalab (cf. <a href="http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf">contrat de licence type</a>).</p>
+                                {{ print.item.exports.license|d('Missing `print.item.exports.license` in your config file') }}
                                 <p>&nbsp;</p>
                                 <blockquote data-secret="QLzNqK36kW" class="wp-embedded-content" style="display: none;"><p><a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence">Licence Ouverte / Open Licence</a></p></blockquote>
                                 <p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" src="https://www.etalab.gouv.fr/licence-ouverte-open-licence/embed#?secret=QLzNqK36kW" data-secret="QLzNqK36kW" width="500" height="300" title="Inclure un article WordPress" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
@@ -242,7 +242,7 @@
                         <div class="tab-pane" id="estcontenu">
                             <div class="testimonial testimonial-info">
                                 <div class="testimonial-section">
-                                    <p>Cette donnée est CONTENUE dans </p>
+                                    {{ print.item.partOf.introduction|d('Missing `print.item.partOf.introduction` in your config file') }}
                                     <p>{{ _columns|getByScheme("http://purl.org/dc/terms/title", {select: "label", cover: "dataset"})|d('Missing `dc:title` in your datasetFields') }} : <a href="/"><i class="fa fa-leaf" style="color:#c4d735"> {{ _columns|getContentByScheme("http://purl.org/dc/terms/title", {cover: "dataset"})|d('Missing `title` in your datasetFields') }}</i></a></p>
                                     <p>{{ _columns|getByScheme("http://purl.org/dc/terms/description", {select: "label", cover: "dataset"})|d('Missing `dc:description` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/description", {cover: "dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>
                                     <p>{{ _columns|getByScheme("http://purl.org/dc/terms/modified", {cover: "dataset", select:"label"})|d('Missing `dc:modified` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/modified")|d('Missing `dc:modified` in your datasetFields') }}</p>
@@ -252,16 +252,16 @@
                         <div class="tab-pane" id="contient">
                             <div class="testimonial testimonial-info">
                                 <div class="testimonial-section">
-                                    <h4>Contient </h4>
-                                    Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
+                                    <h4>{{ print.item.hasPart.label|d('Missing `print.item.hasPart.label` in your config file') }}</h4>
+                                    {{ print.item.hasPart.introduction|d('Missing `print.item.hasPart.introduction` in your config file') }}
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="Istex">
                             <div class="testimonial testimonial-info">
                                 <div class="testimonial-section">
-                                    <h4>Istex </h4>
-                                    Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
+                                    <h4>{{ print.item.istex.label|d('Missing `print.item.istex.label` in your config file') }}</h4>
+                                    {{ print.item.istex.introduction|d('Missing `print.item.istex.introduction` in your config file') }}
                                 </div>
                             </div>
                         </div>
@@ -284,7 +284,7 @@
 
 
             <div class="testimonial testimonial-info">
-                <div class="testimonial-section">
+                <div class="testimonial-section"> <!-- À supprimer? Doublon avec l'iframe -->
                     <p>Cette donnée est CONTENUE dans&nbsp;: {{ _columns|getByScheme("http://purl.org/dc/terms/title", {cover:"dataset",select:"label"})|d('Missing `dc:title` in your datasetFields') }}
                         <a href="{{ _root }}.html"><i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme("http://purl.org/dc/terms/title",{cover:"dataset"})|d('Missing `dc:title` in your datasetFields') }}</i></a></p>
                     <p>{{ _columns|getByScheme("http://purl.org/dc/terms/description",{cover:"dataset",select:"label"})|d('Missing `dc:description` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/description",{cover:"dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>

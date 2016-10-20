@@ -44,16 +44,20 @@
 				},
 				"download": {
 					"label": "Télécharger"
-				}
+				},
+				"license": "Les données mises en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. Comme les données ISTEX, elles sont placées sous le régime de la licence ouverte/_open licence_ Etalab (cf. [contrat de licence type](http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf))."
 			},
 			"partOf": {
-				"label": "Contenue dans"
+				"label": "Contenue dans",
+				"introduction": "Cette donnée est CONTENUE dans"
 			},
 			"hasPart": {
-				"label": "Contient"
+				"label": "Contient",
+				"introduction": "S'il-vous-plaît, modifiez le champ `print.item.hasPart.introduction` dans le fichier de configuration pour remplacer ce texte."
 			},
 			"istex": {
-				"label": "Istex"
+				"label": "Istex",
+				"introduction": "S'il-vous-plaît, modifiez le champ `print.item.istex.introduction` dans le fichier de configuration pour remplacer ce texte."
 			}
 		}
 	},
