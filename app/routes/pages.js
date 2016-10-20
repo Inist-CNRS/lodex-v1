@@ -25,6 +25,6 @@ module.exports = function(router, core) {
       };
       res.render(page, locals);
     });
-  })
+  });
 
 };

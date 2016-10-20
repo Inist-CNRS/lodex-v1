@@ -11,8 +11,8 @@ module.exports = function(options, core) {
   options.uniqueValueWith = options.uniqueValueWith ? options.uniqueValueWith : {};
 
 
-    if (typeof options.uniqueValueWith !== 'object' ||
-      Object.keys(options.uniqueValueWith).length === 0) {
+  if (typeof options.uniqueValueWith !== 'object' ||
+    Object.keys(options.uniqueValueWith).length === 0) {
     options.uniqueValueWith = {
       get: ['value', '_content.json.title', 'title', '_label', '_text', 'basename'],
       deduplicate : true,
