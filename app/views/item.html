@@ -76,15 +76,15 @@
 
                     <div id="tab" class="btn-group" data-toggle="buttons">
                         <a href="#ressource" class="btn btn-default active" data-toggle="tab">
-                            <input type="radio" />Ressource</a>
+                            <input type="radio" />{{ print.item.resource.label|d('Missing `print.item.resource.label` in your config file')}}</a>
                         <a href="#exports" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />Exports</a>
+                            <input type="radio" />{{ print.item.exports.label|d('Missing `print.item.exports.label` in your config file')}}</a>
                         <a href="#estcontenu" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />Contenue dans</a>
+                            <input type="radio" />{{ print.item.partOf.label|d('Missing `print.item.partOf.label` in your config file')}}</a>
                         <a href="#contient" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />Contient</a>
+                            <input type="radio" />{{ print.item.hasPart.label|d('Missing `print.item.hasPart.label` in your config file')}}</a>
                         <a href="#Istex" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />Istex</a>
+                            <input type="radio" />{{ print.item.istex.label|d('Missing `print.item.istex.label` in your config file')}}</a>
 
                     </div>
 
@@ -98,7 +98,7 @@
 
                                     <div class="testimonial-section">
 
-                                        <p>Propriétés</p>
+                                        {{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}
                                         <ul>
 
                                             <li>
@@ -123,7 +123,7 @@
                                 <div class="testimonial testimonial-success">
 
                                     <div class="testimonial-section">
-                                        <p>Propriétés</p>
+                                        {{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}
                                         <ul>
                                         {% for columnName, column in _columns %}
                                         {% if column.cover == 'collection' and column.label %}
@@ -149,14 +149,14 @@
 
                         <div class="tab-pane" id="exports">
 
-                            {{ print.exportsdata.introduction|d('Missing `print.exportsdata.introduction` in your config file') }}
+                            {{ print.item.exports.introduction|d('Missing `print.item.exports.introduction` in your config file') }}
                             <div class="col-md-6">
                                 <div class="update-nag">
                                     <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                    <div class="update-text">XSL <a href="http://file-format.lod.istex.fr/=/xsl" data-lodex="outer">Plus d'information</a>
+                                    <div class="update-text">XSL <a href="http://file-format.lod.istex.fr/=/xsl" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
                                         <a href="{{ _uri }}.xlsx">
                                             <span class="fa fa-download"></span>
-                                            Télécharger</a>
+                                            {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -164,9 +164,9 @@
                             <div class="col-md-6">
                                 <div class="update-nag">
                                     <div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                    <div class="update-text">TSV <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">Plus d'information</a>
+                                    <div class="update-text">TSV <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
                                         <a  href="{{ _uri }}.tsv" >
-                                            <span class="fa fa-download"></span> Télécharger
+                                            <span class="fa fa-download"></span> {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}
                                         </a>
                                     </div>
                                 </div>
@@ -175,10 +175,10 @@
                                 <div class="update-nag">
                                     <div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
                                     <div class="update-text">CSV
-                                        <a href="file-format.lod.istex.fr/=/csv" data-lodex="outer">Plus d'information</a>
+                                        <a href="file-format.lod.istex.fr/=/csv" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
                                         <a  href="{{ _uri }}.csv" >
                                             <span class="fa fa-download"></span>
-                                            Télécharger</a>
+                                            {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -186,10 +186,10 @@
                                 <div class="update-nag">
                                     <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
                                     <div class="update-text">N-Quads
-                                        <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">Plus d'information</a>
+                                        <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
                                         <a  href="{{ _uri }}.nq" >
                                             <span class="fa fa-download"></span>
-                                            Télécharger</a>
+                                            {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -197,9 +197,9 @@
                             <div class="col-md-6">
                                 <div class="update-nag">
                                     <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                    <div class="update-text">N-Quads (Excel) <a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">Plus d'information</a>
+                                    <div class="update-text">N-Quads (Excel) <a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
                                         <a  href="{{ _uri }}.nqx" >
-                                            <span class="fa fa-download"></span> Télécharger
+                                            <span class="fa fa-download"></span> {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}
                                         </a>
                                     </div>
                                 </div>
@@ -209,10 +209,10 @@
                                 <div class="update-nag">
                                     <div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
                                     <div class="update-text">JSONLD
-                                        <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">Plus d'information</a>
+                                        <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
                                         <a  href="{{ _uri }}.jsonld">
                                             <span class="fa fa-download"></span>
-                                            Télécharger</a>
+                                            {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -220,10 +220,10 @@
                                 <div class="update-nag">
                                     <div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
                                     <div class="update-text">Turtle
-                                        <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">Plus d'information</a>
+                                        <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
                                         <a  href="{{ _uri }}.ttl">
                                             <span class="fa fa-download"></span>
-                                            Télécharger</a>
+                                            {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
                                     </div>
                                 </div>
                             </div>
