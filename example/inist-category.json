@@ -5,6 +5,24 @@
     "get": "_content.json.Code",
     "slug": true
   },
+  "print": {
+    "header": {
+      "content": "L'expérimentation __LODEX__ a pour ambition d'extraire de chaque document présent dans le fonds ISTEX un même type d'information pour créer des jeux de données représentatifs, normalisés et interopérables en respectant au maximun les normes du web sémantique."
+    },
+    "overview": {
+      "label": "Aperçu",
+      "introduction": "Voici un aperçu des quelques ressources décrites dans ce jeu de données."
+    },
+    "tableau": {
+      "label": "Tableau"
+    },
+    "exports": {
+      "label": "Exports"
+    },
+    "ontology": {
+      "label": "Ontologie"
+    }
+  },
   "datasetFields": {
     "isRoot": {
       "label": "Is on main page",
@@ -16,16 +34,17 @@
       "label": "Title",
       "scheme": "http://purl.org/dc/terms/title",
       "type": "string",
-      "lang": "en",
+      "lang": "fr",
       "comment": "Always get a title - displayed in corpus/overview",
-      "content": "INIST categories"
+      "content": "Catégories INIST"
     },
     "description1": {
       "label": "Description",
       "scheme": "http://purl.org/dc/terms/description",
       "type": "string",
+      "format": "markdown",
       "lang": "fr",
-      "content": "Plan de classement de l'Inist-CNRS."
+      "content": "Cette table correspond au choix de documenter des données ISTEX et plus particulièrement les catégories INIST.  Il s’agit des codes de classement (tronqués à 3 niveaux) utilisés lors de l'indexation pour constituer __les bases de données PASCAL et FRANCIS__. Ces catégories ont fait l'objet d'une structuration hiérarchique au format SKOS après enrichissement, et d'un alignement avec la classification décimale universelle (CDU) et le thésaurus de référence dans le domaine biomédical MeSH (Medical Subject Headings)."
     },
     "date1": {
       "label": "Updated",
@@ -42,6 +61,21 @@
       "type": "https://www.w3.org/TR/xmlschema-2/#date",
       "content<": {
         "get": "dateSynchronised"
+      }
+    },
+    "model1": {
+      "label": "Ontology model",
+      "type": "object",
+      "format": "component",
+      "scheme": "https://schema.org/image",
+      "content": {
+        "img": {
+          "height": "200",
+          "src": "https://docs.google.com/drawings/d/1ti_UyOQLqnl_vTk3gC8JEsweb0toe0Brs_rYh0NrNJE/pub?w=960&h=720"
+        }
+      },
+      "displayAreas": {
+        "insert": true
       }
     }
   },
