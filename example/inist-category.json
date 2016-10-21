@@ -70,8 +70,9 @@
       "scheme": "https://schema.org/image",
       "content": {
         "img": {
-          "height": "200",
-          "src": "https://docs.google.com/drawings/d/1ti_UyOQLqnl_vTk3gC8JEsweb0toe0Brs_rYh0NrNJE/pub?w=960&h=720"
+          "class": "zoom-out",
+          "src": "https://docs.google.com/drawings/d/1ti_UyOQLqnl_vTk3gC8JEsweb0toe0Brs_rYh0NrNJE/pub?w=960&h=720",
+          "onclick": "window.i = this; if (this.classList[0] === 'zoom-out') { this.setAttribute('class', 'zoom-in'); } else { this.setAttribute('class','zoom-out'); }"
         }
       },
       "displayAreas": {

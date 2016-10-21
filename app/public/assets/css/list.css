@@ -209,6 +209,21 @@ div.tab-pane {
     background-color: transparent;
 }
 
+img.zoom-out {
+    cursor: zoom-in;
+    width: 100%;
+    background-color: transparent;
+}
+
+img.zoom-in {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    z-index: 10000;
+    cursor: zoom-out;
+}
+
 .lib-panel .row,
 .lib-panel .col-md-6 {
     padding: 0;
