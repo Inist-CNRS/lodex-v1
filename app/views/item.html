@@ -52,7 +52,7 @@
     <div id="content" class="row clearfix">
 
 
-        <div id="main" class="col-md-10 clearfix" role="main">
+        <div id="main" class="col-md-9 clearfix" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <em><a href="{{ _root }}.html"> From <i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme('http://purl.org/dc/terms/title', {cover:'dataset'})|d('Missing dc:title in your datasetFields')}}</i></a></em>
@@ -93,7 +93,7 @@
                         <div class="tab-pane active" id="ressource">
 
 
-                            <div class="col-md-6 clearfix">
+                           <!-- <div class="col-md-6 clearfix">-->
                                 <div class="testimonial testimonial-success">
 
                                     <div class="testimonial-section">
@@ -117,9 +117,9 @@
 
                                 </div>
 
-                            </div>
+                          <!--  </div>-->
 
-                            <div class="col-md-6 clearfix">
+                           <!-- <div class="col-md-6 clearfix">-->
                                 <div class="testimonial testimonial-success">
 
                                     <div class="testimonial-section">
@@ -142,7 +142,7 @@
 
                                 </div>
 
-                            </div>
+                         <!--   </div>-->
 
                         </div>
 
@@ -274,26 +274,32 @@
         </div>
 
 
-        <div id="sidebar" class="pull-right col-md-2" role="sidebar">
+        <div id="sidebar" class="pull-right col-md-3" role="sidebar">
 
-            <div id="metrics" class="row">
+          <!--  <div id="metrics" class="row">
                 <div class="text-center col-xs-4 col-sm-10">
                     <metric title="Properties" query="$keys?field=_columns"/>
                 </div>
-            </div>
+            </div>-->
 
 
             <div class="testimonial testimonial-info">
-                <div class="testimonial-section"> <!-- À supprimer? Doublon avec l'iframe -->
+               <h2>Naviguer</h2>
+                <div class="testimonial-section"> 
                     <p>Cette donnée est CONTENUE dans&nbsp;: {{ _columns|getByScheme("http://purl.org/dc/terms/title", {cover:"dataset",select:"label"})|d('Missing `dc:title` in your datasetFields') }}
                         <a href="{{ _root }}.html"><i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme("http://purl.org/dc/terms/title",{cover:"dataset"})|d('Missing `dc:title` in your datasetFields') }}</i></a></p>
-                    <p>{{ _columns|getByScheme("http://purl.org/dc/terms/description",{cover:"dataset",select:"label"})|d('Missing `dc:description` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/description",{cover:"dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>
+                   <!-- <p>{{ _columns|getByScheme("http://purl.org/dc/terms/description",{cover:"dataset",select:"label"})|d('Missing `dc:description` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/description",{cover:"dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>-->
                 </div>
-                <iframe width="180" height="315" src="{{ _root}}.iframe" frameborder="0"></iframe>
+                <h2>Citer</h2>
                 <div>
                     <i class="fa fa-share"></i> Integrate:
                     <input type="text" value="<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{_root}}.iframe&quot; frameborder=&quot;0&quot;></iframe>">
                 </div>
+               
+               <!-- <iframe width="180" height="315" src="{{ _root}}.iframe" frameborder="0"></iframe> À supprimer? Doublon avec l'iframe -->
+                
+                <h2>Télécharger</h2>
+                <h2>Partager</h2>
             </div>
 
 <!--
@@ -306,7 +312,7 @@
             </div>
 -->
 
-            <div class="social pull-right">
+            <div class="social">
                 <ul>
                     <li><a href="https://twitter.com/intent/tweet?url={{ _uri }}"  target="_blank"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="https://plus.google.com/share?url={{ _uri }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
