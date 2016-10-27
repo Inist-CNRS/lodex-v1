@@ -182,15 +182,37 @@
 			}
 		},
 		"director": {
-			"label": "Director",
-			"scheme": "http://purl.org/ontology/bibo/director",
-			"type": "string",
+			"about" : ["firstName", "lastName"],
+			"label" : "Director",
+			"scheme" : "http://purl.org/ontology/bibo/director",
+			"type" : "class",
 			"displayAreas" : {
 				"facet" : true,
 				"table" : true
 			},
 			"content<": {
-				"get": "_content.json.director"
+				"join": " ",
+				"prepend" : "Mr. "
+			}
+		},
+		"firstName" : {
+			"label": "Prénom",
+			"scheme" : "http://xmlns.com/foaf/spec/#term_firstName",
+			"type" : "string",
+			"content<": {
+				"get" : "_content.json.director",
+				"parseCSV" : " ",
+				"first" : true
+			}
+		},
+		"lastName" : {
+			"label": "Nom",
+			"scheme" : "http://xmlns.com/foaf/spec/#term_lastName",
+			"type" : "string",
+			"content<": {
+				"get#1" : "_content.json.director",
+				"parseCSV" : " ",
+				"last" : true
 			}
 		},
 		"updated": {

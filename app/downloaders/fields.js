@@ -122,15 +122,45 @@ module.exports = function(options, core) {
         //debug('download document data')
       }
 
-      JBJ.inject(stylesheet, data, function(err, cols) {
+      // Class should be computed after proprety
+      var classes = {}
+      Object.keys(stylesheet).forEach(function(key) {
+        if (stylesheet[key].type === 'class') {
+          classes[key] = stylesheet[key];
+          if (classes[key]['content<']) {
+            var jxl = { }
+            if (Array.isArray(classes[key].about)) {
+              jxl.get = classes[key].about.map(function(i) { return i + '.content'; })
+            }
+            else {
+              jxl.get = classes[key].about + '.content';
+            }
+            Object.keys(classes[key]['content<']).forEach(function(i) {
+              jxl[i] = classes[key]['content<'][i];
+            })
+            classes[key]['content<'] = jxl;
+          }
+          delete stylesheet[key];
+        }
+      })
+
+      JBJ.inject(stylesheet, data, function(err, data01) {
         if (err) {
           return submit(err);
         }
-        data['_columns'] = cols;
-        delete data['_fields'];
-        delete data['_collection']['_fields'];
-        delete data['_collection']['_dataset']['_fields'];
-        submit(null, data);
+        debug('data 01', data01);
+        debug('stylesheet classes', classes.director);
+        JBJ.inject(classes, data01, function(err, data02) {
+          if (err) {
+            return submit(err);
+          }
+          data['_columns'] = {}
+          data['_columns'] = merge(data01, data02);
+          delete data['_fields'];
+          delete data['_collection']['_fields'];
+          delete data['_collection']['_dataset']['_fields'];
+          submit(null, data);
+        })
       });
     }
   };
