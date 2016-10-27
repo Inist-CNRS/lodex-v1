@@ -8,7 +8,7 @@ var path = require('path')
   ;
 
 var getByScheme = function(document, scheme, options) {
-  debug('getByScheme', document);
+  // debug('getByScheme', document);
   options = options || {};
   var cover = options.cover || 'collection';
   var language = options.language;
