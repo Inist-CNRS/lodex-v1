@@ -27,6 +27,11 @@ module.exports = function(router, core) {
         if (nbd > 1) {
           return cb(null, collectionName);
         }
+        // 
+        // On renvoit une erreur plutot- que d'attendre la fin du chargement 
+        //
+        cb(new core.Errors.Unavailable('First start : loading data...'));
+
         var reqopt = {
           internal : true,
           body : {
@@ -34,7 +39,7 @@ module.exports = function(router, core) {
           }
         };
         core.agent.post('/' + collectionName, reqopt).then(function(reqout) {
-          return core.agent.get('/' + collectionName + '/$keys?field=_columns',
+          core.agent.get('/' + collectionName + '/$keys?field=_columns',
                                 { internal:true, json:true })
           .then(function(columns) {
             var indexes = Object.keys(columns).map(function(k) { return columns[k]['_id']; })
@@ -46,14 +51,14 @@ module.exports = function(router, core) {
               return idx;
             });
             db.collection(collectionName).createIndexes(indexes).then(function(r) {
-              debug(indexes.length + ' Indexes created');
-              return cb(null, collectionName);
+              debug('Initialization completed', indexes.length + ' indexes created.');
             }).catch(function(e) {
-              return debug('Fail to create indexes', e);
+              debug('initialization ended with : ', e);
             });
-            return db.close();
+            db.close();
           }).catch(cb);
         }).catch(cb);
+
       }).catch(cb);
     }).catch(cb);
   }

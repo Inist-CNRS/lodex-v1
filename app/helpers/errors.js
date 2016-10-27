@@ -11,4 +11,5 @@ module.exports.Forbidden = require('custom-error')('Forbidden');
 module.exports.BadConfig = require('custom-error')('BadConfig');
 module.exports.Unauthorized = require('custom-error')('Unauthorized');
 module.exports.TableEmpty = require('custom-error')('TableEmpty');
+module.exports.Unavailable = require('custom-error')('Unavailable');
 

@@ -612,6 +612,9 @@ module.exports = function(config, online) {
       else if (err instanceof Errors.Forbidden) {
         statusCode = 403;
       }
+      else if (err instanceof Errors.Unavailable) {
+        statusCode = 503;
+      }
       else {
         statusCode = 500;
       }
