@@ -148,8 +148,6 @@ module.exports = function(options, core) {
         if (err) {
           return submit(err);
         }
-        debug('data 01', data01);
-        debug('stylesheet classes', classes.director);
         JBJ.inject(classes, data01, function(err, data02) {
           if (err) {
             return submit(err);
