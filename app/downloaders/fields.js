@@ -123,26 +123,26 @@ module.exports = function(options, core) {
       }
 
       // Class should be computed after proprety
-      var classes = {}
+      var classes = {};
       Object.keys(stylesheet).forEach(function(key) {
         if (stylesheet[key].type === 'class') {
           classes[key] = stylesheet[key];
           if (classes[key]['content<']) {
-            var jxl = { }
+            var jxl = {};
             if (Array.isArray(classes[key].about)) {
-              jxl.get = classes[key].about.map(function(i) { return i + '.content'; })
+              jxl.get = classes[key].about.map(function(i) { return i + '.content'; });
             }
             else {
               jxl.get = classes[key].about + '.content';
             }
             Object.keys(classes[key]['content<']).forEach(function(i) {
               jxl[i] = classes[key]['content<'][i];
-            })
+            });
             classes[key]['content<'] = jxl;
           }
           delete stylesheet[key];
         }
-      })
+      });
 
       JBJ.inject(stylesheet, data, function(err, data01) {
         if (err) {
@@ -152,13 +152,13 @@ module.exports = function(options, core) {
           if (err) {
             return submit(err);
           }
-          data['_columns'] = {}
+          data['_columns'] = {};
           data['_columns'] = merge(data01, data02);
           delete data['_fields'];
           delete data['_collection']['_fields'];
           delete data['_collection']['_dataset']['_fields'];
           submit(null, data);
-        })
+        });
       });
     }
   };

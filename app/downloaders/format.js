@@ -15,7 +15,6 @@ module.exports = function(options, core) {
 
     Object.keys(data['_columns']).forEach(function(col) {
       var format = data['_columns'][col].format || 'raw';
-      var type   = data['_columns'][col].type;
       data['_columns'][col].content = {
         raw : data['_columns'][col].content,
         html: ''
@@ -23,27 +22,52 @@ module.exports = function(options, core) {
       if (format === 'raw') {
         data['_columns'][col].content.html = htmlspecialchars(data['_columns'][col].content.raw);
       }
-      else if (format === 'component') {
-        data['_columns'][col].content.html = XMLMapping.dump(data['_columns'][col].content.raw);
-      }
-      else if (type === 'date' && format) {
-        debug('date', typeof data['_columns'][col].content.raw, data['_columns'][col].content.raw,
-              data['_columns'][col].format);
-        data['_columns'][col].content.html = moment(data['_columns'][col].content.raw)
-                                         .format(data['_columns'][col].format);
-      }
       else if (format === 'markdown') {
         data['_columns'][col].content.html = marked(data['_columns'][col].content.raw);
       }
-      else if (type === 'uri') {
-        data['_columns'][col].content.html = '<a href="' + data['_columns'][col].content.raw +'">';
-        if (format !== undefined) {
-          data['_columns'][col].content.html += '<uri format="' + format + '">' + data['_columns'][col].content.raw + '</uri>'
+      else if (format === 'component') {
+        data['_columns'][col].content.html = XMLMapping.dump(data['_columns'][col].content.raw);
+      }
+      else if (format === 'moment') {
+        var syntax = 'LL';
+        if (data['_columns'][col].formatOptions &&
+          data['_columns'][col].formatOptions.syntax) {
+          syntax = data['_columns'][col].formatOptions.syntax;
         }
-        else {
-          data['_columns'][col].content.html += data['_columns'][col].content.raw
-        }
-        data['_columns'][col].content.html += '</a>';
+        data['_columns'][col].content.html = moment(data['_columns'][col].content.raw)
+        .format(syntax);
+      }
+      else if (format === 'chart') {
+        var chart = {
+          chart : data['_columns'][col].formatOptions
+        };
+        data['_columns'][col].content.html = XMLMapping.dump(chart);
+      }
+      else if (format === 'image') {
+        var image = {
+          image : data['_columns'][col].formatOptions
+        };
+        data['_columns'][col].content.html = XMLMapping.dump(image);
+      }
+      else if (format === 'url') {
+        var url = {
+          a : {
+            href : data['_columns'][col].content.raw,
+            $t : data['_columns'][col].content.raw
+          }
+        };
+        data['_columns'][col].content.html = XMLMapping.dump(url);
+      }
+      else if (format === 'uri') {
+        var uri = {
+          a : {
+            href : data['_columns'][col].content.raw,
+            uri : {
+              $t : data['_columns'][col].content.raw
+            }
+          }
+        };
+        data['_columns'][col].content.html = XMLMapping.dump(uri);
       }
     });
     submit(null, data);

@@ -4,5 +4,5 @@ app/public/assets/js/ie-emulation-modes-warning.js
 app/public/assets/js/ie10-viewport-bug-workaround.js
 app/public/assets/js/ie8-responsive-file-warning.js
 app/public/assets/js/istex-widget.min.js
-app/public/assets/js/list.min.js
+app/public/assets/js/bundle.min.js
 app/public/assets/js/rzslider.js

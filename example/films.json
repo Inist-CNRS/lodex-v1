@@ -78,21 +78,22 @@
 			"label": "Updated",
 			"scheme": "http://purl.org/dc/terms/modified",
 			"type": "date",
-			"format" : "LL",
+			"format" : "moment",
+			"formatOptions" : {
+				"syntax" : "LL"
+			},
 			"content<": {
 				"get": "_collection._dataset._updated"
 			}
 		},
 		"chart1" : {
 			"label": "Distribution per year",
-			"type": "object",
-			"format": "component",
 			"scheme": "https://schema.org/associatedMedia",
-			"content" : {
-				"chart" : {
-					"type" : "Line",
-					"field" :"year"
-				}
+			"type": "object",
+			"format": "chart",
+			"formatOptions" : {
+				"type" : "Line",
+				"field" :"year"
 			},
 			"displayAreas" : {
 				"insert" :true
@@ -100,14 +101,12 @@
 		},
 		"chart2" : {
 			"label": "Distribution per actor",
-			"type": "object",
-			"format": "component",
 			"scheme": "https://schema.org/associatedMedia",
-			"content" : {
-				"chart" : {
-					"type" : "Bar",
-					"field" :"actors"
-				}
+			"type": "object",
+			"format": "chart",
+			"formatOptions" : {
+				"type" : "Bar",
+				"field" :"actors"
 			},
 			"displayAreas" : {
 				"insert" :true
@@ -115,18 +114,16 @@
 		},
 		"model1" : {
 			"label": "Ontology model",
-			"type": "object",
-			"format": "component",
 			"scheme": "https://schema.org/image",
-			"content" : {
-				"img" : {
-					"height" : "200",
-					"src" : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/8_mm_Kodak_safety_film_reel_01.jpg/320px-8_mm_Kodak_safety_film_reel_01.jpg"
-				}
+			"type": "uri",
+			"format" : "image",
+			"formatOptions" : {
+				"height" : "200"
 			},
 			"displayAreas" : {
 				"insert" : false
-			}
+			},
+			"content" : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/8_mm_Kodak_safety_film_reel_01.jpg/320px-8_mm_Kodak_safety_film_reel_01.jpg"
 		}
 	},
 	"collectionFields": {
@@ -134,6 +131,7 @@
 			"label": "Title",
 			"scheme": "http://purl.org/dc/terms/title",
 			"type": "string",
+			"format" : "raw",
 			"lang": "fr",
 			"displayAreas" : {
 				"facet" : false,
@@ -147,6 +145,7 @@
 			"label": "Description",
 			"scheme": "http://purl.org/dc/terms/description",
 			"type": "string",
+			"format" : "raw",
 			"content<": {
 				"get": "_content.json.director"
 			}
@@ -155,6 +154,7 @@
 			"label": "Year",
 			"scheme": "http://purl.org/dc/terms/issued",
 			"type": "date",
+			"format" : "raw",
 			"displayAreas" : {
 				"facet" : true,
 				"table" : true
@@ -215,7 +215,10 @@
 			"label": "Updated",
 			"scheme": "http://purl.org/dc/terms/modified",
 			"type": "date",
-			"format": "LL",
+			"format": "moment",
+			"formatOptions": {
+				"syntax" : "LL"
+			},
 			"content<": {
 				"get": "dateSynchronised"
 			}
@@ -224,6 +227,7 @@
 			"label": "Rating",
 			"scheme": "http://schema.org/commentCount",
 			"type": "number",
+			"format" : "raw",
 			"content<": {
 				"get": "_content.json.rating",
 				"replace": [",","."],
@@ -235,12 +239,14 @@
 			"label": "IMDB contributor rating",
 			"scheme": "http://purl.org/dc/terms/source",
 			"type": "string",
+			"format" : "raw",
 			"content": "IMdb"
 		},
 		"seeAlso": {
 			"label": "IMDB Rating",
 			"scheme": "http://purl.org/dc/terms/source",
 			"type": "uri",
+			"format" : "url",
 			"content<": {
 				"get": "_content.json.imdb"
 			}
@@ -249,7 +255,7 @@
 			"label": "Corpus Name",
 			"scheme": "http://purl.org/dc/terms/source",
 			"type": "uri",
-			"format": "lodex",
+			"format": "uri",
 			"content<": {
 				"get": "_root"
 			}
