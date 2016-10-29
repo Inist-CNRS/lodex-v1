@@ -139,6 +139,7 @@ module.exports = function(warmup) {
   config.fix('rootKEY',              'corpus');
   config.fix('maxFileSize',          10485760); // 10 Mo
   config.fix('acceptFileTypes',      []);
+  config.fix('defaultAltValue',      'html');
   config.fix('allowedAltValues',     [
     'dry',
     'jdx',
@@ -244,8 +245,16 @@ module.exports = function(warmup) {
             }
           });
         }
+        //
+        // deduct some vars
+        //
         if (!config.has('baseURL')) {
           config.set('baseURL', 'http://127.0.0.1:' + config.get('port'));
+        }
+        if (config.has('ark')) {
+          //config.set('rootURL', '/ark:/12345/ABC.html');
+          //config.set('rootKEY', 'ark:/12345/ABC');
+          config.set('prefixKEY', 'ark:/' + config.get('ark.naan'));
         }
 
         //

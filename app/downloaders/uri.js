@@ -50,7 +50,7 @@ module.exports = function(options, core) {
         baseURI = baseURL.concat('/').concat(prefixKEY);
       }
 
-      data['_root'] = baseURL + '/' + core.config.get('rootKEY');
+      data['_root'] = baseURL + '/'; //  + core.config.get('rootKEY');
       data['_uri'] = baseURI.concat('/').concat(data['_wid']);
       submit(null, data);
     }

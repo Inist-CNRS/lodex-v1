@@ -15,10 +15,8 @@ module.exports = function(options) {
   if (typeof options.uniqueIdentifierWith !== 'object' ||
       Object.keys(options.uniqueIdentifierWith) === 0) {
     options.uniqueIdentifierWith = {
-      get: ['_content.json.id', '_content.json.uid', '_wid', '_id'],
-      deduplicate : true,
-      cast : 'array',
-      first: true
+      get: ['identifier', '_content.json.id', '_content.json.uid', '_wid', '_id'],
+      coalesce: true
     };
   }
   var stylesheet = {

@@ -55,7 +55,7 @@
         <div id="main" class="col-md-9 clearfix" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-                    <em><a href="{{ _root }}.html"> From <i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme('http://purl.org/dc/terms/title', {cover:'dataset'})|d('Missing dc:title in your datasetFields')}}</i></a></em>
+                    <em><a href="{{ _root }}"> From <i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme('http://purl.org/dc/terms/title', {cover:'dataset'})|d('Missing dc:title in your datasetFields')}}</i></a></em>
 
                     <h2>{{ _columns|getContentByScheme('http://purl.org/dc/terms/title')|d('Missing dc:title in your collectionFields')}}</h2>
 
@@ -285,7 +285,7 @@
 
             <div class="testimonial testimonial-info">
                <h2>Naviguer</h2>
-                <div class="testimonial-section"> 
+                <div class="testimonial-section">
                     <p>Cette donnée est CONTENUE dans&nbsp;: {{ _columns|getByScheme("http://purl.org/dc/terms/title", {cover:"dataset",select:"label"})|d('Missing `dc:title` in your datasetFields') }}
                         <a href="{{ _root }}.html"><i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme("http://purl.org/dc/terms/title",{cover:"dataset"})|d('Missing `dc:title` in your datasetFields') }}</i></a></p>
                    <!-- <p>{{ _columns|getByScheme("http://purl.org/dc/terms/description",{cover:"dataset",select:"label"})|d('Missing `dc:description` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/description",{cover:"dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>-->
@@ -295,9 +295,9 @@
                     <i class="fa fa-share"></i> Integrate:
                     <input type="text" value="<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{_root}}.iframe&quot; frameborder=&quot;0&quot;></iframe>">
                 </div>
-               
+
                <!-- <iframe width="180" height="315" src="{{ _root}}.iframe" frameborder="0"></iframe> À supprimer? Doublon avec l'iframe -->
-                
+
                 <h2>Télécharger</h2>
                 <h2>Partager</h2>
             </div>

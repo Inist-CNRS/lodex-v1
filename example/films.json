@@ -1,15 +1,11 @@
 {
 	"databaseName" : "films",
-	"rootURL" : "/ark:/12345/ABC.html",
-	"rootKEY" : "ark:/12345/ABC",
+	"ark" : {
+		"naan" : "12345",
+		"subpublisher" : "ABC"
+	},
 	"defaultRootCollection": "data",
 	"collectionNameHotFolder": "data",
-	"prefixKEY" : "ark:/12345",
-	"uniqueIdentifierWith" : {
-		"get": "identifier",
-		"upcase" : true,
-		"prepend": "ABC-"
-	},
 	"itemsPerPage": 15,
 	"print": {
 		"header" : {

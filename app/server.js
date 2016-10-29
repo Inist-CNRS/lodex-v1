@@ -187,7 +187,7 @@ module.exports = function(config, online) {
   loaders.apply(function(hash, func, item) {
     core.loaders.push([item.pattern || '**/*', func, item.options]);
   });
-  core.loaders.push(['**/*', require('./loaders/prepend.js'), {}]);
+  core.loaders.push(['**/*', require('./loaders/prepend.js'), { ark : config.get('ark') }]);
   core.loaders.push(['**/*', require('./loaders/uniqueid.js'),
     { uniqueIdentifierWith: config.get('uniqueIdentifierWith') }]);
   //core.loaders.push(['**/*', require('./loaders/document.js'),

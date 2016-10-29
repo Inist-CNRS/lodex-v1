@@ -16,6 +16,7 @@ module.exports = function(router, core) {
 
   var prefixURL = core.config.get('prefixURL');
   var prefixKEY = core.config.get('prefixKEY');
+  var defaultAltValue = core.config.get('defaultAltValue');
   var rootKEY = core.config.get('rootKEY');
 
   function getPublicCollection(origin, cb) {
@@ -27,8 +28,8 @@ module.exports = function(router, core) {
         if (nbd > 1) {
           return cb(null, collectionName);
         }
-        // 
-        // On renvoit une erreur plutot- que d'attendre la fin du chargement 
+        //
+        // On renvoit une erreur plutot- que d'attendre la fin du chargement
         //
         cb(new core.Errors.Unavailable('First start : loading data...'));
 
@@ -185,7 +186,7 @@ module.exports = function(router, core) {
       return next();
     }
     debug('get ', '/:star', req.routeParams, req.query);
-    req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
+    req.query.alt = req.query.alt === undefined ? defaultAltValue : req.query.alt;
     if (req.query.alt === 'html' && !req.query['%24limit']) {
       req['_parsedOriginalUrl'].query += '&%24limit='.concat(core.config.get('itemsPerPage'));
     }
@@ -284,7 +285,7 @@ module.exports = function(router, core) {
       return next();
     }
     debug('get ', '/' + prefixKEY + '/:documentName', req.routeParams);
-    req.query.alt = req.query.alt === undefined ? 'min' : req.query.alt;
+    req.query.alt = req.query.alt === undefined ? defaultAltValue : req.query.alt;
     getMasterCollection(function(err, collID) {
       if (err) {
         return next(err);
