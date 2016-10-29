@@ -35,9 +35,15 @@ module.exports = function(options, core) {
       else if (format === 'markdown') {
         data['_columns'][col].content.html = marked(data['_columns'][col].content.raw);
       }
-      else if (format === 'url') {
-        data['_columns'][col].content.html = '<a href="' + data['_columns'][col].content.raw +
-          '">' + data['_columns'][col].content.raw + '</a>';
+      else if (type === 'uri') {
+        data['_columns'][col].content.html = '<a href="' + data['_columns'][col].content.raw +'">';
+        if (format !== undefined) {
+          data['_columns'][col].content.html += '<uri format="' + format + '">' + data['_columns'][col].content.raw + '</uri>'
+        }
+        else {
+          data['_columns'][col].content.html += data['_columns'][col].content.raw
+        }
+        data['_columns'][col].content.html += '</a>';
       }
     });
     submit(null, data);

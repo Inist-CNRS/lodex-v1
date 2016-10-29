@@ -245,7 +245,6 @@
 			"label": "IMDB Rating",
 			"scheme": "http://purl.org/dc/terms/source",
 			"type": "uri",
-			"format": "url",
 			"content<": {
 				"get": "_content.json.imdb"
 			}
