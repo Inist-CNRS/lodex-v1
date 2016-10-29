@@ -7,12 +7,12 @@
     "lodex": "bin/lodex"
   },
   "scripts": {
-    "build": "browserify -d -t vueify app/components/list.js -p [minifyify --no-map] > app/public/assets/js/list.min.js",
-    "build-dev": "browserify -d -t vueify app/components/list.js > app/public/assets/js/list.min.js",
+    "build": "browserify -d -t vueify app/components/main.js -p [minifyify --no-map] > app/public/assets/js/bundle.min.js",
+    "build-dev": "browserify -d -t vueify app/components/main.js > app/public/assets/js/bundle.min.js",
     "lint": "eslint --ext=.js,.vue ./app/",
     "start": "./bin/lodex",
     "insertversion": "sed -i \"s#\\(LODEX version \\)\\([\\.a-z0-9]\\+\\)#\\1${npm_package_version}#g\" app/views/about.html",
-    "preversion": "npm run lint && npm run build && git add app/public/assets/js/list.min.js",
+    "preversion": "npm run lint && npm run build && git add app/public/assets/js/bundle.min.js",
     "version": "npm run insertversion && git add app/views/about.html",
     "postversion": "git push && git push --tags",
     "apilint": "drafter -lu doc/rest.apib && drafter -lu doc/actions.apib",
