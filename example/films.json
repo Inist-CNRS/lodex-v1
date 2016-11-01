@@ -116,7 +116,7 @@
 			"label": "Ontology model",
 			"scheme": "https://schema.org/image",
 			"type": "uri",
-			"format" : "image",
+			"format" : "picture",
 			"formatOptions" : {
 				"height" : "200"
 			},
@@ -258,6 +258,15 @@
 			"format": "uri",
 			"content<": {
 				"get": "_root"
+			}
+		},
+		"inISTEX": {
+			"label": "Search In ISTEX",
+			"scheme": "https://schema.org/relatedLink",
+			"type": "string",
+			"format": "istex",
+			"content<": {
+				"get#1" : "_content.json.director"
 			}
 		}
 	},

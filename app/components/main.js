@@ -10,8 +10,9 @@ var facet = require('./facet.vue')
 var metric = require('./metric.vue')
 var tableau = require('./tableau.vue')
 var chart = require('./chart.vue')
-var uri = require('./uri.vue')
-var image = require('./image.vue')
+var picture = require('./picture.vue')
+var knownuri = require('./uri.vue')
+var istex = require('./istex.vue')
 
 module.exports = new Vue({
 
@@ -26,8 +27,9 @@ module.exports = new Vue({
     tableau: tableau,
     metric: metric,
     chart: chart,
-    uri: uri,
-    image: image
+    picture: picture,
+    knownuri: knownuri,
+    istex: istex
   }
 
 })

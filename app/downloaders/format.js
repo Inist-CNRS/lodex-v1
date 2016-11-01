@@ -43,11 +43,12 @@ module.exports = function(options, core) {
         };
         data['_columns'][col].content.html = XMLMapping.dump(chart);
       }
-      else if (format === 'image') {
-        var image = {
-          image : data['_columns'][col].formatOptions
+      else if (format === 'picture') {
+        var picture = {
+          picture : data['_columns'][col].formatOptions
         };
-        data['_columns'][col].content.html = XMLMapping.dump(image);
+        picture.picture.src = data['_columns'][col].content.raw;
+        data['_columns'][col].content.html = XMLMapping.dump(picture);
       }
       else if (format === 'url') {
         var url = {
@@ -62,13 +63,23 @@ module.exports = function(options, core) {
         var uri = {
           a : {
             href : data['_columns'][col].content.raw,
-            uri : {
-              $t : data['_columns'][col].content.raw
+            knownuri : {
+              href : data['_columns'][col].content.raw
             }
           }
         };
         data['_columns'][col].content.html = XMLMapping.dump(uri);
       }
+      else if (format === 'istex') {
+        var istex = {
+          istex : {
+            query : data['_columns'][col].content.raw,
+          }
+        };
+        data['_columns'][col].content.html = XMLMapping.dump(istex);
+      }
+
+
     });
     submit(null, data);
   };
