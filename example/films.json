@@ -58,7 +58,7 @@
 		}
 	},
 	"datasetFields": {
-		"title1" : {
+		"d1" : {
 			"label" : "Dataset title",
 			"scheme": "http://purl.org/dc/terms/title",
 			"type": "https://www.w3.org/TR/xmlschema-2/#string",
@@ -66,7 +66,7 @@
 			"lang": "en",
 			"content": "Films"
 		},
-		"desc1" : {
+		"d2" : {
 			"label" : "Dataset description",
 			"scheme": "http://purl.org/dc/terms/description",
 			"type": "https://www.w3.org/TR/xmlschema-2/#string",
@@ -74,7 +74,7 @@
 			"lang": "en",
 			"content": "Several films to demontrate the usage of __LODEX__"
 		},
-		"date1": {
+		"d3": {
 			"label": "Updated",
 			"scheme": "http://purl.org/dc/terms/modified",
 			"type": "https://www.w3.org/TR/xmlschema-2/#date",
@@ -86,7 +86,7 @@
 				"get": "_collection._dataset._updated"
 			}
 		},
-		"chart1" : {
+		"d4" : {
 			"label": "Distribution per year",
 			"scheme": "https://schema.org/associatedMedia",
 			"format": "chart",
@@ -98,7 +98,7 @@
 				"insert" :true
 			}
 		},
-		"chart2" : {
+		"d5" : {
 			"label": "Distribution per actor",
 			"scheme": "https://schema.org/associatedMedia",
 			"format": "chart",
@@ -110,7 +110,7 @@
 				"insert" :true
 			}
 		},
-		"model1" : {
+		"d6" : {
 			"label": "Ontology model",
 			"scheme": "https://schema.org/image",
 			"type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
@@ -125,7 +125,7 @@
 		}
 	},
 	"collectionFields": {
-		"title": {
+		"c1": {
 			"label": "Title",
 			"scheme": "http://purl.org/dc/terms/title",
 			"type": "https://www.w3.org/TR/xmlschema-2/#string",
@@ -139,7 +139,7 @@
 				"get": "_content.json.title"
 			}
 		},
-		"description": {
+		"c2": {
 			"label": "Description",
 			"scheme": "http://purl.org/dc/terms/description",
 			"type": "https://www.w3.org/TR/xmlschema-2/#string",
@@ -148,7 +148,7 @@
 				"get": "_content.json.director"
 			}
 		},
-		"year": {
+		"c3": {
 			"label": "Year",
 			"scheme": "http://purl.org/dc/terms/issued",
 			"type": "https://www.w3.org/TR/xmlschema-2/#date",
@@ -161,7 +161,7 @@
 				"get": "_content.json.year"
 			}
 		},
-		"actors": {
+		"c4": {
 			"label": "Actors",
 			"scheme": "http://schema.org/actors",
 			"displayAreas" : {
@@ -175,8 +175,8 @@
 				}
 			}
 		},
-		"director": {
-			"composedOf" : ["firstName", "lastName"],
+		"c6": {
+			"composedOf" : ["c7", "c8"],
 			"label" : "Director",
 			"scheme" : "http://purl.org/ontology/bibo/director",
 			"type" : "https://www.w3.org/TR/xmlschema-2/#string",
@@ -189,7 +189,7 @@
 				"prepend" : "Mr. "
 			}
 		},
-		"firstName" : {
+		"c7" : {
 			"label": "Prénom",
 			"scheme" : "http://xmlns.com/foaf/spec/#term_firstName",
 			"type" : "https://www.w3.org/TR/xmlschema-2/#string",
@@ -199,7 +199,7 @@
 				"first" : true
 			}
 		},
-		"lastName" : {
+		"c8" : {
 			"label": "Nom",
 			"scheme" : "http://xmlns.com/foaf/spec/#term_lastName",
 			"type" : "https://www.w3.org/TR/xmlschema-2/#string",
@@ -209,7 +209,7 @@
 				"last" : true
 			}
 		},
-		"updated": {
+		"c9": {
 			"label": "Updated",
 			"scheme": "http://purl.org/dc/terms/modified",
 			"type": "https://www.w3.org/TR/xmlschema-2/#date",
@@ -221,7 +221,7 @@
 				"get": "dateSynchronised"
 			}
 		},
-		"rating": {
+		"c10": {
 			"label": "Rating",
 			"scheme": "http://schema.org/commentCount",
 			"type": "https://www.w3.org/TR/xmlschema-2/#float",
@@ -232,15 +232,15 @@
 				"cast": "number"
 			}
 		},
-		"ratingFrom": {
-			"complete" : "rating",
+		"c11": {
+			"complete" : "c10",
 			"label": "IMDB contributor rating",
 			"scheme": "http://purl.org/dc/terms/source",
 			"type": "https://www.w3.org/TR/xmlschema-2/#string",
 			"format" : "raw",
 			"content": "IMdb"
 		},
-		"seeAlso": {
+		"c12": {
 			"label": "IMDB Rating",
 			"scheme": "http://purl.org/dc/terms/source",
 			"type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
@@ -249,7 +249,7 @@
 				"get": "_content.json.imdb"
 			}
 		},
-		"from": {
+		"c13": {
 			"label": "Corpus Name",
 			"scheme": "http://purl.org/dc/terms/source",
 			"type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
@@ -258,7 +258,7 @@
 				"get": "_root"
 			}
 		},
-		"inISTEX": {
+		"c14": {
 			"label": "Search In ISTEX",
 			"scheme": "https://schema.org/relatedLink",
 			"type": "https://www.w3.org/TR/xmlschema-2/#string",
