@@ -61,7 +61,7 @@
 		"title1" : {
 			"label" : "Dataset title",
 			"scheme": "http://purl.org/dc/terms/title",
-			"type": "string",
+			"type": "https://www.w3.org/TR/xmlschema-2/#string",
 			"format" : "raw",
 			"lang": "en",
 			"content": "Films"
@@ -69,7 +69,7 @@
 		"desc1" : {
 			"label" : "Dataset description",
 			"scheme": "http://purl.org/dc/terms/description",
-			"type": "string",
+			"type": "https://www.w3.org/TR/xmlschema-2/#string",
 			"format" : "markdown",
 			"lang": "en",
 			"content": "Several films to demontrate the usage of __LODEX__"
@@ -77,7 +77,7 @@
 		"date1": {
 			"label": "Updated",
 			"scheme": "http://purl.org/dc/terms/modified",
-			"type": "date",
+			"type": "https://www.w3.org/TR/xmlschema-2/#date",
 			"format" : "moment",
 			"formatOptions" : {
 				"syntax" : "LL"
@@ -89,7 +89,6 @@
 		"chart1" : {
 			"label": "Distribution per year",
 			"scheme": "https://schema.org/associatedMedia",
-			"type": "object",
 			"format": "chart",
 			"formatOptions" : {
 				"type" : "Line",
@@ -102,7 +101,6 @@
 		"chart2" : {
 			"label": "Distribution per actor",
 			"scheme": "https://schema.org/associatedMedia",
-			"type": "object",
 			"format": "chart",
 			"formatOptions" : {
 				"type" : "Bar",
@@ -115,7 +113,7 @@
 		"model1" : {
 			"label": "Ontology model",
 			"scheme": "https://schema.org/image",
-			"type": "uri",
+			"type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
 			"format" : "picture",
 			"formatOptions" : {
 				"height" : "200"
@@ -130,7 +128,7 @@
 		"title": {
 			"label": "Title",
 			"scheme": "http://purl.org/dc/terms/title",
-			"type": "string",
+			"type": "https://www.w3.org/TR/xmlschema-2/#string",
 			"format" : "raw",
 			"lang": "fr",
 			"displayAreas" : {
@@ -144,7 +142,7 @@
 		"description": {
 			"label": "Description",
 			"scheme": "http://purl.org/dc/terms/description",
-			"type": "string",
+			"type": "https://www.w3.org/TR/xmlschema-2/#string",
 			"format" : "raw",
 			"content<": {
 				"get": "_content.json.director"
@@ -153,7 +151,7 @@
 		"year": {
 			"label": "Year",
 			"scheme": "http://purl.org/dc/terms/issued",
-			"type": "date",
+			"type": "https://www.w3.org/TR/xmlschema-2/#date",
 			"format" : "raw",
 			"displayAreas" : {
 				"facet" : true,
@@ -178,10 +176,10 @@
 			}
 		},
 		"director": {
-			"about" : ["firstName", "lastName"],
+			"composedOf" : ["firstName", "lastName"],
 			"label" : "Director",
 			"scheme" : "http://purl.org/ontology/bibo/director",
-			"type" : "class",
+			"type" : "https://www.w3.org/TR/xmlschema-2/#string",
 			"displayAreas" : {
 				"facet" : true,
 				"table" : true
@@ -194,7 +192,7 @@
 		"firstName" : {
 			"label": "Prénom",
 			"scheme" : "http://xmlns.com/foaf/spec/#term_firstName",
-			"type" : "string",
+			"type" : "https://www.w3.org/TR/xmlschema-2/#string",
 			"content<": {
 				"get" : "_content.json.director",
 				"parseCSV" : " ",
@@ -204,7 +202,7 @@
 		"lastName" : {
 			"label": "Nom",
 			"scheme" : "http://xmlns.com/foaf/spec/#term_lastName",
-			"type" : "string",
+			"type" : "https://www.w3.org/TR/xmlschema-2/#string",
 			"content<": {
 				"get#1" : "_content.json.director",
 				"parseCSV" : " ",
@@ -214,7 +212,7 @@
 		"updated": {
 			"label": "Updated",
 			"scheme": "http://purl.org/dc/terms/modified",
-			"type": "date",
+			"type": "https://www.w3.org/TR/xmlschema-2/#date",
 			"format": "moment",
 			"formatOptions": {
 				"syntax" : "LL"
@@ -226,7 +224,7 @@
 		"rating": {
 			"label": "Rating",
 			"scheme": "http://schema.org/commentCount",
-			"type": "number",
+			"type": "https://www.w3.org/TR/xmlschema-2/#float",
 			"format" : "raw",
 			"content<": {
 				"get": "_content.json.rating",
@@ -235,17 +233,17 @@
 			}
 		},
 		"ratingFrom": {
-			"about" : "rating",
+			"complete" : "rating",
 			"label": "IMDB contributor rating",
 			"scheme": "http://purl.org/dc/terms/source",
-			"type": "string",
+			"type": "https://www.w3.org/TR/xmlschema-2/#string",
 			"format" : "raw",
 			"content": "IMdb"
 		},
 		"seeAlso": {
 			"label": "IMDB Rating",
 			"scheme": "http://purl.org/dc/terms/source",
-			"type": "uri",
+			"type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
 			"format" : "url",
 			"content<": {
 				"get": "_content.json.imdb"
@@ -254,7 +252,7 @@
 		"from": {
 			"label": "Corpus Name",
 			"scheme": "http://purl.org/dc/terms/source",
-			"type": "uri",
+			"type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
 			"format": "uri",
 			"content<": {
 				"get": "_root"
@@ -263,8 +261,11 @@
 		"inISTEX": {
 			"label": "Search In ISTEX",
 			"scheme": "https://schema.org/relatedLink",
-			"type": "string",
+			"type": "https://www.w3.org/TR/xmlschema-2/#string",
 			"format": "istex",
+			"displayAreas" : {
+				"navbar" : true
+			},
 			"content<": {
 				"get#1" : "_content.json.director"
 			}

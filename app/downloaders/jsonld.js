@@ -4,12 +4,6 @@ var path = require('path'),
   basename = path.basename(__filename, '.js'),
   debug = require('debug')('lodex:downloaders:' + basename);
 
-var type2scheme = {
-  string : 'https://www.w3.org/TR/xmlschema-2/#string',
-  date : 'https://www.w3.org/TR/xmlschema-2/#date',
-  boolean : 'https://www.w3.org/TR/xmlschema-2/#boolean'
-};
-
 module.exports = function(options, core) {
   options = options || {};
   return function (data, submit) {
@@ -27,8 +21,8 @@ module.exports = function(options, core) {
           data['_content'].jsonld[propertyName] = node.content;
           data['_content'].jsonld['@context'][propertyName] = {};
           data['_content'].jsonld['@context'][propertyName]['@id'] = node.scheme;
-          if (node.type && type2scheme[node.type]) {
-            data['_content'].jsonld['@context'][propertyName]['@type'] = type2scheme[node.type];
+          if (node.type) {
+            data['_content'].jsonld['@context'][propertyName]['@type'] = node.type;
           }
           if (node.language) {
             data['_content'].jsonld['@context'][propertyName]['@language'] = node.lang;
