@@ -10,17 +10,17 @@ var path = require('path')
 
 module.exports = function(options) {
   options = options || {};
-  options.uniqueIdentifierWith = options.uniqueIdentifierWith ? options.uniqueIdentifierWith : {};
 
-  if (typeof options.uniqueIdentifierWith !== 'object' ||
-      Object.keys(options.uniqueIdentifierWith) === 0) {
+  if (!options.uniqueIdentifierWith
+    || typeof options.uniqueIdentifierWith !== 'object'
+    ||  Object.keys(options.uniqueIdentifierWith).length === 0) {
     options.uniqueIdentifierWith = {
-      get: ['identifier', '_content.json.id', '_content.json.uid', '_wid', '_id'],
+      get: ['_content.min._id', '_content.json.id', '_content.json.uid', '_wid', 'identifier', '_id'],
       coalesce: true
     };
   }
   var stylesheet = {
-    'wid<':  options.uniqueIdentifierWith
+    'idt<':  options.uniqueIdentifierWith
   };
 
   return function (input, submit) {
@@ -30,7 +30,7 @@ module.exports = function(options) {
     }
     JBJ.inject(stylesheet, input, function(err, res) {
       if (res) {
-        input['_wid'] = res.wid;
+        input.identifier = res.idt;
       }
       submit(err, input);
     });

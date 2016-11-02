@@ -20,6 +20,7 @@ module.exports = function(options) {
     if (input['_wid'] === undefined) {
       input['_wid'] = input.identifier;
     }
+    delete input.identifier;
 
     // _text
     if (input.text) {
