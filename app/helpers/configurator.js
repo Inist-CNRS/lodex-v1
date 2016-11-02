@@ -101,9 +101,9 @@ Configurator.prototype.merge = function merge(obj) {
 Configurator.prototype.expose = function expose() {
   var conf = clone(this.config);
   var tohide = ['dataPath', 'viewPath', 'collectionName', 'connectionURI',
-                'connexionURI', 'configs', 'config', '$0', '_', 'browserifyModules',
-                'collectionsIndexName', 'tempPath', 'theme', 'h', 'd', 'debug', 'help',
-                'version', 'v', 'verbose', 'V'];
+    'connexionURI', 'configs', 'config', '$0', '_', 'browserifyModules',
+    'collectionsIndexName', 'tempPath', 'theme', 'h', 'd', 'debug', 'help',
+    'version', 'v', 'verbose', 'V'];
   tohide.forEach(function(n) {
     if (conf[n] !== undefined) {
       delete conf[n];

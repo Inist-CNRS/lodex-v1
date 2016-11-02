@@ -31,6 +31,7 @@ module.exports = function(router, core) {
         //
         // On renvoit une erreur plutot- que d'attendre la fin du chargement
         //
+        // eslint-disable-next-line callback-return
         cb(new core.Errors.Unavailable('First start : loading data...'));
 
         var reqopt = {

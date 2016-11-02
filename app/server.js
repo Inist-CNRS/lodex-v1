@@ -487,9 +487,10 @@ module.exports = function(config, online) {
     core.app.use(require('morgan')(config.get('logFormat'), { stream : process.stderr }));
     core.app.use(require('serve-favicon')(path.resolve(publicPath, './favicon.ico')));
     core.app.use(require('cookie-parser')());
-    core.app.use(require('express-session')({ secret: __dirname,
-                                              resave: false,
-                                              saveUninitialized: false }));
+    core.app.use(require('express-session')({
+      secret: __dirname,
+      resave: false,
+      saveUninitialized: false }));
     core.app.use(passport.initialize());
     core.app.use(passport.session());
     I18n.expressBind(core.app, {

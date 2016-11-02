@@ -160,11 +160,12 @@ module.exports = function(warmup) {
   ]);
   config.fix('mimeTypes',            {});
   config.fix('heartrate',            5000);
-  config.fix('filesToIgnore',        [ '**/.*', '~*', '*~', '*.sw?', '*.old', '*.bak',
-                                       '**/node_modules', 'Thumbs.db' ]);
+  config.fix('filesToIgnore',        [
+    '**/.*', '~*', '*~', '*.sw?', '*.old', '*.bak', '**/node_modules', 'Thumbs.db'
+  ]);
   config.fix('tempPath',             os.tmpdir());
   config.fix('dataPath',             path.normalize(path.resolve(process.cwd(),
-                                      path.normalize(argv._.pop() || './data'))));
+                                     path.normalize(argv._.pop() || './data'))));
   config.fix('viewPath',             path.resolve(__dirname, './app/views/'));
   config.fix('middlewares',          {});
   config.fix('authorizations',       []);

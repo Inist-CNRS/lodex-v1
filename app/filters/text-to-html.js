@@ -20,7 +20,7 @@ module.exports = function(exec, execmap) {
 
       // Put URLs into an HREF
       // See https://regex101.com/r/jO8bC4/5
-      var urlRegex = /([a-z]+:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ #]*)#?([^ #]*)/ig;
+      var urlRegex = /([a-z]+:\/+)([^/\s]*)([a-z0-9\-@^=%&;/~+]*)[?]?([^ #]*)#?([^ #]*)/ig;
       html = html.replace(urlRegex, '<a href="$&">$&</a>');
       return html;
     }, 'textToHtml');

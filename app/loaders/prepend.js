@@ -14,7 +14,7 @@ module.exports = function(options) {
   return function (input, submit) {
     input.name = path
     .basename(input.location, path.extname(input.location))
-    .replace(/[_\-\.]+/g, ' ');
+    .replace(/[_\-.]+/g, ' ');
 
     if (idt === false) {
       input.identifier = shorthash(input.fid + input.number);

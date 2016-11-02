@@ -11,11 +11,13 @@ var path = require('path')
 module.exports = function(options) {
   options = options || {};
 
-  if (!options.uniqueIdentifierWith
-    || typeof options.uniqueIdentifierWith !== 'object'
-    ||  Object.keys(options.uniqueIdentifierWith).length === 0) {
+  if (!options.uniqueIdentifierWith ||
+      typeof options.uniqueIdentifierWith !== 'object' ||
+      Object.keys(options.uniqueIdentifierWith).length === 0) {
     options.uniqueIdentifierWith = {
-      get: ['_content.min._id', '_content.json.id', '_content.json.uid', '_wid', 'identifier', '_id'],
+      get: [
+        '_content.min._id', '_content.json.id', '_content.json.uid', '_wid', 'identifier', '_id'
+      ],
       coalesce: true,
       first: true
     };
