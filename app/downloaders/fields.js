@@ -125,15 +125,15 @@ module.exports = function(options, core) {
       // Class should be computed after proprety
       var classes = {};
       Object.keys(stylesheet).forEach(function(key) {
-        if (stylesheet[key].type === 'class') {
+        if (stylesheet[key].composedOf) {
           classes[key] = stylesheet[key];
           if (classes[key]['content<']) {
             var jxl = {};
-            if (Array.isArray(classes[key].about)) {
-              jxl.get = classes[key].about.map(function(i) { return i + '.content'; });
+            if (Array.isArray(classes[key].composedOf)) {
+              jxl.get = classes[key].composedOf.map(function(i) { return i + '.content'; });
             }
             else {
-              jxl.get = classes[key].about + '.content';
+              jxl.get = classes[key].composedOf + '.content';
             }
             Object.keys(classes[key]['content<']).forEach(function(i) {
               jxl[i] = classes[key]['content<'][i];
