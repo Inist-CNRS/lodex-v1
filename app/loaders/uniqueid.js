@@ -16,7 +16,8 @@ module.exports = function(options) {
     ||  Object.keys(options.uniqueIdentifierWith).length === 0) {
     options.uniqueIdentifierWith = {
       get: ['_content.min._id', '_content.json.id', '_content.json.uid', '_wid', 'identifier', '_id'],
-      coalesce: true
+      coalesce: true,
+      first: true
     };
   }
   var stylesheet = {
