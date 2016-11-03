@@ -15,13 +15,11 @@ export default {
     }
   },
   mounted () {
-    console.log('embeduri', this.href)
     this.$nextTick(this.reload)
   },
   methods: {
     reload (done) {
       this.$http.get(this.href + "?alt=iframe").then(response => {
-        console.log('embeduri get', response)
         const html = clone(response.body || 'n/a')
         const beg = html.indexOf('<body>') + '<body>'.length
         const end = html.indexOf('</body>')
