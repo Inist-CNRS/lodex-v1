@@ -12,6 +12,7 @@ var tableau = require('./tableau.vue')
 var chart = require('./chart.vue')
 var picture = require('./picture.vue')
 var knownuri = require('./uri.vue')
+var embeduri = require('./embeduri.vue')
 var istex = require('./istex.vue')
 
 module.exports = new Vue({
@@ -29,6 +30,7 @@ module.exports = new Vue({
     chart: chart,
     picture: picture,
     knownuri: knownuri,
+    embeduri: embeduri,
     istex: istex
   }
 

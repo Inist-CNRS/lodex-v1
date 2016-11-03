@@ -70,6 +70,14 @@ module.exports = function(options, core) {
         };
         data['_columns'][col].content.html = XMLMapping.dump(uri);
       }
+      else if (format === 'embeduri') {
+        var embeduri = {
+          embeduri: {
+            href : data['_columns'][col].content.raw
+          }
+        };
+        data['_columns'][col].content.html = XMLMapping.dump(embeduri);
+      }
       else if (format === 'istex') {
         var istex = {
           istex : {
