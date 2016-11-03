@@ -74,21 +74,13 @@
                 <div class="col-md-12 col-sm-12">
 
 
-					<div class="social pull-right">
-					<ul>
-						<li><a href="https://twitter.com/intent/tweet?url={{ documents[0]._uri }}"  target="_blank"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="https://plus.google.com/share?url={{ documents[0]._uri }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-						<li><a href="#"><i class="fa fa-github"></i></a></li>
-						<li><a href="#"><i class="fa fa-dropbox"></i></a></li>
-					</ul>
-					</div>
-                    <div id="tab" class="btn-group" data-toggle="buttons">
+					<div id="tab" class="btn-group" data-toggle="buttons">
                         <a href="#ressource" class="btn btn-default active" data-toggle="tab">
                             <input type="radio" />{{ print.item.resource.label|d('Missing `print.item.resource.label` in your config file')}}</a>
                         <a href="#exports" class="btn btn-default" data-toggle="tab">
                             <input type="radio" />{{ print.item.exports.label|d('Missing `print.item.exports.label` in your config file')}}</a>
                         <a href="#share" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />{{ print.item.partOf.label|d('Missing `print.item.share.label` in your config file')}}</a>
+                            <input type="radio" />{{ print.item.share.label|d('Missing `print.item.share.label` in your config file')}}</a>
                     </div>
 
 
@@ -246,8 +238,8 @@
 							<h2><i class="fa fa-share"></i> Share</h2>
 							<p>
 							<a title="Facebook" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x"></i></span></a>
-							<a title="Twitter" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
-							<a title="Google+" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
+							<a title="Twitter" href="https://twitter.com/intent/tweet?url={{ documents[0]._uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
+							<a title="Google+" href="https://plus.google.com/share?url={{ documents[0]._uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
 							<a title="Linkedin" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x"></i></span></a>
 							<a title="Reddit" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-reddit fa-stack-1x"></i></span></a>
 							<a title="WordPress" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-wordpress fa-stack-1x"></i></span></a>
