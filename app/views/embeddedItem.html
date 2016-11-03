@@ -2,31 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>Document {{_uri}}</title>
   <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" id="bones-stylesheet-css" href="/assets/css/style.css" type="text/css" media="all">
   <link rel="stylesheet" id="bootstrap-stylesheet-css" href="/assets/css/testimonials.css" type="text/css" media="all" />
-  <script src="/libs/chartist/dist/chartist.min.js"></script>
 </head>
 <body>
-  <div id="content" class="row clearfix">
-    <div class="testimonial testimonial-success">
-      <div class="testimonial-section">
-        <p>Properties <a href="{{_uri}}.html">{{_uri}}</a></p>
-        <ul>
-        {% for column in _columns|cover("collection") %}
-          <li>
-            <h5>{{ column.label|d('Missing label for that column')}} ({{ column.scheme|d('Missing scheme for that column') }})</h5>
-            <p>{{ column.content.html | d(column.content.raw, true) | d(column.content, true) | d('Missing content for that column', true) }}</p>
-          </li>
-        {% endfor %}
-        </ul>
+
+  <div class="panel panel-default" style="height: 120px">
+    <div class="panel-body">
+      <div class="media">
+        <div class="media-left" style="color:#c4d735;">
+          <i class="fa fa-leaf fa-2x" aria-hidden="true"></i>
+        </div>
+        <div class="media-body">
+          <div class="media-heading">
+            <a href="{{_uri }}.html">{{ _columns|getContentByScheme('http://purl.org/dc/terms/title') }}</a>
+          </div>
+          <p>{{ _columns|getContentByScheme('http://purl.org/dc/terms/description') }}</p>
+        </div>
       </div>
     </div>
   </div>
+
 <script type="text/javascript" charset="utf-8" src="/assets/js/bundle.min.js"></script>
 </body>
 </html>
-
-<!-- TODO: faire comme dans embeddedDataset.html: afficher le nombre de propriétés, et un lien -->
