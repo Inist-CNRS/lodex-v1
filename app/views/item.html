@@ -74,18 +74,21 @@
                 <div class="col-md-12 col-sm-12">
 
 
+					<div class="social pull-right">
+					<ul>
+						<li><a href="https://twitter.com/intent/tweet?url={{ documents[0]._uri }}"  target="_blank"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="https://plus.google.com/share?url={{ documents[0]._uri }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="#"><i class="fa fa-github"></i></a></li>
+						<li><a href="#"><i class="fa fa-dropbox"></i></a></li>
+					</ul>
+					</div>
                     <div id="tab" class="btn-group" data-toggle="buttons">
                         <a href="#ressource" class="btn btn-default active" data-toggle="tab">
                             <input type="radio" />{{ print.item.resource.label|d('Missing `print.item.resource.label` in your config file')}}</a>
                         <a href="#exports" class="btn btn-default" data-toggle="tab">
                             <input type="radio" />{{ print.item.exports.label|d('Missing `print.item.exports.label` in your config file')}}</a>
-                        <a href="#estcontenu" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />{{ print.item.partOf.label|d('Missing `print.item.partOf.label` in your config file')}}</a>
-                        <a href="#contient" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />{{ print.item.hasPart.label|d('Missing `print.item.hasPart.label` in your config file')}}</a>
-                        <a href="#Istex" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />{{ print.item.istex.label|d('Missing `print.item.istex.label` in your config file')}}</a>
-
+                        <a href="#share" class="btn btn-default" data-toggle="tab">
+                            <input type="radio" />{{ print.item.partOf.label|d('Missing `print.item.share.label` in your config file')}}</a>
                     </div>
 
 
@@ -239,33 +242,35 @@
                             </section>
 
                         </div>
-                        <div class="tab-pane" id="estcontenu">
-                            <div class="testimonial testimonial-info">
-                                <div class="testimonial-section">
-                                    {{ print.item.partOf.introduction|d('Missing `print.item.partOf.introduction` in your config file') }}
-                                    <p>{{ _columns|getByScheme("http://purl.org/dc/terms/title", {select: "label", cover: "dataset"})|d('Missing `dc:title` in your datasetFields') }} : <a href="/"><i class="fa fa-leaf" style="color:#c4d735"> {{ _columns|getContentByScheme("http://purl.org/dc/terms/title", {cover: "dataset"})|d('Missing `title` in your datasetFields') }}</i></a></p>
-                                    <p>{{ _columns|getByScheme("http://purl.org/dc/terms/description", {select: "label", cover: "dataset"})|d('Missing `dc:description` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/description", {cover: "dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>
-                                    <p>{{ _columns|getByScheme("http://purl.org/dc/terms/modified", {cover: "dataset", select:"label"})|d('Missing `dc:modified` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/modified")|d('Missing `dc:modified` in your datasetFields') }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="contient">
-                            <div class="testimonial testimonial-info">
-                                <div class="testimonial-section">
-                                    <h4>{{ print.item.hasPart.label|d('Missing `print.item.hasPart.label` in your config file') }}</h4>
-                                    {{ print.item.hasPart.introduction|d('Missing `print.item.hasPart.introduction` in your config file') }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="Istex">
-                            <div class="testimonial testimonial-info">
-                                <div class="testimonial-section">
-                                    <h4>{{ print.item.istex.label|d('Missing `print.item.istex.label` in your config file') }}</h4>
-                                    {{ print.item.istex.introduction|d('Missing `print.item.istex.introduction` in your config file') }}
-                                </div>
-                            </div>
-                        </div>
+                        <div class="tab-pane" id="share">
+							<h2><i class="fa fa-share"></i> Share</h2>
+							<p>
+							<a title="Facebook" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x"></i></span></a>
+							<a title="Twitter" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
+							<a title="Google+" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
+							<a title="Linkedin" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x"></i></span></a>
+							<a title="Reddit" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-reddit fa-stack-1x"></i></span></a>
+							<a title="WordPress" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-wordpress fa-stack-1x"></i></span></a>
+							<a title="Digg" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-digg fa-stack-1x"></i></span></a>
+							<a title="Stumbleupon" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-stumbleupon fa-stack-1x"></i></span></a>
+							<a title="E-mail" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-envelope fa-stack-1x"></i></span></a>
+							<a title="Print" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-print fa-stack-1x"></i></span></a>
+							</p>
 
+							<h2><i class="fa fa-envelope"></i> Intégrer</h2>
+
+							<p>Subscribe to our weekly Newsletter and stay tuned.</p>
+
+							<form action="" method="post">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+									<input type="text" class="form-control" value="<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{_root}}.iframe&quot; frameborder=&quot;0&quot;></iframe>">
+								</div>
+								<br />
+								<button type="submit" value="sub" name="sub" class="btn btn-primary"><i class="fa fa-share"></i> PReview</button>
+							</form>
+
+						</div>
                     </div>
 
                 </div>
@@ -275,52 +280,19 @@
 
 
         <div id="sidebar" class="pull-right col-md-3" role="sidebar">
+			<div>
+				{% for name, col in documents[0]._columns %}
+				{% if col.displayAreas.navbar %}
+				<div id="navbar-{{ name }}" class="testimonial testimonial-info">
+					<h2>{{ col.content.label }}</h2>
+					<div class="testimonial-section">
+					{{ col.content.html }}
+					</div>
+				</div>
+				{% endif %}
+				{% endfor %}
 
-          <!--  <div id="metrics" class="row">
-                <div class="text-center col-xs-4 col-sm-10">
-                    <metric title="Properties" query="$keys?field=_columns"/>
-                </div>
-            </div>-->
-
-
-            <div class="testimonial testimonial-info">
-               <h2>Naviguer</h2>
-                <div class="testimonial-section">
-                    <p>Cette donnée est CONTENUE dans&nbsp;: {{ _columns|getByScheme("http://purl.org/dc/terms/title", {cover:"dataset",select:"label"})|d('Missing `dc:title` in your datasetFields') }}
-                        <a href="{{ _root }}.html"><i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme("http://purl.org/dc/terms/title",{cover:"dataset"})|d('Missing `dc:title` in your datasetFields') }}</i></a></p>
-                   <!-- <p>{{ _columns|getByScheme("http://purl.org/dc/terms/description",{cover:"dataset",select:"label"})|d('Missing `dc:description` in your datasetFields') }} : {{ _columns|getContentByScheme("http://purl.org/dc/terms/description",{cover:"dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>-->
-                </div>
-                <h2>Citer</h2>
-                <div>
-                    <i class="fa fa-share"></i> Integrate:
-                    <input type="text" value="<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{_root}}.iframe&quot; frameborder=&quot;0&quot;></iframe>">
-                </div>
-
-               <!-- <iframe width="180" height="315" src="{{ _root}}.iframe" frameborder="0"></iframe> À supprimer? Doublon avec l'iframe -->
-
-                <h2>Télécharger</h2>
-                <h2>Partager</h2>
-            </div>
-
-<!--
-            <div class="testimonial testimonial-info">
-                <div class="testimonial-section">
-                    <p>Cette donnée contient XX données </p>
-
-                    <p>Lien vers Contient</p>
-                </div>
-            </div>
--->
-
-            <div class="social">
-                <ul>
-                    <li><a href="https://twitter.com/intent/tweet?url={{ _uri }}"  target="_blank"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="https://plus.google.com/share?url={{ _uri }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="#"><i class="fa fa-github"></i></a></li>
-                    <li><a href="#"><i class="fa fa-dropbox"></i></a></li>
-                </ul>
-            </div>
-
+			</div>
         </div>
     </div>
 </div>
