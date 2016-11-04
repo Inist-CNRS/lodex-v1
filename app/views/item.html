@@ -13,7 +13,9 @@
 
 <script src="/libs/chartist/dist/chartist.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <script type='text/javascript' src="/assets/js/plie.js"></script>
+
 
 <style>
     body > div.container {
@@ -57,7 +59,7 @@
         <div id="main" class="col-md-9 clearfix" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-                    <em><a href="{{ _root }}"> From <i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme('http://purl.org/dc/terms/title', {cover:'dataset'})|d('Missing dc:title in your datasetFields')}}</i></a></em>
+                  <a href="{{ _root }}">  <i class="fa fa-home fa-2x" style="color:#c4d735"> </i></a>
 
                     <h2>{{ _columns|getContentByScheme('http://purl.org/dc/terms/title')|d('Missing dc:title in your collectionFields')}}</h2>
 
@@ -76,7 +78,7 @@
                 <div class="col-md-12 col-sm-12">
 
 
-					<div id="tab" class="btn-group" data-toggle="buttons">
+                    <div id="tab" class="btn-group" data-toggle="buttons">
                         <a href="#ressource" class="btn btn-default active" data-toggle="tab">
                             <input type="radio" />{{ print.item.resource.label|d('Missing `print.item.resource.label` in your config file')}}</a>
                         <a href="#exports" class="btn btn-default" data-toggle="tab">
@@ -88,119 +90,119 @@
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="ressource">
-                        
-<h3 class="titre3">{{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}</h3>
-<div id="pressource3" class="testimonial-section">
-   
-                                        <dl>
-                                        {% for columnName, column in _columns %}
-                                        {% if column.cover == 'collection' and column.label %}
-                                            <dt>
-                                                {{ column.label }} : ({{ column.scheme }})
-                                                {% if column.content and column.content.html %}
-                                                
-                                            </dt>
-                                      
-                                        
-    
+
+
+                            <h3 class="titre3">{{ _columns.c1.cover|d('Missing `columns.c1.cover` in your collectionFields') }} {{ _columns.c1.content.html|d('Missing `columns.c1.content.html` in your config file') }}</h3>
+
+                            <div class="testimonial-proprietes">
+
+                                <dl>
+                                    {% for columnName, column in _columns %}
+                                    {% if column.cover == 'collection' and column.label %}
+                                    <dt>
+                                        {{ column.label }} : ({{ column.scheme }})
+                                        {% if column.content and column.content.html %}
+
+                                    </dt>
+
+
+
                                     <dd>
-                                               <p>{{ column.content.html }}</p>
-                                                {% elif column.content and column.content.raw %}
-                                                <p>{{ column.content.raw }}</p>
-                                                {% endif %}
-                                                </dd>
-  {% endif %}
-                                        {% endfor %}
-                                </dl>
-
-   </div> 
- <h3 class="titre3">{{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }} </h3>
-<div id="pressource1" class="testimonial-section">
-    <dl>
-                                    
-
-                                            
-                                                <dt>{{ _columns.id.label|d('Missing `id.label` in your collectionFields') }}</dt>
-                                                <dd>{{ _columns.id.content.raw|d('Missing `id.content.raw` in your collectionFields') }}</dd>
-                                            <dl>URI</dl>
-                                                <dd>
-                                                    <a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
-                                                </dd>
-                                            
-                                    <dt>label</dt>
-                                    <dd>value</dd>
-                                </dl>
-</div>
- 
-
- 
- 
-                        <h3 class="titre3">{{ print.item.partOf.introduction|d('Missing `print.item.resource.properties` in your config file') }} {{ datasetFileds.d1.label|d('Missing `datasetFileds.d1.label` in your config file') }}</h3>
-<div id="pressource1" class="testimonial-section">
-    <dl>
-                                    
-
-                                            
-                                                <dt>{{ _columns.id.label|d('Missing `id.label` in your collectionFields') }}</dt>
-                                                <dd>{{ _columns.id.content.raw|d('Missing `id.content.raw` in your collectionFields') }}</dd>
-                                            <dl>URI</dl>
-                                                <dd>
-                                                    <a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
-                                                </dd>
-                                            
-                                    <dt>label</dt>
-                                    <dd>value</dd>
-                                </dl>
-</div>
-
-                         
-                              <!--  <div class="testimonial testimonial-success">
-
-                                    <div class="testimonial-section">
-
-                                        {{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}
-                                        <ul>
-
-                                            <li>
-                                                <h5>{{ _columns.id.label|d('Missing `id.label` in your collectionFields') }}</h5>
-                                                <p>{{ _columns.id.content.raw|d('Missing `id.content.raw` in your collectionFields') }}</p>
-                                            </li>
-                                            <li>
-                                                <h5>URI</h5>
-                                                <p>
-                                                    <a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
-                                                </p>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-
-                                </div>
--->
-                          
-                              <!--  <div class="testimonial testimonial-success">
-
-                                    <div class="testimonial-section">
-                                        {{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}
-                                        <ul>
-                                        {% for columnName, column in _columns %}
-                                        {% if column.cover == 'collection' and column.label %}
-                                            <li>
-                                                <h5>{{ column.label }} ({{ column.scheme }})</h5>
-                                                {% if column.content and column.content.html %}
-                                                <p>{{ column.content.html }}</p>
-                                                {% elif column.content and column.content.raw %}
-                                                <p>{{ column.content.raw }}</p>
-                                                {% endif %}
-                                            </li>
+                                        <p>{{ column.content.html }}</p>
+                                        {% elif column.content and column.content.raw %}
+                                        <p>{{ column.content.raw }}</p>
                                         {% endif %}
-                                        {% endfor %}
-                                        </ul>
-                                    </div>
+                                    </dd>
+                                    {% endif %}
+                                    {% endfor %}
+                                </dl>
 
-                                </div>-->
+                            </div> 
+                            <h3 class="titre3">{{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }} </h3>
+                            <div class="testimonial-proprietes">
+                                <dl>
 
-                         
+
+
+                                    <dt>{{ _columns.id.label|d('Missing `id.label` in your collectionFields') }}</dt>
+                                    <dd>{{ _columns.id.content.raw|d('Missing `id.content.raw` in your collectionFields') }}</dd>
+                                    <dt>URI</dt>
+                                    <dd>
+                                        <a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
+                                    </dd>
+
+                                    
+                                </dl>
+                            </div>
+
+
+
+
+                            <h3 class="titre3">{{ _columns.d1.cover|d('Missing `columns.d1.cover` in your datasetFields') }} {{ _columns.d1.content.html|d('Missing `columns.d1.content.html` in your datasetFields') }}</h3>
+                            <div class="testimonial-proprietes">
+                                <dl>
+
+
+
+                                    <dt>{{ _columns.d1.label|d('Missing `d1.label` in your datasetFields') }}</dt>
+                                    <dd>{{ _columns.d1.content.raw|d('Missing `d2.content.raw` in your datasetFields') }}</dd>
+                                    <dt>{{ _columns.d2.label|d('Missing `d2.label` in your datasetFields') }}</dt>
+                                    <dd>
+                                        {{ _columns.d2.content.html|d('Missing `d2.content.html` in your datasetFields') }}
+                                    </dd>
+
+
+                                </dl>
+                            </div>
+
+
+                            <!--<div class="testimonial testimonial-success">
+
+<div class="testimonial-section">
+
+{{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}
+<ul>
+
+<li>
+<h5>{{ _columns.id.label|d('Missing `id.label` in your collectionFields') }}</h5>
+<p>{{ _columns.id.content.raw|d('Missing `id.content.raw` in your collectionFields') }}</p>
+</li>
+<li>
+<h5>URI</h5>
+<p>
+<a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
+</p>
+</li>
+
+</ul>
+</div>
+
+</div>-->
+
+
+                            <!--<div class="testimonial testimonial-success">
+
+<div class="testimonial-section">
+{{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}
+<ul>
+{% for columnName, column in _columns %}
+{% if column.cover == 'collection' and column.label %}
+<li>
+<h5>{{ column.label }} ({{ column.scheme }})</h5>
+{% if column.content and column.content.html %}
+<p>{{ column.content.html }}</p>
+{% elif column.content and column.content.raw %}
+<p>{{ column.content.raw }}</p>
+{% endif %}
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+</div>
+
+</div>
+-->
+
 
                         </div>
 
@@ -274,7 +276,7 @@
                                     </div>
                                 </div>
                             </div>
-                           <div class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="update-nag">
                                     <div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
                                     <div class="update-text">Turtle
@@ -298,34 +300,34 @@
 
                         </div>
                         <div class="tab-pane" id="share">
-							<h2><i class="fa fa-share"></i> Share</h2>
-							<p>
-							<a title="Facebook" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x"></i></span></a>
-							<a title="Twitter" href="https://twitter.com/intent/tweet?url={{ documents[0]._uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
-							<a title="Google+" href="https://plus.google.com/share?url={{ documents[0]._uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
-							<a title="Linkedin" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x"></i></span></a>
-							<a title="Reddit" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-reddit fa-stack-1x"></i></span></a>
-							<a title="WordPress" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-wordpress fa-stack-1x"></i></span></a>
-							<a title="Digg" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-digg fa-stack-1x"></i></span></a>
-							<a title="Stumbleupon" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-stumbleupon fa-stack-1x"></i></span></a>
-							<a title="E-mail" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-envelope fa-stack-1x"></i></span></a>
-							<a title="Print" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-print fa-stack-1x"></i></span></a>
-							</p>
+                            <h2><i class="fa fa-share"></i> Share</h2>
+                            <p>
+                                <a title="Facebook" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x"></i></span></a>
+                                <a title="Twitter" href="https://twitter.com/intent/tweet?url={{ documents[0]._uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
+                                <a title="Google+" href="https://plus.google.com/share?url={{ documents[0]._uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
+                                <a title="Linkedin" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x"></i></span></a>
+                                <a title="Reddit" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-reddit fa-stack-1x"></i></span></a>
+                                <a title="WordPress" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-wordpress fa-stack-1x"></i></span></a>
+                                <a title="Digg" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-digg fa-stack-1x"></i></span></a>
+                                <a title="Stumbleupon" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-stumbleupon fa-stack-1x"></i></span></a>
+                                <a title="E-mail" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-envelope fa-stack-1x"></i></span></a>
+                                <a title="Print" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-print fa-stack-1x"></i></span></a>
+                            </p>
 
-							<h2><i class="fa fa-envelope"></i> Intégrer</h2>
+                            <h2><i class="fa fa-envelope"></i> Intégrer</h2>
 
-							<p>Subscribe to our weekly Newsletter and stay tuned.</p>
+                            <p>Subscribe to our weekly Newsletter and stay tuned.</p>
 
-							<form action="" method="post">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-									<input type="text" class="form-control" value="<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{_root}}.iframe&quot; frameborder=&quot;0&quot;></iframe>">
-								</div>
-								<br />
-								<button type="submit" value="sub" name="sub" class="btn btn-primary"><i class="fa fa-share"></i> PReview</button>
-							</form>
+                            <form action="" method="post">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                    <input type="text" class="form-control" value="<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{_root}}.iframe&quot; frameborder=&quot;0&quot;></iframe>">
+                                </div>
+                                <br />
+                                <button type="submit" value="sub" name="sub" class="btn btn-primary"><i class="fa fa-share"></i> PReview</button>
+                            </form>
 
-						</div>
+                        </div>
                     </div>
 
                 </div>
@@ -335,19 +337,19 @@
 
 
         <div id="sidebar" class="pull-right col-md-3" role="sidebar">
-			<div>
-				{% for name, col in documents[0]._columns %}
-				{% if col.displayAreas.navbar %}
-				<div id="navbar-{{ name }}" class="testimonial testimonial-info">
-					<h2>{{ col.content.label }}</h2>
-					<div class="testimonial-section">
-					{{ col.content.html }}
-					</div>
-				</div>
-				{% endif %}
-				{% endfor %}
+            <div>
+                {% for name, col in documents[0]._columns %}
+                {% if col.displayAreas.navbar %}
+                <div id="navbar-{{ name }}" class="testimonial testimonial-info">
+                    <h2>{{ col.content.label }}</h2>
+                    <div class="testimonial-section">
+                        {{ col.content.html }}
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
 
-			</div>
+            </div>
         </div>
     </div>
 </div>

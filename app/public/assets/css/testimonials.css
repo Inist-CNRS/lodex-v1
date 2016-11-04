@@ -431,11 +431,26 @@
   padding-right: 20px;
 
 }
-
-  /*plié*/
+/*----------------------------------------------------*/
+/*-----------------  plié & propriete-----------------*/
+/*----------------------------------------------------*/
+ 
 .titre3 a[aria-expanded|=true]::before{content:"\00202F\25BC\00202F";font-size:.65em;float: left;}
 .titre3 a[aria-expanded|=false]::before{content:"\00202F\25BA\00202F";font-size:.65em;float: left;}
  
 .titre3 {
     border-left: none;}
 
+
+
+ .testimonial-proprietes {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+        margin-top: 15px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        position: relative;
+        border: 1px solid #458ca5;
+    }
