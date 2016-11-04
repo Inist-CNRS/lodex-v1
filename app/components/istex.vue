@@ -25,8 +25,6 @@ export default {
 	methods: {
 		reload () {
 			this.$http.get(`https://api.istex.fr/document/?q=${this.query}&output=*`).then(response => {
-				console.log(response.data)
-				window.response = response
 				if (response && response.data && response.data.total && response.data.hits) {
 					this.hits = response.data.hits
 				}
