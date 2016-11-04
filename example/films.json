@@ -164,6 +164,7 @@
 		"c4": {
 			"label": "Actors",
 			"scheme": "http://schema.org/actors",
+			"format": "bag",
 			"displayAreas" : {
 				"table" : true
 			},

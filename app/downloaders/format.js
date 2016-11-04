@@ -30,11 +30,17 @@ module.exports = function(options, core) {
       }
       else if (format === 'moment') {
         var syntax = 'LL';
+        var locale = moment.locale();
         if (data['_columns'][col].formatOptions &&
           data['_columns'][col].formatOptions.syntax) {
           syntax = data['_columns'][col].formatOptions.syntax;
         }
+        if (data['_columns'][col].formatOptions &&
+          data['_columns'][col].formatOptions.locale) {
+          locale = data['_columns'][col].formatOptions.locale;
+        }
         data['_columns'][col].content.html = moment(data['_columns'][col].content.raw)
+        .locale(locale)
         .format(syntax);
       }
       else if (format === 'chart') {
@@ -85,6 +91,15 @@ module.exports = function(options, core) {
           }
         };
         data['_columns'][col].content.html = XMLMapping.dump(istex);
+      }
+      else if (format === 'bag') {
+        data['_columns'][col].content.html = '<ul>\n' +
+          data['_columns'][col].content.raw
+          .map(function (item) {
+            return '<li>' + item + '</li>';
+          })
+          .join('\n') +
+          '</ul>';
       }
 
 
