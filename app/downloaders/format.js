@@ -30,11 +30,17 @@ module.exports = function(options, core) {
       }
       else if (format === 'moment') {
         var syntax = 'LL';
+        var locale = moment.locale();
         if (data['_columns'][col].formatOptions &&
           data['_columns'][col].formatOptions.syntax) {
           syntax = data['_columns'][col].formatOptions.syntax;
         }
+        if (data['_columns'][col].formatOptions &&
+          data['_columns'][col].formatOptions.locale) {
+          locale = data['_columns'][col].formatOptions.locale;
+        }
         data['_columns'][col].content.html = moment(data['_columns'][col].content.raw)
+        .locale(locale)
         .format(syntax);
       }
       else if (format === 'chart') {
