@@ -431,3 +431,11 @@
   padding-right: 20px;
 
 }
+
+  /*plié*/
+.titre3 a[aria-expanded|=true]::before{content:"\00202F\25BC\00202F";font-size:.65em;float: left;}
+.titre3 a[aria-expanded|=false]::before{content:"\00202F\25BA\00202F";font-size:.65em;float: left;}
+ 
+.titre3 {
+    border-left: none;}
+

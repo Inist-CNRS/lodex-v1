@@ -12,6 +12,8 @@
 <link rel="stylesheet" id="bootstrap-stylesheet-css" href="/assets/css/testimonials.css" type="text/css" media="all" />
 
 <script src="/libs/chartist/dist/chartist.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type='text/javascript' src="/assets/js/plie.js"></script>
 
 <style>
     body > div.container {
@@ -86,10 +88,73 @@
 
                     <div class="tab-content">
                         <div class="tab-pane active" id="ressource">
+                        
+<h3 class="titre3">{{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}</h3>
+<div id="pressource3" class="testimonial-section">
+   
+                                        <dl>
+                                        {% for columnName, column in _columns %}
+                                        {% if column.cover == 'collection' and column.label %}
+                                            <dt>
+                                                {{ column.label }} : ({{ column.scheme }})
+                                                {% if column.content and column.content.html %}
+                                                
+                                            </dt>
+                                      
+                                        
+    
+                                    <dd>
+                                               <p>{{ column.content.html }}</p>
+                                                {% elif column.content and column.content.raw %}
+                                                <p>{{ column.content.raw }}</p>
+                                                {% endif %}
+                                                </dd>
+  {% endif %}
+                                        {% endfor %}
+                                </dl>
 
+   </div> 
+ <h3 class="titre3">{{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }} </h3>
+<div id="pressource1" class="testimonial-section">
+    <dl>
+                                    
 
-                           <!-- <div class="col-md-6 clearfix">-->
-                                <div class="testimonial testimonial-success">
+                                            
+                                                <dt>{{ _columns.id.label|d('Missing `id.label` in your collectionFields') }}</dt>
+                                                <dd>{{ _columns.id.content.raw|d('Missing `id.content.raw` in your collectionFields') }}</dd>
+                                            <dl>URI</dl>
+                                                <dd>
+                                                    <a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
+                                                </dd>
+                                            
+                                    <dt>label</dt>
+                                    <dd>value</dd>
+                                </dl>
+</div>
+ 
+
+ 
+ 
+                        <h3 class="titre3">{{ print.item.partOf.introduction|d('Missing `print.item.resource.properties` in your config file') }} {{ datasetFileds.d1.label|d('Missing `datasetFileds.d1.label` in your config file') }}</h3>
+<div id="pressource1" class="testimonial-section">
+    <dl>
+                                    
+
+                                            
+                                                <dt>{{ _columns.id.label|d('Missing `id.label` in your collectionFields') }}</dt>
+                                                <dd>{{ _columns.id.content.raw|d('Missing `id.content.raw` in your collectionFields') }}</dd>
+                                            <dl>URI</dl>
+                                                <dd>
+                                                    <a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
+                                                </dd>
+                                            
+                                    <dt>label</dt>
+                                    <dd>value</dd>
+                                </dl>
+</div>
+
+                         
+                              <!--  <div class="testimonial testimonial-success">
 
                                     <div class="testimonial-section">
 
@@ -111,11 +176,9 @@
                                     </div>
 
                                 </div>
-
-                          <!--  </div>-->
-
-                           <!-- <div class="col-md-6 clearfix">-->
-                                <div class="testimonial testimonial-success">
+-->
+                          
+                              <!--  <div class="testimonial testimonial-success">
 
                                     <div class="testimonial-section">
                                         {{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}
@@ -135,9 +198,9 @@
                                         </ul>
                                     </div>
 
-                                </div>
+                                </div>-->
 
-                         <!--   </div>-->
+                         
 
                         </div>
 
