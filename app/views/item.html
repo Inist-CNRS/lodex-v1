@@ -16,9 +16,9 @@
 <script type='text/javascript' src="/assets/js/plie.js"></script>
 
 <style>
-    body > div.container {
-        margin-top : 80px;
-    }
+body > div.container {
+	margin-top : 80px;
+}
 </style>
 
 {% endblock %}
@@ -31,278 +31,206 @@
 
 {% block script %}
 <script>
-    // https://github.com/gionkunz/chartist-js/issues/169
-    // http://jsbin.com/bawofakogu/1/edit?html,css,js,output
-    $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
-        $('.histogram').each(function(i, e) {
-            e.__chartist__.update();
-        });
-    });
+// https://github.com/gionkunz/chartist-js/issues/169
+// http://jsbin.com/bawofakogu/1/edit?html,css,js,output
+$(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
+	$('.histogram').each(function(i, e) {
+		e.__chartist__.update();
+	});
+});
 </script>
 {% endblock %}
 
 
 {% block main %}
 <div class="container" style="margin-top:10px;">
-    <div class="jumbotron alert  alert-info alert-dismissible fade in" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        {{ print.header.content|d('Missing `print.header.content` in your config file') }}
-    </div>
+	<div class="jumbotron alert  alert-info alert-dismissible fade in" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+		{{ print.header.content|d('Missing `print.header.content` in your config file') }}
+	</div>
 </div>
 
 <div class="container-fluid">
-    <div id="content" class="row clearfix">
+	<div id="content" class="row clearfix">
 
 
-        <div id="main" class="col-md-9 clearfix" role="main">
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <em><a href="{{ _root }}"> From <i class="fa fa-leaf" style="color:#c4d735">{{ _columns|getContentByScheme('http://purl.org/dc/terms/title', {cover:'dataset'})|d('Missing dc:title in your datasetFields')}}</i></a></em>
+		<div id="main" class="col-md-9 clearfix" role="main">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<div>
+						<a href="{{ _root }}">
+							<i class="fa fa-home fa-3x"></i>
+							<em style="font-size: 30px;">
+								{{ _columns|getContentByScheme('http://purl.org/dc/terms/title', {cover:'dataset'})|d('Missing dc:title in your datasetFields')}}
+							</em>
+						</a>
+					</div>
 
-                    <h2>{{ _columns|getContentByScheme('http://purl.org/dc/terms/title')|d('Missing dc:title in your collectionFields')}}</h2>
-
-
-                    <div class="testimonial testimonial-info">
-                        <div class="testimonial-section">
-                            <h4>Description</h4>
-                            <p>{{ _columns|getContentByScheme('http://purl.org/dc/terms/description')|d('Missing "dc:description" in your collectionFields')}}</p>
-
-                        </div>
-                    </div>
-
-                </div>
+					<h2>{{ _columns|getContentByScheme('http://purl.org/dc/terms/title')|d('Missing dc:title in your collectionFields')}}</h2>
 
 
-                <div class="col-md-12 col-sm-12">
+					<div class="testimonial testimonial-info">
+						<div class="testimonial-section">
+							<h4>Description</h4>
+							<p>{{ _columns|getContentByScheme('http://purl.org/dc/terms/description')|d('Missing "dc:description" in your collectionFields')}}</p>
+
+						</div>
+					</div>
+
+				</div>
+
+
+				<div class="col-md-12 col-sm-12">
 
 
 					<div id="tab" class="btn-group" data-toggle="buttons">
-                        <a href="#ressource" class="btn btn-default active" data-toggle="tab">
-                            <input type="radio" />{{ print.item.resource.label|d('Missing `print.item.resource.label` in your config file')}}</a>
-                        <a href="#exports" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />{{ print.item.exports.label|d('Missing `print.item.exports.label` in your config file')}}</a>
-                        <a href="#share" class="btn btn-default" data-toggle="tab">
-                            <input type="radio" />{{ print.item.share.label|d('Missing `print.item.share.label` in your config file')}}</a>
-                    </div>
+						<a href="#ressource" class="btn btn-default active" data-toggle="tab">
+							<input type="radio" />{{ print.item.resource.label|d('Missing `print.item.resource.label` in your config file')}}</a>
+						<a href="#exports" class="btn btn-default" data-toggle="tab">
+							<input type="radio" />{{ print.item.exports.label|d('Missing `print.item.exports.label` in your config file')}}</a>
+						<a href="#share" class="btn btn-default" data-toggle="tab">
+							<input type="radio" />{{ print.item.share.label|d('Missing `print.item.share.label` in your config file')}}</a>
+					</div>
 
 
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="ressource">
-                        
-<h3 class="titre3">{{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}</h3>
-<div id="pressource3" class="testimonial-section">
-   
-                                        <dl>
-                                        {% for columnName, column in _columns %}
-                                        {% if column.cover == 'collection' and column.label %}
-                                            <dt>
-                                                {{ column.label }} : ({{ column.scheme }})
-                                                {% if column.content and column.content.html %}
-                                                
-                                            </dt>
-                                      
-                                        
-    
-                                    <dd>
-                                               <p>{{ column.content.html }}</p>
-                                                {% elif column.content and column.content.raw %}
-                                                <p>{{ column.content.raw }}</p>
-                                                {% endif %}
-                                                </dd>
-  {% endif %}
-                                        {% endfor %}
-                                </dl>
-
-   </div> 
- <h3 class="titre3">{{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }} </h3>
-<div id="pressource1" class="testimonial-section">
-    <dl>
-                                    
-
-                                            
-                                                <dt>{{ _columns.id.label|d('Missing `id.label` in your collectionFields') }}</dt>
-                                                <dd>{{ _columns.id.content.raw|d('Missing `id.content.raw` in your collectionFields') }}</dd>
-                                            <dl>URI</dl>
-                                                <dd>
-                                                    <a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
-                                                </dd>
-                                            
-                                    <dt>label</dt>
-                                    <dd>value</dd>
-                                </dl>
-</div>
- 
-
- 
- 
-                        <h3 class="titre3">{{ print.item.partOf.introduction|d('Missing `print.item.resource.properties` in your config file') }} {{ datasetFileds.d1.label|d('Missing `datasetFileds.d1.label` in your config file') }}</h3>
-<div id="pressource1" class="testimonial-section">
-    <dl>
-                                    
-
-                                            
-                                                <dt>{{ _columns.id.label|d('Missing `id.label` in your collectionFields') }}</dt>
-                                                <dd>{{ _columns.id.content.raw|d('Missing `id.content.raw` in your collectionFields') }}</dd>
-                                            <dl>URI</dl>
-                                                <dd>
-                                                    <a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
-                                                </dd>
-                                            
-                                    <dt>label</dt>
-                                    <dd>value</dd>
-                                </dl>
-</div>
-
-                         
-                              <!--  <div class="testimonial testimonial-success">
-
-                                    <div class="testimonial-section">
-
-                                        {{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}
-                                        <ul>
-
-                                            <li>
-                                                <h5>{{ _columns.id.label|d('Missing `id.label` in your collectionFields') }}</h5>
-                                                <p>{{ _columns.id.content.raw|d('Missing `id.content.raw` in your collectionFields') }}</p>
-                                            </li>
-                                            <li>
-                                                <h5>URI</h5>
-                                                <p>
-                                                    <a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
-                                                </p>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-
-                                </div>
--->
-                          
-                              <!--  <div class="testimonial testimonial-success">
-
-                                    <div class="testimonial-section">
-                                        {{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}
-                                        <ul>
-                                        {% for columnName, column in _columns %}
-                                        {% if column.cover == 'collection' and column.label %}
-                                            <li>
-                                                <h5>{{ column.label }} ({{ column.scheme }})</h5>
-                                                {% if column.content and column.content.html %}
-                                                <p>{{ column.content.html }}</p>
-                                                {% elif column.content and column.content.raw %}
-                                                <p>{{ column.content.raw }}</p>
-                                                {% endif %}
-                                            </li>
-                                        {% endif %}
-                                        {% endfor %}
-                                        </ul>
-                                    </div>
-
-                                </div>-->
-
-                         
-
-                        </div>
+					<div class="tab-content">
+						<div class="tab-pane active" id="ressource">
+							<h3 class="titre3">{{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }}</h3>
+							<div class="testimonial-section">
+								<dl>
+									{% for columnName, column in _columns %}
+									{% if column.cover == 'collection' and column.label %}
+									<dt>
+									{{ column.label }}
+									</dt>
+									<dd>
+									<div>
+										<em>{{ column.scheme }}</em>
+									</div>
+									<p>
+									{% if column.content and column.content.html %}
+									{{ column.content.html }}
+									{% elif column.content and column.content.raw %}
+									{{ column.content.raw }}
+									{% endif %}
+									</p>
+									</dd>
+									{% endif %}
+									{% endfor %}
+								</dl>
+							</div>
+						</div>
 
 
-                        <div class="tab-pane" id="exports">
+						<div class="tab-pane" id="exports">
 
-                            {{ print.item.exports.introduction|d('Missing `print.item.exports.introduction` in your config file') }}
-                            <div class="col-md-6">
-                                <div class="update-nag">
-                                    <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                    <div class="update-text">XSL <a href="http://file-format.lod.istex.fr/=/xsl" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
-                                        <a href="{{ _uri }}.xlsx">
-                                            <span class="fa fa-download"></span>
-                                            {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
-                                    </div>
-                                </div>
-                            </div>
+							{{ print.item.exports.introduction|d('Missing `print.item.exports.introduction` in your config file') }}
+							<div class="col-md-6">
+								<div class="update-nag">
+									<div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
+									<div class="update-text">XSL <a href="http://file-format.lod.istex.fr/=/xsl" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
+										<a href="{{ _uri }}.xlsx">
+											<span class="fa fa-download"></span>
+											{{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
+									</div>
+								</div>
+							</div>
 
-                            <div class="col-md-6">
-                                <div class="update-nag">
-                                    <div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                    <div class="update-text">TSV <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
-                                        <a  href="{{ _uri }}.tsv" >
-                                            <span class="fa fa-download"></span> {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="update-nag">
-                                    <div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                    <div class="update-text">CSV
-                                        <a href="file-format.lod.istex.fr/=/csv" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
-                                        <a  href="{{ _uri }}.csv" >
-                                            <span class="fa fa-download"></span>
-                                            {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="update-nag">
-                                    <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                    <div class="update-text">N-Quads
-                                        <a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
-                                        <a  href="{{ _uri }}.nq" >
-                                            <span class="fa fa-download"></span>
-                                            {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
-                                    </div>
-                                </div>
-                            </div>
+							<div class="col-md-6">
+								<div class="update-nag">
+									<div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
+									<div class="update-text">TSV <a href="http://file-format.lod.istex.fr/=/tsv" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
+										<a  href="{{ _uri }}.tsv" >
+											<span class="fa fa-download"></span> {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="update-nag">
+									<div class="update-split update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
+									<div class="update-text">CSV
+										<a href="file-format.lod.istex.fr/=/csv" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
+										<a  href="{{ _uri }}.csv" >
+											<span class="fa fa-download"></span>
+											{{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="update-nag">
+									<div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
+									<div class="update-text">N-Quads
+										<a href="http://file-format.lod.istex.fr/=/nq" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
+										<a  href="{{ _uri }}.nq" >
+											<span class="fa fa-download"></span>
+											{{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
+									</div>
+								</div>
+							</div>
 
-                            <div class="col-md-6">
-                                <div class="update-nag">
-                                    <div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                    <div class="update-text">N-Quads (Excel) <a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
-                                        <a  href="{{ _uri }}.nqx" >
-                                            <span class="fa fa-download"></span> {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+							<div class="col-md-6">
+								<div class="update-nag">
+									<div class="update-split"><i class="glyphicon glyphicon-download-alt"></i></div>
+									<div class="update-text">N-Quads (Excel) <a href="http://file-format.lod.istex.fr/=/nqx" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
+										<a  href="{{ _uri }}.nqx" >
+											<span class="fa fa-download"></span> {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}
+										</a>
+									</div>
+								</div>
+							</div>
 
-                            <div class="col-md-6">
-                                <div class="update-nag">
-                                    <div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                    <div class="update-text">JSONLD
-                                        <a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
-                                        <a  href="{{ _uri }}.jsonld">
-                                            <span class="fa fa-download"></span>
-                                            {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
-                                    </div>
-                                </div>
-                            </div>
-                           <div class="col-md-6">
-                                <div class="update-nag">
-                                    <div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
-                                    <div class="update-text">Turtle
-                                        <a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
-                                        <a  href="{{ _uri }}.ttl">
-                                            <span class="fa fa-download"></span>
-                                            {{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
-                                    </div>
-                                </div>
-                            </div>
+							<div class="col-md-6">
+								<div class="update-nag">
+									<div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
+									<div class="update-text">JSONLD
+										<a href="http://file-format.lod.istex.fr/=/jsonld" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
+										<a  href="{{ _uri }}.jsonld">
+											<span class="fa fa-download"></span>
+											{{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="update-nag">
+									<div class="update-split  update-success"><i class="glyphicon glyphicon-download-alt"></i></div>
+									<div class="update-text">Turtle
+										<a href="http://file-format.lod.istex.fr/=/ttl" data-lodex="outer">{{ print.item.exports.moreInfo.label|d('Missing `print.item.exports.moreInfo.label` in your config file') }}</a>
+										<a  href="{{ _uri }}.ttl">
+											<span class="fa fa-download"></span>
+											{{ print.item.exports.download.label|d('Missing `print.item.exports.download.label` in your config file') }}</a>
+									</div>
+								</div>
+							</div>
 
 
 
-                            <section class="page-content entry-content clearfix" itemprop="articleBody">
-                                <a href="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence.gif" rel="attachment wp-att-214"><img class="size-medium wp-image-214 alignnone" src="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence-300x166.gif" alt="licence-ouverte-open-licence" width="300" height="166"></a>
-                                {{ print.item.exports.license|d('Missing `print.item.exports.license` in your config file') }}
-                                <p>&nbsp;</p>
-                                <blockquote data-secret="QLzNqK36kW" class="wp-embedded-content" style="display: none;"><p><a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence">Licence Ouverte / Open Licence</a></p></blockquote>
-                                <p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" src="https://www.etalab.gouv.fr/licence-ouverte-open-licence/embed#?secret=QLzNqK36kW" data-secret="QLzNqK36kW" width="500" height="300" title="Inclure un article WordPress" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
-                            </section>
+							<section class="page-content entry-content clearfix" itemprop="articleBody">
+								<a href="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence.gif" rel="attachment wp-att-214"><img class="size-medium wp-image-214 alignnone" src="http://lodex.inist.fr/wp-content/uploads/2016/02/licence-ouverte-open-licence-300x166.gif" alt="licence-ouverte-open-licence" width="300" height="166"></a>
+								{{ print.item.exports.license|d('Missing `print.item.exports.license` in your config file') }}
+								<p>&nbsp;</p>
+								<blockquote data-secret="QLzNqK36kW" class="wp-embedded-content" style="display: none;"><p><a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence">Licence Ouverte / Open Licence</a></p></blockquote>
+								<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" src="https://www.etalab.gouv.fr/licence-ouverte-open-licence/embed#?secret=QLzNqK36kW" data-secret="QLzNqK36kW" width="500" height="300" title="Inclure un article WordPress" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+							</section>
 
-                        </div>
-                        <div class="tab-pane" id="share">
+						</div>
+						<div class="tab-pane" id="share">
+							{{ print.item.share.introduction|d('Missing `print.item.share.introduction` in your config file') }}
+							<h2><i class="fa fa-share"></i> Lien vers cette ressource</h2>
+							<form action="" method="post">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-link"></i></span>
+									<input type="text" class="form-control" value="{{ _uri }}">
+								</div>
+							</form>
+
+
+
 							<h2><i class="fa fa-share"></i> Share</h2>
 							<p>
 							<a title="Facebook" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x"></i></span></a>
-							<a title="Twitter" href="https://twitter.com/intent/tweet?url={{ documents[0]._uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
-							<a title="Google+" href="https://plus.google.com/share?url={{ documents[0]._uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
+							<a title="Twitter" href="https://twitter.com/intent/tweet?url={{ _uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
+							<a title="Google+" href="https://plus.google.com/share?url={{ _uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
 							<a title="Linkedin" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x"></i></span></a>
 							<a title="Reddit" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-reddit fa-stack-1x"></i></span></a>
 							<a title="WordPress" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-wordpress fa-stack-1x"></i></span></a>
@@ -326,30 +254,29 @@
 							</form>
 
 						</div>
-                    </div>
+					</div>
 
-                </div>
+				</div>
 
-            </div>
-        </div>
+			</div>
+		</div>
 
 
-        <div id="sidebar" class="pull-right col-md-3" role="sidebar">
+		<div id="sidebar" class="pull-right col-md-3" role="sidebar">
 			<div>
-				{% for name, col in documents[0]._columns %}
-				{% if col.displayAreas.navbar %}
+				{% for name, col in _columns %}
+				{% if col.displayAreas.sidebar %}
 				<div id="navbar-{{ name }}" class="testimonial testimonial-info">
-					<h2>{{ col.content.label }}</h2>
+					<h2>{{ col.label }}</h2>
 					<div class="testimonial-section">
-					{{ col.content.html }}
+						{{ col.content.html }}
 					</div>
 				</div>
 				{% endif %}
 				{% endfor %}
-
 			</div>
-        </div>
-    </div>
+		</div>
+	</div>
 </div>
 
 
