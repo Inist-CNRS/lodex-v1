@@ -41,7 +41,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 <div class="container-fluid">
 	<div id="content" class="row clearfix">
 
-		<div id="main" class="col-md-7 clearfix" role="main">
+		<div id="main" class="col-md-9 clearfix" role="main">
 			<div class="row">
 				<div class="col-xs-10 col-sm-8">
 					<div class="tab-content">
@@ -145,7 +145,8 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 				<div class="tab-content">
 					<div class="tab-pane active" id="overview">
 						{{ print.overview.introduction|d('Missing `print.overview.introduction` in your config file') }}
-						<div class="container">
+						<!--<div class="container">-->
+						<div id="fiche" class="col-md-12 clearfix" role="main">
 							{% for doc in documents %}
 							<div class="col-sm-4 col-md-3">
 								<div class="panel panel-default" style="height: 120px">
