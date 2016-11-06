@@ -59,7 +59,14 @@
         <div id="main" class="col-md-9 clearfix" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-                  <a href="{{ _root }}">  <i class="fa fa-home fa-2x" style="color:#c4d735"> </i></a>
+                  <div>
+						<a href="{{ _root }}">
+							<i class="fa fa-home fa-3x"></i>
+							<em style="font-size: 30px;">
+								{{ _columns|getContentByScheme('http://purl.org/dc/terms/title', {cover:'dataset'})|d('Missing dc:title in your datasetFields')}}
+							</em>
+						</a>
+					</div>
 
                     <h2>{{ _columns|getContentByScheme('http://purl.org/dc/terms/title')|d('Missing dc:title in your collectionFields')}}</h2>
 
