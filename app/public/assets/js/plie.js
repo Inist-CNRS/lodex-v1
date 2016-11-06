@@ -19,7 +19,7 @@ Index :
 $(document).ready(function()
 {
 	// 0/ Masquage des panneaux par dÃ©faut
-	$panneaux = $('div.testimonial-proprietes').hide();
+	$panneaux = $('div.testimonial-proprietes').show();
 	
 	// ---------------------------------------------------------------------------------------- //
 	

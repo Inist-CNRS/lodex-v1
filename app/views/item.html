@@ -59,14 +59,7 @@
         <div id="main" class="col-md-9 clearfix" role="main">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-					<div>
-						<a href="{{ _root }}">
-							<i class="fa fa-home fa-3x"></i>
-							<em style="font-size: 30px;">
-								{{ _columns|getContentByScheme('http://purl.org/dc/terms/title', {cover:'dataset'})|d('Missing dc:title in your datasetFields')}}
-							</em>
-						</a>
-					</div>
+                  <a href="{{ _root }}">  <i class="fa fa-home fa-2x" style="color:#c4d735"> </i></a>
 
                     <h2>{{ _columns|getContentByScheme('http://purl.org/dc/terms/title')|d('Missing dc:title in your collectionFields')}}</h2>
 
@@ -103,31 +96,33 @@
 
                             <div class="testimonial-proprietes">
 
-                                <dl>
+                               <dl class="dl-horizontal">
                                     {% for columnName, column in _columns %}
                                     {% if column.cover == 'collection' and column.label %}
                                     <dt>
-                                        {{ column.label }} : ({{ column.scheme }})
-                                        {% if column.content and column.content.html %}
+                                        {{ column.label }} : 
+                                        
 
                                     </dt>
 
-
+{% if column.content and column.content.html %}
 
                                     <dd>
-                                        <p>{{ column.content.html }}</p>
+                                       {{ column.content.html }}<br>
+                                        ({{ column.scheme }}) 
                                         {% elif column.content and column.content.raw %}
-                                        <p>{{ column.content.raw }}</p>
+                                        {{ column.content.raw }}
+                                        
                                         {% endif %}
                                     </dd>
                                     {% endif %}
                                     {% endfor %}
                                 </dl>
 
-                            </div>
+                            </div> 
                             <h3 class="titre3">{{ print.item.resource.properties|d('Missing `print.item.resource.properties` in your config file') }} </h3>
                             <div class="testimonial-proprietes">
-                                <dl>
+                                <dl class="dl-horizontal">
 
 
 
@@ -138,7 +133,7 @@
                                         <a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
                                     </dd>
 
-
+                                    
                                 </dl>
                             </div>
 
@@ -147,7 +142,7 @@
 
                             <h3 class="titre3">{{ _columns.d1.cover|d('Missing `columns.d1.cover` in your datasetFields') }} {{ _columns.d1.content.html|d('Missing `columns.d1.content.html` in your datasetFields') }}</h3>
                             <div class="testimonial-proprietes">
-                                <dl>
+                                <dl class="dl-horizontal">
 
 
 
@@ -307,21 +302,11 @@
 
                         </div>
                         <div class="tab-pane" id="share">
-							{{ print.item.share.introduction|d('Missing `print.item.share.introduction` in your config file') }}
-
-							<h2><i class="fa fa-link"></i> Lien vers cette ressource</h2>
-							<form action="" method="post">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-link"></i></span>
-									<input type="text" class="form-control" value="{{ _uri }}">
-								</div>
-							</form>
-
                             <h2><i class="fa fa-share"></i> Share</h2>
                             <p>
                                 <a title="Facebook" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x"></i></span></a>
-                                <a title="Twitter" href="https://twitter.com/intent/tweet?url={{ _uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
-                                <a title="Google+" href="https://plus.google.com/share?url={{ _uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
+                                <a title="Twitter" href="https://twitter.com/intent/tweet?url={{ documents[0]._uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
+                                <a title="Google+" href="https://plus.google.com/share?url={{ documents[0]._uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
                                 <a title="Linkedin" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x"></i></span></a>
                                 <a title="Reddit" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-reddit fa-stack-1x"></i></span></a>
                                 <a title="WordPress" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-wordpress fa-stack-1x"></i></span></a>
@@ -331,13 +316,17 @@
                                 <a title="Print" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-print fa-stack-1x"></i></span></a>
                             </p>
 
-                            <h2><i class="fa fa-code"></i> Intégrer</h2>
+                            <h2><i class="fa fa-envelope"></i> Intégrer</h2>
+
+                            <p>Subscribe to our weekly Newsletter and stay tuned.</p>
 
                             <form action="" method="post">
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-code"></i></span>
+                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                                     <input type="text" class="form-control" value="<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{_root}}.iframe&quot; frameborder=&quot;0&quot;></iframe>">
                                 </div>
+                                <br />
+                                <button type="submit" value="sub" name="sub" class="btn btn-primary"><i class="fa fa-share"></i> PReview</button>
                             </form>
 
                         </div>
@@ -351,14 +340,14 @@
 
         <div id="sidebar" class="pull-right col-md-3" role="sidebar">
             <div>
-                {% for name, col in _columns %}
-                {% if col.displayAreas.sidebar %}
-				<div id="navbar-{{ name }}" class="testimonial testimonial-info">
-					<h2>{{ col.content.label }}</h2>
-					<div class="testimonial-section">
-						{{ col.content.html }}
-					</div>
-				</div>
+                {% for name, col in documents[0]._columns %}
+                {% if col.displayAreas.navbar %}
+                <div id="navbar-{{ name }}" class="testimonial testimonial-info">
+                    <h2>{{ col.content.label }}</h2>
+                    <div class="testimonial-section">
+                        {{ col.content.html }}
+                    </div>
+                </div>
                 {% endif %}
                 {% endfor %}
 
