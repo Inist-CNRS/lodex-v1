@@ -6,22 +6,50 @@
     "slug": true
   },
   "print": {
-    "header": {
-      "content": "L'expérimentation __LODEX__ a pour ambition d'extraire de chaque document présent dans le fonds ISTEX un même type d'information pour créer des jeux de données représentatifs, normalisés et interopérables en respectant au maximun les normes du web sémantique."
-    },
-    "overview": {
-      "label": "Aperçu",
-      "introduction": "Voici un aperçu des quelques ressources décrites dans ce jeu de données."
-    },
-    "tableau": {
-      "label": "Tableau"
-    },
-    "exports": {
-      "label": "Exports"
-    },
-    "ontology": {
-      "label": "Ontologie"
-    }
+	  "header" : {
+		  "content" : "L'expérimentation __LODEX__ a pour ambition d'extraire de chaque document présent dans le fonds ISTEX un même type d'information pour créer des jeux de données représentatifs, normalisés et interopérables en respectant au maximum les normes du web sémantique."
+	  },
+	  "overview" : {
+		  "label": "Aperçu",
+		  "introduction" : "Voici un aperçu des quelques films décrits dans ce jeu de données."
+	  },
+	  "tableau" : {
+		  "label": "Tableau",
+		  "introduction" : "Le tableau ci-après permet de naviguer rapidement parmi les différentes ressources qui composent ce jeu de données."
+	  },
+	  "exports" : {
+		  "label": "Exports",
+		  "introduction" : "Ce jeu de données est disponible sur ce site selon une syntaxe `tableau`, avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD N-Quads et turtle. Ils sont librement téléchargeable au travers de plusieurs formats&nbsp;:"
+	  },
+	  "ontology" : {
+		  "label": "Ontologie",
+		  "introduction" : "Ce jeu de données a été modélisé à partir de plusieurs propriétés issues de plusieurs ontologies différentes"
+	  },
+	  "item": {
+		  "resource": {
+			  "label": "Ressource",
+			  "properties": "Propriétés"
+		  },
+		  "exports": {
+			  "label": "Exports",
+			  "introduction" : "Cette donnée est disponible sur ce site avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD, N-Quads et turtle. Elle est librement téléchargeable au travers de plusieurs formats&nbsp:",
+			  "moreInfo": {
+				  "label": "Plus d'information"
+			  },
+			  "download": {
+				  "label": "Télécharger"
+			  },
+			  "license": "Les données mises en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. Comme les données ISTEX, elles sont placées sous le régime de la licence ouverte/_open licence_ Etalab (cf. [contrat de licence type](http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf))."
+		  },
+		  "share": {
+			  "label": "Partager",
+			  "introduction": "Partager cette ressource"
+		  },
+		  "istex": {
+			  "label": "Istex",
+			  "introduction": "S'il-vous-plaît, modifiez le champ `print.item.istex.introduction` dans le fichier de configuration pour remplacer ce texte."
+		  }
+	  }
   },
   "datasetFields": {
     "isRoot": {
@@ -33,7 +61,6 @@
     "title1": {
       "label": "Title",
       "scheme": "http://purl.org/dc/terms/title",
-      "type": "string",
       "lang": "fr",
       "comment": "Always get a title - displayed in corpus/overview",
       "content": "Catégories INIST"
@@ -41,7 +68,6 @@
     "description1": {
       "label": "Description",
       "scheme": "http://purl.org/dc/terms/description",
-      "type": "string",
       "format": "markdown",
       "lang": "fr",
       "content": "Cette table correspond au choix de documenter des données ISTEX et plus particulièrement les catégories INIST.  Il s’agit des codes de classement (tronqués à 3 niveaux) utilisés lors de l'indexation pour constituer __les bases de données PASCAL et FRANCIS__. Ces catégories ont fait l'objet d'une structuration hiérarchique au format SKOS après enrichissement, et d'un alignement avec la classification décimale universelle (CDU) et le thésaurus de référence dans le domaine biomédical MeSH (Medical Subject Headings)."
@@ -49,7 +75,6 @@
     "date1": {
       "label": "Updated",
       "scheme": "http://purl.org/dc/terms/modified",
-      "type": "date",
       "format" : "LL",
       "content<": {
         "get": "_collection._dataset._updated"
@@ -65,7 +90,6 @@
     },
     "model1": {
       "label": "Ontology model",
-      "type": "object",
       "format": "component",
       "scheme": "https://schema.org/image",
       "content": {
@@ -84,7 +108,6 @@
     "title": {
       "label": "Title",
       "scheme": "http://purl.org/dc/terms/title",
-      "type": "string",
       "lang": "en",
       "content<": {
         "get": ["_content.json.Verbalisation en anglais", "_content.json.Code"],
@@ -97,7 +120,6 @@
     "description": {
       "label": "Description",
       "scheme": "http://purl.org/dc/terms/description",
-      "type": "string",
       "lang": "fr",
       "content<": {
         "get": "_content.json.Description"
@@ -109,9 +131,11 @@
     "hasTopConcept": {
       "label": "Has top concept",
       "scheme": "http://www.w3.org/2004/02/skos/core#hasTopConcept",
-      "type": "string",
+	  "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
+	  "format": "embeduri",
       "content<": {
-        "get": "_content.json.Est tête d'arborescence"
+        "getInternalURI": "_content.json.Est tête d'arborescence",
+		"cast" : "string"
       },
       "displayAreas": {
         "table": true
@@ -120,19 +144,19 @@
     "broader": {
       "label": "Generic",
       "scheme": "http://www.w3.org/2004/02/skos/core#broader",
-      "type": "string",
+	  "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
+	  "format": "embeduri",
       "content<": {
-        "get": "_content.json.Terme Générique"
+		"getInternalURI" : "_content.json.Terme Générique",
+		"cast" : "string"
       },
       "displayAreas": {
         "table": true
       }
     },
-
     "updated": {
       "label": "Updated",
       "scheme": "http://purl.org/dc/terms/modified",
-      "type": "date",
       "format": "LL",
       "content<": {
         "get": "dateSynchronised"
