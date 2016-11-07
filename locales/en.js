@@ -84,5 +84,13 @@
 	"Language": "Language",
 	"Displayed on the home page": "Displayed on the home page",
 	"Crown": "Crown",
-	"Réf.": "Réf."
+	"Réf.": "Réf.",
+	"Link to this resource": "Link to this resource",
+	"Share": "Share",
+	"Include in your page": "Include in your page",
+	"Resource": "Resource",
+	"Export": "Export",
+	"Get more information": "Get more information",
+	"Overview": "Overview",
+	"Ontology": "Ontology"
 }

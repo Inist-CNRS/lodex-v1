@@ -9,48 +9,19 @@
 	"itemsPerPage": 15,
 	"print": {
 		"header" : {
-			"content" : "L'expérimentation __LODEX__ a pour ambition d'extraire de chaque document présent dans le fonds ISTEX un même type d'information pour créer des jeux de données représentatifs, normalisés et interopérables en respectant au maximum les normes du web sémantique."
+			"introduction" : "L'expérimentation __LODEX__ a pour ambition d'extraire de chaque document présent dans le fonds ISTEX un même type d'information pour créer des jeux de données représentatifs, normalisés et interopérables en respectant au maximum les normes du web sémantique."
 		},
-		"overview" : {
-			"label": "Aperçu",
-			"introduction" : "Voici un aperçu des quelques films décrits dans ce jeu de données."
-		},
-		"tableau" : {
-			"label": "Tableau",
-			"introduction" : "Le tableau ci-après permet de naviguer rapidement parmi les différentes ressources qui composent ce jeu de données."
-		},
-		"exports" : {
-			"label": "Exports",
-			"introduction" : "Ce jeu de données est disponible sur ce site selon une syntaxe `tableau`, avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD N-Quads et turtle. Ils sont librement téléchargeable au travers de plusieurs formats&nbsp;:"
-		},
-		"ontology" : {
-			"label": "Ontologie",
-			"introduction" : "Ce jeu de données a été modélisé à partir de plusieurs propriétés issues de plusieurs ontologies différentes"
+		"list" :  {
+			"overview" : "Voici un aperçu des quelques films décrits dans ce jeu de données." ,
+			"tableau" : "Le tableau ci-après permet de naviguer rapidement parmi les différentes ressources qui composent ce jeu de données." ,
+			"exports" : "Ce jeu de données est disponible sur ce site selon une syntaxe `tableau`, avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD N-Quads et turtle. Ils sont librement téléchargeable au travers de plusieurs formats&nbsp;:" ,
+			"ontology" : "Ce jeu de données a été modélisé à partir de plusieurs propriétés issues de plusieurs ontologies différentes"
 		},
 		"item": {
-			"resource": {
-				"label": "Ressource",
-				"properties": "Propriétés"
-			},
-			"exports": {
-				"label": "Exports",
-				"introduction" : "Cette donnée est disponible sur ce site avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD, N-Quads et turtle. Elle est librement téléchargeable au travers de plusieurs formats&nbsp:",
-				"moreInfo": {
-					"label": "Plus d'information"
-				},
-				"download": {
-					"label": "Télécharger"
-				},
-				"license": "Les données mises en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. Comme les données ISTEX, elles sont placées sous le régime de la licence ouverte/_open licence_ Etalab (cf. [contrat de licence type](http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf))."
-			},
-			"share": {
-				"label": "Partager",
-				"introduction": "Partager cette ressource"
-			},
-			"istex": {
-				"label": "Istex",
-				"introduction": "S'il-vous-plaît, modifiez le champ `print.item.istex.introduction` dans le fichier de configuration pour remplacer ce texte."
-			}
+			"exports": "Cette donnée est disponible sur ce site avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD, N-Quads et turtle. Elle est librement téléchargeable au travers de plusieurs formats&nbsp:",
+			"license": "Les données mises en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. Comme les données ISTEX, elles sont placées sous le régime de la licence ouverte/_open licence_ Etalab (cf. [contrat de licence type](http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf)).",
+			"share": "Partager cette ressource",
+			"istex": "S'il-vous-plaît, modifiez le champ `print.item.istex` dans le fichier de configuration pour remplacer ce texte."
 		}
 	},
 	"datasetFields": {
