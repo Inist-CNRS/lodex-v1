@@ -309,11 +309,21 @@
 
                         </div>
                         <div class="tab-pane" id="share">
+							{{ print.item.share.introduction|d('Missing `print.item.share.introduction` in your config file') }}
+
+							<h2><i class="fa fa-link"></i> Lien vers cette ressource</h2>
+							<form action="" method="post">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-link"></i></span>
+									<input type="text" class="form-control" value="{{ _uri }}">
+								</div>
+							</form>
+
                             <h2><i class="fa fa-share"></i> Share</h2>
                             <p>
                                 <a title="Facebook" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x"></i></span></a>
-                                <a title="Twitter" href="https://twitter.com/intent/tweet?url={{ documents[0]._uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
-                                <a title="Google+" href="https://plus.google.com/share?url={{ documents[0]._uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
+                                <a title="Twitter" href="https://twitter.com/intent/tweet?url={{ _uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x"></i></span></a>
+                                <a title="Google+" href="https://plus.google.com/share?url={{ _uri }}"><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x"></i></span></a>
                                 <a title="Linkedin" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x"></i></span></a>
                                 <a title="Reddit" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-reddit fa-stack-1x"></i></span></a>
                                 <a title="WordPress" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-wordpress fa-stack-1x"></i></span></a>
@@ -323,19 +333,13 @@
                                 <a title="Print" href=""><span class="fa-stack fa-lg"><i class="fa fa-square-o fa-stack-2x"></i><i class="fa fa-print fa-stack-1x"></i></span></a>
                             </p>
 
-                            <h2><i class="fa fa-envelope"></i> Intégrer</h2>
-
-                            <p>Subscribe to our weekly Newsletter and stay tuned.</p>
-
+                            <h2><i class="fa fa-code"></i> Intégrer</h2>
                             <form action="" method="post">
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                    <span class="input-group-addon"><i class="fa fa-code"></i></span>
                                     <input type="text" class="form-control" value="<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{_root}}.iframe&quot; frameborder=&quot;0&quot;></iframe>">
                                 </div>
-                                <br />
-                                <button type="submit" value="sub" name="sub" class="btn btn-primary"><i class="fa fa-share"></i> PReview</button>
                             </form>
-
                         </div>
                     </div>
 
