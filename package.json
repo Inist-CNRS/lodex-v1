@@ -44,7 +44,7 @@
     "async": "^1.4.2",
     "async-each": "^1.0.1",
     "body-parser": "^1.15.2",
-    "castor-load": "^4.6.0",
+    "castor-load": "^4.6.1",
     "castor-load-csv": "^2.1.2",
     "castor-load-excel": "latest",
     "castor-load-jsoncorpus": "^3.0.0",

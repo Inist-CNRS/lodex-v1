@@ -6,6 +6,7 @@ module.exports.CollectionNotFound = require('custom-error')('CollectionNotFound'
 module.exports.IndexNotFound = require('custom-error')('IndexNotFound');
 module.exports.PageNotFound = require('custom-error')('PageNotFound');
 module.exports.TableNotFound = require('custom-error')('TableNotFound');
+module.exports.ResourceNotFound = require('custom-error')('ResourceNotFound');
 module.exports.InvalidParameters = require('custom-error')('InvalidParameters');
 module.exports.Forbidden = require('custom-error')('Forbidden');
 module.exports.BadConfig = require('custom-error')('BadConfig');

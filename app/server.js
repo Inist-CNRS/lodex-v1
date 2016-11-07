@@ -44,6 +44,8 @@ module.exports = function(config, online) {
     acl : new ACL(),
     Errors : Errors
   };
+  var internals = require('./helpers/internals.js')(core);
+
 
   //
   // Passport
@@ -99,6 +101,25 @@ module.exports = function(config, online) {
   filters.apply(function(hash, func) {
     JBJ.use(func);
   });
+
+  //
+  // JBJ
+  // to load specials
+  //
+  JBJ.filters.getInternalURI = function(obj, arg, next) {
+    var collname = objectPath.get(obj, '_collection._wid');
+    var key = arg;
+    var value = objectPath.get(obj, key);
+    var baseuri = obj._uri.replace(obj._wid, '');
+    internals.getWidByField(collname, key, value, function(err, found) {
+      if (err) {
+        next(err);
+      }
+      else {
+        next(null, baseuri.concat(found));
+      }
+    })
+  }
 
   // JBJ
   // to load ./protocols/
