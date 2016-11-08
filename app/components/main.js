@@ -6,14 +6,15 @@ var Vue = require('vue/dist/vue.js')
 
 Vue.use(require('vue-resource'))
 
-var facet = require('./facet.vue')
-var metric = require('./metric.vue')
-var tableau = require('./tableau.vue')
+var bag = require('./bag.vue')
 var chart = require('./chart.vue')
-var picture = require('./picture.vue')
-var knownuri = require('./uri.vue')
 var embeduri = require('./embeduri.vue')
+var facet = require('./facet.vue')
 var istex = require('./istex.vue')
+var knownuri = require('./uri.vue')
+var metric = require('./metric.vue')
+var picture = require('./picture.vue')
+var tableau = require('./tableau.vue')
 
 module.exports = new Vue({
 
@@ -31,7 +32,8 @@ module.exports = new Vue({
     picture: picture,
     knownuri: knownuri,
     embeduri: embeduri,
-    istex: istex
+    istex: istex,
+    bag: bag
   }
 
 })

@@ -132,6 +132,9 @@
 			"label": "Actors",
 			"scheme": "http://schema.org/actors",
 			"format": "bag",
+			"formatOptions": {
+				"inline": true
+			},
 			"displayAreas" : {
 				"table" : true
 			},

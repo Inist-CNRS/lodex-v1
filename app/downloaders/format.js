@@ -93,13 +93,19 @@ module.exports = function(options, core) {
         data['_columns'][col].content.html = XMLMapping.dump(istex);
       }
       else if (format === 'bag') {
-        data['_columns'][col].content.html = '<ul>\n' +
+        var inline = '';
+        if (data['_columns'][col].formatOptions &&
+          data['_columns'][col].formatOptions.inline) {
+          inline = ' inline="true"';
+        }
+
+        data['_columns'][col].content.html = '<bag' + inline + '><ul>\n' +
           data['_columns'][col].content.raw
           .map(function (item) {
             return '<li>' + item + '</li>';
           })
           .join('\n') +
-          '</ul>';
+          '</ul></bag>';
       }
 
 
