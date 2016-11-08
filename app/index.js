@@ -112,6 +112,7 @@ module.exports = function(warmup) {
   //
   var Configurator = require('./helpers/configurator.js');
   var config = new Configurator();
+  config.fix('cleanAtStatup',        true);
   config.fix('databaseHost',         mongoHostPort);
   config.fix('databaseName',         appname);
   config.fix('collectionNameIndex',     'index');

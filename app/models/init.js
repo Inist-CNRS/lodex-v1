@@ -80,21 +80,25 @@ module.exports = function(model) {
     if (self.mongoDatabaseHandle instanceof Error) {
       return fill();
     }
-    self.mongoDatabaseHandle.listCollections({}).toArray().then(function(names) {
-      names.map(function(cur) {
-        return cur.name;
-      }).filter(function(key) {
-        return key.search(/_P_/) !== -1 || key.search(/_R_/) !== -1;
-      }).forEach(function(key) {
-        self.mongoDatabaseHandle.collection(key).drop().then(function(reply) {
-          debug('CleanUp : Success', key);
-        }).catch(function(reply) {
-          debug('CleanUp : Fail', key);
+    if (req.config.get('cleanAtStatup') === true) {
+      self.mongoDatabaseHandle.listCollections({}).toArray().then(function(names) {
+        names.map(function(cur) {
+          return cur.name;
+        }).filter(function(key) {
+          return key.search(/_P_/) !== -1 || key.search(/_R_/) !== -1;
+        }).forEach(function(key) {
+          self.mongoDatabaseHandle.collection(key).drop().then(function(reply) {
+            debug('CleanUp : Success', key);
+          }).catch(function(reply) {
+            debug('CleanUp : Fail', key);
+          });
         });
-      });
-    })
-    .catch(fill);
-
+      })
+      .catch(fill);
+    }
+    else {
+      fill()
+    }
   });
 
   return model;
