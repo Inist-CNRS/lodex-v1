@@ -10,7 +10,7 @@ install: ## install depedencies thanks to a dockerized npm install
 
 run-debug: ## run lodex in debug mode (with local mongo and nodejs and without docker)
 	@npm run build-dev
-	@DEBUG=lodex*,console* NODE_ENV=development npm start
+	@DEBUG=lodex*,console* NODE_ENV=development ./bin/lodex --cleanAtStartup=false
 
 run-dev: ## run lodex in dev mode (with local mongo and nodejs/nodemon and without docker)
 	@npm run build-dev
