@@ -100,66 +100,48 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 					<div class="tab-content">
 						<div class="tab-pane active" id="ressource">
 
+							{{ print.item.resource|d('Missing `print.item.resource` in your config file') }}
 
-							<h3 class="titre3">{{ _columns.c1.cover|d('Missing `columns.c1.cover` in your collectionFields') }} {{ _columns.c1.content.html|d('Missing `columns.c1.content.html` in your config file') }}</h3>
+							<h3 class="titre3">{{ __('Collection fields') }}</h3>
 
 							<div class="testimonial-proprietes">
-
 								<dl class="dl-horizontal">
 									{% for columnName, column in _columns %}
 									{% if column.cover == 'collection' and column.label %}
 									<dt>
 									{{ column.label }} :
-
-
 									</dt>
-
 									{% if column.content and column.content.html %}
-
 									<dd>
 									{{ column.content.html }}<br>
 									({{ column.scheme }})
 									{% elif column.content and column.content.raw %}
 									{{ column.content.raw }}
-
 									{% endif %}
 									</dd>
 									{% endif %}
 									{% endfor %}
 								</dl>
-
-							</div>
-							<h3 class="titre3">{{ __('Resource') }}</h3>
-							<div class="testimonial-proprietes">
-								<dl class="dl-horizontal">
-
-
-
-									<dt>{{ _columns.id.label|d('Missing `id.label` in your collectionFields') }}</dt>
-									<dd>{{ _columns.id.content.raw|d('Missing `id.content.raw` in your collectionFields') }}</dd>
-									<dt>URI</dt>
-									<dd>
-									<a href="{{_uri}}">{{ _uri|d('Missing `uri` in your collectionFields') }}</a>
-									</dd>
-
-
-								</dl>
 							</div>
 
-
-
-
-							<h3 class="titre3">{{ _columns.d1.cover|d('Missing `columns.d1.cover` in your datasetFields') }} {{ _columns.d1.content.html|d('Missing `columns.d1.content.html` in your datasetFields') }}</h3>
+							<h3 class="titre3">{{ __('Dataset fields') }}</h3>
 							<div class="testimonial-proprietes">
 								<dl class="dl-horizontal">
-
-									<dt>{{ _columns.d1.label|d('Missing `d1.label` in your datasetFields') }}</dt>
-									<dd>{{ _columns.d1.content.raw|d('Missing `d2.content.raw` in your datasetFields') }}</dd>
-									<dt>{{ _columns.d2.label|d('Missing `d2.label` in your datasetFields') }}</dt>
+									{% for columnName, column in _columns %}
+									{% if column.cover == 'dataset' and column.label %}
+									<dt>
+									{{ column.label }} :
+									</dt>
+									{% if column.content and column.content.html %}
 									<dd>
-									{{ _columns.d2.content.html|d('Missing `d2.content.html` in your datasetFields') }}
+									{{ column.content.html }}<br>
+									({{ column.scheme }})
+									{% elif column.content and column.content.raw %}
+									{{ column.content.raw }}
+									{% endif %}
 									</dd>
-
+									{% endif %}
+									{% endfor %}
 								</dl>
 							</div>
 						</div>

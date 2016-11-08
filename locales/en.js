@@ -92,5 +92,7 @@
 	"Export": "Export",
 	"Get more information": "Get more information",
 	"Overview": "Overview",
-	"Ontology": "Ontology"
+	"Ontology": "Ontology",
+	"Collection fields": "Collection fields",
+	"Dataset fields": "Dataset fields"
 }
