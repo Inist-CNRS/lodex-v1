@@ -80,7 +80,7 @@ module.exports = function(model) {
     if (self.mongoDatabaseHandle instanceof Error) {
       return fill();
     }
-    if (req.config.get('cleanAtStatup') === true) {
+    if (req.config.get('cleanAtStartup') === true) {
       self.mongoDatabaseHandle.listCollections({}).toArray().then(function(names) {
         names.map(function(cur) {
           return cur.name;
