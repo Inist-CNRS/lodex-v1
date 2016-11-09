@@ -1712,10 +1712,10 @@ output {
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #008837;
+  color: #458ca5;
   background-color: #fff;
   background-image: none;
-  border: 1px solid #7b3294;
+  border: 1px solid #c4d735;
   border-radius: 10px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -1732,14 +1732,14 @@ output {
   color: #00a241;
 }
 .form-control::-moz-placeholder {
-  color: #00a241;
+  color: #458ca5;
   opacity: 1;
 }
 .form-control:-ms-input-placeholder {
-  color: #00a241;
+  color: #458ca5;
 }
 .form-control::-webkit-input-placeholder {
-  color: #00a241;
+  color: #458ca5;
 }
 .form-control[disabled],
 .form-control[readonly],
@@ -1901,8 +1901,8 @@ select[multiple].input-lg {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #af62ca;
 }
 .has-warning .input-group-addon {
-  color: #7b3294;
-  border-color: #7b3294;
+  color: #c4d735;
+  border-color: #c4d735;
   background-color: #fcf8e3;
 }
 .has-warning .form-control-feedback {
@@ -1929,7 +1929,7 @@ select[multiple].input-lg {
 .has-error .input-group-addon {
   color: #7b3294;
   border-color: #7b3294;
-  background-color: #a6dba0;
+  background-color: #c4d735;
 }
 .has-error .form-control-feedback {
   color: #7b3294;
@@ -3401,10 +3401,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   font-size: 14px;
   font-weight: normal;
   line-height: 1;
-  color: #008837;
+  color: #458ca5;
   text-align: center;
-  background-color: #a6dba0;
-  border: 1px solid #7b3294;
+  background-color: #c4d735;
+  border: 1px solid #c4d735;
   border-radius: 10px;
 }
 .input-group-addon.input-sm {
