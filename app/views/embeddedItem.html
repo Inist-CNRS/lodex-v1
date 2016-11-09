@@ -21,6 +21,7 @@
             <a href="{{_uri }}.html">{{ _columns|getContentByScheme('http://purl.org/dc/terms/title') }}</a>
           </div>
           <p>{{ _columns|getContentByScheme('http://purl.org/dc/terms/description') }}</p>
+          <p>{{ _columns|length }} {{ __('properties') }}</p>
         </div>
       </div>
     </div>
