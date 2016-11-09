@@ -97,7 +97,7 @@ module.exports = function(model) {
       .catch(fill);
     }
     else {
-      fill()
+      fill();
     }
   });
 

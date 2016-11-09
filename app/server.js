@@ -110,16 +110,14 @@ module.exports = function(config, online) {
     var collname = objectPath.get(obj, '_collection._wid');
     var key = arg;
     var value = objectPath.get(obj, key);
-    var baseuri = obj._uri.replace(obj._wid, '');
+    var baseuri = obj['_uri'].replace(obj['_wid'], '');
     internals.getWidByField(collname, key, value, function(err, found) {
       if (err) {
-        next(err);
+        return next(err);
       }
-      else {
-        next(null, baseuri.concat(found));
-      }
-    })
-  }
+      return next(null, baseuri.concat(found));
+    });
+  };
 
   // JBJ
   // to load ./protocols/

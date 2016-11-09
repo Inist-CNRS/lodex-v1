@@ -85,7 +85,7 @@ module.exports = function (core) {
   func.getWidByField = function getWidByField(collname, key, value, cb) {
     core.connect().then(function(db) {
       db.collection(collname, function(err, coll) {
-        var qry = {}
+        var qry = {};
         if (err) {
           return cb(err);
         }
