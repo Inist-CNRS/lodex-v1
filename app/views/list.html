@@ -123,10 +123,10 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 			<div>
 				<div class="social pull-right">
 					<ul>
-						<li><a href="https://twitter.com/intent/tweet?url={{ documents[0]._uri }}"  target="_blank"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="https://plus.google.com/share?url={{ documents[0]._uri }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-						<li><a href="#"><i class="fa fa-github"></i></a></li>
-						<li><a href="#"><i class="fa fa-dropbox"></i></a></li>
+						<li><a href="https://twitter.com/intent/tweet?url={{ documents[0]._uri|urlencode }}"  target="_blank"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="https://plus.google.com/share?url={{ documents[0]._uri|urlencode }}" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="https://www.facebook.com/sharer.php?u={{ documents[0]._uri|urlencode }}"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="https://www.linkedin.com/shareArticle?url={{ documents[0]._uri|urlencode }}"><i class="fa fa-linkedin"></i></a></li>
 					</ul>
 				</div>
 				<div id="tab" class="btn-group" data-toggle="buttons">
