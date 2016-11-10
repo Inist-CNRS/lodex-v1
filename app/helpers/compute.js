@@ -25,7 +25,7 @@ function Compute(schema, options) {
   self.options.concurrency = options.concurrency || 1;
   self.options.port = options.port || 80;
 
-  self.schema = schema;
+  // DISABLED  self.schema = schema;
   self.bank = {};
 
 
@@ -41,6 +41,7 @@ Compute.prototype.use = function (hash, obj) {
   return self;
 };
 
+/* DISABLED
 Compute.prototype.run = function (cb) {
   var self = this;
   debug('run', self.schema);
@@ -65,6 +66,7 @@ Compute.prototype.run = function (cb) {
 
   });
 };
+*/
 
 Compute.prototype.operators = function () {
   var self = this;

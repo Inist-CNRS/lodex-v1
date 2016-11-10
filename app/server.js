@@ -38,7 +38,7 @@ module.exports = function(config, online) {
     computer : undefined,
     loaders : undefined,
     downloaders : undefined,
-    heart: undefined,
+// DISABLED    heart: undefined,
     agent : new Agent(config.get('port')),
     passport : passport,
     acl : new ACL(),
@@ -141,6 +141,7 @@ module.exports = function(config, online) {
   //  create an heart & set heartrate
   //  load ./heartbeats/
   //
+  /* DISABLED 
   try {
     core.heart = require('./helpers/heart.js')(config.get('heartrate'));
   }
@@ -158,7 +159,7 @@ module.exports = function(config, online) {
       func(item.options, core));
   });
   core.heart.createEvent(2, { repeat: 1 }, require('./heartbeats/compute.js')({}, core));
-
+  */
 
   //
   // Models
@@ -324,7 +325,7 @@ module.exports = function(config, online) {
       collectionName: config.get('collectionNameHotFields'),
       concurrency : config.get('concurrency')
     };
-    core.computer = new Computer(config.get('computedFields'), cptopts);
+    core.computer = new Computer(null /* DISABLED config.get('computedFields')*/, cptopts);
 
     core.computer.use('count', require('./operators/count.js'));
     core.computer.use('catalog', require('./operators/catalog.js'));
@@ -345,6 +346,8 @@ module.exports = function(config, online) {
     operators.apply(function(hash, func) {
       core.computer.use(hash, func);
     });
+    /* 
+     * DISABLED
     var cptfunc = function() {
       if (cptlock === undefined || cptlock === false) {
         cptlock = true;
@@ -363,6 +366,7 @@ module.exports = function(config, online) {
         });
       }
     };
+    */
     if (ldr !== undefined) {
       ldr.on('browseOver', function (found) {
         objectPath.set(core.states, 'hotfolder.last.browseOver', found);
@@ -370,36 +374,36 @@ module.exports = function(config, online) {
       ldr.on('watching', function (err, doc) {
         if (err) { objectPath.set(core.states, 'hotfolder.last.error', err.toString()); }
         objectPath.set(core.states, 'hotfolder.last.watching', doc);
-        cptfunc();
+        // DISABLED cptfunc();
       });
       ldr.on('checked', function (err, doc) {
         if (err) { objectPath.set(core.states, 'hotfolder.last.error', err.toString()); }
         objectPath.set(core.states, 'hotfolder.last.checked', doc);
-        cptfunc();
+        // DISABLED cptfunc();
       });
       ldr.on('cancelled', function (err, doc) {
         if (err) { objectPath.set(core.states, 'hotfolder.last.error', err.toString()); }
         objectPath.set(core.states, 'hotfolder.last.cancelled', doc);
-        cptfunc();
+        // DISABLED cptfunc();
       });
       ldr.on('added', function (err, doc) {
         if (err) { objectPath.set(core.states, 'hotfolder.last.error', err.toString()); }
         objectPath.set(core.states, 'hotfolder.last.added', doc);
-        cptfunc();
+        // DISABLED cptfunc();
       });
       ldr.on('changed', function (err, doc) {
         if (err) { objectPath.set(core.states, 'hotfolder.last.error', err.toString()); }
         objectPath.set(core.states, 'hotfolder.last.changed', doc);
-        cptfunc();
+        // DISABLED cptfunc();
       });
       ldr.on('dropped', function (err, doc) {
         if (err) { objectPath.set(core.states, 'hotfolder.last.error', err.toString()); }
         objectPath.set(core.states, 'hotfolder.last.dropped', doc);
-        cptfunc();
+        // DISABLED cptfunc();
       });
       ldr.on('saved', function (doc) {
         objectPath.set(core.states, 'hotfolder.last.saved', doc);
-        cptfunc();
+        // DISABLED cptfunc();
       });
 
     }

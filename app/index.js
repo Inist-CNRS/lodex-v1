@@ -182,7 +182,7 @@ module.exports = function(warmup) {
   config.fix('middlewares',          []);
   config.fix('resources',            {}); // for apiv1
   config.fix('operators',            {});
-  config.fix('computedFields',       {});  // JBJ stylesheet to compute fields
+  // DISABLED config.fix('computedFields',       {});  // JBJ stylesheet to compute fields
   // List of allowed values for 'typ=' parameter
   config.fix('allowedTypValues',     ['uri', 'form', 'file', 'fork']);
   config.fix('datasetFields',        {});
