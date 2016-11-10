@@ -35,7 +35,7 @@ $(document).ready(function()
     var lien = $('<a>',
       {
         'href':				'#' + ancre,
-        'aria-expanded':	'false',
+        'aria-expanded':	'true',
         'aria-controls':	ancre
       });
 
