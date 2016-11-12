@@ -3,6 +3,7 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('lodex:' + basename)
+  , errlog = require('debug')('lodex:' + basename + ':error')
   , fs = require('fs')
   , kuler = require('kuler')
   , mime = require('mime')
@@ -141,7 +142,7 @@ module.exports = function(config, online) {
   //  create an heart & set heartrate
   //  load ./heartbeats/
   //
-  /* DISABLED 
+  /* DISABLED
   try {
     core.heart = require('./helpers/heart.js')(config.get('heartrate'));
   }
@@ -346,7 +347,7 @@ module.exports = function(config, online) {
     operators.apply(function(hash, func) {
       core.computer.use(hash, func);
     });
-    /* 
+    /*
      * DISABLED
     var cptfunc = function() {
       if (cptlock === undefined || cptlock === false) {
@@ -615,7 +616,6 @@ module.exports = function(config, online) {
   // catch 404 and forward to error handler
   //
   core.app.use(function(req, res, next) {
-    debug('Error handler');
     next(new Errors.PageNotFound('Not Found'));
   });
 
@@ -649,8 +649,9 @@ module.exports = function(config, online) {
       return;
     }
     res.status(statusCode);
+    errlog('Error handler', err);
     console.error(kuler('Route error for', 'red'), req.originalUrl,
-                  kuler(statusCode + ' - ' + err.toString(), 'orangered'),
+                  kuler(statusCode, 'orangered'),
                   ' from ', req.get('referer'));
     if (req.accepts('html')) {
       res.render('error.html', {

@@ -2,6 +2,7 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('lodex:' + basename)
+  , errlog = require('debug')('lodex:' + basename + ':error')
   , util = require('util')
   , minimist = require('minimist')
   , portfinder = require('portfinder')
@@ -265,8 +266,9 @@ module.exports = function(warmup) {
         if (online === undefined || typeof online !== 'function') {
           online = function(err, core) {
             if (err instanceof Error) {
+              errlog('Server failed to start', err);
               console.error(kuler('Unable to init the server.', 'red'),
-                            kuler(err.toString(), 'orangered'));
+                            kuler('Try to start with DEBUG=*error', 'orangered'));
               process.exit(3);
               return;
             }

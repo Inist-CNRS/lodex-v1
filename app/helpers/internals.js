@@ -2,6 +2,7 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('lodex:helpers:' + basename)
+  , errlog = require('debug')('lodex:helpers:' + basename + ':error')
   , util = require('util')
   , base = require('../helpers/base.js')
   ;
@@ -46,7 +47,7 @@ module.exports = function (core) {
             db.collection(collectionName).createIndexes(indexes).then(function(r) {
               debug('Initialization completed', indexes.length + ' indexes created.');
             }).catch(function(e) {
-              debug('initialization ended with : ', e);
+              errlog('Initialization failed', e);
             });
             db.close();
           }).catch(cb);
