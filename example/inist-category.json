@@ -76,7 +76,7 @@
     }
   },
   "collectionFields": {
-    "title": {
+    "c1": {
       "label": "Title",
       "scheme": "http://purl.org/dc/terms/title",
       "lang": "en",
@@ -88,7 +88,7 @@
         "table": true
       }
     },
-    "description": {
+    "c2": {
       "label": "Description",
       "scheme": "http://purl.org/dc/terms/description",
       "lang": "fr",
@@ -99,7 +99,7 @@
         "table": true
       }
     },
-    "hasTopConcept": {
+    "c3": {
       "label": "Has top concept",
       "scheme": "http://www.w3.org/2004/02/skos/core#hasTopConcept",
 	  "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
@@ -112,7 +112,7 @@
         "table": true
       }
     },
-    "broader": {
+    "c4": {
       "label": "Generic",
       "scheme": "http://www.w3.org/2004/02/skos/core#broader",
 	  "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
@@ -125,12 +125,30 @@
         "table": true
       }
     },
-    "updated": {
+    "c5": {
       "label": "Updated",
       "scheme": "http://purl.org/dc/terms/modified",
-      "format": "LL",
+      "format": "moment",
       "content<": {
         "get": "dateSynchronised"
+      },
+      "displayAreas": {
+        "table": true
+      }
+    },
+    "c6": {
+      "label": "Nb de document dans ISTEX",
+      "scheme": "https://schema.org/InteractionCounter",
+      "content<": {
+		  "get#1": ["_content.json.Verbalisation en anglais", "_content.json.Code"],
+		  "first": true,
+		  "prepend": "http://api.istex.fr/document/?q=\"",
+		  "append": "\"&size=1&output=id",
+		  "fetch" : true,
+		  "parseJSON": true,
+		  "get#2" : "total",
+		  "default" : 0,
+		  "cast" : "number"
       },
       "displayAreas": {
         "table": true
