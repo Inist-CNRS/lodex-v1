@@ -2,7 +2,8 @@
 
 var path = require('path')
   , basename = path.basename(__filename, '.js')
-  , debug = require('debug')('lodex:downloaders:' + basename)
+  , debug  = require('debug')('lodex:downloaders:' + basename)
+  , errlog  = require('debug')('lodex:downloaders:' + basename + ':error')
   , merge = require('merge')
   , JBJ = require('jbj')
   ;
@@ -146,10 +147,12 @@ module.exports = function(options, core) {
 
       JBJ.inject(stylesheet, data, function(err, data01) {
         if (err) {
+          errlog('JBJ inject(1) failed', err);
           return submit(err);
         }
         JBJ.inject(classes, data01, function(err, data02) {
           if (err) {
+            errlog('JBJ inject(2) failed', err);
             return submit(err);
           }
           data['_columns'] = {};

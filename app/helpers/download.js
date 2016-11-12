@@ -2,6 +2,7 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('lodex:helpers:' + basename)
+  , errlog = require('debug')('lodex:helpers:' + basename +':error')
   , assert = require('assert')
   , minimatch = require('minimatch')
   , es = require('event-stream')
@@ -98,15 +99,14 @@ Chain.prototype.apply = function (cursor, res, next) {
           item.oneach.call(scopes[idx], data, function (error, output) {
             scopes[idx].counter += 1;
             if (error) {
-              debug('fail onEach', trace.join('/'), 'on', scopes[idx].counter, error);
+              errlog('fail onEach', trace.join('/'), 'on', scopes[idx].counter, error);
               return callback(null, error);
             }
-            //debug('success onEach', trace.join('/'), 'on', scopes[idx].counter)
             return callback(null, output);
           });
         }
         catch (e) {
-          debug('error onEach', trace.join('/'), e.toString(), item.oneach);
+          errlog('error onEach', trace.join('/'), e.toString(), item.oneach);
           return callback(null, e);
         }
         return null;
@@ -121,7 +121,7 @@ Chain.prototype.apply = function (cursor, res, next) {
           debug('apply onEnd', idx);
           onend.call(scopes[idx], function (error, output) {
             if (error) {
-              debug('onend failed', error);
+              errlog('onEnd failed', error);
             }
             else if (output) {
               res.write(output);
