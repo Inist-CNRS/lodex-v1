@@ -5,8 +5,8 @@ var path = require('path')
   , debug = require('debug')('lodex:helpers:' + basename)
   , util = require('util')
   , events = require('events')
-  , JBJ = require('jbj')
-  , MongoClient = require('mongodb').MongoClient
+  // , JBJ = require('jbj')
+  // , MongoClient = require('mongodb').MongoClient
   ;
 
 

@@ -2,7 +2,7 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('lodex:helpers:' + basename)
-  , errlog = require('debug')('lodex:helpers:' + basename +':error')
+  , errlog = require('debug')('lodex:helpers:' + basename + ':error')
   , assert = require('assert')
   , minimatch = require('minimatch')
   , es = require('event-stream')

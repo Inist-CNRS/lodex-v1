@@ -318,7 +318,7 @@ module.exports = function(config, online) {
   // Map/Reduce features
   // load ./operators
   //
-  var cptlock, cptopts;
+  var /* cptlock,*/ cptopts;
   try {
     cptopts = {
       port: config.get('port'),
