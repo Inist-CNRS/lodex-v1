@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     reload (done) {
-      this.$http.get(this.href + "?alt=iframe").then(response => {
+      this.$http.get(this.href + '?alt=iframe').then((response) => {
         const html = clone(response.body || 'n/a')
         const beg = html.indexOf('<body>') + '<body>'.length
         const end = html.indexOf('</body>')

@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     reload (done) {
-      this.$http.get(this.href + "?alt=min").then(response => {
+      this.$http.get(this.href + '?alt=min').then((response) => {
         this.label = clone(response.data[0].value || 'n/a')
       })
     }
