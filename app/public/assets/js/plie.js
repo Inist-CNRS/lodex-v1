@@ -23,6 +23,7 @@ $(document).ready(function()
   // 0/ Masquage des panneaux par défaut
   var $panneaux = $('div.testimonial-proprietes').show();
 
+
   // ---------------------------------------------------------------------------------------- //
 
   // 1/ Initialisation des liens d'accès aux panneaux
@@ -58,3 +59,5 @@ $(document).ready(function()
     return false;
   });
 });
+
+ 
