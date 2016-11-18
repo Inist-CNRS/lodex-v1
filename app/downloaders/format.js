@@ -14,11 +14,13 @@ module.exports = function(options, core) {
   return function (data, submit) {
 
     Object.keys(data['_columns']).forEach(function(col) {
+      debug('init', { col: col, content: data['_columns'][col].content });
       var format = data['_columns'][col].format || 'raw';
       data['_columns'][col].content = {
         raw : data['_columns'][col].content,
         html: ''
       };
+      debug('debut', { col: col, content: data['_columns'][col].content });
       if (format === 'raw') {
         data['_columns'][col].content.html = htmlspecialchars(data['_columns'][col].content.raw);
       }
@@ -108,6 +110,7 @@ module.exports = function(options, core) {
           '</ul></bag>';
       }
 
+      debug('fin', { col: col, content: data['_columns'][col].content });
 
     });
     submit(null, data);
