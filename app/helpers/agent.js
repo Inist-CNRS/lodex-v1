@@ -36,7 +36,7 @@ Agent.prototype.fix = function (url, options) {
 };
 
 Agent.prototype.get = function (url, options, callback) {
-  debug('get', options);
+  debug('get(options)', options);
   return this.request.get(this.fix(url, options), options, callback);
 };
 
@@ -49,7 +49,7 @@ Agent.prototype.post = function (url, options, callback) {
     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
     options.headers['Content-Length'] = options.body.length;
   }
-  debug('post', options);
+  debug('post(options)', options);
   return this.request.post(this.fix(url, options), options, callback);
 };
 

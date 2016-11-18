@@ -98,51 +98,71 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 
 
 					<div class="tab-content">
-						<div class="tab-pane active" id="ressource">
+						<div class="tab-pane active" id="ressource" style="padding-left: 0px; padding-right: 0px;">
 
 							{{ print.item.resource|d('Missing `print.item.resource` in your config file') }}
 
-							<h3 class="titre3">{{ __('Collection fields') }}</h3>
-
-							<div class="testimonial-proprietes">
-								<dl class="dl-horizontal">
-									{% for columnName, column in _columns %}
-									{% if column.cover == 'collection' and column.label %}
-									<dt>
-									{{ column.label }} :
-									</dt>
-									{% if column.content and column.content.html %}
-									<dd>
-									{{ column.content.html }}<dd>
-									<dd class="scheme">{{ column.scheme }}
-									{% elif column.content and column.content.raw %}
-									{{ column.content.raw }}
-									{% endif %}
-									</dd>
-									{% endif %}
-									{% endfor %}
-								</dl>
-							</div>
-
-							<h3 class="titre3">{{ __('Dataset fields') }}</h3>
-							<div class="testimonial-proprietes">
-								<dl class="dl-horizontal">
-									{% for columnName, column in _columns %}
-									{% if column.cover == 'dataset' and column.label %}
-									<dt>
-									{{ column.label }} :
-									</dt>
-									{% if column.content and column.content.html %}
-									<dd>
-									{{ column.content.html }}<br>
-									({{ column.scheme }})
-									{% elif column.content and column.content.raw %}
-									{{ column.content.raw }}
-									{% endif %}
-									</dd>
-									{% endif %}
-									{% endfor %}
-								</dl>
+							<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+								<div class="panel" style="border-radius:0px"> <!--  panel-default -->
+									<div class="panel-heading" role="tab" id="headingOne" style="background-color: #fff;">
+										<h3 class="panel-title">
+											<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+												{{ __('Properties') }}
+											</a>
+										</h3>
+									</div>
+									<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+										<div class="panel-body">
+											<dl class="dl-horizontal">
+												{% for columnName, column in _columns %}
+												{% if column.cover == 'collection' and column.label %}
+												<dt style="padding-top: 10px;">
+												{{ column.label }} :
+												<div class="scheme">{{ column.scheme }}</div>
+												</dt>
+												<dd style="padding-top: 10px;">
+												{% if column.content and column.content.html %}
+												{{ column.content.html }}
+												{% elif column.content and column.content.raw %}
+												{{ column.content.raw }}
+												{% endif %}
+												</dd>
+												{% endif %}
+												{% endfor %}
+											</dl>
+										</div>
+									</div>
+								</div>
+								<div class="panel" style="border-radius:0px"> <!--  panel-default -->
+									<div class="panel-heading" role="tab" id="headingTwo"  style="background-color: #fff;">
+										<h3 class="panel-title">
+											<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+												{{ __('Dataset properties') }}
+											</a>
+										</h3>
+									</div>
+									<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+										<div class="panel-body">
+											<dl class="dl-horizontal">
+												{% for columnName, column in _columns %}
+												{% if column.cover == 'dataset' and column.label %}
+												<dt style="padding-top: 10px;">
+												{{ column.label }} :
+												</dt>
+												{% if column.content and column.content.html %}
+												<dd style="padding-top: 10px;">
+												{{ column.content.html }}<br>
+												({{ column.scheme }})
+												{% elif column.content and column.content.raw %}
+												{{ column.content.raw }}
+												{% endif %}
+												</dd>
+												{% endif %}
+												{% endfor %}
+											</dl>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 
@@ -285,8 +305,8 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 			</div>
 		</div>
 
-<div id="sidebar" class="pull-right col-xs-6 col-md-3 col-lg-3" role="sidebar">
-		
+		<div id="sidebar" class="pull-right col-xs-6 col-md-3 col-lg-3" role="sidebar">
+
 			<div>
 				{% for name, col in documents[0]._columns %}
 				{% if col.displayAreas.navbar %}

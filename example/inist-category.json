@@ -140,11 +140,23 @@
       "label": "Nb de document dans ISTEX",
       "scheme": "https://schema.org/InteractionCounter",
       "content<": {
-		  "get#1": ["_content.json.Verbalisation en anglais", "_content.json.Code"],
-		  "first": true,
-		  "prepend": "http://api.istex.fr/document/?q=\"",
-		  "append": "\"&size=1&output=id",
-		  "fetch" : true,
+		  "$uri" : {
+			  "set" : "http://api.istex.fr/document/"
+		  },
+		  "$params" : {
+			  "inject" : {
+				  "size" : "1",
+				  "output" : "id",
+				  "q<" : {
+					  "get": ["_content.json.Verbalisation en anglais", "_content.json.Code"],
+					  "first": true
+				  }
+			  },
+			  "querystring" : true
+		  },
+		  "get#1" : ["uri", "params"],
+		  "join": "?",
+		  "fetch": true,
 		  "parseJSON": true,
 		  "get#2" : "total",
 		  "default" : 0,

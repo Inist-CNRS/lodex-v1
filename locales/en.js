@@ -98,5 +98,7 @@
 	"Ontology": "Ontology",
 	"Collection fields": "Collection fields",
 	"Dataset fields": "Dataset fields",
-	"properties": "properties"
+	"properties": "properties",
+	"Properties": "Properties",
+	"Dataset properties": "Dataset properties"
 }

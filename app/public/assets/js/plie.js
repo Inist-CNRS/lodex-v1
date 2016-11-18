@@ -22,6 +22,8 @@ $(document).ready(function()
 {
   // 0/ Masquage des panneaux par défaut
   var $panneaux = $('div.testimonial-proprietes').show();
+  $('div.plie-ferme').hide();
+
 
 
   // ---------------------------------------------------------------------------------------- //
@@ -60,4 +62,4 @@ $(document).ready(function()
   });
 });
 
- 
+

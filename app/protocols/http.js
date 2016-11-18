@@ -9,11 +9,12 @@ module.exports = function(options, core) {
   var agent = core.agent;
   options = options || {};
   return function (urlObj, callback) {
-    agent.get(urlObj, {}, function(error, response, body) {
-      if (response && response.statusCode !== 200) {
-        body = undefined;
-      }
-      callback(error, body);
-    });
+     agent.get(urlObj).then(function (body) {
+       debug(urlObj.href, body);
+       callback(null, body);
+    })
+    .catch(function (reason) {
+      callback(response.error);
+    })
   };
 };
