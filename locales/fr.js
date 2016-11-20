@@ -98,5 +98,7 @@
 	"Ontology": "Ontologie",
 	"Collection fields": "Champs collection",
 	"Dataset fields": "Champs dataset",
-	"properties": "propriétés"
+	"properties": "propriétés",
+	"Properties": "Propriétés",
+	"Dataset properties": "Propriétés du jeu de données"
 }
