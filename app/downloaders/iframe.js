@@ -25,7 +25,10 @@ module.exports = function (options, core) {
       }
       var template = self.documents.length === 1 ? 'embeddedItem.html' : 'embeddedDataset.html';
       var locals = self.documents.length === 1 ? self.documents[0] : { documents : self.documents };
-      // locals.print = core.config.get('print');
+      locals.print = core.config.get('print');
+      locals.lang = self.options.lang;
+      locals.url = self.options.url;
+      locals.query = self.options.query;
       debug('rendering', template);
       self.stream.setHeader('Content-Type', 'text/html; charset=utf-8');
       self.stream.render(template, locals);

@@ -292,6 +292,9 @@ module.exports = function(router, core) {
       var cursor = locals.mongoCursor;
       var params = {
         firstOnly : req.query.fo || req.query.firstOnly || false,
+        lang : req.lang,
+        url : require('url').parse(req.protocol + '://' + req.get('host') + req.originalUrl),
+        query : req.query,
         resourceName : req.routeParams.resourceName,
         documentName : req.routeParams.documentName,
         collection : locals.collection
@@ -344,6 +347,9 @@ module.exports = function(router, core) {
       var cursor = locals.mongoCursor;
       var params = {
         firstOnly : req.query.fo || req.query.firstOnly || false,
+        lang : req.lang,
+        url : require('url').parse(req.protocol + '://' + req.get('host') + req.originalUrl),
+        query : req.query,
         resourceName : req.routeParams.resourceName,
         documentName : req.routeParams.documentName,
         collection : locals.collection
@@ -383,6 +389,9 @@ module.exports = function(router, core) {
       var cursor = locals.mongoCursor;
       var params = {
         firstOnly : req.query.fo || req.query.firstOnly || false,
+        lang : req.lang,
+        url : require('url').parse(req.protocol + '://' + req.get('host') + req.originalUrl),
+        query : req.query,
         resourceName : req.routeParams.resourceName,
         documentName : req.routeParams.documentName,
         index : locals.table
@@ -418,6 +427,9 @@ module.exports = function(router, core) {
       var cursor = locals.mongoCursor;
       var params = {
         firstOnly : req.query.fo || req.query.firstOnly || false,
+        lang : req.lang,
+        url : require('url').parse(req.protocol + '://' + req.get('host') + req.originalUrl),
+        query : req.query,
         resourceName : req.routeParams.resourceName,
         documentName : req.routeParams.documentName,
         index : locals.table
