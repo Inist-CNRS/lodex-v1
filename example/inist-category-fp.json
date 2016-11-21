@@ -1,0 +1,205 @@
+{
+	"ark" : {
+		"naan" : "67375",
+		"subpublisher" : "JPB"
+	},
+  "defaultRootCollection": "data",
+  "collectionNameHotFolder": "data",
+  "uniqueIdentifierWith" : {
+    "get": "_content.json.Code",
+    "slug": true
+  },
+  "print": {
+    "header": {
+      "introduction": "L'expérimentation __LODEX__ a pour ambition d'extraire de chaque document présent dans le fonds ISTEX un même type d'information pour créer des jeux de données représentatifs, normalisés et interopérables en respectant au maximum les normes du web sémantique."
+    },
+    "list": {
+      "overview": "Voici un aperçu des quelques catégories inist  décrites dans ce jeu de données.",
+      "tableau": "Le tableau ci-après permet de naviguer rapidement parmi les différentes ressources qui composent ce jeu de données.",
+      "exports": "Ce jeu de données est disponible sur ce site selon une syntaxe `tableau`, avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD N-Quads et turtle. Ils sont librement téléchargeable au travers de plusieurs formats&nbsp;:",
+      "ontology": "Ce jeu de données a été modélisé à partir de plusieurs propriétés issues de plusieurs ontologies différentes"
+    },
+    "item": {
+      "exports": "Cette donnée est disponible sur ce site avec les formats CSV, TSV ou Excel ou une syntaxe RDF (Resource description framework), avec les formats JSON-LD, N-Quads et turtle. Elle est librement téléchargeable au travers de plusieurs formats&nbsp:",
+      "license": "Les données mises en ligne dans le cadre de cette expérimentation sont issues des métadonnées ISTEX. Comme les données ISTEX, elles sont placées sous le régime de la licence ouverte/_open licence_ Etalab (cf. [contrat de licence type](http://www.istex.fr/wp-content/uploads/2015/02/2015_Licence-type-ISTEX.pdf)).",
+      "share": "Partager cette ressource",
+      "istex": "S'il-vous-plaît, modifiez le champ `print.item.istex` dans le fichier de configuration pour remplacer ce texte."
+    }
+  },
+  "datasetFields": {
+    "d1": {
+      "label": "Titre",
+      "scheme": "http://purl.org/dc/terms/title",
+      "lang": "fr",
+      "comment": "Always get a title - displayed in corpus/overview",
+      "content": "Catégories INIST"
+    },
+    "d2": {
+      "label": "Description",
+      "scheme": "http://purl.org/dc/terms/description",
+      "format": "markdown",
+      "lang": "fr",
+      "content": "Cette table correspond au choix de documenter des données ISTEX et plus particulièrement les catégories INIST.  Il s’agit des codes de classement (tronqués à 3 niveaux) utilisés lors de l'indexation pour constituer __les bases de données PASCAL et FRANCIS__. Ces catégories ont fait l'objet d'une structuration hiérarchique au format SKOS après enrichissement, et d'un alignement avec la classification décimale universelle (CDU) et le thésaurus de référence dans le domaine biomédical MeSH (Medical Subject Headings)."
+    },
+    "d3": {
+      "label": "Mis à jour",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "format": "moment",
+      "formatOptions": {
+        "syntax": "LL",
+        "locale": "fr"
+      },
+      "content<": {
+        "get": "_collection._dataset._updated"
+      }
+    },
+    "d4": {
+      "label": "Synchronisé",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "type": "https://www.w3.org/TR/xmlschema-2/#date",
+      "format": "moment",
+      "formatOptions": {
+        "syntax": "LL",
+        "locale": "fr"
+      },
+      "content<": {
+        "get": "dateSynchronised"
+      }
+    },
+    "d6": {
+      "label": "Ontology model",
+      "scheme": "https://schema.org/image",
+      "format": "picture",
+      "formatOptions": {
+        "height": "200"
+      },
+      "displayAreas": {
+        "insert": true
+      },
+      "content": "https://docs.google.com/drawings/d/1ti_UyOQLqnl_vTk3gC8JEsweb0toe0Brs_rYh0NrNJE/pub?w=960&h=720"
+    }
+  },
+  "collectionFields": {
+    "c1": {
+      "label": "Verbalisation",
+      "scheme": "http://purl.org/dc/terms/title",
+      "lang": "fr",
+      "content<": {
+        "get": ["_content.json.Verbalisation en français", "_content.json.Code"],
+        "first": true
+      },
+      "displayAreas": {
+        "table": true
+      }
+    },
+    "c2": {
+      "label": "Description",
+      "scheme": "http://purl.org/dc/terms/description",
+      "lang": "fr",
+      "format": "markdown",
+      "content<": {
+        "get": "_content.json.Description"
+      },
+      "displayAreas": {
+        "table": true
+      }
+    },
+    "c3": {
+      "label": "Est tête d'arborescence",
+      "scheme": "http://www.w3.org/2004/02/skos/core#hasTopConcept",
+	  "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
+	  "format": "embeduri",
+      "content<": {
+        "getInternalURI": "_content.json.Est tête d'arborescence",
+		"cast" : "string"
+      },
+      "displayAreas": {
+        "table": true
+      }
+    },
+    "c4": {
+      "label": "Générique",
+      "scheme": "http://www.w3.org/2004/02/skos/core#broader",
+	  "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
+	  "format": "embeduri",
+      "content<": {
+		"getInternalURI" : "_content.json.Terme Générique",
+		"cast" : "string"
+      },
+      "displayAreas": {
+        "table": true
+      }
+    },
+    "c5": {
+      "label": "Terme spécifique",
+      "scheme": "http://www.w3.org/2004/02/skos/core#narrower",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "format": "raw",
+      "lang": "fr",
+      "displayAreas": {
+        "facet": true,
+        "table": false
+      },
+      "content<": {
+        "get": "_content.json.Terme Spécifique"
+      }
+    },
+    "c6": {
+      "label": "Source",
+      "scheme": " http://purl.org/dc/terms/source",
+      "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
+      "format": "url",
+      "lang": "fr",
+      "displayAreas": {
+        "facet": false,
+        "table": false
+      },
+      "content<": {
+        "get": "_content.json.Source"
+      }
+    },
+    "c7": {
+      "label": "Code Catégorie Inist",
+      "scheme": "http://www.w3.org/2004/02/skos/core#altLabel",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "format": "raw",
+      "lang": "fr",
+      "displayAreas": {
+        "facet": false,
+        "table": true
+      },
+      "content<": {
+        "get": "_content.json.Code catégorie Inist"
+      }
+    },
+    "c9": {
+      "label": "Updated",
+      "scheme": "http://purl.org/dc/terms/modified",
+      "format": "moment",
+      "content<": {
+        "get": "dateSynchronised"
+      },
+      "displayAreas": {
+        "table": true
+      }
+    },
+    "c10": {
+      "label": "Nb documents ISTEX",
+      "scheme": "https://schema.org/InteractionCounter",
+      "content<": {
+        "get#1": ["_content.json.Verbalisation en anglais", "_content.json.Code"],
+        "first": true,
+        "prepend": "http://api.istex.fr/document/?q=\"",
+        "append": "\"&size=1&output=id",
+        "fetch" : true,
+        "parseJSON": true,
+        "get#2" : "total",
+        "default" : 0,
+        "cast" : "number"
+      },
+      "displayAreas": {
+        "table": true
+      }
+    }
+  }
+}

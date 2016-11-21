@@ -39,7 +39,7 @@
 	"Save": "Sauvegarder",
 	"Edit Column": "Modifier la colonne",
 	"Label": "Étiquette",
-	"Scheme": "Schéma",
+"Scheme": "Schéma",
 	"View it": "Voir",
 	"Stylesheet": "Feuille de style",
 	"Test it": "Tester",
@@ -100,5 +100,7 @@
 	"Dataset fields": "Champs dataset",
 	"properties": "propriétés",
 	"Properties": "Propriétés",
-	"Dataset properties": "Propriétés du jeu de données"
+	"Dataset properties": "Propriétés du jeu de données",
+	"Choose which fields you to view": "Choisir les champs à voir",
+	"Choose which fields you want to view": "Choisir les champs que vous voulez voir"
 }
