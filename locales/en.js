@@ -100,5 +100,7 @@
 	"Dataset fields": "Dataset fields",
 	"properties": "properties",
 	"Properties": "Properties",
-	"Dataset properties": "Dataset properties"
+	"Dataset properties": "Dataset properties",
+	"Choose which fields you to view": "Choose which fields you to view",
+	"Choose which fields you want to view": "Choose which fields you want to view"
 }

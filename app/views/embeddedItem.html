@@ -16,6 +16,9 @@
             <div class="media-heading">
               <a href="{{_uri }}.html">{{ _columns|getContentByScheme('http://purl.org/dc/terms/title') }}</a>
             </div>
+            <p>
+            {{ _columns|getContentByScheme('http://purl.org/dc/terms/description') }}
+            </p>
             <dl class="dl-horizontal">
               {% for columnID , column in _columns %}
               {% if column.cover == 'collection' and column.label and query[columnID]|d('?') != '?' %}

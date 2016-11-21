@@ -12,10 +12,6 @@
 <link rel="stylesheet" id="bootstrap-stylesheet-css" href="/assets/css/testimonials.css" type="text/css" media="all" />
 
 <script src="/libs/chartist/dist/chartist.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-<script type='text/javascript' src="/assets/js/plie.js"></script>
-
 
 <style>
 body > div.container {
@@ -40,6 +36,19 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 		e.__chartist__.update();
 	});
 });
+</script>
+<script>
+$( "#customfieldsiframe" )
+  .change(function() {
+    var code2 = "";
+    $( "select option:selected" ).each(function() {
+      code2 += "&" + $( this ).val();
+  });
+	var code1 = "<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{ _uri }}?alt=iframe&";
+	var code3 = "&quot; frameborder=&quot;0&quot;></iframe>";
+	$('#iframecode').val(code1 + code2 + code3);
+  })
+  .trigger( "change" );
 </script>
 {% endblock %}
 
@@ -148,11 +157,11 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 												{% if column.cover == 'dataset' and column.label %}
 												<dt style="padding-top: 10px;">
 												{{ column.label }} :
+												<div class="scheme">{{ column.scheme }}</div>
 												</dt>
-												{% if column.content and column.content.html %}
 												<dd style="padding-top: 10px;">
-												{{ column.content.html }}<br>
-												({{ column.scheme }})
+												{% if column.content and column.content.html %}
+												{{ column.content.html }}
 												{% elif column.content and column.content.raw %}
 												{{ column.content.raw }}
 												{% endif %}
@@ -294,8 +303,20 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 							<form action="" method="post">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-code"></i></span>
-									<input type="text" class="form-control" value="<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{_root}}?alt=iframe&quot; frameborder=&quot;0&quot;></iframe>">
+									<input id="iframecode" type="text" class="form-control" value="<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{ _uri }}?alt=iframe&quot; frameborder=&quot;0&quot;></iframe>">
 								</div>
+								<div class="form-group">
+									<label for="customfieldsiframe">
+										<h4>
+										{{ __('Choose which fields you want to view') }}
+										</h4>
+									</label>
+									<select id="customfieldsiframe" multiple class="form-control">
+										{% for key, col in _columns %}
+										<option value="{{key}}">{{col.label}}</option>
+										{% endfor %}
+									</select>
+							</div>
 							</form>
 						</div>
 					</div>
@@ -306,9 +327,8 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 		</div>
 
 		<div id="sidebar" class="pull-right col-xs-6 col-md-3 col-lg-3" role="sidebar">
-
 			<div>
-				{% for name, col in documents[0]._columns %}
+				{% for name, col in _columns %}
 				{% if col.displayAreas.navbar %}
 				<div id="navbar-{{ name }}" class="testimonial testimonial-info">
 					<h2>{{ col.content.label }}</h2>
@@ -318,7 +338,6 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 				</div>
 				{% endif %}
 				{% endfor %}
-
 			</div>
 		</div>
 	</div>
