@@ -29,6 +29,11 @@ module.exports = function(options, core) {
           }
         }
       });
+      data['_content'].jsonld['@context'].dataset = {
+        '@id': 'http://purl.org/dc/terms/isPartOf',
+        '@type': 'https://www.w3.org/TR/xmlschema-2/#anyURI'
+      };
+      data['_content'].jsonld.dataset = data['_config'].baseURL + '/' + data['_config'].rootKEY;
     }
     submit(null, data);
   };
