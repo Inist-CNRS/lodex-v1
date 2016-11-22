@@ -263,7 +263,8 @@ module.exports = function(warmup) {
           else {
             // Ex: ark:/12345/ABC
             config.set('rootKEY',
-              'ark:/' + config.get('ark.naan') + '/' + config.get('ark.subpublisher'));
+              'ark:/' + config.get('ark.naan') + '/' + config.get('ark.subpublisher') +
+              '-00000000-0');
           }
 
           ///// rootURL /////

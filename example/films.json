@@ -2,7 +2,8 @@
 	"databaseName" : "films",
 	"ark" : {
 		"naan" : "12345",
-		"subpublisher" : "ABC"
+		"subpublisher" : "ABC",
+		"#corpus": "ark:/54321/CBA-12345678-9"
 	},
 	"defaultRootCollection": "data",
 	"collectionNameHotFolder": "data",
