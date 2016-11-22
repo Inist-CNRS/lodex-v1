@@ -13,6 +13,9 @@ module.exports = function(options, core) {
     var self = this;
     var head = '';
     debug('data tsv', data);
+    data['_columns']['_uri'] = {};
+    data['_columns']['_uri'].title = 'URI';
+    data['_columns']['_uri'].content = data['_uri'];
     if (data['_count'][0] === 0) {
       self.stream.setHeader('Content-disposition', 'attachment; filename=' + self.options.fileName);
       head = CSV.stringify(Object.keys(data['_columns']).map(function(propertyName) {
