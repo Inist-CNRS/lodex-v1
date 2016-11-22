@@ -257,7 +257,15 @@ module.exports = function(warmup) {
         if (config.has('ark')) {
           //config.set('rootURL', '/ark:/12345/ABC.html');
           //config.set('rootKEY', 'ark:/12345/ABC');
+          if (config.has('ark.corpus')) {
+            config.set('rootKEY', config.get('ark.corpus'));
+          }
+          else {
+            config.set('rootKEY',
+              'ark:/' + config.get('ark.naan') + '/' + config.get('ark.subpublisher'));
+          }
           config.set('prefixKEY', 'ark:/' + config.get('ark.naan'));
+          config.set('rootURL', config.get('baseURL') + '/' + config.get('rootKEY') + '.html');
         }
 
         //
