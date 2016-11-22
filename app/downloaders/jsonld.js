@@ -15,7 +15,11 @@ module.exports = function(options, core) {
       data['_content'].jsonld = {};
       data['_content'].jsonld['@id'] = data['_uri'];
       data['_content'].jsonld['@context'] = {};
-      Object.keys(data['_columns']).forEach(function(propertyName) {
+      Object.keys(data['_columns'])
+      .filter(function (propertyName) {
+        return data['_columns'][propertyName].cover === 'collection';
+      })
+      .forEach(function(propertyName) {
         var node = data['_columns'][propertyName] || data['_collection']['_columns'][propertyName];
         if (node.scheme) {
           data['_content'].jsonld[propertyName] = node.content;
@@ -29,6 +33,7 @@ module.exports = function(options, core) {
           }
         }
       });
+
       data['_content'].jsonld['@context'].dataset = {
         '@id': 'http://purl.org/dc/terms/isPartOf',
         '@type': 'https://www.w3.org/TR/xmlschema-2/#anyURI'
