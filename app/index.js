@@ -255,17 +255,25 @@ module.exports = function(warmup) {
           config.set('baseURL', 'http://127.0.0.1:' + config.get('port'));
         }
         if (config.has('ark')) {
-          //config.set('rootURL', '/ark:/12345/ABC.html');
-          //config.set('rootKEY', 'ark:/12345/ABC');
+          ///// rootKEY /////
           if (config.has('ark.corpus')) {
+            // Ex: ark:/54321/CBA-12345678-9
             config.set('rootKEY', config.get('ark.corpus'));
           }
           else {
+            // Ex: ark:/12345/ABC
             config.set('rootKEY',
               'ark:/' + config.get('ark.naan') + '/' + config.get('ark.subpublisher'));
           }
-          config.set('prefixKEY', 'ark:/' + config.get('ark.naan'));
+
+          ///// rootURL /////
+          // Ex: http://127.0.0.1:3000/ark:/12345/ABC.html
+          //     http://127.0.0.1:3000/ark:/54321/CBA-12345678-9.html
           config.set('rootURL', config.get('baseURL') + '/' + config.get('rootKEY') + '.html');
+
+          ///// prefixKEY /////
+          // Ex: ark:/12345
+          config.set('prefixKEY', 'ark:/' + config.get('ark.naan'));
         }
 
         //
