@@ -32,7 +32,10 @@
 			"type": "https://www.w3.org/TR/xmlschema-2/#string",
 			"format" : "raw",
 			"lang": "en",
-			"content": "Films"
+			"content": "Films",
+			"displayAreas": {
+				"resource": true
+			}
 		},
 		"d2" : {
 			"label" : "Dataset description",
@@ -40,7 +43,10 @@
 			"type": "https://www.w3.org/TR/xmlschema-2/#string",
 			"format" : "markdown",
 			"lang": "en",
-			"content": "Several films to demontrate the usage of __LODEX__"
+			"content": "Several films to demontrate the usage of __LODEX__",
+			"displayAreas": {
+				"resource": true
+			}
 		},
 		"d3": {
 			"label": "Updated",
@@ -52,6 +58,9 @@
 			},
 			"content<": {
 				"get": "_collection._dataset._updated"
+			},
+			"displayAreas": {
+				"resource": true
 			}
 		},
 		"d4" : {
@@ -63,7 +72,7 @@
 				"field" :"c3"
 			},
 			"displayAreas" : {
-				"insert" :true
+				"insert": true
 			}
 		},
 		"d5" : {
@@ -75,7 +84,7 @@
 				"field" :"c4"
 			},
 			"displayAreas" : {
-				"insert" :true
+				"insert": true
 			}
 		},
 		"d6" : {

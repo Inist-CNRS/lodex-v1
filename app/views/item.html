@@ -154,7 +154,7 @@ $( "#customfieldsiframe" )
 										<div class="panel-body">
 											<dl class="dl-horizontal">
 												{% for columnName, column in _columns %}
-												{% if column.cover == 'dataset' and column.label %}
+												{% if column.cover == 'dataset' and column.label and column.displayAreas.resource %}
 												<dt style="padding-top: 10px;">
 												{{ column.label }} :
 												<div class="scheme">{{ column.scheme }}</div>
