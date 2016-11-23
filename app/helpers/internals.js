@@ -10,6 +10,7 @@ var path = require('path')
 module.exports = function (core) {
 
   var func = {};
+  var processing = {};
 
   func.getPublicCollection = function getPublicCollection (origin, cb) {
     var collectionName = origin['_wid'] + '_P_' +
@@ -17,9 +18,15 @@ module.exports = function (core) {
       '0123456789ABCDEFEFGHIJKLMNOPQRSTUVWXYZ');
     core.connect().then(function(db) {
       db.collection(collectionName).count().then(function(nbd) {
-        if (nbd > 1) {
+        if (processing[collectionName] === undefined) {
+          processing[collectionName] = false;
+        }
+        debug('getPublicCollection', { processing: processing, nbd: nbd });
+        if (processing[collectionName] || nbd > 1) {
+          debug('     Abort getPublicCollection');
           return cb(null, collectionName);
         }
+        processing[collectionName] = true;
         //
         // On renvoit une erreur plutot- que d'attendre la fin du chargement
         //
@@ -45,8 +52,10 @@ module.exports = function (core) {
               return idx;
             });
             db.collection(collectionName).createIndexes(indexes).then(function(r) {
+              processing[collectionName] = false;
               debug('Initialization completed', indexes.length + ' indexes created.');
             }).catch(function(e) {
+              processing[collectionName] = false;
               errlog('Initialization failed', e);
             });
             db.close();
