@@ -146,7 +146,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 
 				<div class="tab-content">
 					<div class="tab-pane active" id="overview">
-						{{ print.overview|d('Missing `print.overview` in your config file') }}
+						{{ print.list.overview|d('Missing `print.list.overview` in your config file') }}
 						<!--<div class="container">-->
 						<div id="fiche" class="col-md-12 clearfix" role="main">
 							{% for doc in documents %}
@@ -189,11 +189,11 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 						</nav>
 					</div>
 					<div class="tab-pane" id="tableau">
-						{{ print.tableau|d('Missing `print.tableau` in your config file') }}
+						{{ print.list.tableau|d('Missing `print.list.tableau` in your config file') }}
 						<tableau />
 					</div>
 					<div class="tab-pane" id="exports">
-						{{ print.exports|d('Missing `print.exports` in your config file') }}
+						{{ print.list.exports|d('Missing `print.list.exports` in your config file') }}
 
 
                             <div class="col-md-6">
@@ -291,7 +291,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 						</section>
 					</div>
 					<div class="tab-pane" id="ontology">
-						{{ print.ontology|d('Missing `print.ontology` in your config file') }}
+						{{ print.list.ontology|d('Missing `print.list.ontology` in your config file') }}
 						<div>
 							{% for key, col in documents[0]._columns %}
 							<h4> {{ col.label|d('?') }}</h4>
