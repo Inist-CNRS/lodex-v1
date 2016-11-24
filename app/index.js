@@ -189,12 +189,12 @@ module.exports = function(warmup) {
   config.fix('datasetFields',        {});
   config.fix('documentFields',       {});
   config.fix('collectionFields',     {
-    id: {
-      label: 'ID',
-      scheme: 'http://purl.org/dc/terms/identifier',
-      format: 'uri',
-      'content<' : {
-        get: '_wid'
+    uri: {
+      label: 'URI',
+      scheme: 'https://www.w3.org/TR/xmlschema-2/#anyURI',
+      format: 'url',
+      'content<': {
+        get: '_uri'
       }
     }
   });
