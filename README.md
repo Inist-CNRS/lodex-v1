@@ -40,7 +40,7 @@ Or you can pass it:
 - in variables prefixed with `lodex`,
 - via an option `--config file`, then from that file.
 
-Or you can put your settings in a JSON file besides your data repository.
+Or you can put your settings in a JSON file besides your data repository (recommended).
 
 For example, if you run `lodex /path/to/repository`, the file will be
 `/path/to/repository.json`.
@@ -51,12 +51,11 @@ Wherever the settings file is, it is a JSON file.
 
 - `connectionURI`: URI to connect to mongoDB (by default: `mongodb://localhost:27017/lodex`)
 - `port`: the port the web application will listen (default: `3000`)
-- `baseURL`: base URL for the URIs (by default: `127.0.0.1`)
+- `baseURL`: base URL for the URIs (by default: `http://127.0.0.1:3000`)
 - `access`: array of objects containing:
     + `login`
     + `plain`: password in plain text
     + `display`: real name, as displayed in the application
-- `strategies`: TODO
 - ...
 
 
@@ -73,8 +72,11 @@ Each field should contain:
 
 #### baseURL
 
-To generate non-local URI, you need to set the `baseURL` field in the `config.local.js`, which will replace the `http://127.0.0.1:3000` part of the URIs.
+To generate non-local URI, you need to set the `baseURL` field in the `config.local.js` (or in the [settings file](#files)), which will replace the `http://127.0.0.1:3000` part of the URIs.
 
+This is useful when lodex can't guess what URL is accessible from your users.
+For example, when using the [lodex docker image](https://hub.docker.com/r/inistcnrs/lodex/) and mapping the port to another one.
+This happens when using [ezmaster](https://github.com/Inist-CNRS/ezmaster) to instanciate lodex several times.
 
 ### Example
 
@@ -97,6 +99,7 @@ module.exports =
 
 ```
 
+Other examples of settings (along with associated data) are available in the [example](https://github.com/Inist-CNRS/lodex/example/) directory.
 
 
 ## Contribute
