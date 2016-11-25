@@ -89,7 +89,7 @@
 	"Displayed on the home page": "Affiché sur la page d'accueil",
 	"Réf.": "Réf.",
 	"Link to this resource": "Lien vers cette ressource",
-	"Share": "Partager",
+	"Share": "Partage",
 	"Include in your page": "Inclure dans votre page",
 	"Resource": "Ressource",
 	"Export": "Export",
@@ -104,5 +104,13 @@
 	"Choose which fields you to view": "Choisir les champs à voir",
 	"Choose which fields you want to view": "Choisir les champs que vous voulez voir",
 	"Older": "Précédent",
-	"Newer": "Suivant"
+	"Newer": "Suivant",
+	"Topic": "Sujet",
+	"Resources": "Resources",
+	"About Lodex": "À propos de Lodex",
+	"Project's blog": "Le blog du projet",
+	"Legals": "Mentions légales",
+	"API Documentation": "Documentation de l'API",
+	"Backoffice": "Administration",
+	"GitHub repository": "Dépôt Github"
 }

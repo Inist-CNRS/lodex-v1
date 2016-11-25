@@ -6,5 +6,21 @@
 	"Older": "Older",
 	"Newer": "Newer",
 	"Get more information": "Get more information",
-	"Download": "Download"
+	"Download": "Download",
+	"Topic": "Topic",
+	"Resource": "Resource",
+	"Share": "Share",
+	"Properties": "Properties",
+	"Dataset properties": "Dataset properties",
+	"Link to this resource": "Link to this resource",
+	"Include in your page": "Include in your page",
+	"Choose which fields you want to view": "Choose which fields you want to view",
+	"Resources": "Resources",
+	"Home": "Home",
+	"About Lodex": "About Lodex",
+	"Project's blog": "Project's blog",
+	"Legals": "Legals",
+	"API Documentation": "API Documentation",
+	"Backoffice": "Backoffice",
+	"GitHub repository": "GitHub repository"
 }
