@@ -25,7 +25,7 @@ module.exports = function (options) {
     // Save
     req.session.lang = req.i18n.getLocale();
     req.lang = req.i18n.getLocale();
-
+console.log('req.lang', req.lang);
     next();
   };
 };
