@@ -32,11 +32,11 @@ export default {
       this.$http.get(`https://api.istex.fr/document/?q=${this.query}&output=*`).then((response) => {
         if (response && response.data && response.data.total && response.data.hits) {
           this.hits = response.data.hits
-            .map(hit => {
+            .map((hit) => {
               if (hit.fulltext) {
                 hit.pdfFulltext = hit.fulltext.find((fulltext) => fulltext.extension === 'pdf')
               }
-              return hit;
+              return hit
             })
         }
       })
