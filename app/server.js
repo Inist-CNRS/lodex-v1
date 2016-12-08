@@ -119,8 +119,8 @@ module.exports = function(config, online) {
       if (err) {
         return next(err);
       }
-      debug('getInternalURI with key value', value, ' from ', self._wid, 'found', found);
-      return next(null, self._baseURI.concat(found));
+      debug('getInternalURI with key value', value, ' from ', self['_wid'], 'found', found);
+      return next(null, self['_baseURI'].concat(found));
     });
   };
 
