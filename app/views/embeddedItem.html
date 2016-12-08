@@ -14,28 +14,22 @@
           </div>
           <div class="media-body">
             <div class="media-heading">
-              <a href="{{_uri }}.html">{{ _columns|getContentByScheme('http://purl.org/dc/terms/title') }}</a>
+              <a href="{{_uri }}.html" target="_parent">{{ _columns|getContentByScheme('http://purl.org/dc/terms/title') }}</a>
             </div>
             <p>
             {{ _columns|getContentByScheme('http://purl.org/dc/terms/description') }}
             </p>
-            <dl class="dl-horizontal">
-              {% for columnID , column in _columns %}
-              {% if column.cover == 'collection' and column.label and query[columnID]|d('?') != '?' %}
-              <dt style="padding-top: 10px; width: 260px;">
-              {{ column.label }} :
-              <div style="font-size: 12px; color: lightslategrey;">{{ column.scheme }}</div>
-              </dt>
-              <dd style="padding-top: 10px; margin-left: 275px;">
-              {% if column.content and column.content.html %}
-              {{ column.content.html }}
-              {% elif column.content and column.content.raw %}
-              {{ column.content.raw }}
-              {% endif %}
-              </dd>
-              {% endif %}
-              {% endfor %}
-            </dl>
+            {% for columnID , column in _columns %}
+            {% if column.cover == 'collection' and column.label and query[columnID]|d('?') != '?' %}
+            <div>
+            {% if column.content and column.content.html %}
+            {{ column.content.html }}
+            {% elif column.content and column.content.raw %}
+            {{ column.content.raw }}
+            {% endif %}
+            </div>
+            {% endif %}
+            {% endfor %}
           </div>
         </div>
       </div>

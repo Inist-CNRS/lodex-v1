@@ -44,8 +44,8 @@ $( "#customfieldsiframe" )
     $( "select option:selected" ).each(function() {
       code2 += "&" + $( this ).val();
   });
-	var code1 = "<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{ _uri }}?alt=iframe&";
-	var code3 = "&quot; frameborder=&quot;0&quot;></iframe>";
+	var code1 = "<iframe width=\"560\" height=\"315\" src=\"{{ _uri }}?alt=iframe&";
+	var code3 = "\" frameborder=\"0\"></iframe>";
 	$('#iframecode').val(code1 + code2 + code3);
   })
   .trigger( "change" );
@@ -303,7 +303,7 @@ $( "#customfieldsiframe" )
 							<form action="" method="post">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-code"></i></span>
-									<input id="iframecode" type="text" class="form-control" value="<iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;{{ _uri }}?alt=iframe&quot; frameborder=&quot;0&quot;></iframe>">
+									<input id="iframecode" type="text" class="form-control" value="<iframe width=&quote;560&quot; height=&quote;315&quote; src=&quote;{{ _uri }}?alt=iframe&quote; frameborder=&quot;0&quot;></iframe>">
 								</div>
 								<div class="form-group">
 									<label for="customfieldsiframe">
