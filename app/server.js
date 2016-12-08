@@ -108,15 +108,19 @@ module.exports = function(config, online) {
   // to load specials
   //
   JBJ.filters.getInternalURI = function(obj, arg, next) {
+    var self = obj;
     var collname = objectPath.get(obj, '_collection._wid');
     var key = arg;
     var value = objectPath.get(obj, key);
-    var baseuri = obj['_uri'].replace(obj['_wid'], '');
-    internals.getWidByField(collname, key, value, function(err, found) {
+    if (!value || value === '') {
+      return next(null);
+    }
+    internals.getWidByField(collname, '_wid', value, function(err, found) {
       if (err) {
         return next(err);
       }
-      return next(null, baseuri.concat(found));
+      debug('getInternalURI with key value', value, ' from ', self._wid, 'found', found);
+      return next(null, self._baseURI.concat(found));
     });
   };
 
