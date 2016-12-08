@@ -115,7 +115,14 @@ module.exports = function(router, core) {
       return next();
     }
     debug('get ', '/:star', req.routeParams, req.query);
-    req.query.alt = req.query.alt === undefined ? defaultAltValue : req.query.alt;
+    if (req.query.alt === undefined) {
+      if (req['_parsedOriginalUrl'].query) {
+        req['_parsedOriginalUrl'].query += '&alt=' + defaultAltValue;
+      }
+      else {
+        req['_parsedOriginalUrl'].query = 'alt=' + defaultAltValue;
+      }
+    }
     if (req.query.alt === 'html' && !req.query['%24limit']) {
       req['_parsedOriginalUrl'].query += '&%24limit='.concat(core.config.get('itemsPerPage'));
     }
@@ -214,7 +221,14 @@ module.exports = function(router, core) {
       return next();
     }
     debug('get ', '/' + prefixKEY + '/:documentName', req.routeParams);
-    req.query.alt = req.query.alt === undefined ? defaultAltValue : req.query.alt;
+    if (req.query.alt === undefined) {
+      if (req['_parsedOriginalUrl'].query) {
+        req['_parsedOriginalUrl'].query += '&alt=' + defaultAltValue;
+      }
+      else {
+        req['_parsedOriginalUrl'].query = 'alt=' + defaultAltValue;
+      }
+    }
     internals.getMasterCollection(function(err, collID) {
       if (err) {
         return next(err);
