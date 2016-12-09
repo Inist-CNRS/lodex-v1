@@ -1,37 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ documents[0]._uri }}</title>
-  <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" >
-  <link rel="stylesheet" id="bootstrap-stylesheet-css" href="/assets/css/testimonials.css" type="text/css" media="all" />
-</head>
-<body>
-  <div class="testimonial ">
-    <div class="testimonial-section">
-      <blockquote cite="{{ documents[0]._root }}.html" style="padding: 0">
-        <h2>
-          <a href="{{ documents[0]._root }}.html"><i class="fa fa-leaf" style="color:#c4d735">
-            {{ documents[0]._columns|getContentByScheme("http://purl.org/dc/terms/title", {cover: "dataset"})|d('Missing `dc:title` in your datasetFields') }}</i></a>
-        </h2>
-        <p>{{ documents[0]._columns|getContentByScheme("http://purl.org/dc/terms/description", {cover: "dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>
-        <div class="blog-post-actions">
-          <p class="blog-post-bottom pull-left">
-            <span class="badge quote-badge">{{ documents|length }}</span>  Resources
-          </p>
-          <p class="blog-post-bottom pull-right">
-            <i class="fa fa-clock-o" aria-hidden="true"></i> <time> {{ documents[0]._columns|getByScheme("http://purl.org/dc/terms/modified", {cover: "dataset", select:"label"})|d('Missing `dc:modified` label in your datasetFields') }}: {{ documents[0]._columns|getContentByScheme("http://purl.org/dc/terms/modified", {cover:"dataset"})|d('Missing `dc:modified` in your datasetFields') }} </time>
-          </p>
-        </div>
-      </blockquote>
-      <!--
-      <p>{{ documents[0]._columns|getByScheme("http://purl.org/dc/terms/title", {select: "label", cover: "dataset"})|d('Missing `dc:title` in your datasetFields') }} : <a href="/"><i class="fa fa-leaf" style="color:#c4d735"> {{ documents[0]._columns|getContentByScheme("http://purl.org/dc/terms/title", {cover: "dataset"})|d('Missing `dc:title` in your datasetFields') }}</i></a></p>
-      <p>{{ documents[0]._columns|getByScheme("http://purl.org/dc/terms/description", {select: "label", cover: "dataset"})|d('Missing `dc:description` in your datasetFields') }} : {{ documents[0]._columns|getContentByScheme("http://purl.org/dc/terms/description", {cover: "dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>
-      <p>{{ documents[0]._columns|getByScheme("http://purl.org/dc/terms/modified", {cover: "dataset", select:"label"})|d('Missing `dc:modified` label in your datasetFields') }} : {{ documents[0]._columns|getContentByScheme("http://purl.org/dc/terms/modified", {cover:"dataset"})|d('Missing `dc:modified` in your datasetFields') }}</p>
-      <p>{{ documents|length }} resources</p>
-      -->
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ documents[0]._uri }}</title>
+    <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" >
+    <link rel="stylesheet" id="bootstrap-stylesheet-css" href="/assets/css/testimonials.css" type="text/css" media="all" />
+  </head>
+  <body>
+    <div class="testimonial ">
+      <div class="testimonial-section">
+        <blockquote cite="{{ documents[0]._root }}.html" style="padding: 0; padding-left: 15px;">
+          <h2>
+            <a href="{{ documents[0]._root }}.html" target="_top"><i class="fa fa-leaf" style="color:#c4d735">
+              {{ documents[0]._columns|getContentByScheme("http://purl.org/dc/terms/title", {cover: "dataset"})|d('Missing `dc:title` in your datasetFields') }}</i></a>
+          </h2>
+          <p>{{ documents[0]._columns|getContentByScheme("http://purl.org/dc/terms/description", {cover: "dataset"})|d('Missing `dc:description` in your datasetFields') }}</p>
+          <div class="blog-post-actions">
+            <p class="blog-post-bottom pull-left">
+              <span class="badge quote-badge">{{ documents|length }}</span> Resources
+            </p>
+            <p class="blog-post-bottom pull-right">
+              <i class="fa fa-clock-o" aria-hidden="true"></i> <time> {{ documents[0]._columns|getByScheme("http://purl.org/dc/terms/modified", {cover: "dataset", select:"label"})|d('Missing `dc:modified` label in your datasetFields') }}: {{ documents[0]._columns|getContentByScheme("http://purl.org/dc/terms/modified", {cover:"dataset"})|d('Missing `dc:modified` in your datasetFields') }} </time>
+            </p>
+          </div>
+        </blockquote>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>
