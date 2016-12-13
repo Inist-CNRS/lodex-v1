@@ -161,7 +161,7 @@ $(document).on('shown.bs.tab', 'button[data-toggle="tab"]', function (e) {
 												<div class="media-heading">
 													{% for name, col in doc._columns %}
 													{% if col.cover == 'collection' and col.scheme == 'http://purl.org/dc/terms/title' %}
-													<a href="{{ doc._uri }}.html" title="{{ col.content.html }}"> {{ col.content.html|truncate(15) }} </a>
+													<a href="{{ doc._uri }}.html" title="{{ col.content.html }}"> {{ col.content.html|truncate(20) }} </a>
 													{% endif %}
 													{% endfor %}
 												</div>
