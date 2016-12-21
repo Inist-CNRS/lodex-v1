@@ -1,19 +1,21 @@
-lodex:
-  image: node:4.4.0
-  links:
-    - lodex_db:mongodb
-  volumes:
-    - .:/app
-  environment:
-    http_proxy:  ${http_proxy}
-    https_proxy: ${https_proxy}
-    NODE_ENV: "development"
-    DEBUG: "castor*,console*"
-  working_dir: /app
-  ports:
-    - 3000:3000
-  command: ./lodex
+version: '2'
+services:
+  lodex:
+    image: node:4.4.0
+    links:
+      - lodex_db:mongodb
+    volumes:
+      - .:/app
+    environment:
+      http_proxy:  ${http_proxy}
+      https_proxy: ${https_proxy}
+      NODE_ENV: "development"
+      DEBUG: "castor*,console*"
+   working_dir: /app
+    ports:
+      - 3000:3000
+    command: ./lodex
 
-lodex_db:
-  image: mongo:3.0.7
-  command: --smallfiles
+  lodex_db:
+    image: mongo:3.0.7
+    command: --smallfiles
