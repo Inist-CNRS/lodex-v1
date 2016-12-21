@@ -2,7 +2,6 @@
 node_modules
 coverage/
 
-*.local.*
 data.json
 
 lib-cov
